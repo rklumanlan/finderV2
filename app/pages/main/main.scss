@@ -1,0 +1,29 @@
+
+
+
+.getting-started {
+
+  p {
+    margin: 20px 0;
+    line-height: 22px;
+    font-size: 16px;
+  }
+
+}
+.mainBackDiv{
+  position: absolute;
+  overflow: auto;
+  top: 0;
+  bottom: 0;
+  left:0;
+  right:0;
+  background-image: $bg-pattern;
+}
+
+.upperDiv{
+  height:20%;
+}
+.lowerDiv{
+  // background-color:#F5F5F5;
+  height:80%;
+}

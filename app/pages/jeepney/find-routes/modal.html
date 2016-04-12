@@ -1,0 +1,15 @@
+
+<ion-navbar *navbar primary>
+<ion-buttons start>
+  <button (click)="close()">
+    <ion-icon name="ios-arrow-back"></ion-icon>
+  </button>
+</ion-buttons><ion-title>Jeepneys</ion-title>
+</ion-navbar>
+<ion-content >
+  <ion-list>
+  <ion-item *ngFor="#point of points" (click)="validateItem(point.name)">
+    {{point.name}}
+  </ion-item>
+</ion-list>
+</ion-content>

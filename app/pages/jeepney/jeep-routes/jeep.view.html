@@ -1,0 +1,28 @@
+
+<ion-content >
+  <div class="bg">
+
+    <ion-item-group >
+
+      <ion-item-divider light>Angeles</ion-item-divider>
+      <button ion-item detail-push *ngFor="#acjeep of acjeeps" [navPush]="[JeepDetailsPage, {jeep: acjeep}]">
+        <ion-thumbnail item-left>
+        <img src="{{acjeep.image}}">
+        </ion-thumbnail>
+        <h2>{{acjeep.name}}</h2>
+        <h3>{{acjeep.color}}</h3>
+      </button>
+
+      <ion-item-divider light>Clark</ion-item-divider>
+      <button ion-item *ngFor="#cjeep of cjeeps" [navPush]="[JeepDetailsPage, {jeep: cjeep}]">
+        <ion-thumbnail item-left>
+        <img src="{{cjeep.image}}">
+        </ion-thumbnail>
+        <h2>{{cjeep.name}}</h2>
+        <h3>{{cjeep.color}}</h3>
+      </button>
+
+    </ion-item-group>
+  </div>
+
+</ion-content>
