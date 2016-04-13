@@ -129,7 +129,7 @@ export class GoogleMapsService {
   }
 
   init(options){
-    console.log(options);
+    console.log(options.marker_1);
 
     this.ctr1=options.ctr1;
     this.ctr2=options.ctr2;
@@ -138,6 +138,8 @@ export class GoogleMapsService {
 
     this.latlng1 = options.jeep_1;
     this.points1 = options.marker_1;
+
+    console.log(this.points1);
 
 
     // var me = this;
@@ -236,6 +238,7 @@ export class GoogleMapsService {
     // }
 
   initMap(){
+    console.log(this.points1);
     var me = this;
 
     var mapOptions = {
@@ -313,8 +316,9 @@ export class GoogleMapsService {
 
         if(me.latlng1!==null){
             console.log('klk');
-          console.log(this.points1);
-          // me.loadMarkers(this.points1,null);
+          console.log(me.points1);
+          var point = me.points1;
+          me.loadMarkers(point,null);
         }
 
         me.enableMap();
@@ -740,7 +744,7 @@ export class GoogleMapsService {
         console.log(response.data);
         console.log('enter to');
         me.processSnapToRoadResponse(data.json(),'jeep2');
-        me.drawSnappedPolyline(snappedCoordinates2,'jeep2');
+        me.drawSnappedPolyline(this.snappedCoordinates2,'jeep2');
       }
 
 
@@ -748,7 +752,7 @@ export class GoogleMapsService {
         console.log(response.data);
         console.log('enter mid');
         me.processSnapToRoadResponse(data.json(),'jeep3');
-        me.drawSnappedPolyline(snappedCoordinates3,'jeep3');
+        me.drawSnappedPolyline(this.snappedCoordinates3,'jeep3');
       }
 
 
@@ -756,7 +760,7 @@ export class GoogleMapsService {
         console.log(response.data);
         console.log('enter 4');
         me.processSnapToRoadResponse(data.json(),'jeep4');
-        me.drawSnappedPolyline(snappedCoordinates4,'jeep4');
+        me.drawSnappedPolyline(this.snappedCoordinates4,'jeep4');
       }
 
       else {
@@ -766,6 +770,7 @@ export class GoogleMapsService {
       }
 
           console.log(data.json());
+          me.fitBounds(this.markers);
 
       },
       err => console.log(err)
@@ -792,7 +797,7 @@ export class GoogleMapsService {
     //     console.log(response.data);
     //     console.log('enter to');
     //     processSnapToRoadResponse(response.data,'jeep2');
-    //     drawSnappedPolyline(snappedCoordinates2,'jeep2');
+    //     drawSnappedPolyline(this.snappedCoordinates2,'jeep2');
     //   }
     //
     //
@@ -833,11 +838,11 @@ export class GoogleMapsService {
     var originalIndexes = [];
     this.snappedCoordinates1 = [];
     var originalIndexes2 = [];
-    snappedCoordinates2 = [];
+    this.snappedCoordinates2 = [];
     var originalIndexes3 = [];
-    snappedCoordinates3 = [];
+    this.snappedCoordinates3 = [];
     var originalIndexes4 = [];
-    snappedCoordinates4 = [];
+    this.snappedCoordinates4 = [];
     if(ctr == 'jeep1'){
       console.log('process from');
       for (var i = 0; i < data.snappedPoints.length; i++) {
@@ -845,7 +850,6 @@ export class GoogleMapsService {
           'lat': data.snappedPoints[i].location.latitude,
           'lng': data.snappedPoints[i].location.longitude
         };
-        console.log(latlng1);
         var interpolated1 = true;
 
         if (data.snappedPoints[i].originalIndex !== undefined) {
@@ -874,7 +878,7 @@ export class GoogleMapsService {
         }
 
         latlng2.interpolated = interpolated2;
-        snappedCoordinates2.push(latlng2);
+        this.snappedCoordinates2.push(latlng2);
       }
     }
     if(ctr=='jeep3'){
@@ -893,7 +897,7 @@ export class GoogleMapsService {
         }
 
         latlng3.interpolated = interpolated3;
-        snappedCoordinates3.push(latlng3);
+        this.snappedCoordinates3.push(latlng3);
       }
     }
     if(ctr=='jeep4'){
@@ -912,8 +916,8 @@ export class GoogleMapsService {
         }
 
         latlng4.interpolated = interpolated4;
-        snappedCoordinates4.push(latlng4);
-        console.log(snappedCoordinates4);
+        this.snappedCoordinates4.push(latlng4);
+        console.log(this.snappedCoordinates4);
       }
     }
 
@@ -926,88 +930,90 @@ export class GoogleMapsService {
   // Draw the polyline for the snapToRoads API response
   drawSnappedPolyline(snappedCoords,ctr) {
 
+    var me = this;
+
 
 
     if(ctr =='jeep1'){
         console.log(snappedCoords);
-      snappedPolyline1 = new google.maps.Polyline({
+      this.snappedPolyline1 = new google.maps.Polyline({
         path: snappedCoords,
         strokeColor: 'turquoise',
         strokeWeight: 5,
         icons: [{
-          icon: lineSymbol1,
+          icon: this.lineSymbol1,
           offset: '100%'
         }]
       });
 
-      snappedPolyline1.setMap(map);
-      console.log(snappedPolyline1);
-      animateCircle(snappedPolyline1);
+      this.snappedPolyline1.setMap(this.map);
+      console.log(this.snappedPolyline1);
+      me.animateCircle(this.snappedPolyline1);
 
-      polylines1.push(snappedPolyline1);
-      console.log(polylines1);
+      this.polylines1.push(this.snappedPolyline1);
+      console.log(this.polylines1);
       console.log('draw from');
     }
-    if(ctr=='jeep2'){
-      console.log('draw to');
-      console.log(snappedCoords);
-      snappedPolyline2 = new google.maps.Polyline({
-        path: snappedCoords,
-        strokeColor: '#FF69B4',
-        strokeWeight: 5,
-        icons: [{
-          icon: lineSymbol2,
-          offset: '100%'
-        }]
-      });
-
-      snappedPolyline2.setMap(map);
-      animateCircle(snappedPolyline2);
-
-      polylines2.push(snappedPolyline2);
-      console.log(polylines2);
-    }
-    if(ctr=='jeep3'){
-      console.log('draw mid');
-      console.log(snappedCoords);
-      snappedPolyline3 = new google.maps.Polyline({
-        path: snappedCoords,
-        strokeColor: '#98FB98',
-        strokeWeight: 5,
-        icons: [{
-          icon: lineSymbol3,
-          offset: '100%'
-        }]
-      });
-
-      snappedPolyline3.setMap(map);
-      animateCircle(snappedPolyline3);
-
-      polylines3.push(snappedPolyline3);
-      console.log(polylines3);
-    }
-    if(ctr=='jeep4'){
-      console.log('draw 4');
-      console.log(snappedCoords);
-      snappedPolyline4 = new google.maps.Polyline({
-        path: snappedCoords,
-        strokeColor: '#FF00FF',
-        strokeWeight: 5,
-        icons: [{
-          icon: lineSymbol4,
-          offset: '100%'
-        }]
-      });
-
-      snappedPolyline4.setMap(map);
-      animateCircle(snappedPolyline4);
-
-      polylines4.push(snappedPolyline4);
-      console.log(polylines4);
-    }
+    // if(ctr=='jeep2'){
+    //   console.log('draw to');
+    //   console.log(snappedCoords);
+    //   snappedPolyline2 = new google.maps.Polyline({
+    //     path: snappedCoords,
+    //     strokeColor: '#FF69B4',
+    //     strokeWeight: 5,
+    //     icons: [{
+    //       icon: lineSymbol2,
+    //       offset: '100%'
+    //     }]
+    //   });
+    //
+    //   snappedPolyline2.setMap(map);
+    //   animateCircle(snappedPolyline2);
+    //
+    //   polylines2.push(snappedPolyline2);
+    //   console.log(polylines2);
+    // }
+    // if(ctr=='jeep3'){
+    //   console.log('draw mid');
+    //   console.log(snappedCoords);
+    //   snappedPolyline3 = new google.maps.Polyline({
+    //     path: snappedCoords,
+    //     strokeColor: '#98FB98',
+    //     strokeWeight: 5,
+    //     icons: [{
+    //       icon: lineSymbol3,
+    //       offset: '100%'
+    //     }]
+    //   });
+    //
+    //   snappedPolyline3.setMap(map);
+    //   animateCircle(snappedPolyline3);
+    //
+    //   polylines3.push(snappedPolyline3);
+    //   console.log(polylines3);
+    // }
+    // if(ctr=='jeep4'){
+    //   console.log('draw 4');
+    //   console.log(snappedCoords);
+    //   snappedPolyline4 = new google.maps.Polyline({
+    //     path: snappedCoords,
+    //     strokeColor: '#FF00FF',
+    //     strokeWeight: 5,
+    //     icons: [{
+    //       icon: lineSymbol4,
+    //       offset: '100%'
+    //     }]
+    //   });
+    //
+    //   snappedPolyline4.setMap(map);
+    //   animateCircle(snappedPolyline4);
+    //
+    //   polylines4.push(snappedPolyline4);
+    //   console.log(polylines4);
+    // }
 
     for (var i = 0; i < snappedCoords.length; i++) {
-      var marker = addMarker(snappedCoords[i]);
+      var marker = me.addMarker(snappedCoords[i]);
     }
 
 
@@ -1019,16 +1025,17 @@ export class GoogleMapsService {
   addMarker(coords,ctr) {
     var marker = new google.maps.Marker({
       position: coords,
-      map: map,
+      map: this.map,
     });
     marker.setMap(null);
-    markers.push(marker);
+    this.markers.push(marker);
 
     return marker;
   }
 
   //load markers for the landmarks
   loadMarkers(points,points2){
+    var me = this;
 
 console.log(points2);
     console.log(points);
@@ -1046,18 +1053,18 @@ console.log(points2);
       for (var x = 0; x < records.length; x++) {
         var markerPos = new google.maps.LatLng(records[x].lat,records[x].lng);
         var marker = new google.maps.Marker({
-            map: map,
+            map: this.map,
             animation: google.maps.Animation.DROP,
             position: markerPos
         });
         var infoWindowContent;
         if (points2!==null) {
           infoWindowContent = records[x].text;
-          addInfoWindow(marker, infoWindowContent);
+          me.addInfoWindow(marker, infoWindowContent);
         }
         else{
           infoWindowContent = points[x].text;
-          addInfoWindow(marker, infoWindowContent);
+          me.addInfoWindow(marker, infoWindowContent);
         }
       }
     //
@@ -1071,15 +1078,15 @@ console.log(points2);
 
   //display info about the markers
   addInfoWindow(marker, message) {
-      $translate(message).then(function(mess) {
-        var point_title = "<h4>"+mess+"</h4>";
+      // $translate(message).then(function(mess) {
+        var point_title = "<h4>"+message+"</h4>";
         var infoWindow = new google.maps.InfoWindow({
             content: point_title
         });
         google.maps.event.addListener(marker, 'click', function () {
-            infoWindow.open(map, marker);
+            infoWindow.open(this.map, marker);
         });
-      });
+      // });
 
   }
 
@@ -1088,7 +1095,7 @@ console.log(points2);
     var count = 0;
     var defaultIcon = [
       {
-        icon: lineSymbol1,
+        icon: this.lineSymbol1,
         offset: '100%'
       }
     ];
@@ -1107,7 +1114,7 @@ console.log(points2);
     for (var i = 0; i < markers.length; i++) {
       bounds.extend(markers[i].getPosition());
     }
-    map.fitBounds(bounds);
+    this.map.fitBounds(bounds);
   }
 
   disableMap(){
