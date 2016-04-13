@@ -7,7 +7,7 @@
         <h2>{{jeepDetails.name}}</h2>
         <h3>{{jeepDetails.color}}</h3>
         <h4>Route Description:<br/>{{jeepDetails.route}}</h4>
-        <button full [navPush]="[JeepMapsPage, {jeep: jeepDetails.name}]">View Map</button>
+        <button full [navPush]="[JeepMapsPage, {jeep: jeepDetails}]">View Map</button>
       </div>
     </div>
 </ion-content>

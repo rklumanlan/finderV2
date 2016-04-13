@@ -32,22 +32,48 @@ export class JeepMapsPage {
     //
     // // this.MapsPage = MapsPage;
     this.dataService = dataService;
+    this.googleMapsService = googleMapsService;
     this.navParams = navParams;
     //
-    this.details = navParams.get('jeep');
-    console.log(this.details);
+    this.jeep= navParams.get('jeep');
+    console.log(this.jeep);
 
 
+    this.options = {};
 
-
-    this.jeepDetails = null;
-    this.dataService.getJeepDetails(this.details).then((data) => {
+    // this.jeepDetails = null;
+    this.points = [];
+    this.dataService.getPoints().then((data) => {
       // console.log(data);
-      this.jeepDetails = data.res.rows[0];
-      console.log(this.jeepDetails);
+      // this.points = data.res.rows[0];
+      // console.log(this.points);
+
+      if(data.res.rows.length > 0) {
+        for(var i = 0; i < data.res.rows.length; i++) {
+
+
+          if (this.check_marks(data.res.rows.item(i).tags,this.jeep.name)) {
+            this.points.push({text: data.res.rows.item(i).text, lat: data.res.rows.item(i).lat, lng:data.res.rows.item(i).lng, tags:data.res.rows.item(i).tags});
+          }
+        }
+      }
+      console.log(this.points);
     }, (error) => {
       console.log("ERROR -> " + JSON.stringify(error.err));
     });
+
+    this.options.jeep_1 = this.jeep;
+    this.options.marker_1 = this.points;
+
+    this.googleMapsService.init(this.options);
+
+    // this.dataService.getJeepDetails(this.details).then((data) => {
+    //   // console.log(data);
+    //   this.jeepDetails = data.res.rows[0];
+    //   console.log(this.jeepDetails);
+    // }, (error) => {
+    //   console.log("ERROR -> " + JSON.stringify(error.err));
+    // });
 
     //
     // console.log(options);
@@ -89,6 +115,24 @@ export class JeepMapsPage {
     //   console.log("ERROR -> " + JSON.stringify(error.err));
     // });
   }
+
+check_marks(a,b){
+    // if (a!==undefined) {
+      var string1 = a;
+      var ab = string1.split(",");
+
+
+      if (ab.indexOf(b)!=-1) {
+        return true;
+      }
+      // else {
+      //   return true;
+      // }
+      // else {
+      //   return;
+      // }
+  // }
+}
 
 //   showLoader(){
 // console.log('loader'+this.loading);
@@ -207,4 +251,6 @@ export class JeepMapsPage {
 //     document.addEventListener('offline', onOffline, false);
 //
 //   }
+
+
 }
