@@ -128,6 +128,88 @@ export class GoogleMapsService {
     // this.loadGoogleMaps();
   }
 
+  clearVal(){
+    this.map = null;
+    this.mapInitialised = false;
+    //
+    //
+    // this.coords = null;
+
+
+
+    //fit markers to screen
+    this.markers = [];
+
+    //array for point a or display jeepney route
+    this.polylines1 = [];
+    this.snappedCoordinates1 = [];
+    this.lineSymbol1 = null;
+
+    //array for point b
+    this.polylines2 = [];
+    this.snappedCoordinates2 = [];
+    this.lineSymbol2 = null;
+
+    //array for pointc
+    this.polylines3 = [];
+    this.snappedCoordinates3 = [];
+    this.lineSymbol3 = null;
+
+    //array for pointd
+    this.polylines4 = [];
+    this.snappedCoordinates4 = [];
+    this.lineSymbol4 = null;
+
+    //this.latlng1 = coordinates for point a
+    this.latlng1 = null;
+    this.points1 = null;
+
+    //this.latlng2 = coordinates for point b
+    this.latlng2 = null;
+    this.points2 = null;
+
+
+    //latlng3 = coordinates for point c
+    this.latlng3 = null;
+    this.points3 = null;
+
+    //latlng3 = coordinates for point c
+    this.latlng4 = null;
+    this.points4 = null;
+
+    //color of the jeep
+    this.color1 = null;
+    this.color2 = null;
+    this.color3 = null;
+    this.color4 = null;
+
+    this.start_new1 = null;
+    this.start_new2 = null;
+    this.start_new3 = null;
+    this.start_new4 = null;
+
+    this.end1Ctr = null;
+    this.end2Ctr = null;
+    this.end3Ctr = null;
+    this.end4Ctr = null;
+
+    this.marker = null;
+
+    this.lat_array_coords1 = null;
+    this.lat_array_coords2 = null;
+    this.lat_array_coords3 = null;
+    this.lat_array_coords4 = null;
+
+    this.snappedPolyline1 = null;
+    this.snappedPolyline2 = null;
+    this.snappedPolyline3 = null;
+    this.snappedPolyline4 = null;
+    this.ctr1 = null;
+    this.ctr2 = null;
+    this.ctr3 = null;
+    this.ctr4 = null;
+  }
+
   init(options){
     console.log(options.marker_1);
 
@@ -139,10 +221,13 @@ export class GoogleMapsService {
     this.latlng1 = options.jeep_1;
     this.points1 = options.marker_1;
 
-    console.log(this.points1);
+    this.loadGoogleMaps();
 
+  }
 
-    // var me = this;
+  loadGoogleMaps(){
+
+    var me = this;
 
     this.addConnectivityListeners();
 
@@ -153,7 +238,20 @@ export class GoogleMapsService {
 
         if(this.connectivity.isOnline()){
             console.log("online, loading map");
-            this.loadGoogleMaps();
+
+            //Load the SDK
+            window.mapInit = function(){
+                me.initMap();
+                me.enableMap();
+            }
+
+            let script = document.createElement("script");
+            script.type = "text/javascript";
+            script.id = "googleMaps";
+
+            script.src = 'https://maps.googleapis.com/maps/api/js?libraries=places&callback=mapInit';
+
+            document.body.appendChild(script);
 
         }
     }
@@ -173,106 +271,22 @@ export class GoogleMapsService {
 
   }
 
-  loadGoogleMaps(){
-    //Load the SDK
-    // window.mapInit = function(){
-    //     me.initMap();
-    //     me.enableMap();
-    // }
-
-    var me = this;
-
-    window.mapInit = function(){
-      me.initMap();
-      console.log('callback map int');
-    };
-
-    // let script = document.createElement("script");
-    // script.id = "googleMaps";
-
-    //Create a script element to insert into the page
-    let script = document.createElement("script");
-    script.type = "text/javascript";
-    script.id = "googleMaps";
-
-    //Note the callback function in the URL
-    script.src = 'https://maps.googleapis.com/maps/api/js?libraries=places&callback=mapInit';
-
-    // if(this.apiKey){
-    //     script.src = 'http://maps.google.com/maps/api/js?key=' + apiKey + '&callback=mapInit';
-    // } else {
-    //     script.src = 'http://maps.google.com/maps/api/js?callback=mapInit';
-    // }
-
-    document.body.appendChild(script);
-
-  }
-
-    // var me = this;
-    //
-    // this.addConnectivityListeners();
-    //
-    // if(typeof google == "undefined" || typeof google.maps == "undefined"){
-    //
-    //     console.log("Google maps JavaScript needs to be loaded.");
-    //     this.disableMap();
-    //
-    //     if(this.connectivity.isOnline()){
-    //         console.log("online, loading map");
-    //
-
-
-
-    // else {
-    //
-    //     if(this.connectivity.isOnline()){
-    //         console.log("showing map");
-    //         this.initMap();
-    //         this.enableMap();
-    //     }
-    //     else {
-    //         console.log("disabling map");
-    //         this.disableMap();
-    //     }
-    //
-    // }
 
   initMap(){
-    console.log(this.points1);
+
+    this.mapInitialised = true;
+
     var me = this;
 
-    var mapOptions = {
+      let mapOptions = {
         center: {'lat': 15.16829179, 'lng': 151.196532},
         zoom: 14,
         streetViewControl: false,
         mapTypeControl: false
 
       };
-      console.log(this.latlng2!==undefined&&this.ctr1!==undefined&&this.ctr2!==undefined);
-      if (this.latlng2!==undefined&&this.ctr1!==undefined&&this.ctr2!==undefined) {
-          console.log('map3');
-          this.map = new google.maps.Map(document.getElementById('map2'), mapOptions);
-
-      }
-      else if (this.ctr1==='1ride'&&(this.ctr2==='forth'||this.ctr2==='back')&&this.latlng2===undefined) {
-          console.log('map2');
-          this.map = new google.maps.Map(document.getElementById('map2'), mapOptions);
-
-      }
-      else if (this.latlng1!==undefined&&this.ctr1===undefined&&this.ctr2===undefined){
-          console.log(document.getElementById('map'));
-          this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-      }
-
-      // var locationControlDiv = document.createElement('div');
-      // var locationControl = new SetLocation(locationControlDiv, this.map);
-      //
-      // locationControlDiv.index = 1;
-      // map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(locationControlDiv);
-
-
-
+      console.log(document.getElementById("asd"));
+      this.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
       this.color1 = me.setColor(this.latlng1.color);
 
@@ -284,33 +298,14 @@ export class GoogleMapsService {
         strokeColor: this.color1,
       };
 
-      // // Symbol that gets animated along the polyline
-      // this.lineSymbol2 = {
-      //     path: google.maps.SymbolPath.CIRCLE,
-      //     scale: 5,
-      //     strokeColor: this.color2,
-      // };
-      // // Symbol that gets animated along the polyline
-      // this.lineSymbol3 = {
-      //     path: google.maps.SymbolPath.CIRCLE,
-      //     scale: 5,
-      //     strokeColor: this.color3,
-      // };
-      // // Symbol that gets animated along the polyline
-      // this.lineSymbol4 = {
-      //     path: google.maps.SymbolPath.CIRCLE,
-      //     scale: 5,
-      //     strokeColor: this.color4,
-      // };
-
       google.maps.event.addListenerOnce(this.map, 'idle', function(){
         console.log('maps idle');
 
         if(me.latlng1!==null){
           console.log('elsee');
-            // var colorCode1a = new setColorCode(colorCodeDiv,this.map,this.color1,this.latlng1.name);
-            console.log(me.latlng1.coordi);
-            me.bendAndSnap(me.latlng1.coordi,'jeep1');
+
+          console.log(me.latlng1.coordi);
+          me.bendAndSnap(me.latlng1.coordi,'jeep1');
 
         }
 
@@ -396,10 +391,6 @@ export class GoogleMapsService {
           for (var i = startCtr1+1; i <= endCtr1; i++) {
               start_new1 += "|"+lat_array_coords1[i];
           }
-          // if (ctr1==='1ride'&&ctr2==='back'&&(latlng1.name!=='CHECK-POINT-HOLY'||latlng1.name!=='CHECK-POINT-HOLY-HI-WAY'||latlng1.name!=='MARISOL-PAMPANG'||latlng1.name!=='PANDAN-PAMPANG')) {
-          //   console.log('rev2');
-          //   start_new1.split("|").reverse().join("|");
-          // }
 
 
       }
@@ -724,8 +715,7 @@ export class GoogleMapsService {
     var asd;
     console.log(this.apiKey);
 
-    var creds = JSON.stringify({ interpolate: true, key: this.apiKey, path: this.coords});
-
+    //set url params
     let params = new URLSearchParams();
 		params.set('interpolate', true);
 		params.set('key', this.apiKey);
@@ -1149,5 +1139,18 @@ console.log(points2);
     document.addEventListener('online', onOnline, false);
     document.addEventListener('offline', onOffline, false);
 
+  }
+
+  showLoader(){
+  console.log('lklkl');
+  console.log(this.map+'lklkl');
+
+    this.loading.show();
+
+
+
+    setTimeout(() => {
+        this.loading.hide();
+    }, 1000);
   }
 }

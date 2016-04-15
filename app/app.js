@@ -10,7 +10,7 @@ import {DataService} from './services/data';
 import {ConnectivityService} from './providers/connectivity-service/connectivity-service';
 import {GoogleMapsService} from './providers/google-maps-service/google-maps-service';
 
-// import {LoadingModal} from './components/loading-modal/loading-modal';
+import {LoadingModal} from './components/loading-modal/loading-modal';
 
 
 
@@ -18,6 +18,7 @@ import {GoogleMapsService} from './providers/google-maps-service/google-maps-ser
 @App({
   templateUrl: 'build/app.html',
   providers: [DataService,ConnectivityService,GoogleMapsService],
+  directives: [LoadingModal],
   config: {
     iconMode: 'md',
     modalEnter: 'modal-slide-in',
@@ -38,6 +39,7 @@ class MyApp {
   constructor(app, platform) {
     // set up our app
     this.app = app;
+
     this.platform = platform;
     this.initializeApp();
     // make HelloIonicPage the root (or first) page
