@@ -11,7 +11,7 @@ import {LoadingModal} from '../../components/loading-modal/loading-modal';
 
 @Page({
   templateUrl: 'build/pages/maps/maps.html',
-  directives: [LoadingModal],
+  
 })
 
 export class MapsPage {
@@ -23,6 +23,8 @@ export class MapsPage {
     this.googleMapsService = googleMapsService;
 
     this.googleMapsService.loadGoogleMaps();
+
+
 
     // this.loading = app.getComponent('loading');
     // // this.loading.show();

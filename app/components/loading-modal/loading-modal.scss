@@ -17,6 +17,10 @@ loading-modal .container {
     .backdrop {
       opacity: 0.3;
     }
+    ion-spinner {
+      width: 50%;
+      height: 50%;
+    }
   }
 
   .backdrop {

@@ -1,4 +1,4 @@
-import {Page,NavParams, Storage, SqlStorage} from 'ionic-angular';
+import {Page,NavParams, Storage, SqlStorage,Modal,NavController} from 'ionic-angular';
 
 import {JeepMapsPage} from '../../jeepney/jeep-routes/jeep.map';
 
@@ -10,10 +10,11 @@ import {DataService} from '../../../services/data';
 
 export class JeepDetailsPage {
   static get parameters(){
-    return [[DataService],[NavParams]];
+    return [[DataService],[NavParams],[NavController]];
   }
-  constructor(dataService,navParams){
-    this.JeepMapsPage = JeepMapsPage;
+  constructor(dataService,navParams,nav){
+    // this.JeepMapsPage = JeepMapsPage;
+    this.nav = nav;
     this.dataService = dataService;
     this.navParams = navParams;
 
@@ -28,5 +29,9 @@ export class JeepDetailsPage {
     }, (error) => {
       console.log("ERROR -> " + JSON.stringify(error.err));
     });
+  }
+  presentModal() {
+    (JeepMapsPage);
+    this.nav.push(JeepMapsPage, { jeep: this.jeepDetails });
   }
 }

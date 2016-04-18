@@ -34,7 +34,7 @@ export class DataService {
     insertJeepsData(){
       this.jeeps = [{
         name: 'CHECK-POINT-HOLY',
-        color: 'Pearl Gray',
+        color: 'Gray',
         image: 'img/jeeps/sm_c_point_holy.jpg',
         route: 'Check-Point-Holy route is from Maingate to Holy Angel University.',
         category: 'Angeles',
