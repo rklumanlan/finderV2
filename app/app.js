@@ -17,7 +17,7 @@ import {LoadingModal} from './components/loading-modal/loading-modal';
 
 @App({
   templateUrl: 'build/app.html',
-  providers: [DataService,ConnectivityService,GoogleMapsService],
+  providers: [DataService,ConnectivityService],
   directives: [LoadingModal],
   config: {
     iconMode: 'md',

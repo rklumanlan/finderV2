@@ -13,7 +13,8 @@ import 'rxjs/Rx';
 
 @Page({
   templateUrl: 'build/pages/jeepney/jeep-routes/jeep.map.html',
-  directives: [LoadingModal]
+  directives: [LoadingModal],
+  providers: [GoogleMapsService]
 })
 
 export class JeepMapsPage {
@@ -22,7 +23,7 @@ export class JeepMapsPage {
   }
   constructor(dataService,navParams,connectivityService,app,googleMapsService,nav,http){
 
-    this.nav = nav
+    this.nav = nav;
 
     this.http = http;
 
@@ -130,7 +131,7 @@ export class JeepMapsPage {
     this.ctr4 = null;
 
 
-    this.loadGoogleMaps(this.option);
+    this.googleMapsService.loadGoogleMaps(this.option);
 
   }
 
