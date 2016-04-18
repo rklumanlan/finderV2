@@ -1,10 +1,10 @@
-import {Page,NavParams, Storage, SqlStorage,IonicApp} from 'ionic-angular';
+import {Page, NavParams, Storage, SqlStorage, IonicApp, NavController, Alert} from 'ionic-angular';
+
+import {Injectable} from 'angular2/core';
 
 import {Http, URLSearchParams} from 'angular2/http';
 import 'rxjs/Rx';
 
-
-import {Injectable} from 'angular2/core';
 
 import {DataService} from '../../services/data';
 
