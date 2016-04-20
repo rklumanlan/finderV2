@@ -381,4 +381,8 @@ export class DataService {
     getPoints(){
       return this.storage.query("SELECT * FROM points ORDER BY text ASC");
     }
+
+    getPointsOrigin(ctr){
+      return this.storage.query("SELECT * FROM points WHERE text = '"+ctr+"'");
+    }
 }
