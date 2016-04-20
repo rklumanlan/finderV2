@@ -21,7 +21,9 @@
                 <button item-right>
                   &nbsp;<ion-icon name="arrow-dropdown"></ion-icon>&nbsp;
                 </button>
+
               </button>
+              <input type="hidden" id="hiddenFrom"/>
               <ion-item-divider light>To:</ion-item-divider>
               <button ion-item detail-none (click)="showModal('to')">
                 {{to}}
@@ -29,33 +31,11 @@
                   &nbsp;<ion-icon name="arrow-dropdown"></ion-icon>&nbsp;
                 </button>
               </button>
-              <button full>
+              <input type="hidden" id="hiddenTo"/>
+              <button full (click)="submitForm(from,to)">
                 Find Routes
               </button>
             </ion-item-group>
-          <!-- <div class="item item-divider divider-title text-center">
-            <h2 translate>From:</h2>
-          </div>
-          <div class="item item-button-right" >
-            <label for="{{text_point_A}}"><span>{{text_point_A}}</span></label>
-            <input type="hidden" id="point_a" value="{{from}}">
-            <button class="button button-positive">
-              <i class="icon ion-chevron-down"></i>
-            </button>
-          </div>
-          <div class="item item-divider divider-title text-center">
-            <h2 translate>To:</h2>
-          </div>
-          <div class="item item-button-right" >
-            <label for="{{text_point_B}}"><span>{{text_point_B}}</span></label>
-            <input type="hidden" id="point_b" value="{{to}}">
-            <button class="button button-positive">
-              <i class="icon ion-chevron-down"></i>
-            </button>
-          </div>
-          <button class="button button-full button-positive" ng-click="submit()">
-            <b translate='tab2_title'></b>
-          </button> -->
         </form>
         </div>
       </div>

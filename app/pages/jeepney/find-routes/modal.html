@@ -8,8 +8,8 @@
 </ion-navbar>
 <ion-content >
   <ion-list>
-  <ion-item *ngFor="#point of points" (click)="validateItem(point.name)">
+  <button ion-item *ngFor="#point of points" (click)="validateItem(point.name)">
     {{point.name}}
-  </ion-item>
+  </button>
 </ion-list>
 </ion-content>

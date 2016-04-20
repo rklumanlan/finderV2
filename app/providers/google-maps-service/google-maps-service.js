@@ -68,26 +68,39 @@ export class GoogleMapsService {
     this.lineSymbol4 = null;
 
     //this.latlng1 = coordinates for point a
-    this.latlng1 = null;
-    this.points1 = null;
+    this.latlng1 = undefined;
+    this.points1 = undefined;
 
     //this.latlng2 = coordinates for point b
-    this.latlng2 = null;
-    this.points2 = null;
+    this.latlng2 = undefined;
+    this.points2 = undefined;
 
 
     //latlng3 = coordinates for point c
-    this.latlng3 = null;
-    this.points3 = null;
+    this.latlng3 = undefined;
+    this.points3 = undefined;
 
     //latlng3 = coordinates for point c
-    this.latlng4 = null;
-    this.points4 = null;
+    this.latlng4 = undefined;
+    this.points4 = undefined;
 
     //color of the jeep
     this.color1 = null;
+    this.color2 = null;
+    this.color3 = null;
+    this.color4 = null;
 
     this.marker = null;
+
+    this.start_new1 = undefined;
+    this.start_new2 = undefined;
+    this.start_new3 = undefined;
+    this.start_new4 = undefined;
+
+    this.end1Ctr = undefined;
+    this.end2Ctr = undefined;
+    this.end3Ctr = undefined;
+    this.end4Ctr = undefined;
 
     this.lat_array_coords1 = null;
     this.lat_array_coords2 = null;
@@ -98,14 +111,19 @@ export class GoogleMapsService {
     this.snappedPolyline2 = null;
     this.snappedPolyline3 = null;
     this.snappedPolyline4 = null;
-    this.ctr1 = null;
-    this.ctr2 = null;
-    this.ctr3 = null;
-    this.ctr4 = null;
+    this.ctr1 = undefined;
+    this.ctr2 = undefined;
+    this.ctr3 = undefined;
+    this.ctr4 = undefined;
+
+    this.fromId = null;
+    this.toId = null;
   }
 
 
 loadGoogleMaps(opt){
+  console.log('enter loadGoogleMaps');
+  console.log(this.map);
 
     var option = opt;
 
@@ -161,10 +179,84 @@ loadGoogleMaps(opt){
 
   initMap(options){
 
+    console.log(options);
+
     var me = this;
+
+    me.fromId = options.fromId;
+    me.toId = options.toId;
+
+    // me.latlng1 = options.jeep_1;
+    // me.points1 = options.marker_1;
+
+    me.ctr1=options.ctr1;
+    me.ctr2=options.ctr2;
+    me.ctr3=options.ctr3;
+    me.ctr4=options.ctr4;
+
+    // console.log(ctr2);
+    // console.log(options.jeep_2!==undefined);
+
 
     me.latlng1 = options.jeep_1;
     me.points1 = options.marker_1;
+    // console.log(options.jeep_2!==undefined);
+    // console.log(options.jeep_2);
+    // console.log(options.jeep_3);
+    if(me.ctr1==='1ride'&&(me.ctr2==='forth'||me.ctr2==='back')){
+        // console.log(options.end1);
+        me.end1Ctr = options.end1;
+        // console.log(end1Ctr);
+        me.points2 = options.marker_2;
+    }
+
+    else if (options.jeep_2!==undefined) {
+        // console.log('not undefined');
+        me.latlng2 = options.jeep_2;
+        // console.log(latlng2);
+        me.points2 = options.marker_2;
+        me.end1Ctr = options.end1;
+        me.end2Ctr = options.end2;
+        if(options.jeep_3!==undefined){
+          // console.log('jeep3 not unde');
+            me.latlng3 = options.jeep_3;
+            me.points3 = options.marker_3;
+            me.end1Ctr = options.end1;
+            me.end2Ctr = options.end2;
+            me.end3Ctr = options.end3;
+        }
+        else {
+            // console.log('jeep3 undefined');
+            me.latlng3 = undefined;
+            me.points3 = undefined;
+            me.end3Ctr = null;
+        }
+        if(options.jeep_4!==undefined){
+          // console.log('jeep4 not unde');
+            me.latlng4 = options.jeep_4;
+            me.points4 = options.marker_4;
+            me.end1Ctr = options.end1;
+            me.end2Ctr = options.end2;
+            me.end3Ctr = options.end3;
+            me.end4Ctr = options.end4;
+            // console.log('aa');
+            // console.log(end4Ctr);
+        }
+        else {
+            // console.log('jeep4 undefined');
+            me.latlng4 = undefined;
+            me.points4 = undefined;
+            me.end4Ctr = null;
+        }
+    }
+    else {
+        me.latlng2 = undefined;
+        me.points2 = undefined;
+        me.end1Ctr = null;
+        me.end2Ctr = null;
+
+
+    }
 
     me.mapInitialised = true;
 
@@ -180,16 +272,60 @@ loadGoogleMaps(opt){
                 streetViewControl: false,
                 mapTypeControl: false
             }
+            console.log('map');
+            console.log(document.getElementById("map"));
+            // me.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+            if (me.latlng2!==undefined&&me.ctr1!==undefined&&me.ctr2!==undefined) {
+                console.log('map3');
+                me.map = new google.maps.Map(document.getElementById('map2'), mapOptions);
 
-            me.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+            }
+            else if (me.ctr1==='1ride'&&(me.ctr2==='forth'||me.ctr2==='back')&&me.latlng2===undefined) {
+                console.log('map2');
+                me.map = new google.maps.Map(document.getElementById('map2'), mapOptions);
 
+            }
+            else if (me.latlng1!==undefined&&me.ctr1===undefined&&me.ctr2===undefined){
+                console.log('map1');
+                me.map = new google.maps.Map(document.getElementById('map1'), mapOptions);
+
+            }
+            // console.log(me.latlng2);
             me.color1 = me.setColor(me.latlng1.color);
+            if(me.latlng2!==undefined){
+              me.color2 = me.setColor(me.latlng2.color);
+            }
+            // if(me.latlng3!== null){
+            //   me.color3 = me.setColor(me.latlng3.color);
+            // }
+            // if(me.latlng4!==null){
+            //   me.color4 = me.setColor(me.latlng4.color);
+            // }
 
             // Symbol that gets animated along the polyline
             me.lineSymbol1 = {
               path: google.maps.SymbolPath.CIRCLE,
               scale: 5,
               strokeColor: me.color1,
+            };
+
+            // Symbol that gets animated along the polyline
+            me.lineSymbol2 = {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 5,
+                strokeColor: me.color2,
+            };
+            // Symbol that gets animated along the polyline
+            me.lineSymbol3 = {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 5,
+                strokeColor: me.color3,
+            };
+            // Symbol that gets animated along the polyline
+            me.lineSymbol4 = {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 5,
+                strokeColor: me.color4,
             };
 
             // Create the DIV to hold the control and call the CenterControl()
@@ -204,19 +340,53 @@ loadGoogleMaps(opt){
             colorCodeDiv.style.maxWidth='100%';
             colorCodeDiv.style.width='100%';
 
+            if (me.latlng2 !==undefined || me.ctr1==='1ride') {
+              var divRow1 = document.createElement('div');
+              divRow1.className='row';
+              divRow1.style.padding='0px';
+              colorCodeDiv.appendChild(divRow1);
+
+              var divCol1 = document.createElement('div');
+              divCol1.className='col col-100';
+              var from = me.fromId;
+              var to = me.toId;
+
+              var index = {};
+
+              // $translate(from).then(function(title1) {
+                  index.from=from;
+              //     return $translate(to);
+              // }).then(function(title2) {
+                  index.to=to;
+                  divCol1.innerHTML = index.from+" - "+index.to;
+              // });
+
+              console.log(index);
+              divCol1.style.backgroundColor = 'rgb(255, 255, 255)';
+              divCol1.style.maxWidth='100%';
+              divCol1.style.cursor = 'pointer';
+              divCol1.style.textAlign = 'center';
+              divCol1.style.fontWeight = 'bold';
+              divRow1.appendChild(divCol1);
+
+
+            }
+
 
             var colorHead;
-            // if (latlng2 !==undefined){
-            //     colorHead='Legends:';
-            // }
-            // else{
+            if (me.latlng2 !==undefined){
+                colorHead='Legends:';
+            }
+            else{
                 colorHead='Legend:';
-            // }
+            }
 
             var divRow2 = document.createElement('div');
             divRow2.className='row';
             divRow2.style.padding='0px';
             colorCodeDiv.appendChild(divRow2);
+
+
 
             var divCol2 = document.createElement('div');
             divCol2.className='col col-100';
@@ -234,28 +404,111 @@ loadGoogleMaps(opt){
 
 
 
-            var colorCode1b = me.setColorCode(colorCodeDiv,this.map,this.latlng1.color,this.latlng1.name)
+            // var colorCode1b = me.setColorCode(colorCodeDiv,this.map,this.latlng1.color,this.latlng1.name)
 
             colorCodeDiv.index = 1;
             me.map.controls[google.maps.ControlPosition.TOP_CENTER].push(colorCodeDiv);
 
             google.maps.event.addListenerOnce(me.map, 'idle', function(){
 
-              if(me.latlng1!==null){
-                console.log('elsee');
+              if (me.latlng2!==undefined&&me.ctr1!==undefined&&me.ctr2!==undefined) {
 
-                console.log(me.latlng1.coordi);
-                me.bendAndSnap(me.latlng1.coordi,'jeep1');
+                  // console.log('enter latlang2');
+                  // console.log(latlng2.coordi);
+                var a = me.getStartEnd(me.latlng1.coordi,'jeep1');
+                var b = me.getStartEnd(me.latlng2.coordi,'jeep2');
+                if (me.latlng3 !==undefined){
+                  console.log('jeep3');
+                    var c = getStartEnd(me.latlng3.coordi,'jeep3');
+                }
+                if (me.latlng4 !==undefined){
+                  console.log('jeep4');
+                    var d = getStartEnd(me.latlng4.coordi,'jeep4');
+                }
+
+                var colorCode1b = me.setColorCode(colorCodeDiv,me.map,me.color1,me.latlng1.name);
+                if (me.start_new2!==undefined) {
+                    var colorCode2b = me.setColorCode(colorCodeDiv,me.map,me.color2,me.latlng2.name);
+                }
+
+                if(me.latlng3 !==undefined){
+                    var colorCode3b = me.setColorCode(colorCodeDiv,me.map,me.color3,me.latlng3.name);
+                }
+
+                if(me.latlng4 !==undefined){
+                    var colorCode4b = me.setColorCode(colorCodeDiv,me.map,me.color4,me.latlng4.name);
+                }
+                me.bendAndSnap(me.start_new1,'jeep1');
+                console.log('bend1');
+                if(me.start_new2!==undefined){
+                  me.bendAndSnap(me.start_new2,'jeep2');
+                  console.log('bend2');
+                }
+                console.log(me.start_new3);
+                if(me.start_new3!==undefined){
+                  console.log('bend 3');
+                  console.log(me.start_new3);
+                  me.bendAndSnap(me.start_new3,'jeep3');
+                }
+                if(me.start_new4!==undefined){
+                  console.log('bend 4');
+                  console.log(me.start_new4);
+                  me.bendAndSnap(me.start_new4,'jeep4');
+                }
+              }
+              else if (me.ctr1==='1ride'&&(me.ctr2==='forth'||me.ctr2==='back')&&me.latlng2===undefined){
+                  var colorCode1bif = new setColorCode(colorCodeDiv,map,color1,me.latlng1.name);
+                  var ride = getStartEnd(latlng1.coordi,'jeep1');
+                  // console.log(latlng1.coordi);
+                  console.log('1ride if');
+                  // console.log(start_new1);
+                  me.bendAndSnap(me.start_new1,'jeep1');
+              }
+              else{
+                console.log('this.latlng1.name');
+                console.log(me.latlng1);
+                  var colorCode1a = me.setColorCode(colorCodeDiv,me.map,me.color1,me.latlng1.name);
+                  me.bendAndSnap(me.latlng1.coordi,'jeep1');
 
               }
 
-              if(me.latlng1!==null){
-                  console.log('klk');
-                console.log(me.points1);
+              // if(me.latlng1!==null){
+              //   console.log('elsee');
+              //
+              //   console.log(me.latlng1.coordi);
+              //   me.bendAndSnap(me.latlng1.coordi,'jeep1');
+              //
+              // }
+              //
+              // if(me.latlng1!==null){
+              //     console.log('klk');
+              //   console.log(me.points1);
+              //   var point = me.points1;
+              //
+              //   me.loadMarkers(point,null);
+              // }
+
+              if(me.points1 !==undefined && me.points2 !==undefined && me.points3 === undefined){
+                me.loadMarkers(me.points1,me.points2);
+
+                console.log('loadmarkers2');
+              }
+              else if(me.points1 !==undefined && me.points2 !==undefined && me.points3 !== undefined && me.points4 === undefined){
+                me.loadMarkers(me.points1,vpoints3);
+
+                console.log('loadmarkers3');
+              }
+              else if(me.points1 !==undefined && me.points2 !==undefined && me.points3 !== undefined && me.points4 !== undefined){
+                me.loadMarkers(me.points1,me.points4);
+
+                console.log('loadmarkers4');
+              }
+              else if (me.ctr1==='1ride'&&(me.ctr2==='forth'||me.ctr2==='back')&&me.latlng2===undefined) {
+                  console.log('1ride ctr');
+                  me.loadMarkers(points1,null);
+              }
+              else{
                 var point = me.points1;
-
-
-
                 me.loadMarkers(point,null);
               }
 
@@ -357,6 +610,262 @@ loadGoogleMaps(opt){
 
   }
 
+  getStartEnd(startEnd,ctr){
+    var me = this;
+      // console.log(points1);
+    if(ctr === 'jeep1'){
+      console.log('enter from');
+      var string1 = startEnd;
+      me.lat_array_coords1 = string1.split("|");
+      // console.log(end1Ctr);
+      // console.log(lat_array_coords1);
+      // console.log($stateParams.toId);
+      // console.log(points1.lat+","+points1.lng);
+
+      var startCtr1;
+      var endCtr1;
+
+      // if (ctr1==='1ride') {
+      //   console.log('1ride iffff');
+      //   startCtr1 = getStartPoints(end1Ctr,lat_array_coords1,ctr);
+      //   endCtr1 = getEndPoints(points1.lat+","+points1.lng,lat_array_coords1,ctr);
+      // }
+      // else {
+        startCtr1 = me.getStartPoints(me.points1.lat+","+me.points1.lng,me.lat_array_coords1,ctr);
+        endCtr1 = me.getEndPoints(me.end1Ctr,me.lat_array_coords1,ctr);
+      // }
+
+      // console.log(me.points1.lat+","+me.points1.lng);
+      // console.log(end1Ctr);
+      // console.log(lat_array_coords1);
+      //
+      // console.log(startCtr1);
+      // console.log(endCtr1);
+
+
+      me.start_new1 = me.lat_array_coords1[startCtr1];
+      // console.log(start_new1);
+      // console.log(ctr1);
+      // console.log(startCtr1>endCtr1);
+      if (startCtr1>endCtr1) {
+        // console.log('1a');
+        // console.log((ctr1==='1ride'&&ctr2==='forth'));
+        //   console.log(start_new1);
+        for (var j = startCtr1-1; j >= endCtr1; j--) {
+            me.start_new1 += "|"+me.lat_array_coords1[j];
+        }
+        if (ctr1==='1ride') {
+          console.log('reverse');
+          me.start_new1 = me.start_new1.split("|").reverse().join("|");
+        }
+        console.log(me.start_new1);
+
+      }
+      else {
+        console.log('2a');
+          for (var i = startCtr1+1; i <= endCtr1; i++) {
+              me.start_new1 += "|"+me.lat_array_coords1[i];
+          }
+          // if (ctr1==='1ride'&&ctr2==='back'&&(latlng1.name!=='CHECK-POINT-HOLY'||latlng1.name!=='CHECK-POINT-HOLY-HI-WAY'||latlng1.name!=='MARISOL-PAMPANG'||latlng1.name!=='PANDAN-PAMPANG')) {
+          //   console.log('rev2');
+          //   start_new1.split("|").reverse().join("|");
+          // }
+
+
+      }
+      console.log(me.start_new1);
+    }
+    if(ctr === 'jeep2'){
+      console.log('enter from');
+      // console.log(points2);
+      var string2 = startEnd;
+      me.lat_array_coords2 = string2.split("|");
+
+      console.log(me.points2.lat+","+me.points2.lng);
+      // console.log(end2Ctr);
+      console.log(me.lat_array_coords2);
+      var startCtr2 = me.getStartPoints(me.points2.lat+","+me.points2.lng,me.lat_array_coords2,ctr);
+      var endCtr2 = me.getEndPoints(me.end2Ctr,me.lat_array_coords2,ctr);
+
+      console.log('jepp2');
+      // console.log(startCtr2);
+      // console.log(endCtr2);
+      me.start_new2 = me.lat_array_coords2[startCtr2];
+      console.log(me.start_new2);
+      // console.log(ctr2);
+    //   if (ctr2=='forth') {
+    //       console.log('enter ctr2');
+
+        if (startCtr2>endCtr2) {
+          console.log('123');
+            for (var l = startCtr2-1; l >= endCtr2; l--) {
+                me.start_new2 += "|"+me.lat_array_coords2[l];
+            }
+            me.start_new2 = me.start_new2.split("|").reverse().join("|");
+        }
+        else {
+          console.log('456');
+            for (var k = startCtr2+1; k <= endCtr2; k++) {
+                me.start_new2 += "|"+me.lat_array_coords2[k];
+                console.log(me.start_new2);
+            }
+
+        }
+        console.log(me.start_new2);
+
+
+
+
+      }
+      if(ctr === 'jeep3'){
+        // console.log('enter mid3');
+        // console.log(points3);
+        var string3 = startEnd;
+        lat_array_coords3 = string3.split("|");
+
+        // console.log(points3.lat+","+points3.lng);
+        // console.log(end3Ctr);
+        // console.log(lat_array_coords3);
+        var startCtr3 = me.getStartPoints(me.points3.lat+","+me.points3.lng,vlat_array_coords3,ctr);
+        var endCtr3 = me.getEndPoints(me.end3Ctr,me.lat_array_coords3,ctr);
+        // console.log(startCtr3);
+        // console.log(endCtr3);
+        //
+
+        me.start_new3 = me.lat_array_coords3[startCtr3];
+        // console.log(start_new3);
+        if (startCtr3<endCtr3 && start_new3!==undefined) {
+          console.log('enter 3if1');
+          for (var m = startCtr3+1; m <= endCtr3; m++) {
+              me.start_new3 += "|"+me.lat_array_coords3[m];
+          }
+          // start_new3 = start_new3.split("|").reverse().join("|");
+          console.log(me.start_new3);
+        }
+        else if (startCtr3>endCtr3 && start_new3!==undefined){
+          console.log('enter 3if3');
+          for (var n = startCtr3-1; n >= endCtr3; n--) {
+              me.start_new3 += "|"+me.lat_array_coords3[n];
+          }
+          me.start_new3 = me.start_new3.split("|").reverse().join("|");
+
+          // console.log('33a');
+          console.log(me.start_new3);
+        }
+      }
+      if(ctr === 'jeep4'){
+        // console.log('enter mid4');
+        // console.log(points4);
+        var string4 = startEnd;
+        me.lat_array_coords4 = string4.split("|");
+
+        // console.log(points4.lat+","+points4.lng);
+        // console.log(end4Ctr);
+        // console.log(lat_array_coords4);
+        var startCtr4 = me.getStartPoints(vpoints4.lat+","+me.points4.lng,me.lat_array_coords4,ctr);
+        var endCtr4 = me.getEndPoints(me.end4Ctr,me.lat_array_coords4,ctr);
+        // console.log(startCtr4);
+        // console.log(endCtr4);
+
+
+        me.start_new4 = me.lat_array_coords4[startCtr4];
+
+        if (startCtr4<endCtr4 && start_new4!==undefined) {
+          console.log('enter 4if1');
+          for (var m = startCtr4+1; m <= endCtr4; m++) {
+              me.start_new4 += "|"+me.lat_array_coords4[m];
+          }
+          // start_new4 = start_new4.split("|").reverse().join("|");
+          console.log(me.start_new4);
+        }
+        else if (startCtr4>endCtr4 && start_new4!==undefined){
+          console.log('enter 4if4');
+          for (var n = startCtr4-1; n >= endCtr4; n--) {
+              me.start_new4 += "|"+me.lat_array_coords4[n];
+          }
+          me.start_new4 = me.start_new4.split("|").reverse().join("|");
+
+
+          console.log(me.start_new4);
+        }
+        console.log('ccc');
+        console.log(me.start_new4);
+      }
+
+
+  }
+
+  //match the selected start point to the start point array
+  getStartPoints(startpoint,ctr,jeepNo){
+    var me = this;
+    // console.log(ctr1);
+    // console.log(ctr2);
+    // console.log(jeepNo);
+    // console.log((ctr2==='forth'||ctr2==='back'));
+    // if (latlng3===undefined) {
+      console.log('undefined');
+      // console.log(ctr1);
+      // console.log(ctr2);
+      if ((me.ctr1=='1ride'&&me.ctr2=='forth'&&jeepNo==='jeep1')||(me.ctr1=='forth'&&jeepNo==='jeep1')||(me.ctr2=='forth'&&jeepNo==='jeep2')||(me.ctr3=='forth'&&jeepNo==='jeep3')||(me.ctr4=='forth'&&jeepNo==='jeep4')) {
+        console.log('start index of');
+        console.log(ctr.indexOf(startpoint));
+        return ctr.indexOf(startpoint);
+      }
+      else if((me.ctr1=='1ride'&&me.ctr2=='back'&&jeepNo==='jeep1')||(me.ctr1=='back'&&jeepNo==='jeep1')||(me.ctr2=='back'&&jeepNo==='jeep2')||(me.ctr3=='back'&&jeepNo==='jeep3')||(ctr4=='back'&&jeepNo==='jeep4')){
+
+        console.log('lat3 unde');
+          console.log('start last index');
+          // console.log(ctr);
+          // console.log(startpoint);
+          // console.log(ctr.lastIndexOf(startpoint));
+          return ctr.lastIndexOf(startpoint);
+      }
+  }
+
+  //match the selected end point to the end point array
+  getEndPoints(endpoint,ctr,jeepNo){
+    var me = this;
+
+    // console.log(endpoint);
+    // console.log(ctr);
+    // console.log(ctr1);
+    // console.log(ctr1=='back'||ctr2=='back'||ctr3=='back');
+    // console.log(ctr1=='forth'||ctr2=='forth'||ctr3=='forth');
+
+    // if (latlng3===undefined) {
+      if((me.ctr1=='1ride'&&me.ctr2=='forth'&&jeepNo==='jeep1')||(me.ctr1=='forth'&&jeepNo==='jeep1')||(me.ctr2=='forth'&&jeepNo==='jeep2')||(me.ctr3=='forth'&&jeepNo==='jeep3')||(me.ctr4=='forth'&&jeepNo==='jeep4')) {
+        console.log('end index of');
+        console.log(ctr.indexOf(endpoint));
+        return ctr.indexOf(endpoint);
+      }
+      if((me.ctr1=='1ride'&&me.ctr2=='back'&&jeepNo==='jeep1')||(me.ctr1=='back'&&jeepNo==='jeep1')||(me.ctr2=='back'&&jeepNo==='jeep2')||(me.ctr3=='back'&&jeepNo==='jeep3')||(me.ctr4=='back'&&jeepNo==='jeep4')){
+          console.log('end last index');
+          console.log(me.ctr);
+          console.log(endpoint);
+          console.log(ctr.lastIndexOf(endpoint));
+          console.log(ctr.lastIndexOf(endpoint));
+          return ctr.lastIndexOf(endpoint);
+      }
+    // }
+    // else if (latlng3!==undefined) {
+      // if ((ctr1=='1ride'&&ctr2=='forth'&&jeepNo==='jeep1')||(ctr1=='forth'&&jeepNo==='jeep1')||(ctr2=='forth'&&jeepNo==='jeep2')||(ctr3=='forth'&&jeepNo==='jeep3')) {
+      //   console.log('end last index');
+      //   console.log(ctr);
+      //   console.log(endpoint);
+      //   console.log(ctr.lastIndexOf(endpoint));
+      //   console.log(ctr.lastIndexOf(endpoint));
+      //   return ctr.lastIndexOf(endpoint);
+      // }
+      // else if((ctr1=='1ride'&&ctr2=='back'&&jeepNo==='jeep1')||(ctr1=='back'&&jeepNo==='jeep1')||(ctr2=='back'&&jeepNo==='jeep2')||(ctr3=='back'&&jeepNo==='jeep3')){
+      //   console.log('end index of');
+      //   console.log(ctr.indexOf(endpoint));
+      //   return ctr.indexOf(endpoint);
+      // }
+    // }
+
+
+  }
+
   bendAndSnap(latlngs,ctr) {
     var me = this;
 
@@ -371,12 +880,50 @@ loadGoogleMaps(opt){
     me.http.get('https://roads.googleapis.com/v1/snapToRoads',{search: params})
     .subscribe(
       data => {
+        // if(ctr == 'jeep1'){
+        //   me.processSnapToRoadResponse(data.json(),'jeep1');
+        //   me.drawSnappedPolyline(me.snappedCoordinates1,'jeep1');
+        // }
+        //
+        // else {
+        //   me.processSnapToRoadResponse(data.json(),null);
+        //   me.drawSnappedPolyline(me.snappedCoordinates1,null);
+        // }
+
         if(ctr == 'jeep1'){
+          console.log(data.json());
+          console.log('jeep1 bend');
           me.processSnapToRoadResponse(data.json(),'jeep1');
           me.drawSnappedPolyline(me.snappedCoordinates1,'jeep1');
         }
 
+        if(ctr=='jeep2'){
+          // console.log(response.data);
+          // console.log('enter to');
+          console.log('jeep 2 bend');
+          console.log(data.json());
+          me.processSnapToRoadResponse(data.json(),'jeep2');
+          me.drawSnappedPolyline(me.snappedCoordinates2,'jeep2');
+        }
+
+
+        // if(ctr=='jeep3'){
+        //   // console.log(response.data);
+        //   // console.log('enter mid');
+        //   me.processSnapToRoadResponse(data.json(),'jeep3');
+        //   me.drawSnappedPolyline(me.snappedCoordinates3,'jeep3');
+        // }
+        //
+        //
+        // if(ctr=='jeep4'){
+        //   // console.log(response.data);
+        //   // console.log('enter 4');
+        //   me.processSnapToRoadResponse(data.json(),'jeep4');
+        //   me.drawSnappedPolyline(me.snappedCoordinates4,'jeep4');
+        // }
+
         else {
+            console.log('default');
           me.processSnapToRoadResponse(data.json(),null);
           me.drawSnappedPolyline(me.snappedCoordinates1,null);
         }
@@ -393,14 +940,15 @@ loadGoogleMaps(opt){
   // Store all coordinates in response
   // Calls functions to add markers to map for unsnapped coordinates
   processSnapToRoadResponse(data,ctr) {
+    var me = this;
     var originalIndexes = [];
-    this.snappedCoordinates1 = [];
+    me.snappedCoordinates1 = [];
     var originalIndexes2 = [];
-    this.snappedCoordinates2 = [];
+    me.snappedCoordinates2 = [];
     var originalIndexes3 = [];
-    this.snappedCoordinates3 = [];
+    me.snappedCoordinates3 = [];
     var originalIndexes4 = [];
-    this.snappedCoordinates4 = [];
+    me.snappedCoordinates4 = [];
     if(ctr == 'jeep1'){
       console.log('process from');
       for (var i = 0; i < data.snappedPoints.length; i++) {
@@ -417,7 +965,7 @@ loadGoogleMaps(opt){
         }
 
         latlng1.interpolated = interpolated1;
-        this.snappedCoordinates1.push(latlng1);
+        me.snappedCoordinates1.push(latlng1);
       }
     }
     if(ctr=='jeep2'){
@@ -436,7 +984,7 @@ loadGoogleMaps(opt){
         }
 
         latlng2.interpolated = interpolated2;
-        this.snappedCoordinates2.push(latlng2);
+        me.snappedCoordinates2.push(latlng2);
       }
     }
     if(ctr=='jeep3'){
@@ -455,7 +1003,7 @@ loadGoogleMaps(opt){
         }
 
         latlng3.interpolated = interpolated3;
-        this.snappedCoordinates3.push(latlng3);
+        me.snappedCoordinates3.push(latlng3);
       }
     }
     if(ctr=='jeep4'){
@@ -474,8 +1022,8 @@ loadGoogleMaps(opt){
         }
 
         latlng4.interpolated = interpolated4;
-        this.snappedCoordinates4.push(latlng4);
-        console.log(this.snappedCoordinates4);
+        me.snappedCoordinates4.push(latlng4);
+        console.log(me.snappedCoordinates4);
       }
     }
 
@@ -505,6 +1053,25 @@ loadGoogleMaps(opt){
       console.log(me.polylines1);
       console.log('draw from');
     }
+    if(ctr=='jeep2'){
+      console.log('draw to');
+      console.log(snappedCoords);
+      me.snappedPolyline2 = new google.maps.Polyline({
+        path: snappedCoords,
+        strokeColor: '#FF69B4',
+        strokeWeight: 5,
+        icons: [{
+          icon: me.lineSymbol2,
+          offset: '100%'
+        }]
+      });
+
+      me.snappedPolyline2.setMap(me.map);
+      me.animateCircle(me.snappedPolyline2);
+
+      me.polylines2.push(me.snappedPolyline2);
+      console.log(me.polylines2);
+    }
 
     for (var i = 0; i < snappedCoords.length; i++) {
       var marker = me.addMarker(snappedCoords[i]);
@@ -520,7 +1087,7 @@ loadGoogleMaps(opt){
     var me = this;
     var marker = new google.maps.Marker({
       position: coords,
-      map: this.map,
+      map: me.map,
     });
     marker.setMap(null);
     me.markers.push(marker);
@@ -604,6 +1171,7 @@ loadGoogleMaps(opt){
   fitBounds(markers) {
     var me = this;
     console.log('Fit');
+    console.log(me.map);
     console.log(markers);
     var bounds = new google.maps.LatLngBounds();
     for (var i = 0; i < markers.length; i++) {
