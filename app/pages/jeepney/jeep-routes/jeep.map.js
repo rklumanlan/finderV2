@@ -48,7 +48,7 @@ export class JeepMapsPage {
 
 
           if (this.check_marks(data.res.rows.item(i).tags,this.jeep.name)) {
-            this.points.push({text: data.res.rows.item(i).text, lat: data.res.rows.item(i).lat, lng:data.res.rows.item(i).lng, tags:data.res.rows.item(i).tags});
+            this.points.push({text: data.res.rows.item(i).text, lat: data.res.rows.item(i).lat, lng:data.res.rows.item(i).lng, tags:data.res.rows.item(i).tags, icon:data.res.rows.item(i).icon});
           }
         }
       }
