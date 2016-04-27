@@ -270,7 +270,7 @@ loadGoogleMaps(opt){
                 zoom: 15,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 streetViewControl: false,
-                mapTypeControl: false
+                mapTypeControl: false,
             }
             console.log('map');
             console.log(document.getElementById("map"));
@@ -295,12 +295,12 @@ loadGoogleMaps(opt){
             if(me.latlng2!==undefined){
               me.color2 = me.setColor(me.latlng2.color);
             }
-            // if(me.latlng3!== null){
-            //   me.color3 = me.setColor(me.latlng3.color);
-            // }
-            // if(me.latlng4!==null){
-            //   me.color4 = me.setColor(me.latlng4.color);
-            // }
+            if(me.latlng3!==undefined){
+              me.color3 = me.setColor(me.latlng3.color);
+            }
+            if(me.latlng4!==undefined){
+              me.color4 = me.setColor(me.latlng4.color);
+            }
 
             // Symbol that gets animated along the polyline
             me.lineSymbol1 = {
@@ -419,11 +419,11 @@ loadGoogleMaps(opt){
                 var b = me.getStartEnd(me.latlng2.coordi,'jeep2');
                 if (me.latlng3 !==undefined){
                   console.log('jeep3');
-                    var c = getStartEnd(me.latlng3.coordi,'jeep3');
+                    var c = me.getStartEnd(me.latlng3.coordi,'jeep3');
                 }
                 if (me.latlng4 !==undefined){
                   console.log('jeep4');
-                    var d = getStartEnd(me.latlng4.coordi,'jeep4');
+                    var d = me.getStartEnd(me.latlng4.coordi,'jeep4');
                 }
 
                 var colorCode1b = me.setColorCode(colorCodeDiv,me.map,me.color1,me.latlng1.name);
@@ -494,7 +494,7 @@ loadGoogleMaps(opt){
                 console.log('loadmarkers2');
               }
               else if(me.points1 !==undefined && me.points2 !==undefined && me.points3 !== undefined && me.points4 === undefined){
-                me.loadMarkers(me.points1,vpoints3);
+                me.loadMarkers(me.points1,me.points3);
 
                 console.log('loadmarkers3');
               }
@@ -721,12 +721,12 @@ loadGoogleMaps(opt){
         // console.log('enter mid3');
         // console.log(points3);
         var string3 = startEnd;
-        lat_array_coords3 = string3.split("|");
+        me.lat_array_coords3 = string3.split("|");
 
         // console.log(points3.lat+","+points3.lng);
         // console.log(end3Ctr);
         // console.log(lat_array_coords3);
-        var startCtr3 = me.getStartPoints(me.points3.lat+","+me.points3.lng,vlat_array_coords3,ctr);
+        var startCtr3 = me.getStartPoints(me.points3.lat+","+me.points3.lng,me.lat_array_coords3,ctr);
         var endCtr3 = me.getEndPoints(me.end3Ctr,me.lat_array_coords3,ctr);
         // console.log(startCtr3);
         // console.log(endCtr3);
@@ -734,7 +734,7 @@ loadGoogleMaps(opt){
 
         me.start_new3 = me.lat_array_coords3[startCtr3];
         // console.log(start_new3);
-        if (startCtr3<endCtr3 && start_new3!==undefined) {
+        if (startCtr3<endCtr3 && me.start_new3!==undefined) {
           console.log('enter 3if1');
           for (var m = startCtr3+1; m <= endCtr3; m++) {
               me.start_new3 += "|"+me.lat_array_coords3[m];
@@ -742,7 +742,7 @@ loadGoogleMaps(opt){
           // start_new3 = start_new3.split("|").reverse().join("|");
           console.log(me.start_new3);
         }
-        else if (startCtr3>endCtr3 && start_new3!==undefined){
+        else if (startCtr3>endCtr3 && me.start_new3!==undefined){
           console.log('enter 3if3');
           for (var n = startCtr3-1; n >= endCtr3; n--) {
               me.start_new3 += "|"+me.lat_array_coords3[n];
@@ -907,20 +907,20 @@ loadGoogleMaps(opt){
         }
 
 
-        // if(ctr=='jeep3'){
-        //   // console.log(response.data);
-        //   // console.log('enter mid');
-        //   me.processSnapToRoadResponse(data.json(),'jeep3');
-        //   me.drawSnappedPolyline(me.snappedCoordinates3,'jeep3');
-        // }
-        //
-        //
-        // if(ctr=='jeep4'){
-        //   // console.log(response.data);
-        //   // console.log('enter 4');
-        //   me.processSnapToRoadResponse(data.json(),'jeep4');
-        //   me.drawSnappedPolyline(me.snappedCoordinates4,'jeep4');
-        // }
+        if(ctr=='jeep3'){
+          // console.log(response.data);
+          // console.log('enter mid');
+          me.processSnapToRoadResponse(data.json(),'jeep3');
+          me.drawSnappedPolyline(me.snappedCoordinates3,'jeep3');
+        }
+
+
+        if(ctr=='jeep4'){
+          // console.log(response.data);
+          // console.log('enter 4');
+          me.processSnapToRoadResponse(data.json(),'jeep4');
+          me.drawSnappedPolyline(me.snappedCoordinates4,'jeep4');
+        }
 
         else {
             console.log('default');
@@ -1077,6 +1077,45 @@ loadGoogleMaps(opt){
       var marker = me.addMarker(snappedCoords[i]);
     }
 
+    if(ctr=='jeep3'){
+      console.log('draw mid');
+      console.log(me.snappedCoords);
+      me.snappedPolyline3 = new google.maps.Polyline({
+        path: snappedCoords,
+        strokeColor: '#98FB98',
+        strokeWeight: 5,
+        icons: [{
+          icon: me.lineSymbol3,
+          offset: '100%'
+        }]
+      });
+
+      me.snappedPolyline3.setMap(me.map);
+      animateCircle(me.snappedPolyline3);
+
+      me.polylines3.push(me.snappedPolyline3);
+      console.log(me.polylines3);
+    }
+    if(ctr=='jeep4'){
+      console.log('draw 4');
+      console.log(me.snappedCoords);
+      me.snappedPolyline4 = new google.maps.Polyline({
+        path: snappedCoords,
+        strokeColor: '#FF00FF',
+        strokeWeight: 5,
+        icons: [{
+          icon: me.lineSymbol4,
+          offset: '100%'
+        }]
+      });
+
+      me.snappedPolyline4.setMap(me.map);
+      me.animateCircle(me.snappedPolyline4);
+
+      me.polylines4.push(me.snappedPolyline4);
+      console.log(me.polylines4);
+    }
+
 
 
 
@@ -1102,7 +1141,7 @@ loadGoogleMaps(opt){
     var records;
 
     if (points2!==null) {
-      records = [{lat:points.lat,lng:points.lng,text:points.text},{lat:points2.lat,lng:points2.lng,text:points2.text}];
+      records = [{lat:points.lat,lng:points.lng,text:points.text,icon:points.icon},{lat:points2.lat,lng:points2.lng,text:points2.text,icon:points2.icon}];
     }
     else {
       records = points;
@@ -1117,7 +1156,7 @@ loadGoogleMaps(opt){
             map: me.map,
             animation: google.maps.Animation.DROP,
             position: markerPos,
-            icon: iconBase + 'schools_maps.png'
+            icon: records[x].icon
         });
         var infoWindowContent;
         if (points2!==null) {
