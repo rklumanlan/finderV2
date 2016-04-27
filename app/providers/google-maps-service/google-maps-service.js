@@ -269,8 +269,7 @@ loadGoogleMaps(opt){
                 // center: latLng,
                 zoom: 15,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
-                streetViewControl: false,
-                mapTypeControl: false,
+                disableDefaultUI: true
             }
             console.log('map');
             console.log(document.getElementById("map"));
@@ -302,31 +301,7 @@ loadGoogleMaps(opt){
               me.color4 = me.setColor(me.latlng4.color);
             }
 
-            // Symbol that gets animated along the polyline
-            me.lineSymbol1 = {
-              path: google.maps.SymbolPath.CIRCLE,
-              scale: 5,
-              strokeColor: me.color1,
-            };
-
-            // Symbol that gets animated along the polyline
-            me.lineSymbol2 = {
-                path: google.maps.SymbolPath.CIRCLE,
-                scale: 5,
-                strokeColor: me.color2,
-            };
-            // Symbol that gets animated along the polyline
-            me.lineSymbol3 = {
-                path: google.maps.SymbolPath.CIRCLE,
-                scale: 5,
-                strokeColor: me.color3,
-            };
-            // Symbol that gets animated along the polyline
-            me.lineSymbol4 = {
-                path: google.maps.SymbolPath.CIRCLE,
-                scale: 5,
-                strokeColor: me.color4,
-            };
+            me.setLineSymbol();
 
             // Create the DIV to hold the control and call the CenterControl()
             // constructor passing in this DIV.
@@ -408,6 +383,19 @@ loadGoogleMaps(opt){
 
             colorCodeDiv.index = 1;
             me.map.controls[google.maps.ControlPosition.TOP_CENTER].push(colorCodeDiv);
+
+            //fab button for displaying legends
+            if (me.latlng2!==undefined) {
+              me.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('info2'));
+              document.getElementById('info2').style.marginRight = '16px';
+              document.getElementById('info2').style.marginBottom = '16px';
+            }
+            else {
+              me.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('info2'));
+              document.getElementById('info1').style.marginRight = '16px';
+              document.getElementById('info1').style.marginBottom = '16px';
+            }
+
 
             google.maps.event.addListenerOnce(me.map, 'idle', function(){
 
@@ -522,6 +510,83 @@ loadGoogleMaps(opt){
         });
 
   }
+  setLineSymbol(){
+    var me = this;
+    var path = 'M45.851,12.498v6.289h0.813v1.146h-1.487V18.19h-3.032V3.866H7.484V18.19H4.451v1.742H2.965v-1.146h0.812v-6.289H0.53 v6.289h0.812v2.827h3.11v17.682h2.716v6.385h8.118v-6.385h19.056v6.385h8.119v-6.385h2.715V21.613h3.11v-2.827h0.813v-6.289 H45.851z M11.231,28.743c-1.556,0-2.818-1.311-2.818-2.925c0-1.61,1.262-2.918,2.818-2.918c1.561,0,2.822,1.309,2.822,2.918 C14.053,27.433,12.792,28.743,11.231,28.743z M18.942,34.71h-1.625V22.772h1.625V34.71z M23.093,34.71H21.47V22.772h1.624V34.71z M27.256,34.71h-1.624V22.772h1.624V34.71z M27.925,18.19H10.731V7.228h28.164V18.19h-0.826c0.021-0.185,0.056-0.37,0.056-0.561 c0-2.927-2.301-5.309-5.128-5.309s-5.128,2.382-5.128,5.309C27.869,17.823,27.902,18.005,27.925,18.19z M31.41,34.71h-1.624 V22.772h1.624V34.71z M29.549,18.19c-0.029-0.184-0.056-0.37-0.056-0.561c0-2,1.57-3.628,3.504-3.628s3.505,1.628,3.505,3.628 c0,0.193-0.027,0.379-0.057,0.561H29.549z M38.394,28.743c-1.558,0-2.82-1.311-2.82-2.925c0-1.61,1.263-2.918,2.82-2.918 c1.559,0,2.822,1.309,2.822,2.918C41.219,27.433,39.952,28.743,38.394,28.743z'
+
+    console.log("color"+me.color1);
+    console.log(me.color1=='White'||me.color1=='#FFFF99'||me.color1=='Yellow');
+    var strokeWeight1 = 0;
+    var strokeColor1 = null;
+    var strokeWeight2 = 0;
+    var strokeColor2 = null;
+    var strokeWeight3 = 0;
+    var strokeColor3 = null;
+    var strokeWeight4 = 0;
+    var strokeColor4 = null;
+
+    if(me.color1=='White'||me.color1=='#FFFF99'||me.color1=='Yellow'){
+      strokeWeight1 = 1;
+      strokeColor1 = '#000000';
+    }
+
+    if(me.color2=='White'||me.color2=='#FFFF99'||me.color2=='Yellow'){
+      strokeWeight2 = 1;
+      strokeColor2 = '#000000';
+    }
+
+    if(me.color3=='White'||me.color3=='#FFFF99'||me.color3=='Yellow'){
+      strokeWeight3 = 1;
+      strokeColor3 = '#000000';
+    }
+
+    if(me.color4=='White'||me.color4=='#FFFF99'||me.color4=='Yellow'){
+      strokeWeight4 = 1;
+      strokeColor4 = '#000000';
+    }
+
+    // Symbol that gets animated along the polyline
+    me.lineSymbol1 = {
+      path: path,
+      fillColor: me.color1,
+      fillOpacity: 1,
+      strokeWeight: strokeWeight1,
+      strokeColor: strokeColor1,
+      anchor: new google.maps.Point(27.433,27.433),
+      scale: .50,
+    };
+
+    // Symbol that gets animated along the polyline
+    me.lineSymbol2 = {
+      path: path,
+      fillColor: me.color2,
+      fillOpacity: 1,
+      strokeWeight: strokeWeight2,
+      strokeColor: strokeColor2,
+      anchor: new google.maps.Point(27.433,27.433),
+      scale: .50,
+    };
+    // Symbol that gets animated along the polyline
+    me.lineSymbol3 = {
+      path: path,
+      fillColor: me.color3,
+      fillOpacity: 1,
+      strokeWeight: strokeWeight3,
+      strokeColor: strokeColor3,
+      anchor: new google.maps.Point(27.433,27.433),
+      scale: .50,
+    };
+    // Symbol that gets animated along the polyline
+    me.lineSymbol4 = {
+      path: path,
+      fillColor: me.color4,
+      fillOpacity: 1,
+      strokeWeight: strokeWeight4,
+      strokeColor: strokeColor4,
+      anchor: new google.maps.Point(27.433,27.433),
+      scale: .50,
+    };
+  }
 
   disableMap(){
 
@@ -600,6 +665,11 @@ loadGoogleMaps(opt){
     if(color==='#FFFF99'){
       canvas.style.border='1px solid #000000';
     }
+
+    if(color==='Yellow'){
+      canvas.style.border='1px solid #000000';
+    }
+
 
     canvas.style.backgroundColor=color;
     divCol.appendChild(canvas);
@@ -1042,7 +1112,8 @@ loadGoogleMaps(opt){
         strokeWeight: 5,
         icons: [{
           icon: me.lineSymbol1,
-          offset: '100%'
+          offset: '100%',
+          fixedRotation:true
         }]
       });
 
@@ -1062,7 +1133,8 @@ loadGoogleMaps(opt){
         strokeWeight: 5,
         icons: [{
           icon: me.lineSymbol2,
-          offset: '100%'
+          offset: '100%',
+          fixedRotation:true
         }]
       });
 
@@ -1086,7 +1158,8 @@ loadGoogleMaps(opt){
         strokeWeight: 5,
         icons: [{
           icon: me.lineSymbol3,
-          offset: '100%'
+          offset: '100%',
+          fixedRotation:true
         }]
       });
 
@@ -1105,7 +1178,8 @@ loadGoogleMaps(opt){
         strokeWeight: 5,
         icons: [{
           icon: me.lineSymbol4,
-          offset: '100%'
+          offset: '100%',
+          fixedRotation:true
         }]
       });
 
@@ -1199,7 +1273,7 @@ loadGoogleMaps(opt){
     ];
 
     window.setInterval(function() {
-      count = (count + 0.7) % 200;
+      count = (count + 0.2) % 200;
       var icons = polyline.get('icons') || defaultIcon;
       icons[0].offset = (count / 2) + '%';
       polyline.set('icons', icons);
