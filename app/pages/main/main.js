@@ -1,6 +1,6 @@
 import {Page, Storage, SqlStorage} from 'ionic-angular';
 import {TabsPage} from '../jeepney/tabs/tabs';
-import {RestaurantPage} from '../restaurant/restaurant';
+// import {RestaurantPage} from '../restaurant/restaurant';
 import {DataService} from '../../services/data';
 import {Geolocation} from 'ionic-native';
 
@@ -22,7 +22,7 @@ export class MainPage {
 
 
     this.TabsPage = TabsPage;
-    this.RestaurantPage = RestaurantPage;
+    // this.RestaurantPage = RestaurantPage;
     this.coordsVal = null;
     // this.loadscript();
 
@@ -72,5 +72,5 @@ export class MainPage {
 
   }
 
-    
+
 }

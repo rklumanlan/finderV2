@@ -391,7 +391,7 @@ loadGoogleMaps(opt){
               document.getElementById('info2').style.marginBottom = '16px';
             }
             else {
-              me.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('info2'));
+              me.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('info1'));
               document.getElementById('info1').style.marginRight = '16px';
               document.getElementById('info1').style.marginBottom = '16px';
             }

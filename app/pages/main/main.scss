@@ -10,9 +10,9 @@
     font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^="icoMoon-"], [class*=" icoMoon-"] {
     /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'icomoon' !important;
+    font-family: 'icomoon';
     speak: none;
     font-style: normal;
     font-weight: normal;
@@ -25,39 +25,70 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-health:before {
+.icoMoon{
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icoMoon-health:before {
     content: "\e900";
     font-size: 5em;
 
 }
-.icon-hotel:before {
+.icoMoon-hotel:before {
     content: "\e901";
     font-size: 5em;
 }
-.icon-jeep:before {
+.icoMoon-jeep:before {
     content: "\e902";
     font-size: 5em;
 }
-.icon-mall:before {
+
+.icoMoon-mall:before {
     content: "\e903";
     font-size: 5em;
 }
-.icon-police:before {
+.icoMoon-police:before {
     content: "\e904";
     font-size: 5em;
 }
-.icon-resto:before {
+.icoMoon-resto:before {
     content: "\e905";
     font-size: 5em;
 }
-.icon-salon:before {
+.icoMoon-salon:before {
     content: "\e906";
     font-size: 5em;
 }
-.icon-supermarket:before {
+.icoMoon-supermarket:before {
     content: "\e907";
     font-size: 5em;
 }
+.ion-md-jeepTab:before{
+  content: "\e902";
+
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 // icomoon custom font icons
 
 .mainBackDiv{
