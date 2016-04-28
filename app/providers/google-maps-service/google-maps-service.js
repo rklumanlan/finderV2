@@ -388,41 +388,85 @@ loadGoogleMaps(opt){
 
             var legBtn1 = document.getElementById('info1');
             var legBtn2 = document.getElementById('info2');
-            var legMarkDiv1;
-            var legMarkDiv2;
+            var locMarkerBtn1 = document.getElementById('locMarker1');
+            var locMarkerBtn2 = document.getElementById('locMarker2');
+            var legMarkDiv1 = document.getElementById('legend0');
+            var legMarkDiv2 = document.getElementById('legend1');
 
 
-            if (document.getElementById('legend0')!==null) {
-              legMarkDiv1 = document.getElementById('legend0');
-              legMarkDiv1.style.display = 'none';
-
-            }
-
-            if (document.getElementById('legend1')!==null) {
-              legMarkDiv2 = document.getElementById('legend1');
-              legMarkDiv2.style.display = 'none';
-
-            }
+            // if (document.getElementById('legend0')!==null&&me.map!==null) {
+            //   console.log('leg1');
+            //   legMarkDiv1 = document.getElementById('legend0');
+            //   legMarkDiv1.style.display = 'none';
+            //
+            // }
+            //
+            // if (document.getElementById('legend1')!==null) {
+            //   legMarkDiv2 = document.getElementById('legend1');
+            //   legMarkDiv2.style.display = 'none';
+            //
+            // }
 
 
 
             //fab button for displaying legends
             if (me.latlng2!==undefined||(me.latlng1!==undefined&&me.ctr1==='1ride')) {
               me.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legBtn2);
+              legBtn2.style.display = "inline";
+
+              me.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(locMarkerBtn2);
+              locMarkerBtn2.style.display = "inline";
+
               me.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legMarkDiv2);
+
               legBtn2.style.marginRight = '16px';
               legBtn2.style.marginBottom = '16px';
+              locMarkerBtn2.style.marginRight = '16px';
 
               legBtn2.addEventListener('click', function() {
                 colorCodeDiv.style.display = 'inline';
                 legMarkDiv2.style.display = 'inline';
+
+                console.log(me.points1);
+                console.log(me.points2);
+
+                var points = {};
+
+                if(me.points1 !==undefined && me.points2 !==undefined && me.points3 === undefined){
+                  points[0] = me.points1.icon;
+                  points[1] = me.points2.icon;
+                }
+                else if(me.points1 !==undefined && me.points2 !==undefined && me.points3 !== undefined && me.points4 === undefined){
+                  points[0] = me.points1.icon;
+                  points[1] = me.points3.icon;
+                }
+                else if(me.points1 !==undefined && me.points2 !==undefined && me.points3 !== undefined && me.points4 !== undefined){
+                  points[0] = me.points1.icon;
+                  points[1] = me.points4.icon;
+                }
+                // else if (me.ctr1==='1ride'&&(me.ctr2==='forth'||me.ctr2==='back')&&me.latlng2===undefined) {
+                //   console.log('1rider');
+                //   points[0] = me.points1.icon;
+                // }
+                for (var i = 0; i < 2; i++) {
+                  me.displayLegMark(points[i]);
+                  console.log(points[i]);
+                }
               });
             }
             else {
               me.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legBtn1);
+              legBtn1.style.display = "inline";
+
+              me.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(locMarkerBtn1);
+              locMarkerBtn1.style.display = "inline";
+
               me.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legMarkDiv1);
+              legMarkDiv1.style.marginBottom = '5px';
+
               legBtn1.style.marginRight = '16px';
               legBtn1.style.marginBottom = '16px';
+              locMarkerBtn1.style.marginRight = '16px';
 
               legBtn1.addEventListener('click', function() {
                 colorCodeDiv.style.display = 'inline';
@@ -439,7 +483,13 @@ loadGoogleMaps(opt){
 
             google.maps.event.addListener(me.map, 'tilesloaded', function() {
               colorCodeDiv.style.display = 'none';
-              legMarkDiv1.style.display = 'none';
+              if (legMarkDiv1!=null) {
+                legMarkDiv1.style.display = 'none';
+              }
+              if (legMarkDiv2!=null) {
+                legMarkDiv2.style.display = 'none';
+              }
+
             });
 
 
@@ -561,26 +611,38 @@ loadGoogleMaps(opt){
   }
 
   displayLegMark(mark){
+    var ctr;
+    if (document.getElementById('legend0')!=null) {
+      ctr=0;
+    }
+    else if (document.getElementById('legend1')!=null) {
+      ctr=1;
+    }
+
+    console.log(mark=='img/pins/cityhall.png');
+
     if (mark=='img/pins/church.png') {
-      document.getElementById('church0').style.display = 'block';
+      document.getElementById('church'+ctr).style.display = 'block';
     }
-    if (mark=='img/pins/cityhall') {
-      document.getElementById('cityhall0').style.display = 'block';
+    else if (mark=='img/pins/cityhall.png') {
+      console.log('cityhall');
+      document.getElementById('cityhall'+ctr).style.display = 'block';
     }
-    if (mark=='img/pins/hospital') {
-      document.getElementById('hospital0').style.display = 'block';
+    else if (mark=='img/pins/hospital.png') {
+      console.log('hosp');
+      document.getElementById('hospital'+ctr).style.display = 'block';
     }
-    if (mark=='img/pins/mall') {
-      document.getElementById('mall0').style.display = 'block';
+    else if (mark=='img/pins/mall.png') {
+      document.getElementById('mall'+ctr).style.display = 'block';
     }
-    if (mark=='img/pins/school') {
-      document.getElementById('school0').style.display = 'block';
+    else if (mark=='img/pins/school.png') {
+      document.getElementById('school'+ctr).style.display = 'block';
     }
-    if (mark=='img/pins/subd_brgy') {
-      document.getElementById('subd_brgy0').style.display = 'block';
+    else if (mark=='img/pins/subd_brgy.png') {
+      document.getElementById('subd_brgy'+ctr).style.display = 'block';
     }
-    if (mark=='img/pins/termnal') {
-      document.getElementById('terminal0').style.display = 'block';
+    else if (mark=='img/pins/terminal.png') {
+      document.getElementById('terminal'+ctr).style.display = 'block';
     }
   }
 

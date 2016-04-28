@@ -4,22 +4,24 @@
 <ion-content class="map">
   <loading-modal id="loading"></loading-modal>
     <div id="map2"></div>
-    <div id="legend1" style="border-style: solid; border-width: thin; margin-right:5px">
+    <div id="legend1" class="legend">
       <div><span style="font-weight: bold;font-size: 1em;">Legend</span></div>
 
-      <div id="church1" style="display:none"><img src="img/pins/church.png" style="vertical-align:middle"> Church</div>
+      <div id="church1" class="hidden"><img src="img/pins/church.png" style="vertical-align:middle"> Church</div>
 
-      <div id="cityhall1" style="display:none"><img src="img/pins/cityhall.png" style="vertical-align:middle"> City Hall</div>
+      <div id="cityhall1" class="hidden"><img src="img/pins/cityhall.png" style="vertical-align:middle"> City Hall</div>
 
-      <div id="hospital1" style="display:none"><img src="img/pins/hospital.png" style="vertical-align:middle"> Hospital</div>
+      <div id="hospital1" class="hidden"><img src="img/pins/hospital.png" style="vertical-align:middle"> Hospital</div>
 
-      <div id="mall1" style="display:none"><img src="img/pins/mall.png" style="vertical-align:middle"> Mall</div>
+      <div id="mall1" class="hidden"><img src="img/pins/mall.png" style="vertical-align:middle"> Mall</div>
 
-      <div id="school1" style="display:none"><img src="img/pins/subd_brgy.png" style="vertical-align:middle"> School</div>
+      <div id="school1" class="hidden"><img src="img/pins/subd_brgy.png" style="vertical-align:middle"> School</div>
 
-      <div id="subd_brgy1" style="display:none"><img src="img/pins/subd_brgy.png" style="vertical-align:middle"> Subdivision</div>
+      <div id="subd_brgy1" class="hidden"><img src="img/pins/subd_brgy.png" style="vertical-align:middle"> Subdivision</div>
 
-      <div id="terminal1" style="display:none"><img src="img/pins/terminal.png" style="vertical-align:middle"> Mall</div>
+      <div id="terminal1" class="hidden"><img src="img/pins/terminal.png" style="vertical-align:middle"> Mall</div>
     </div>
-    <button fab id='info2' light><img src="img/pins/info.png" width='15px' height='15px'></button>
+    <button fab id='info2' class="hidden"><img src="img/pins/info.png" height='20px'></button>
+
+    <button fab id='locMarker2' light class="hidden"><img src="img/pins/loc_marker.png"  height='35px'></button>
 </ion-content>
