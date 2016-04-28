@@ -382,19 +382,68 @@ loadGoogleMaps(opt){
             // var colorCode1b = me.setColorCode(colorCodeDiv,this.map,this.latlng1.color,this.latlng1.name)
 
             colorCodeDiv.index = 1;
-            me.map.controls[google.maps.ControlPosition.TOP_CENTER].push(colorCodeDiv);
+            colorCodeDiv.style.display = 'none';
+            me.map.controls[google.maps.ControlPosition.TOP_LEFT].push(colorCodeDiv);
+
+
+            var legBtn1 = document.getElementById('info1');
+            var legBtn2 = document.getElementById('info2');
+            var legMarkDiv1;
+            var legMarkDiv2;
+
+
+            if (document.getElementById('legend0')!==null) {
+              legMarkDiv1 = document.getElementById('legend0');
+              legMarkDiv1.style.display = 'none';
+
+            }
+
+            if (document.getElementById('legend1')!==null) {
+              legMarkDiv2 = document.getElementById('legend1');
+              legMarkDiv2.style.display = 'none';
+
+            }
+
+
 
             //fab button for displaying legends
-            if (me.latlng2!==undefined) {
-              me.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('info2'));
-              document.getElementById('info2').style.marginRight = '16px';
-              document.getElementById('info2').style.marginBottom = '16px';
+            if (me.latlng2!==undefined||(me.latlng1!==undefined&&me.ctr1==='1ride')) {
+              me.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legBtn2);
+              me.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legMarkDiv2);
+              legBtn2.style.marginRight = '16px';
+              legBtn2.style.marginBottom = '16px';
+
+              legBtn2.addEventListener('click', function() {
+                colorCodeDiv.style.display = 'inline';
+                legMarkDiv2.style.display = 'inline';
+              });
             }
             else {
-              me.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('info1'));
-              document.getElementById('info1').style.marginRight = '16px';
-              document.getElementById('info1').style.marginBottom = '16px';
+              me.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legBtn1);
+              me.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legMarkDiv1);
+              legBtn1.style.marginRight = '16px';
+              legBtn1.style.marginBottom = '16px';
+
+              legBtn1.addEventListener('click', function() {
+                colorCodeDiv.style.display = 'inline';
+                legMarkDiv1.style.display = 'inline';
+
+                console.log(me.points1);
+                for (var i = 0; i < me.points1.length; i++) {
+                  me.displayLegMark(me.points1[i].icon);
+                  console.log(me.points1[i].icon);
+                }
+              });
+
             }
+
+            google.maps.event.addListener(me.map, 'tilesloaded', function() {
+              colorCodeDiv.style.display = 'none';
+              legMarkDiv1.style.display = 'none';
+            });
+
+
+
 
 
             google.maps.event.addListenerOnce(me.map, 'idle', function(){
@@ -445,8 +494,8 @@ loadGoogleMaps(opt){
                 }
               }
               else if (me.ctr1==='1ride'&&(me.ctr2==='forth'||me.ctr2==='back')&&me.latlng2===undefined){
-                  var colorCode1bif = new setColorCode(colorCodeDiv,map,color1,me.latlng1.name);
-                  var ride = getStartEnd(latlng1.coordi,'jeep1');
+                  var colorCode1bif = new me.setColorCode(colorCodeDiv,me.map,me.color1,me.latlng1.name);
+                  var ride = me.getStartEnd(me.latlng1.coordi,'jeep1');
                   // console.log(latlng1.coordi);
                   console.log('1ride if');
                   // console.log(start_new1);
@@ -510,6 +559,31 @@ loadGoogleMaps(opt){
         });
 
   }
+
+  displayLegMark(mark){
+    if (mark=='img/pins/church.png') {
+      document.getElementById('church0').style.display = 'block';
+    }
+    if (mark=='img/pins/cityhall') {
+      document.getElementById('cityhall0').style.display = 'block';
+    }
+    if (mark=='img/pins/hospital') {
+      document.getElementById('hospital0').style.display = 'block';
+    }
+    if (mark=='img/pins/mall') {
+      document.getElementById('mall0').style.display = 'block';
+    }
+    if (mark=='img/pins/school') {
+      document.getElementById('school0').style.display = 'block';
+    }
+    if (mark=='img/pins/subd_brgy') {
+      document.getElementById('subd_brgy0').style.display = 'block';
+    }
+    if (mark=='img/pins/termnal') {
+      document.getElementById('terminal0').style.display = 'block';
+    }
+  }
+
   setLineSymbol(){
     var me = this;
     var path = 'M45.851,12.498v6.289h0.813v1.146h-1.487V18.19h-3.032V3.866H7.484V18.19H4.451v1.742H2.965v-1.146h0.812v-6.289H0.53 v6.289h0.812v2.827h3.11v17.682h2.716v6.385h8.118v-6.385h19.056v6.385h8.119v-6.385h2.715V21.613h3.11v-2.827h0.813v-6.289 H45.851z M11.231,28.743c-1.556,0-2.818-1.311-2.818-2.925c0-1.61,1.262-2.918,2.818-2.918c1.561,0,2.822,1.309,2.822,2.918 C14.053,27.433,12.792,28.743,11.231,28.743z M18.942,34.71h-1.625V22.772h1.625V34.71z M23.093,34.71H21.47V22.772h1.624V34.71z M27.256,34.71h-1.624V22.772h1.624V34.71z M27.925,18.19H10.731V7.228h28.164V18.19h-0.826c0.021-0.185,0.056-0.37,0.056-0.561 c0-2.927-2.301-5.309-5.128-5.309s-5.128,2.382-5.128,5.309C27.869,17.823,27.902,18.005,27.925,18.19z M31.41,34.71h-1.624 V22.772h1.624V34.71z M29.549,18.19c-0.029-0.184-0.056-0.37-0.056-0.561c0-2,1.57-3.628,3.504-3.628s3.505,1.628,3.505,3.628 c0,0.193-0.027,0.379-0.057,0.561H29.549z M38.394,28.743c-1.558,0-2.82-1.311-2.82-2.925c0-1.61,1.263-2.918,2.82-2.918 c1.559,0,2.822,1.309,2.822,2.918C41.219,27.433,39.952,28.743,38.394,28.743z'

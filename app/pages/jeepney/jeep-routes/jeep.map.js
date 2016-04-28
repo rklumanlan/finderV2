@@ -36,8 +36,11 @@ export class JeepMapsPage {
     this.googleMapsService = googleMapsService;
 
     this.navParams = navParams;
-    this.jeepney = this.navParams.get('jeep');
-    this.jeep= this.jeepney;
+    // this.jeepney = this.navParams.get('jeep');
+    console.log('jeeep');
+    this.jeep= this.navParams.get('jeep');
+
+    console.log(this.jeep[0]);
 
     this.option = {};
     this.points = [];
