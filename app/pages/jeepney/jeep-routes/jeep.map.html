@@ -1,5 +1,24 @@
+<ion-navbar *navbar primary>
+    <ion-title>Jeepneys</ion-title>
+</ion-navbar>
 <ion-content class="map">
-  <!-- <ion-spinner></ion-spinner> -->
   <loading-modal id="loading"></loading-modal>
-    <div id="map"></div>
+  <div id="map1"></div>
+  <div id="legend0" style="border-style: solid; border-width: thin; margin-right:5px">
+    <div><span style="font-weight: bold;font-size: 1em;">Legend</span></div>
+    <div id="church0" style="display:none"><img src="img/pins/church.png" style="vertical-align:middle"> Church</div>
+
+    <div id="cityhall0" style="display:none"><img src="img/pins/cityhall.png" style="vertical-align:middle"> City Hall</div>
+
+    <div id="hospital0" style="display:none"><img src="img/pins/hospital.png" style="vertical-align:middle"> Hospital</div>
+
+    <div id="mall0" style="display:none"><img src="img/pins/mall.png" style="vertical-align:middle"> Mall</div>
+
+    <div id="school0" style="display:none"><img src="img/pins/subd_brgy.png" style="vertical-align:middle"> School</div>
+
+    <div id="subd_brgy0" style="display:none"><img src="img/pins/subd_brgy.png" style="vertical-align:middle"> Subdivision</div>
+
+    <div id="terminal0" style="display:none"><img src="img/pins/terminal.png" style="vertical-align:middle"> Mall</div>
+  </div>
+  <button fab id='info1' light><img src="img/pins/info.png" width='15px' height='15px'></button>
 </ion-content>

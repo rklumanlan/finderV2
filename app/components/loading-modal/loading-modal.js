@@ -10,16 +10,19 @@ export class LoadingModal {
 
   constructor() {
     this.isBusy = false;
+    this.isHide = false;
   }
 
   show(){
     console.log('afafd');
     this.isBusy = true;
+    this.isHide = true;
     console.log(this.isBusy);
   }
 
   hide(){
     this.isBusy = false;
+    this.isHide = false;
   }
 
 }

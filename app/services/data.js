@@ -20,7 +20,9 @@ export class DataService {
           console.log(error);
       });
 
-      this.storage.query('CREATE TABLE IF NOT EXISTS points (id INTEGER PRIMARY KEY AUTOINCREMENT, text TEXT, lat TEXT, lng TEXT, tags TEXT)').then((data) => {
+      this.storage.query("DROP TABLE points");
+
+      this.storage.query('CREATE TABLE IF NOT EXISTS points (id INTEGER PRIMARY KEY AUTOINCREMENT, text TEXT, lat TEXT, lng TEXT, tags TEXT, icon TEXT)').then((data) => {
         console.log('yey');
           console.log("TABLE CREATED -> " + JSON.stringify(data.res));
       }, (error) => {
@@ -34,7 +36,7 @@ export class DataService {
     insertJeepsData(){
       this.jeeps = [{
         name: 'CHECK-POINT-HOLY',
-        color: 'Pearl Gray',
+        color: 'Gray',
         image: 'img/jeeps/sm_c_point_holy.jpg',
         route: 'Check-Point-Holy route is from Maingate to Holy Angel University.',
         category: 'Angeles',
@@ -161,205 +163,240 @@ export class DataService {
         text: 'Republic Central Colleges',
         lat: '15.13927',
         lng: '120.59037',
-        tags: 'PANDAN-PAMPANG'
+        tags: 'PANDAN-PAMPANG',
+        icon: 'img/pins/school.png'
         },{
         text: 'Holy Family Medical Center',
         lat:'15.13990',
         lng:'120.59450',
-        tags: 'CHECK-POINT-HOLY-HI-WAY,PANDAN-PAMPANG'
+        tags: 'CHECK-POINT-HOLY-HI-WAY,PANDAN-PAMPANG',
+        icon: 'img/pins/hospital.png'
         },{
         text: 'Citi Center',
         lat: '15.15181',
         lng: '120.60971',
-        tags: 'PANDAN-PAMPANG'
+        tags: 'PANDAN-PAMPANG',
+        icon: 'img/pins/subd_brgy.png'
         },{
         text: 'Marquee Mall',
         lat: '15.162432',
         lng: '120.608675',
-        tags: 'PANDAN-PAMPANG'
+        tags: 'PANDAN-PAMPANG',
+        icon: 'img/pins/mall.png'
         },{
         text: 'Angeles City Hall',
         lat: '15.16451',
         lng: '120.60811',
-        tags: 'PANDAN-PAMPANG'
+        tags: 'PANDAN-PAMPANG',
+        icon: 'img/pins/cityhall.png'
         },{
         text: 'SM City Clark',
         lat:'15.16834',
         lng:'120.58275',
-        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY'
+        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY',
+        icon: 'img/pins/mall.png'
         },{
         text: 'Main Gate Terminal',
         lat:'15.16840',
         lng:'120.58442',
-        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY'
-        },{
-        text: 'Fields Avenue',
-        lat:'15.16749',
-        lng:'120.58981',
-        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY'
+        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY',
+        icon: 'img/pins/terminal.png'
         },{
         text: 'Diamond Subdivision',
         lat: '15.16253',
         lng: '120.59107',
-        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY'
+        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY',
+        icon: 'img/pins/subd_brgy.png'
         },{
         text: 'Savers Mall',
         lat: '15.16242',
         lng: '120.59110',
-        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY'
+        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY',
+        icon: 'img/pins/mall.png'
         },{
         text: 'Immaculate Concepcion Parish',
         lat: '15.15900',
         lng: '120.59201',
-        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY'
+        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY',
+        icon: 'img/pins/church.png'
         },{
         text: 'Systems Plus College Foundation',
         lat: '15.15828',
         lng: '120.59222',
-        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY'
+        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY',
+        icon: 'img/pins/school.png'
         },{
         text: 'Marisol',
         lat:'15.15293',
         lng:'120.59217',
-        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY'
+        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY',
+        icon: 'img/pins/subd_brgy.png'
         },{
         text: 'Lourdes North West',
         lat:'15.14186',
         lng:'120.58799',
-        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY'
+        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY',
+        icon: 'img/pins/terminal.png'
         },{
         text: 'Bancal',
         lat: '15.15346',
         lng: '120.58335',
-        tags: 'CHECK-POINT-HENSONVILLE-HOLY'
+        tags: 'CHECK-POINT-HENSONVILLE-HOLY',
+        icon: 'img/pins/subd_brgy.png'
         },{
         text: 'Jenra Mall',
         lat: '15.13622',
         lng: '120.58805',
-        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY,CHECK-POINT-HENSONVILLE-HOLY,MARISOL-PAMPANG,VILLA-PAMPANG'
+        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY,CHECK-POINT-HENSONVILLE-HOLY,MARISOL-PAMPANG,VILLA-PAMPANG',
+        icon: 'img/pins/mall.png'
         },{
         text: 'Nepo Mall',
         lat :'15.13567',
-        lng :'120.58914',
-        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY,CHECK-POINT-HENSONVILLE-HOLY,MARISOL-PAMPANG,VILLA-PAMPANG'
+        lng :'img/pins/mall.png',
+        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY,CHECK-POINT-HENSONVILLE-HOLY,MARISOL-PAMPANG,VILLA-PAMPANG',
+        icon: 'img/pins/mall.png'
         },{
         text: 'Sacred Heart Medical Center',
         lat :'15.12493',
         lng :'120.59831',
-        tags: 'VILLA-PAMPANG'
+        tags: 'VILLA-PAMPANG',
+        icon: 'img/pins/hospital.png'
         },{
         text: 'Holy Angel University',
         lat: '15.13417',
         lng: '120.59130',
-        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY,CHECK-POINT-HENSONVILLE-HOLY'
+        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY,CHECK-POINT-HENSONVILLE-HOLY',
+        icon: 'img/pins/school.png'
         },{
         text: 'Holy Rosary Parish Church',
         lat: '15.13483',
         lng: '120.59063',
-        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY,CHECK-POINT-HENSONVILLE-HOLY'
+        tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY,CHECK-POINT-HENSONVILLE-HOLY',
+        icon: 'img/pins/church.png'
         },{
         text: 'The Medical City Angeles',
         lat:'15.13834',
         lng:'120.59335',
-        tags: 'CHECK-POINT-HOLY-HI-WAY,PANDAN-PAMPANG'
+        tags: 'CHECK-POINT-HOLY-HI-WAY,PANDAN-PAMPANG',
+        icon: 'img/pins/hospital.png'
         },{
         text: 'Angeles University Foundation Medical Center',
         lat: '15.14527',
         lng: '120.59539',
-        tags: 'CHECK-POINT-HOLY-HI-WAY,MARISOL-PAMPANG'
+        tags: 'CHECK-POINT-HOLY-HI-WAY,MARISOL-PAMPANG',
+        icon: 'img/pins/hospital.png'
         },{
         text: 'Angeles University Foundation',
         lat: '15.14544',
         lng: '120.59530',
-        tags: 'CHECK-POINT-HOLY-HI-WAY,MARISOL-PAMPANG'
+        tags: 'CHECK-POINT-HOLY-HI-WAY,MARISOL-PAMPANG',
+        icon: 'img/pins/school.png'
         },{
         text: 'City College of Angeles',
         lat: '15.14917',
         lng: '120.57793',
-        tags: 'SAPANG BATO-ANGELES'
+        tags: 'SAPANG BATO-ANGELES',
+        icon: 'img/pins/school.png'
         },{
         text: 'Carmenville',
         lat:'15.14539',
         lng: '120.56643',
-        tags:'SAPANG BATO-ANGELES'
+        tags:'SAPANG BATO-ANGELES',
+        icon: 'img/pins/subd_brgy.png'
         },{
         text: 'Timog Park Gate 1',
         lat:'15.14505',
         lng:'120.56465',
-        tags:'SAPANG BATO-ANGELES'
+        tags:'SAPANG BATO-ANGELES',
+        icon: 'img/pins/subd_brgy.png'
         },{
         text: 'Cuayan',
         lat:'15.14449',
         lng:'120.55945',
-        tags:'SAPANG BATO-ANGELES'
+        tags:'SAPANG BATO-ANGELES',
+        icon: 'img/pins/subd_brgy.png'
         },{
         text: 'Timog Park Gate 2',
         lat:'15.14776',
         lng: '120.559465',
-        tags:'SAPANG BATO-ANGELES'
+        tags:'SAPANG BATO-ANGELES',
+        icon: 'img/pins/subd_brgy.png'
         },{
         text: 'Timog Park Gate 3',
         lat:'15.15069',
         lng:'120.55945',
-        tags:'SAPANG BATO-ANGELES'
+        tags:'SAPANG BATO-ANGELES',
+        icon: 'img/pins/subd_brgy.png'
         },{
         text: 'Friendship Plaza',
         lat:'15.15091',
         lng:'120.55946',
-        tags:'SAPANG BATO-ANGELES'
+        tags:'SAPANG BATO-ANGELES',
+        icon: 'img/pins/subd_brgy.png'
         },{
         text: 'Anunas',
         lat:'15.153712',
         lng:'120.560274',
-        tags:'SAPANG BATO-ANGELES'
+        tags:'SAPANG BATO-ANGELES',
+        icon: 'img/pins/subd_brgy.png'
         },{
         text: 'Villa Sol',
         lat:'15.15803',
         lng: '120.55970',
-        tags:'SAPANG BATO-ANGELES'
+        tags:'SAPANG BATO-ANGELES',
+        icon: 'img/pins/subd_brgy.png'
         },{
         text: 'Friendship',
         lat:'15.16304',
         lng:'120.55475',
-        tags:'SAPANG BATO-ANGELES'
+        tags:'SAPANG BATO-ANGELES',
+        icon: 'img/pins/terminal.png'
         },{
         text: 'Transfer',
         lat:'15.16258',
         lng:'120.55349',
-        tags:'SAPANG BATO-ANGELES'
+        tags:'SAPANG BATO-ANGELES',
+        icon: 'img/pins/terminal.png'
         },{
         text: 'Margot',
         lat:'15.17078',
         lng:'120.53471',
-        tags:'SAPANG BATO-ANGELES'
+        tags:'SAPANG BATO-ANGELES',
+        icon: 'img/pins/subd_brgy.png'
         },{
         text: 'Sapang Bato',
         lat:'15.16966',
         lng:'120.51317',
-        tags:'SAPANG BATO-ANGELES'
+        tags:'SAPANG BATO-ANGELES',
+        icon: 'img/pins/subd_brgy.png'
         },{
         text: 'Rafael Lazatin Memorial Medical Center',
         lat:'15.14630',
         lng:'120.58128',
-        tags: 'PAMPANG-HOLY'
+        tags: 'PAMPANG-HOLY',
+        icon: 'img/pins/hospital.png'
         },{
         text: 'Dr. Amando L. Garcia Medical Center, Inc.',
         lat:'15.14254',
         lng:'120.58971',
-        tags: 'MARISOL-PAMPANG'
+        tags: 'MARISOL-PAMPANG',
+        icon: 'img/pins/hospital.png'
         },{
         text: 'Angeles Medical Center Inc.',
         lat:'15.14124',
         lng:'120.58907',
-        tags: 'MARISOL-PAMPANG'
+        tags: 'MARISOL-PAMPANG',
+        icon: 'img/pins/hospital.png'
       }];
 
       var x,y,item2;
 
+      // this.storage.query("delete from points");
+
       for(x=0, y=this.points.length; x < y; x++){
         item2=this.points[x];
 
-        this.storage.query("INSERT OR REPLACE INTO points (id, text, lat, lng, tags) VALUES ('"+x+"','"+item2.text+"','"+item2.lat+"','"+item2.lng+"','"+item2.tags+"')").then((data) => {
+        this.storage.query("INSERT OR REPLACE INTO points (id, text, lat, lng, tags,icon) VALUES ('"+x+"','"+item2.text+"','"+item2.lat+"','"+item2.lng+"','"+item2.tags+"','"+item2.icon+"')").then((data) => {
             console.log(JSON.stringify(data.res));
         }, (error) => {
           console.log(error);
@@ -380,5 +417,9 @@ export class DataService {
 
     getPoints(){
       return this.storage.query("SELECT * FROM points ORDER BY text ASC");
+    }
+
+    getPointsOrigin(ctr){
+      return this.storage.query("SELECT * FROM points WHERE text = '"+ctr+"'");
     }
 }

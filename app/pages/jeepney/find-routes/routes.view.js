@@ -1,6 +1,8 @@
-import {Page, Modal, NavController} from 'ionic-angular';
+import {Page, Modal, NavController, Alert} from 'ionic-angular';
 
 import {MyModal} from '../../jeepney/find-routes/modal';
+
+import {RoutesMapsPage} from '../../jeepney/find-routes/routes.map';
 
 @Page({
   templateUrl: 'build/pages/jeepney/find-routes/routes.view.html'
@@ -41,6 +43,22 @@ export class FindRoutesPage {
       // console.log(data.point);
     });
     this.nav.present(profileModal);
+  }
+  submitForm(from,to){
+
+    if(from == 'Choose starting point' || to == 'Choose destination'){
+      console.log(from+"-"+to);
+      let alert = Alert.create({
+        title: 'Alert',
+        subTitle: 'Empty Fields! Please select starting point or destination.',
+        buttons: ['OK']
+      });
+      this.nav.present(alert);
+    }
+    else {
+      this.nav.push(RoutesMapsPage, { from: from, to: to });
+    }
+
   }
 
 

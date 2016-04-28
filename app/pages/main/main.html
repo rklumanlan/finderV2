@@ -7,108 +7,137 @@
   <div class="mainBackDiv" >
     <ion-row center class="upperDiv">
       <ion-col width-80 offset-10 class="locTBox">
-        <ion-row center style="background-color:white;padding:0px;border-style: solid;border-width: .5px;">
-          <!-- <ion-col width-80 style="padding:0px;border-style: solid;border-width: .5px;"> -->
+        <ion-row center class="enter">
             <div style="width:80%; padding-top:0px;">
-              <ion-input type="text" placeholder=" Enter a location" style="padding-left: 10px;"></ion-input>
+              <ion-input type="text" placeholder=" Enter a location" style="padding-left: 10px;" id="geolocation"></ion-input>
             </div>
-            <div style="width:20%;padding-top:0px;border-left: .5px solid;">
+            <div style="width:20%; padding-top:0px; ">
 
-              <button block clear >
-                <ion-icon name="locate" ></ion-icon>
+              <button block clear (click)="showlatlong()">
+                <ion-icon name="locate"></ion-icon>
               </button>
             </div>
-
-            <!-- <ion-input type="text" placeholder=" Enter a location" style="padding-left: 10px;"></ion-input><button full clear style="padding:0px;">
-              <ion-icon name="locate" ></ion-icon>
-            </button> -->
-          <!-- </ion-col> -->
-          <!-- <ion-col width-20 style="padding:0px; border-style: solid;border-width: .5px;">
-            <button full clear style="padding:0px;">
-              <ion-icon name="locate" ></ion-icon>
-            </button>
-          </ion-col> -->
-
         </ion-row>
-
-
       </ion-col>
     </ion-row>
 
     <div  class="lowerDiv" padding>
+    <!-- jeeps and resto -->
     <ion-row center>
       <ion-col width-50>
-          <button block primary clear style="height:80px; line-height:30px" [navPush]="TabsPage">
-            <div >
-              <ion-icon name="home" style="font-size: 3em;"></ion-icon><br/>Jeepneys
+          <button block primary clear [navPush]="TabsPage" class="btn-menu">
+            <div>
+              <ul class="ul-menu">
+                <li class="icn"><span class="icoMoon icoMoon-jeep"></span></li>
+                <li class="lbl"><span class="btn-menu-label">Jeeps & Routes</span></li>
+              </ul>
             </div>
           </button>
       </ion-col >
       <ion-col width-50>
-          <button block primary clear style="height:80px; line-height:30px">
+          <button block primary clear full [navPush]="RestaurantPage" class="btn-menu">
             <div>
-              <ion-icon name="home" style="font-size: 3em;"></ion-icon><br/>Restaurants
-            </div>
-          </button>
-      </ion-col>
-      <ion-col width-50>
-          <button block primary clear style="height:80px; line-height:30px">
-            <div>
-              <ion-icon name="home" style="font-size: 3em;"></ion-icon><br/>Malls
+              <ul class="ul-menu">
+                <li class="icn 2"><span class="icoMoon icoMoon-resto"></span></li>
+                <li class="lbl"><span class="btn-menu-label">Restaurants</span></li>
+              </ul>
             </div>
           </button>
       </ion-col>
     </ion-row>
-    <ion-row center>
-      <ion-col width-50>
-          <button block primary clear style="height:80px; line-height:30px">
-            <div>
-              <ion-icon name="home" style="font-size: 3em;"></ion-icon><br/>Malls
-            </div>
-          </button>
-      </ion-col>
-      <ion-col width-50>
-          <button block primary clear style="height:80px; line-height:30px">
-            <div >
-              <ion-icon name="home" style="font-size: 3em;"></ion-icon><br/>Supermarkets
-            </div>
-          </button>
-      </ion-col >
-    </ion-row>
-    <ion-row center>
+    <!-- jeeps and resto -->
 
-      <ion-col width-50>
-          <button block primary clear style="height:80px; line-height:30px">
+    <!-- hotels and malls -->
+    <ion-row center>
+      <ion-col>
+          <button block primary clear class="btn-menu">
             <div>
-              <ion-icon name="home" style="font-size: 3em;"></ion-icon><br/>Hotels
+              <ul class="ul-menu">
+                <li class="icn"><span class="icoMoon icoMoon-hotel"></span></li>
+                <li class="lbl"><span class="btn-menu-label">Hotels</span></li>
+              </ul>
             </div>
           </button>
       </ion-col>
       <ion-col width-50>
-          <button block primary clear style="height:80px; line-height:30px">
+          <button block primary clear class="btn-menu">
             <div>
-              <ion-icon name="home" style="font-size: 3em;"></ion-icon><br/>Hospitals
+              <ul class="ul-menu">
+                <li class="icn"><span class="icoMoon icoMoon-mall"></span></li>
+                <li class="lbl"><span class="btn-menu-label">Malls</span></li>
+              </ul>
             </div>
           </button>
       </ion-col>
     </ion-row>
+    <!-- hotels and malls -->
+
+    <!-- supermarkets and barbers -->
     <ion-row center>
       <ion-col width-50>
-          <button block primary clear style="height:80px; line-height:30px">
-            <div >
-              <ion-icon name="home" style="font-size: 3em;"></ion-icon><br/>Salons
+          <button block primary clear class="btn-menu">
+            <div>
+              <ul class="ul-menu">
+                <li class="icn"><span class="icoMoon icoMoon-supermarket"></span></li>
+                <li class="lbl"><span class="btn-menu-label">Supermarkets</span></li>
+              </ul>
             </div>
           </button>
       </ion-col >
       <ion-col width-50>
-          <button block primary clear style="height:80px; line-height:30px">
+          <button block primary clear class="btn-menu">
             <div>
-              <ion-icon name="home" style="font-size: 3em;"></ion-icon><br/>Police Stations
+              <ul class="ul-menu">
+                <li class="icn"><span class="icoMoon icoMoon-salon"></span></li>
+                <li class="lbl"><span class="btn-menu-label">Beauty Salons</span></li>
+              </ul>
             </div>
           </button>
       </ion-col>
     </ion-row>
-    </div>
+    <!-- supermarkets and barbers -->
+
+    <!-- police and hospitals -->
+    <ion-row center>
+      <ion-col width-50>
+          <button block primary clear class="btn-menu">
+            <div>
+              <ul class="ul-menu">
+                <li class="icn"><span class="icoMoon icoMoon-police"></span></li>
+                <li class="lbl"><span class="btn-menu-label">Police Stations</span></li>
+              </ul>
+            </div>
+          </button>
+      </ion-col>
+      <ion-col width-50>
+          <button block primary clear class="btn-menu">
+            <div>
+              <ul class="ul-menu">
+                <li class="icn"><span class="icoMoon icoMoon-health"></span></li>
+                <li class="lbl"><span class="btn-menu-label">Hospitals</span></li>
+              </ul>
+            </div>
+          </button>
+      </ion-col >
+    </ion-row>
+    <!-- police and hospitals -->
+
+    <!-- more -->
+    <ion-row center>
+    <ion-col>
+        <button block primary clear class="btn-menu">
+          <div>
+            <ul class="ul-menu">
+              <li class="icn"><ion-icon name="more"></ion-icon></li>
+              <li class="lbl"><span class="btn-menu-label">More</span></li>
+            </ul>
+
+          </div>
+        </button>
+    </ion-col >
+  </ion-row>
+  <!-- more -->
   </div>
 
+</div>
 </ion-content>
