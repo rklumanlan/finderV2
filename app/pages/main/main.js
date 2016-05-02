@@ -62,8 +62,15 @@ export class MainPage {
             // me.coordsVal.geoLng = position.coords.longitude;
             geoCoords = position.coords.latitude  + ',' + position.coords.longitude;
             console.log(position.coords.latitude  + ',' + position.coords.longitude);
+            // me.geolocation = me.geolocationService.loadGeolocation(geoCoords);
+            // me.geolocation = me.geolocationService.setLocationName(geoCoords);
+             me.geolocationService.setLocationName(geoCoords).then(function(v) { // `delay` returns a promise
+                console.log(v); // Log the value once it is resolved
+                me.geolocation = v;
+              });
 
-            this.geolocationService.loadGeolocation(geoCoords);
+
+
         },
 
         (error) => {
@@ -71,6 +78,13 @@ export class MainPage {
         }, options
 
     );
+
+
+    // this.geolocationService.getLocationName(latitude, longitude, function(result){
+    //     $("#userLocation").text(result);
+    // });
+
+
     // me.googleMapsService.loadGoogleMaps(me.coordsVal);
 
 
