@@ -1,6 +1,14 @@
 import {Page, Storage, SqlStorage} from 'ionic-angular';
 import {TabsPage} from '../jeepney/tabs/tabs';
-// import {RestaurantPage} from '../restaurant/restaurant';
+// Import menu pages
+import {RestaurantPage} from '../restaurant/restaurant';
+import {HotelsPage} from '../hotels/hotels';
+import {MallsPage} from '../malls/malls';
+import {SupermarketsPage} from '../supermarkets/supermarkets';
+import {SalonsPage} from '../salons/salons';
+import {PolicePage} from '../police/police';
+import {HospitalsPage} from '../hospitals/hospitals';
+// Import menu pages until here
 import {DataService} from '../../services/data';
 import {Geolocation} from 'ionic-native';
 
@@ -22,7 +30,15 @@ export class MainPage {
 
 
     this.TabsPage = TabsPage;
-    // this.RestaurantPage = RestaurantPage;
+    // menu pages
+    this.RestaurantPage = RestaurantPage;
+    this.HotelsPage = HotelsPage;
+    this.MallsPage = MallsPage;
+    this.SupermarketsPage = SupermarketsPage;
+    this.SalonsPage = SalonsPage;
+    this.PolicePage = PolicePage;
+    this.HopitalsPage = HospitalsPage;
+    // menu pages until here
     this.coordsVal = null;
     // this.loadscript();
 
@@ -50,7 +66,7 @@ export class MainPage {
     //
     function onSuccess(position) {
         var element = document.getElementById('geolocation');
-        //element.innerHTML =  position.coords.latitude  + ',' + position.coords.longitude;
+        element.value =  position.coords.latitude  + ',' + position.coords.longitude;
 
         this.coordsVal = position.coords.latitude  + ',' + position.coords.longitude;
 
