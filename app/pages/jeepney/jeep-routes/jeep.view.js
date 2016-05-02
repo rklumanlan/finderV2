@@ -26,7 +26,7 @@ export class JeepRoutesPage {
     // this.dataService.insertJeepsData();
 
     this.dataService.getAllData('Angeles').then((data) => {
-      console.log(data.result);
+      // console.log(data.result);
       if(data.res.rows.length > 0) {
         for(var i = 0; i < data.res.rows.length; i++) {
           this.acjeeps.push({name: data.res.rows.item(i).name, color: data.res.rows.item(i).color, image:data.res.rows.item(i).image});

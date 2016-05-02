@@ -2623,6 +2623,7 @@ export class RoutesMapsPage {
           console.log('elses');
           data = me.getJeepDocs(jeep1)
             .then(function(result) {
+              console.log(result);
               options.jeep_1 = result;
               return me.getJeepDocs(jeep2);
             })
@@ -2685,10 +2686,21 @@ export class RoutesMapsPage {
     }
   }
   getJeepDocs(jeep){
+    console.log('details');
+    var jeepDocs = {};
 
     return this.dataService.getJeepDetails(jeep).then((data) => {
-      return data.res.rows[0];
-      console.log(data.res.rows[0]);
+      if(data.res.rows.length > 0) {
+        for(var i = 0; i < data.res.rows.length; i++) {
+          // jeepDocs.push(name: data.res.rows.item(i).name, color: data.res.rows.item(i).color, image:data.res.rows.item(i).image, coordi:data.res.rows.item(i).coordi);
+          jeepDocs.name = data.res.rows.item(i).name;
+          jeepDocs.color = data.res.rows.item(i).color;
+          jeepDocs.image = data.res.rows.item(i).image;
+          jeepDocs.coordi = data.res.rows.item(i).coordi;
+        }
+      }
+      console.log(jeepDocs);
+      return jeepDocs;
     }, (error) => {
       console.log(error);
     });
@@ -2696,9 +2708,20 @@ export class RoutesMapsPage {
 
   getJeepMarkers(points){
     console.log(points);
+    var jeepMarks = {};
     return this.dataService.getPointsOrigin(points).then((data) => {
-      return data.res.rows[0];
-      console.log(data.res.rows[0]);
+      if(data.res.rows.length > 0) {
+        for(var i = 0; i < data.res.rows.length; i++) {
+          // jeepDocs.push(name: data.res.rows.item(i).name, color: data.res.rows.item(i).color, image:data.res.rows.item(i).image, coordi:data.res.rows.item(i).coordi);
+          jeepMarks.text = data.res.rows.item(i).text;
+          jeepMarks.lat = data.res.rows.item(i).lat;
+          jeepMarks.lng = data.res.rows.item(i).lng;
+          jeepMarks.icon = data.res.rows.item(i).icon;
+
+        }
+      }
+      console.log(jeepMarks);
+      return jeepMarks;
     }, (error) => {
       console.log(error);
     });

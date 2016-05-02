@@ -56,6 +56,7 @@ export class FindRoutesPage {
       this.nav.present(alert);
     }
     else {
+      console.log(from+"="+to);
       this.nav.push(RoutesMapsPage, { from: from, to: to });
     }
 
