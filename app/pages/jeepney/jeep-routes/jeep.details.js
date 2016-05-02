@@ -22,16 +22,24 @@ export class JeepDetailsPage {
 
     this.jeepDetails = [];
     console.log(this.details.name);
+    console.log('should entert data service');
 
     this.dataService.getJeepDetails(this.details.name).then((data) => {
-      this.jeepDetails = data.res.rows[0];
+      // console.log(data.result);
+      console.log(data.res.rows[0]);
+      if(data.res.rows.length > 0) {
+        for(var i = 0; i < data.res.rows.length; i++) {
+          this.jeepDetails.push({name: data.res.rows.item(i).name, color: data.res.rows.item(i).color, image:data.res.rows.item(i).image, route:data.res.rows.item(i).route,coordi:data.res.rows.item(i).coordi});
+        }
+      }
       console.log(this.jeepDetails);
     }, (error) => {
       console.log("ERROR -> " + JSON.stringify(error.err));
     });
   }
   presentModal() {
-    (JeepMapsPage);
-    this.nav.push(JeepMapsPage, { jeep: this.jeepDetails });
+    console.log('present modal');
+    console.log(this.jeepDetails[0] );
+    this.nav.push(JeepMapsPage, { jeep: this.jeepDetails[0] });
   }
 }
