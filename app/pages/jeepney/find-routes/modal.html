@@ -1,17 +1,20 @@
-
 <ion-navbar *navbar primary>
   <ion-title>Jeepneys</ion-title>
-<ion-buttons start>
-  <button (click)="close()">
-    <ion-icon name="md-close"></ion-icon>
-  </button>
-</ion-buttons>
+  <ion-buttons start>
+    <button (click)="close()">
+      <ion-icon name="md-close"></ion-icon>
+    </button>
+  </ion-buttons>
 
 </ion-navbar>
+<ion-toolbar>
+  <ion-searchbar [(ngModel)]="searchQuery" (input)="getItems($event)"></ion-searchbar>
+</ion-toolbar>
 <ion-content >
+
   <ion-list>
-  <button ion-item *ngFor="#point of points" (click)="validateItem(point.name)">
-    {{point.name}}
-  </button>
-</ion-list>
+    <button ion-item *ngFor="#item of items"  (click)="validateItem(item)">
+      {{item}}
+    </button>
+  </ion-list>
 </ion-content>

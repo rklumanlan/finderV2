@@ -1,5 +1,15 @@
 <ion-navbar *navbar primary>
-  <ion-title>Finder</ion-title>
+  <ion-toolbar class="toolbar">
+    <ion-title>Angeles Routes</ion-title>
+    <ion-buttons end>
+      <button>
+        <ion-icon name="search"></ion-icon>
+      </button>
+      <button>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-navbar>
 
 
@@ -9,7 +19,7 @@
       <ion-col width-80 offset-10 class="locTBox">
         <ion-row center class="enter">
             <div style="width:80%; padding-top:0px;">
-              <ion-input type="text" placeholder=" Enter a location" style="padding-left: 10px;" id="geolocation"></ion-input>
+              <ion-input type="text" id='geolocation' [(ngModel)]="geolocation" value='{{geolocation}}' placeholder=" Enter a location" style="padding-left: 10px;" ></ion-input>
             </div>
             <div style="width:20%; padding-top:0px; ">
 
@@ -50,7 +60,7 @@
     <!-- hotels and malls -->
     <ion-row center>
       <ion-col>
-          <button block primary clear class="btn-menu">
+          <button block primary clear full [navPush]="HotelsPage" class="btn-menu">
             <div>
               <ul class="ul-menu">
                 <li class="icn"><span class="icoMoon icoMoon-hotel"></span></li>
@@ -60,7 +70,7 @@
           </button>
       </ion-col>
       <ion-col width-50>
-          <button block primary clear class="btn-menu">
+          <button block primary clear [navPush]="MallsPage" class="btn-menu">
             <div>
               <ul class="ul-menu">
                 <li class="icn"><span class="icoMoon icoMoon-mall"></span></li>
@@ -75,7 +85,7 @@
     <!-- supermarkets and barbers -->
     <ion-row center>
       <ion-col width-50>
-          <button block primary clear class="btn-menu">
+          <button block primary clear [navPush]="SupermarketsPage" class="btn-menu">
             <div>
               <ul class="ul-menu">
                 <li class="icn"><span class="icoMoon icoMoon-supermarket"></span></li>
@@ -85,7 +95,7 @@
           </button>
       </ion-col >
       <ion-col width-50>
-          <button block primary clear class="btn-menu">
+          <button block primary clear [navPush]="SalonsPage" class="btn-menu">
             <div>
               <ul class="ul-menu">
                 <li class="icn"><span class="icoMoon icoMoon-salon"></span></li>
@@ -100,7 +110,7 @@
     <!-- police and hospitals -->
     <ion-row center>
       <ion-col width-50>
-          <button block primary clear class="btn-menu">
+          <button block primary clear [navPush]="PolicePage" class="btn-menu">
             <div>
               <ul class="ul-menu">
                 <li class="icn"><span class="icoMoon icoMoon-police"></span></li>
@@ -110,7 +120,7 @@
           </button>
       </ion-col>
       <ion-col width-50>
-          <button block primary clear class="btn-menu">
+          <button block primary clear [navPush]="HopitalsPage" class="btn-menu">
             <div>
               <ul class="ul-menu">
                 <li class="icn"><span class="icoMoon icoMoon-health"></span></li>
@@ -128,7 +138,7 @@
         <button block primary clear class="btn-menu">
           <div>
             <ul class="ul-menu">
-              <li class="icn"><ion-icon name="more"></ion-icon></li>
+              <li class="icn"><span class="icoMoon-more"></span></li>
               <li class="lbl"><span class="btn-menu-label">More</span></li>
             </ul>
 
