@@ -36,7 +36,6 @@ export class MainPage {
 
 
     this.TabsPage = TabsPage;
-<<<<<<< HEAD
     // menu pages
     this.RestaurantPage = RestaurantPage;
     this.HotelsPage = HotelsPage;
@@ -47,12 +46,8 @@ export class MainPage {
     this.HopitalsPage = HospitalsPage;
     // menu pages until here
     this.coordsVal = null;
-=======
+    
     this.geolocation = '';
-    // this.RestaurantPage = RestaurantPage;
->>>>>>> d41237fc848583a824607aea1da6df8627626130
-    // this.loadscript();
-
 
   }
 
