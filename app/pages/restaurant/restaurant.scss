@@ -1,0 +1,60 @@
+.restaurant {
+
+}
+
+select.drpdown {
+    width: 100%;
+    background: #F7F7F7;
+    border-radius: 2px;
+    border: 1px solid #E8E8E8;
+}
+
+ion-label.input_lbl {
+    color: #717171;
+    margin: 10% 5% !important;
+  }
+
+  #drpdown {
+      border-radius: 15px;
+      background: none;
+      border: 2px solid #3493FF;
+      width: 96%;
+      margin: 0 auto;
+      margin-top: 2%;
+  }
+ion-row.enter {
+    border: .5px solid #D8D8D8;
+    background: #fff;
+    height: 45px;
+}
+
+.mainBackDiv{
+  //position: absolute;
+  overflow: auto;
+  top: 0;
+  bottom: 0;
+  left:0;
+  right:0;
+  background-image: $bg-pattern;
+}
+#map {
+  height: 100%;
+}
+#floating-panel {
+  /*position: absolute;
+  top: 10px;
+  left: 25%;
+  z-index: 5; */
+  margin-bottom:30px;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+  text-align: center;
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+}
+
+#latlng {
+  width: 225px;
+}
