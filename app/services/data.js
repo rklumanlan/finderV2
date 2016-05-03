@@ -52,7 +52,7 @@ export class DataService {
         }, {
         name: 'CHECK-POINT-HENSONVILLE-HOLY',
         color: 'White',
-        image: 'img/jeeps/c_point hensonville_holy.jpg',
+        image: 'img/jeeps/c_point_hensonville_holy.jpg',
         route: 'Check-Point-Hensonville-Holy route is from Narciso St. to Holy Angel University or vice-versa.',
         route2: '',
         category: 'Angeles',
@@ -68,7 +68,7 @@ export class DataService {
         }, {
         name: 'MAINGATE-FRIENDSHIP',
         color: 'Suntan',
-        image: 'img/jeeps/m-gate f-ship.jpg',
+        image: 'img/jeeps/m-gate_f-ship.jpg',
         route: 'Maingate-Friendship is from Donjuico Avenue.',
         route2: '',
         category: 'Angeles',
