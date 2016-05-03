@@ -2,12 +2,12 @@
 
 <ion-content padding>
   <div >
-      <div >
-        <img src="{{jeepDetails.image}}">
-        <h2>{{jeepDetails.name}}</h2>
-        <h3>{{jeepDetails.color}}</h3>
-        <h4>Route Description:<br/>{{jeepDetails.route}}</h4>
-        <h6><br/> {{jeepDetails.route2}}</h6>
+      <div *ngFor="#jeepDetail of jeepDetails">
+        <img src="{{jeepDetail.image}}">
+        <h2>{{jeepDetail.name}}</h2>
+        <h3>{{jeepDetail.color}}</h3>
+        <h4>Route Description:<br/>{{jeepDetail.route}}</h4>
+        <h6><br/>{{jeepDetail.route2}}</h6>
         <button full  (click)="presentModal()">View Map</button>
       </div>
     </div>
