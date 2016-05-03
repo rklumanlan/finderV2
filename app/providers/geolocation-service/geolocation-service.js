@@ -50,7 +50,7 @@ export class GeolocationService {
 
         if(me.connectivity.isOnline()){
             console.log("showing map");
-            return me.initMap(ctr);
+            // return me.initMap(ctr);
             // me.enableMap();
         }
         else {
