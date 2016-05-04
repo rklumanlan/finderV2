@@ -46,7 +46,7 @@ export class MainPage {
     this.HopitalsPage = HospitalsPage;
     // menu pages until here
     this.coordsVal = null;
-    
+
     this.geolocation = '';
 
   }
