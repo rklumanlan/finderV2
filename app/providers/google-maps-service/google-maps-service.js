@@ -1321,12 +1321,16 @@ loadGoogleMaps(opt){
     }
 
     for (var x = 0; x < records.length; x++) {
+      var image = {
+        url: records[x].icon,
+        scaledSize: new google.maps.Size(23, 36)
+      };
       var markerPos = new google.maps.LatLng(records[x].lat,records[x].lng);
       var marker = new google.maps.Marker({
           map: me.map,
           animation: google.maps.Animation.DROP,
           position: markerPos,
-          icon: records[x].icon
+          icon: image
       });
       me.markerIcon.push(marker);
 

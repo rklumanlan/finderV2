@@ -2219,7 +2219,7 @@ export class RoutesMapsPage {
           options.toId = me.to;
           return options;
         });
-        pointMarker2.then((result) => {
+        data.then((result) => {
 
            me.googleMapsService.loadGoogleMaps(options);
         });
@@ -2444,7 +2444,9 @@ export class RoutesMapsPage {
       options.fromId = me.from;
       options.toId = me.to;
 
-      pointMarker2.then((result) => {
+      data.then((result) => {
+        console.log('jeep3');
+        console.log(options.jeep_3);
         me.googleMapsService.loadGoogleMaps(options);
       });
     }
@@ -2676,7 +2678,7 @@ export class RoutesMapsPage {
         options.fromId = me.from;
         options.toId = me.to;
 
-        pointMarker2.then((result) => {
+        data.then((result) => {
           console.log(result);
           console.log(options);
           me.googleMapsService.loadGoogleMaps(options);
