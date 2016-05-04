@@ -458,6 +458,9 @@ loadGoogleMaps(opt){
                   console.log(points[i]);
                 }
               });
+              locMarkerBtn2.addEventListener('click', function() {
+                me.setMapOnAll(me.map);
+              });
             }
             else {
               me.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legBtn1);
@@ -499,6 +502,7 @@ loadGoogleMaps(opt){
               if (legMarkDiv2!=null) {
                 legMarkDiv2.style.display = 'none';
               }
+              me.clearMarkers();
 
             });
 
@@ -569,22 +573,7 @@ loadGoogleMaps(opt){
 
               }
 
-              // if(me.latlng1!==null){
-              //   console.log('elsee');
-              //
-              //   console.log(me.latlng1.coordi);
-              //   me.bendAndSnap(me.latlng1.coordi,'jeep1');
-              //
-              // }
-              //
-              // if(me.latlng1!==null){
-              //     console.log('klk');
-              //   console.log(me.points1);
-              //   var point = me.points1;
-              //
-              //   me.loadMarkers(point,null);
-              // }
-              console.log(me.points3);
+
               if(me.points1 !==undefined && me.points2 !==undefined && me.points3 === undefined){
                 me.loadMarkers(me.points1,me.points2);
 
@@ -975,16 +964,16 @@ loadGoogleMaps(opt){
 
         if (startCtr4<endCtr4 && start_new4!==undefined) {
           console.log('enter 4if1');
-          for (var m = startCtr4+1; m <= endCtr4; m++) {
-              me.start_new4 += "|"+me.lat_array_coords4[m];
+          for (var o = startCtr4+1; o <= endCtr4; o++) {
+              me.start_new4 += "|"+me.lat_array_coords4[o];
           }
           // start_new4 = start_new4.split("|").reverse().join("|");
           console.log(me.start_new4);
         }
         else if (startCtr4>endCtr4 && start_new4!==undefined){
           console.log('enter 4if4');
-          for (var n = startCtr4-1; n >= endCtr4; n--) {
-              me.start_new4 += "|"+me.lat_array_coords4[n];
+          for (var p = startCtr4-1; p >= endCtr4; p--) {
+              me.start_new4 += "|"+me.lat_array_coords4[p];
           }
           me.start_new4 = me.start_new4.split("|").reverse().join("|");
 
