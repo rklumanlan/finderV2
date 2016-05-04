@@ -223,9 +223,12 @@ loadGoogleMaps(opt){
         console.log(options.jeep_3);
         if(options.jeep_3!==undefined){
           console.log('jeep3 not unde');
+
             me.latlng3 = options.jeep_3;
             console.log(me.latlng3);
             me.points3 = options.marker_3;
+            console.log(options.marker_3);
+            console.log(me.points3);
             me.end1Ctr = options.end1;
             me.end2Ctr = options.end2;
             me.end3Ctr = options.end3;
@@ -612,7 +615,8 @@ loadGoogleMaps(opt){
     if (document.getElementById('legend0')!=null) {
       ctr=0;
     }
-    else if (document.getElementById('legend1')!=null) {
+
+    if (document.getElementById('legend1')!=null) {
       ctr=1;
     }
 
@@ -911,6 +915,7 @@ loadGoogleMaps(opt){
       }
       if(ctr === 'jeep3'){
         console.log('enter mid3');
+        console.log(me.points3);
         // console.log(points3);
         var string3 = startEnd;
         me.lat_array_coords3 = string3.split("|");
@@ -954,7 +959,7 @@ loadGoogleMaps(opt){
         // console.log(points4.lat+","+points4.lng);
         // console.log(end4Ctr);
         // console.log(lat_array_coords4);
-        var startCtr4 = me.getStartPoints(vpoints4.lat+","+me.points4.lng,me.lat_array_coords4,ctr);
+        var startCtr4 = me.getStartPoints(me.points4.lat+","+me.points4.lng,me.lat_array_coords4,ctr);
         var endCtr4 = me.getEndPoints(me.end4Ctr,me.lat_array_coords4,ctr);
         // console.log(startCtr4);
         // console.log(endCtr4);
@@ -962,7 +967,7 @@ loadGoogleMaps(opt){
 
         me.start_new4 = me.lat_array_coords4[startCtr4];
 
-        if (startCtr4<endCtr4 && start_new4!==undefined) {
+        if (startCtr4<endCtr4 && me.start_new4!==undefined) {
           console.log('enter 4if1');
           for (var o = startCtr4+1; o <= endCtr4; o++) {
               me.start_new4 += "|"+me.lat_array_coords4[o];
@@ -970,7 +975,7 @@ loadGoogleMaps(opt){
           // start_new4 = start_new4.split("|").reverse().join("|");
           console.log(me.start_new4);
         }
-        else if (startCtr4>endCtr4 && start_new4!==undefined){
+        else if (startCtr4>endCtr4 && me.start_new4!==undefined){
           console.log('enter 4if4');
           for (var p = startCtr4-1; p >= endCtr4; p--) {
               me.start_new4 += "|"+me.lat_array_coords4[p];
