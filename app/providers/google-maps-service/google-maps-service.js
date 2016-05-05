@@ -431,38 +431,56 @@ loadGoogleMaps(opt){
               legBtn2.style.marginBottom = '16px';
               locMarkerBtn2.style.marginRight = '16px';
 
+              var ctr3;
+
               legBtn2.addEventListener('click', function() {
-                colorCodeDiv.style.display = 'inline';
-                legMarkDiv2.style.display = 'inline';
+                if (ctr3 == false) {
+                  colorCodeDiv.style.display = 'none';
+                  legMarkDiv2.style.display = 'none';
+                  ctr3 = true;
+                }
+                else {
+                  colorCodeDiv.style.display = 'inline';
+                  legMarkDiv2.style.display = 'inline';
 
-                console.log(me.points1);
-                console.log(me.points2);
+                  var points = {};
 
-                var points = {};
+                  if(me.points1 !==undefined && me.points2 !==undefined && me.points3 === undefined){
+                    points[0] = me.points1.icon;
+                    points[1] = me.points2.icon;
+                  }
+                  else if(me.points1 !==undefined && me.points2 !==undefined && me.points3 !== undefined && me.points4 === undefined){
+                    points[0] = me.points1.icon;
+                    points[1] = me.points3.icon;
+                  }
+                  else if(me.points1 !==undefined && me.points2 !==undefined && me.points3 !== undefined && me.points4 !== undefined){
+                    points[0] = me.points1.icon;
+                    points[1] = me.points4.icon;
+                  }
 
-                if(me.points1 !==undefined && me.points2 !==undefined && me.points3 === undefined){
-                  points[0] = me.points1.icon;
-                  points[1] = me.points2.icon;
+                  for (var i = 0; i < 2; i++) {
+                    me.displayLegMark(points[i]);
+                    console.log(points[i]);
+                  }
+
+                  ctr3 = false;
                 }
-                else if(me.points1 !==undefined && me.points2 !==undefined && me.points3 !== undefined && me.points4 === undefined){
-                  points[0] = me.points1.icon;
-                  points[1] = me.points3.icon;
-                }
-                else if(me.points1 !==undefined && me.points2 !==undefined && me.points3 !== undefined && me.points4 !== undefined){
-                  points[0] = me.points1.icon;
-                  points[1] = me.points4.icon;
-                }
-                // else if (me.ctr1==='1ride'&&(me.ctr2==='forth'||me.ctr2==='back')&&me.latlng2===undefined) {
-                //   console.log('1rider');
-                //   points[0] = me.points1.icon;
-                // }
-                for (var i = 0; i < 2; i++) {
-                  me.displayLegMark(points[i]);
-                  console.log(points[i]);
-                }
+
+
               });
+
+              var ctr4;
+
+
               locMarkerBtn2.addEventListener('click', function() {
-                me.setMapOnAll(me.map);
+                if (ctr4 == false) {
+                  me.clearMarkers();
+                  ctr4 = true;
+                }
+                else {
+                  me.setMapOnAll(me.map);
+                  ctr4 = false;
+                }
               });
             }
             else {
@@ -479,35 +497,41 @@ loadGoogleMaps(opt){
               legBtn1.style.marginBottom = '16px';
               locMarkerBtn1.style.marginRight = '16px';
 
-              legBtn1.addEventListener('click', function() {
-                colorCodeDiv.style.display = 'inline';
-                legMarkDiv1.style.display = 'inline';
+              var ctr;
 
-                console.log(me.points1);
-                for (var i = 0; i < me.points1.length; i++) {
-                  me.displayLegMark(me.points1[i].icon);
-                  console.log(me.points1[i].icon);
+              legBtn1.addEventListener('click', function() {
+                if (ctr == false) {
+                  colorCodeDiv.style.display = 'none';
+                  legMarkDiv1.style.display = 'none';
+                  ctr = true;
                 }
+                else {
+                  colorCodeDiv.style.display = 'inline';
+                  legMarkDiv1.style.display = 'inline';
+                  for (var i = 0; i < me.points1.length; i++) {
+                    me.displayLegMark(me.points1[i].icon);
+                    console.log(me.points1[i].icon);
+                  }
+                  ctr = false;
+                }
+
               });
 
+              var ctr2;
+
               locMarkerBtn1.addEventListener('click', function() {
-                me.setMapOnAll(me.map);
+                if (ctr2 == false) {
+                  me.clearMarkers();
+                  ctr2 = true;
+                }
+                else {
+                  me.setMapOnAll(me.map);
+                  ctr2 = false;
+                }
               });
 
 
             }
-
-            google.maps.event.addListener(me.map, 'tilesloaded', function() {
-              colorCodeDiv.style.display = 'none';
-              if (legMarkDiv1!=null) {
-                legMarkDiv1.style.display = 'none';
-              }
-              if (legMarkDiv2!=null) {
-                legMarkDiv2.style.display = 'none';
-              }
-              me.clearMarkers();
-
-            });
 
 
 
