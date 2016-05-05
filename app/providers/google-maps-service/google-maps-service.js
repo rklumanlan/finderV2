@@ -606,8 +606,23 @@ loadGoogleMaps(opt){
 
         (error) => {
             console.log(error);
+            me.locErrMsg();
         });
 
+  }
+
+  locErrMsg(){
+    let alert = Alert.create({
+      title: 'No location found',
+      subTitle: 'Please enable your GPS location.',
+      buttons: [{
+        text: 'OK',
+        handler: data => {
+          this.nav.pop();
+        }
+      }]
+    });
+    this.nav.present(alert);
   }
 
   displayLegMark(mark){
