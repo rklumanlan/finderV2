@@ -18,9 +18,9 @@ export class GeolocationService {
     this.connectivity = connectivityService;
     this.mapInitialised = false;
     this.apiKey = 'AIzaSyD4zGo9cejtd83MbUFQL8YU71b8_A5XZpc';
-    this.geolocation = null;
     this.loadGeolocation();
-    console.log(this.geolocation);
+    // this.geolocation = null;
+    // console.log(this.geolocation);
   }
 
   loadGeolocation(ctr){
@@ -37,25 +37,30 @@ export class GeolocationService {
 
             let script = document.createElement("script");
             script.id = "geoLocation";
-            script.src = 'https://maps.googleapis.com/maps/api/js?key='+me.apiKey;
+            script.src = 'https://maps.googleapis.com/maps/api/js?key='+me.apiKey+'&libraries=places';
+
 
             document.body.appendChild(script);
 
         }
         else {
           // me.disableMap();
+
+          // add error handler if offline -- alert box
         }
     }
     else {
 
         if(me.connectivity.isOnline()){
             console.log("showing map");
-            return me.initMap(ctr);
+            // return me.initMap(ctr);
             // me.enableMap();
         }
         else {
             console.log("disabling map");
             // me.disableMap();
+
+            // add error handler if offline -- alert box
         }
 
     }
@@ -91,7 +96,7 @@ export class GeolocationService {
               if (results[1]) {
                   locationName = results[1].formatted_address;
                   // alert(locationName);
-                  document.getElementById('geolocation').value = locationName;
+                  // document.getElementById('geolocation').value = locationName;
               }
               else {
                   locationName = "Unknown";
@@ -105,3 +110,7 @@ export class GeolocationService {
       });
   }
 }
+// create new function for google place filter
+// to call function in another page
+// -import service
+// call this.servicename.functioname

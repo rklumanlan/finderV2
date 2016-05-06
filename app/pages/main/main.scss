@@ -121,9 +121,11 @@ li.icn {
 }
 
 span.btn-menu-label {
-    font-size: 12pt;
-    color: #717171;
-    white-space: pre-wrap;
+  font-size: 10pt;
+  color: #636363;
+  white-space: pre-wrap;
+  font-weight: normal;
+  text-transform: capitalize;
 }
 
 ion-row.enter {
@@ -150,4 +152,36 @@ p {
   // background-color:#F5F5F5;
   height:80%;
   padding: 0%;
+}
+.toolbar-background {
+    border-color: #FFFFFF;
+    background-image: $bg-pattern;;
+}
+
+div.geoloc_input{
+	width:80%;
+  height:40px;
+	padding-top:0px;
+  border: 1px solid #9FCCFF;
+  background: #fff;
+}
+
+div.geoloc_btn{
+	width:20%;
+  height:40px;
+	padding-top:0px;
+  border: 1px solid #9FCCFF;
+  background: #fff;
+}
+ion-input#geolocation input.text-input {
+    margin: 10px 5px !important;
+}
+ion-toolbar.geoloc_toolbar.toolbar {
+    padding: 10%;
+}
+div.geoloc_btn button.disable-hover.button.button-clear.button-block.button-icon-only {
+    margin: 2% 0%;
+}
+ion-input#geolocation input.text-input::-webkit-input-placeholder {
+    color: #fff;
 }

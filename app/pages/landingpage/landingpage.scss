@@ -1,0 +1,59 @@
+.landingpage {
+
+}
+div.ph_map{
+	position:absolute;
+	z-index:1;
+	background-image: $ph_map;
+	width: 100%;
+  height: 90vh;
+  background-size: 93%;
+  background-repeat: no-repeat;
+}
+div.pin_icon {
+		z-index:10;
+    position: absolute;
+    overflow: auto;
+    background-image: $map_pin;
+    width: 100%;
+    height: 35%;
+    background-repeat: no-repeat;
+		background-size: 36%;
+    margin: 30% 0% 0% 30%;
+}
+.geo_inpt{
+	padding-left: 10px;
+	background:#3493FF;
+	color:#fff !important;
+}
+div.getgeoloc {
+	z-index:100;
+    display: inline-flex;
+    width: 100%;
+		margin-top: 80%;
+		padding: 0% 10%;
+}
+div.geoloc_inputlp{
+	width:80%;
+  height:40px;
+	padding-top:0px;
+	border: 1px solid #3493FF;
+  background: #3493FF;
+}
+
+div.geoloc_btnlp{
+	width:20%;
+  height:40px;
+	padding-top:0px;
+  border: 1px solid #9FCCFF;
+  background: #fff;
+}
+div.geoloc_btnlp button.disable-hover.button.button-clear.button-block.button-icon-only {
+    margin: 3% 0%;
+}
+ion-input#geolocation input.text-input {
+    margin: 10px 5px !important;
+}
+ion-toolbar.geoloc_toolbar.toolbar {
+    padding: 10%;
+}
