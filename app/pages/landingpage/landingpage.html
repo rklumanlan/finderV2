@@ -1,0 +1,28 @@
+<!--
+  Generated template for the LandingpagePage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-navbar *navbar>
+  <ion-title></ion-title>
+</ion-navbar> -->
+
+<ion-content padding class="landingpage">
+  <div class="mainBackDiv" >
+    <ion-row>
+      <div class="ph_map"></div>
+      <div class="pin_icon"></div>
+      <div class="getgeoloc">
+        <div class="geoloc_inputlp">
+          <ion-input type="text" id='geolocation' [(ngModel)]="geolocation" value='{{geolocation}}' placeholder="Enter a location" class="geo_inpt" ></ion-input>
+        </div>
+        <div class="geoloc_btnlp">
+          <button block clear (click)="showlatlong(mainp)">
+            <ion-icon name="locate"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </ion-row>
+  </div>
+</ion-content>
