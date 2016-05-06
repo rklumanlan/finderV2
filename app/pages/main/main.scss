@@ -1,11 +1,12 @@
-// icomoon custom font icons
+//icomoon custom font icons
+
 @font-face {
     font-family: 'icomoon';
-    src:    url('../fonts/icomoon.eot?h2vfz5');
-    src:    url('../fonts/icomoon.eot?h2vfz5#iefix') format('embedded-opentype'),
-        url('../fonts/icomoon.ttf?h2vfz5') format('truetype'),
-        url('../fonts/icomoon.woff?h2vfz5') format('woff'),
-        url('../fonts/icomoon.svg?h2vfz5#icomoon') format('svg');
+    src:    url('../fonts/icomoon.eot?awjbyu');
+    src:    url('../fonts/icomoon.eot?awjbyu#iefix') format('embedded-opentype'),
+        url('../fonts/icomoon.ttf?awjbyu') format('truetype'),
+        url('../fonts/icomoon.woff?awjbyu') format('woff'),
+        url('../fonts/icomoon.svg?awjbyu#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -24,7 +25,6 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-
 .icoMoon{
   font-family: 'icomoon';
   speak: none;
@@ -42,7 +42,6 @@
 .icoMoon-health:before {
     content: "\e900";
     font-size: 5em;
-
 }
 .icoMoon-hotel:before {
     content: "\e901";
@@ -52,35 +51,46 @@
     content: "\e902";
     font-size: 5em;
 }
-
+.icoMoon-jeep2:before {
+    content: "\1f320";
+}
 .icoMoon-mall:before {
     content: "\e903";
     font-size: 5em;
 }
-.icoMoon-police:before {
+.icoMoon-marker:before {
     content: "\e904";
     font-size: 5em;
 }
-.icoMoon-resto:before {
+.icoMoon-more:before {
+    content: "\e90b";
+}
+.icoMoon-police:before {
     content: "\e905";
     font-size: 5em;
 }
-.icoMoon-salon:before {
+.icoMoon-resto:before {
     content: "\e906";
     font-size: 5em;
 }
-.icoMoon-supermarket:before {
+.icoMoon-review:before {
+    content: "\e90a";
+    font-size: 5em;
+}
+.icoMoon-salon:before {
     content: "\e907";
     font-size: 5em;
 }
-.icoMoon-jeep2:before {
+.icoMoon-supermarket:before {
     content: "\e908";
+    font-size: 5em;
 }
-.icoMoon-more:before {
+.icoMoon-website:before {
     content: "\e909";
+    font-size: 5em;
 }
 .ion-md-jeepTab:before{
-  content: "\e908";
+  content: "\1f320";
 
   font-family: 'icomoon';
   speak: none;
@@ -95,7 +105,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-// icomoon custom font icons
+//icomoon custom font icons
 
 .mainBackDiv{
   position: absolute;

@@ -28,9 +28,9 @@ export class JeepDetailsPage {
       // console.log(data.result);
       console.log(data.res.rows[0]);
       if(data.res.rows.length > 0) {
-        for(var i = 0; i < data.res.rows.length; i++) {
-          this.jeepDetails.push({name: data.res.rows.item(i).name, color: data.res.rows.item(i).color, image:data.res.rows.item(i).image, route:data.res.rows.item(i).route,coordi:data.res.rows.item(i).coordi});
-        }
+        for(var i = 0; i < data.res.rows.length; i++) { console.log(data.res.rows.item(i));
+          this.jeepDetails.push({name: data.res.rows.item(i).name, color: data.res.rows.item(i).color, image:data.res.rows.item(i).image, route:data.res.rows.item(i).route, route2:data.res.rows.item(i).route2,coordi:data.res.rows.item(i).coordi});
+       }
       }
       console.log(this.jeepDetails);
     }, (error) => {
