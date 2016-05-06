@@ -15,10 +15,6 @@ export class MyModal {
     this.navParams = navParams;
 
     this.ctr = navParams.get('ctrId');
-    console.log('nacparams');
-    console.log(this.ctr);
-
-    //database service
     this.dataService = dataService;
 
     this.points = [];
@@ -31,7 +27,6 @@ export class MyModal {
           this.points.push(data.res.rows.item(i).text);
         }
       }
-      console.log(this.points);
     }, (error) => {
       console.log(error);
     })
@@ -62,14 +57,7 @@ export class MyModal {
     })
   }
 
-
-
   initializeItems() {
-    // this.items = [
-    //   'Amsterdam',
-    //   'Bogota'
-    // ];
-
     this.items = this.points;
     console.log(this.items);
   }
@@ -81,8 +69,5 @@ export class MyModal {
   validateItem(ctr){
     let data = { 'point': ctr };
     this.view.dismiss(data);
-    // console.log(ctr);
-    // this.from = ctr;
-    // alert(ctr);
   }
 }
