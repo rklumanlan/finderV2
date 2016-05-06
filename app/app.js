@@ -2,6 +2,7 @@ import {App, IonicApp, Platform, Storage, SqlStorage} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {MainPage} from './pages/main/main';
 import {TabsPage} from './pages/jeepney/tabs/tabs';
+import {LandingPage} from './pages/landingpage/landingpage';
 // import {JeepneyRoutesPage} from './pages/jeepney/jeep-routes/jeep-routes';
 // import {ListPage} from './pages/list/list';
 
@@ -43,7 +44,7 @@ class MyApp {
     this.platform = platform;
     this.initializeApp();
     // make HelloIonicPage the root (or first) page
-    this.rootPage = MainPage;
+    this.rootPage = LandingPage;
   }
 
   initializeApp() {

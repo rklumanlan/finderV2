@@ -1,4 +1,4 @@
-import {Page,NavParams, Storage, SqlStorage,Modal,NavController} from 'ionic-angular';
+import {Page, NavParams, Storage, SqlStorage, Modal, NavController} from 'ionic-angular';
 
 import {JeepMapsPage} from '../../jeepney/jeep-routes/jeep.map';
 
@@ -22,7 +22,7 @@ export class JeepDetailsPage {
 
     this.jeepDetails = [];
     console.log(this.details.name);
-    console.log('should entert data service');
+    console.log('should enter data service');
 
     this.dataService.getJeepDetails(this.details.name).then((data) => {
       // console.log(data.result);

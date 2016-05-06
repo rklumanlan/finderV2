@@ -47,6 +47,9 @@ export class GoogleMapsService {
     //fit markers to screen
     this.markers = [];
 
+    //marker hide/showing
+    this.markerIcon = [];
+
     //array for point a or display jeepney route
     this.polylines1 = [];
     this.snappedCoordinates1 = [];
@@ -123,13 +126,13 @@ export class GoogleMapsService {
 
 loadGoogleMaps(opt){
   console.log('enter loadGoogleMaps');
-  console.log(this.map);
+  console.log(opt.jeep_3);
 
     var option = opt;
 
     var me = this;
 
-    me.addConnectivityListeners();
+    me.addConnectivityListeners(opt);
 
     if(typeof google == "undefined" || typeof google.maps == "undefined"){
 
@@ -142,7 +145,6 @@ loadGoogleMaps(opt){
             //Load the SDK
             window.mapInit = function(){
                 me.initMap(option);
-                me.enableMap();
             }
 
             let script = document.createElement("script");
@@ -166,7 +168,6 @@ loadGoogleMaps(opt){
         if(me.connectivity.isOnline()){
             console.log("showing map");
             me.initMap(option);
-            me.enableMap();
         }
         else {
             console.log("disabling map");
@@ -211,16 +212,23 @@ loadGoogleMaps(opt){
     }
 
     else if (options.jeep_2!==undefined) {
-        // console.log('not undefined');
+        console.log('not undefined');
         me.latlng2 = options.jeep_2;
-        // console.log(latlng2);
+        console.log(me.latlng2);
         me.points2 = options.marker_2;
         me.end1Ctr = options.end1;
         me.end2Ctr = options.end2;
+        console.log(options);
+        console.log(options.end3);
+        console.log(options.jeep_3);
         if(options.jeep_3!==undefined){
-          // console.log('jeep3 not unde');
+          console.log('jeep3 not unde');
+
             me.latlng3 = options.jeep_3;
+            console.log(me.latlng3);
             me.points3 = options.marker_3;
+            console.log(options.marker_3);
+            console.log(me.points3);
             me.end1Ctr = options.end1;
             me.end2Ctr = options.end2;
             me.end3Ctr = options.end3;
@@ -423,34 +431,55 @@ loadGoogleMaps(opt){
               legBtn2.style.marginBottom = '16px';
               locMarkerBtn2.style.marginRight = '16px';
 
+              var ctr3;
+
               legBtn2.addEventListener('click', function() {
-                colorCodeDiv.style.display = 'inline';
-                legMarkDiv2.style.display = 'inline';
-
-                console.log(me.points1);
-                console.log(me.points2);
-
-                var points = {};
-
-                if(me.points1 !==undefined && me.points2 !==undefined && me.points3 === undefined){
-                  points[0] = me.points1.icon;
-                  points[1] = me.points2.icon;
+                if (ctr3 == false) {
+                  colorCodeDiv.style.display = 'none';
+                  legMarkDiv2.style.display = 'none';
+                  ctr3 = true;
                 }
-                else if(me.points1 !==undefined && me.points2 !==undefined && me.points3 !== undefined && me.points4 === undefined){
-                  points[0] = me.points1.icon;
-                  points[1] = me.points3.icon;
+                else {
+                  colorCodeDiv.style.display = 'inline';
+                  legMarkDiv2.style.display = 'inline';
+
+                  var points = {};
+
+                  if(me.points1 !==undefined && me.points2 !==undefined && me.points3 === undefined){
+                    points[0] = me.points1.icon;
+                    points[1] = me.points2.icon;
+                  }
+                  else if(me.points1 !==undefined && me.points2 !==undefined && me.points3 !== undefined && me.points4 === undefined){
+                    points[0] = me.points1.icon;
+                    points[1] = me.points3.icon;
+                  }
+                  else if(me.points1 !==undefined && me.points2 !==undefined && me.points3 !== undefined && me.points4 !== undefined){
+                    points[0] = me.points1.icon;
+                    points[1] = me.points4.icon;
+                  }
+
+                  for (var i = 0; i < 2; i++) {
+                    me.displayLegMark(points[i]);
+                    console.log(points[i]);
+                  }
+
+                  ctr3 = false;
                 }
-                else if(me.points1 !==undefined && me.points2 !==undefined && me.points3 !== undefined && me.points4 !== undefined){
-                  points[0] = me.points1.icon;
-                  points[1] = me.points4.icon;
+
+
+              });
+
+              var ctr4;
+
+
+              locMarkerBtn2.addEventListener('click', function() {
+                if (ctr4 == false) {
+                  me.clearMarkers();
+                  ctr4 = true;
                 }
-                // else if (me.ctr1==='1ride'&&(me.ctr2==='forth'||me.ctr2==='back')&&me.latlng2===undefined) {
-                //   console.log('1rider');
-                //   points[0] = me.points1.icon;
-                // }
-                for (var i = 0; i < 2; i++) {
-                  me.displayLegMark(points[i]);
-                  console.log(points[i]);
+                else {
+                  me.setMapOnAll(me.map);
+                  ctr4 = false;
                 }
               });
             }
@@ -468,29 +497,41 @@ loadGoogleMaps(opt){
               legBtn1.style.marginBottom = '16px';
               locMarkerBtn1.style.marginRight = '16px';
 
-              legBtn1.addEventListener('click', function() {
-                colorCodeDiv.style.display = 'inline';
-                legMarkDiv1.style.display = 'inline';
+              var ctr;
 
-                console.log(me.points1);
-                for (var i = 0; i < me.points1.length; i++) {
-                  me.displayLegMark(me.points1[i].icon);
-                  console.log(me.points1[i].icon);
+              legBtn1.addEventListener('click', function() {
+                if (ctr == false) {
+                  colorCodeDiv.style.display = 'none';
+                  legMarkDiv1.style.display = 'none';
+                  ctr = true;
+                }
+                else {
+                  colorCodeDiv.style.display = 'inline';
+                  legMarkDiv1.style.display = 'inline';
+                  for (var i = 0; i < me.points1.length; i++) {
+                    me.displayLegMark(me.points1[i].icon);
+                    console.log(me.points1[i].icon);
+                  }
+                  ctr = false;
+                }
+
+              });
+
+              var ctr2;
+
+              locMarkerBtn1.addEventListener('click', function() {
+                if (ctr2 == false) {
+                  me.clearMarkers();
+                  ctr2 = true;
+                }
+                else {
+                  me.setMapOnAll(me.map);
+                  ctr2 = false;
                 }
               });
 
+
             }
-
-            google.maps.event.addListener(me.map, 'tilesloaded', function() {
-              colorCodeDiv.style.display = 'none';
-              if (legMarkDiv1!=null) {
-                legMarkDiv1.style.display = 'none';
-              }
-              if (legMarkDiv2!=null) {
-                legMarkDiv2.style.display = 'none';
-              }
-
-            });
 
 
 
@@ -559,21 +600,6 @@ loadGoogleMaps(opt){
 
               }
 
-              // if(me.latlng1!==null){
-              //   console.log('elsee');
-              //
-              //   console.log(me.latlng1.coordi);
-              //   me.bendAndSnap(me.latlng1.coordi,'jeep1');
-              //
-              // }
-              //
-              // if(me.latlng1!==null){
-              //     console.log('klk');
-              //   console.log(me.points1);
-              //   var point = me.points1;
-              //
-              //   me.loadMarkers(point,null);
-              // }
 
               if(me.points1 !==undefined && me.points2 !==undefined && me.points3 === undefined){
                 me.loadMarkers(me.points1,me.points2);
@@ -599,15 +625,28 @@ loadGoogleMaps(opt){
                 me.loadMarkers(point,null);
               }
 
-              me.enableMap();
-
             });
         },
 
         (error) => {
             console.log(error);
+            me.locErrMsg();
         });
 
+  }
+
+  locErrMsg(){
+    let alert = Alert.create({
+      title: 'No location found',
+      subTitle: 'Please enable your GPS location.',
+      buttons: [{
+        text: 'OK',
+        handler: data => {
+          this.nav.pop();
+        }
+      }]
+    });
+    this.nav.present(alert);
   }
 
   displayLegMark(mark){
@@ -615,7 +654,8 @@ loadGoogleMaps(opt){
     if (document.getElementById('legend0')!=null) {
       ctr=0;
     }
-    else if (document.getElementById('legend1')!=null) {
+
+    if (document.getElementById('legend1')!=null) {
       ctr=1;
     }
 
@@ -724,29 +764,18 @@ loadGoogleMaps(opt){
     };
   }
 
-  disableMap(){
-
-    console.log("disable map");
-  }
-
-  enableMap(){
-
-    console.log("enable map");
-  }
-
-  addConnectivityListeners(){
+  //listener when online or offline
+  addConnectivityListeners(option){
     var me = this;
 
     var onOnline = function(){
         setTimeout(function(){
             if(typeof google == "undefined" || typeof google.maps == "undefined"){
-                me.loadGoogleMaps();
+                me.loadGoogleMaps(option);
             } else {
                 if(!me.mapInitialised){
                     me.initMap(option);
                 }
-
-                me.enableMap();
             }
         }, 2000);
     };
@@ -924,7 +953,8 @@ loadGoogleMaps(opt){
 
       }
       if(ctr === 'jeep3'){
-        // console.log('enter mid3');
+        console.log('enter mid3');
+        console.log(me.points3);
         // console.log(points3);
         var string3 = startEnd;
         me.lat_array_coords3 = string3.split("|");
@@ -968,7 +998,7 @@ loadGoogleMaps(opt){
         // console.log(points4.lat+","+points4.lng);
         // console.log(end4Ctr);
         // console.log(lat_array_coords4);
-        var startCtr4 = me.getStartPoints(vpoints4.lat+","+me.points4.lng,me.lat_array_coords4,ctr);
+        var startCtr4 = me.getStartPoints(me.points4.lat+","+me.points4.lng,me.lat_array_coords4,ctr);
         var endCtr4 = me.getEndPoints(me.end4Ctr,me.lat_array_coords4,ctr);
         // console.log(startCtr4);
         // console.log(endCtr4);
@@ -976,18 +1006,18 @@ loadGoogleMaps(opt){
 
         me.start_new4 = me.lat_array_coords4[startCtr4];
 
-        if (startCtr4<endCtr4 && start_new4!==undefined) {
+        if (startCtr4<endCtr4 && me.start_new4!==undefined) {
           console.log('enter 4if1');
-          for (var m = startCtr4+1; m <= endCtr4; m++) {
-              me.start_new4 += "|"+me.lat_array_coords4[m];
+          for (var o = startCtr4+1; o <= endCtr4; o++) {
+              me.start_new4 += "|"+me.lat_array_coords4[o];
           }
           // start_new4 = start_new4.split("|").reverse().join("|");
           console.log(me.start_new4);
         }
-        else if (startCtr4>endCtr4 && start_new4!==undefined){
+        else if (startCtr4>endCtr4 && me.start_new4!==undefined){
           console.log('enter 4if4');
-          for (var n = startCtr4-1; n >= endCtr4; n--) {
-              me.start_new4 += "|"+me.lat_array_coords4[n];
+          for (var p = startCtr4-1; p >= endCtr4; p--) {
+              me.start_new4 += "|"+me.lat_array_coords4[p];
           }
           me.start_new4 = me.start_new4.split("|").reverse().join("|");
 
@@ -1086,44 +1116,24 @@ loadGoogleMaps(opt){
     me.http.get('https://roads.googleapis.com/v1/snapToRoads',{search: params})
     .subscribe(
       data => {
-        // if(ctr == 'jeep1'){
-        //   me.processSnapToRoadResponse(data.json(),'jeep1');
-        //   me.drawSnappedPolyline(me.snappedCoordinates1,'jeep1');
-        // }
-        //
-        // else {
-        //   me.processSnapToRoadResponse(data.json(),null);
-        //   me.drawSnappedPolyline(me.snappedCoordinates1,null);
-        // }
-
         if(ctr == 'jeep1'){
-          console.log(data.json());
-          console.log('jeep1 bend');
           me.processSnapToRoadResponse(data.json(),'jeep1');
           me.drawSnappedPolyline(me.snappedCoordinates1,'jeep1');
         }
 
         if(ctr=='jeep2'){
-          // console.log(response.data);
-          // console.log('enter to');
-          console.log('jeep 2 bend');
-          console.log(data.json());
           me.processSnapToRoadResponse(data.json(),'jeep2');
           me.drawSnappedPolyline(me.snappedCoordinates2,'jeep2');
         }
 
 
         if(ctr=='jeep3'){
-          // console.log(response.data);
-          // console.log('enter mid');
           me.processSnapToRoadResponse(data.json(),'jeep3');
           me.drawSnappedPolyline(me.snappedCoordinates3,'jeep3');
         }
 
 
         if(ctr=='jeep4'){
-          // console.log(response.data);
-          // console.log('enter 4');
           me.processSnapToRoadResponse(data.json(),'jeep4');
           me.drawSnappedPolyline(me.snappedCoordinates4,'jeep4');
         }
@@ -1300,7 +1310,7 @@ loadGoogleMaps(opt){
       });
 
       me.snappedPolyline3.setMap(me.map);
-      animateCircle(me.snappedPolyline3);
+      me.animateCircle(me.snappedPolyline3);
 
       me.polylines3.push(me.snappedPolyline3);
       console.log(me.polylines3);
@@ -1325,9 +1335,6 @@ loadGoogleMaps(opt){
       me.polylines4.push(me.snappedPolyline4);
       console.log(me.polylines4);
     }
-
-
-
 
   }
 
@@ -1357,31 +1364,48 @@ loadGoogleMaps(opt){
       records = points;
     }
 
-      console.log(records);
+    for (var x = 0; x < records.length; x++) {
+      var image = {
+        url: records[x].icon,
+        scaledSize: new google.maps.Size(23, 36)
+      };
+      var markerPos = new google.maps.LatLng(records[x].lat,records[x].lng);
+      var marker = new google.maps.Marker({
+          map: me.map,
+          animation: google.maps.Animation.DROP,
+          position: markerPos,
+          icon: image
+      });
+      me.markerIcon.push(marker);
 
-      for (var x = 0; x < records.length; x++) {
-        var markerPos = new google.maps.LatLng(records[x].lat,records[x].lng);
-        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
-        var marker = new google.maps.Marker({
-            map: me.map,
-            animation: google.maps.Animation.DROP,
-            position: markerPos,
-            icon: records[x].icon
-        });
-        var infoWindowContent;
-        if (points2!==null) {
-          infoWindowContent = records[x].text;
-          me.addInfoWindow(marker, infoWindowContent);
-        }
-        else{
-          infoWindowContent = points[x].text;
-          me.addInfoWindow(marker, infoWindowContent);
-        }
+
+      var infoWindowContent;
+      if (points2!==null) {
+        infoWindowContent = records[x].text;
+        me.addInfoWindow(marker, infoWindowContent);
       }
+      else{
+        infoWindowContent = points[x].text;
+        me.addInfoWindow(marker, infoWindowContent);
+      }
+    }
+    me.clearMarkers();
 
 
+  }
 
+  // Sets the map on all markers in the array.
+  setMapOnAll(map) {
+    var me = this;
+    for (var i = 0; i < me.markerIcon.length; i++) {
+      me.markerIcon[i].setMap(map);
+    }
+  }
 
+  // Removes the markers from the map, but keeps them in the array.
+  clearMarkers() {
+    var me = this;
+    me.setMapOnAll(null);
   }
 
   //display info about the markers
@@ -1429,6 +1453,7 @@ loadGoogleMaps(opt){
     me.map.fitBounds(bounds);
   }
 
+  //error message when cennection lost
   disableMap(){
     console.log("disable map");
     let alert = Alert.create({
@@ -1444,50 +1469,5 @@ loadGoogleMaps(opt){
     this.nav.present(alert);
   }
 
-  enableMap(){
-    console.log("enable map");
-  }
 
-  addConnectivityListeners(){
-    var me = this;
-    console.log('conn');console.log(!me.mapInitialised);
-
-    var onOnline = function(){
-        setTimeout(function(){
-            if(typeof google == "undefined" || typeof google.maps == "undefined"){
-                me.loadGoogleMaps();
-            } else {
-                if(!me.mapInitialised){
-                  console.log('init');
-                    me.initMap(option);
-                }
-
-                me.enableMap();
-            }
-        }, 2000);
-    };
-
-    var onOffline = function(){
-
-        me.disableMap();
-    };
-
-    document.addEventListener('online', onOnline, false);
-    document.addEventListener('offline', onOffline, false);
-
-  }
-
-
-  check_marks(tags,name){
-    console.log('mappu'+document.getElementById('map'));
-
-
-
-    var stringTags = tags;
-    var index = stringTags.split(",");
-
-    if (index.indexOf(name)!=-1) {
-      return true;
-    }
-  }
 }
