@@ -87,6 +87,7 @@ export class GeolocationService {
       var latlngStr = input.split(',', 2);
 
       var locationName;
+      console.log(new google.maps.Geocoder());
       var geocoder = new google.maps.Geocoder();
       var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
 

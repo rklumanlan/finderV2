@@ -23,11 +23,11 @@ import {GeolocationService} from '../../providers/geolocation-service/geolocatio
 
 export class MainPage{
   static get parameters(){
-    return [[GeolocationService],[NavParams],[NavController]];
+    return [[DataService],[GeolocationService],[NavParams],[NavController]];
   }
-  constructor(geolocationService,navParams,nav) {
+  constructor(dataService,geolocationService,navParams,nav) {
     //database service
-    // this.dataService = dataService;
+    this.dataService = dataService;
     this.geolocationService = geolocationService;
     this.navParams = navParams;
     this.nav = nav;
