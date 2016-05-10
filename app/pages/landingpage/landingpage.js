@@ -26,33 +26,9 @@ export class LandingPage {
     this.geolocation = '';
   }
 
-  onPageDidEnter() {
-    console.log('ssss');
-    this.lat();
-  }
   autocomplete(searchbar){
-    console.log('lll');
     var me = this;
-
-    // console.log(document.getElementById('geo'));
-    // console.log(new google.maps.places);
-    var input = document.getElementById('geolocation').getElementsByTagName('input')[0];
-    // console.log(new google.maps.places.Autocomplete(document.getElementById('geo')));
-    var autocomplete = new google.maps.places.Autocomplete(input);
-    autocomplete.addListener('place_changed', function() {
-         var place = autocomplete.getPlace();
-         console.log(place);
-         // Get each component of the address from the place details
-        // and fill the corresponding field on the form.
-        for (var i = 0; i < place.address_components.length; i++) {
-          var addressType = place.address_components[i].types[0];
-          // if (componentForm[addressType]) {
-          //   var val = place.address_components[i][componentForm[addressType]];
-          //   document.getElementById(addressType).value = val;
-          // }
-          console.log(addressType);
-        }
-    });
+    me.geolocationService.autoComplete();
   }
 
   showlatlong(event) {
@@ -91,15 +67,5 @@ export class LandingPage {
       );
 
   }
-
-  // passGeoloc(ctr) {
-  //   var me = this;
-  //
-  //   if (ctr == 'mainp'){
-  //     this.nav.push(MainPage, { geoloc: me.geoCoords});
-  //   }
-  //   else{
-  //     console.log("no location yet");
-  //   }
 
 }

@@ -1,7 +1,10 @@
+import {NavController} from 'ionic-angular';
 import {Injectable, Inject} from 'angular2/core';
 import {Http} from 'angular2/http';
 
 import {ConnectivityService} from '../../providers/connectivity-service/connectivity-service';
+
+import {MainPage} from '../../pages/main/main';
 
 /*
   Generated class for the GeolocationService provider.
@@ -12,15 +15,16 @@ import {ConnectivityService} from '../../providers/connectivity-service/connecti
 @Injectable()
 export class GeolocationService {
   static get parameters(){
-    return [[ConnectivityService]];
+    return [[ConnectivityService],[NavController]];
   }
-  constructor(connectivityService) {
+  constructor(connectivityService,nav) {
     this.connectivity = connectivityService;
     this.mapInitialised = false;
     this.apiKey = 'AIzaSyD4zGo9cejtd83MbUFQL8YU71b8_A5XZpc';
     this.loadGeolocation();
-    // this.geolocation = null;
-    // console.log(this.geolocation);
+    this.latlng = {};
+    this.nav = nav;
+    this.MainPage  = MainPage;
   }
 
   loadGeolocation(ctr){
@@ -95,9 +99,20 @@ export class GeolocationService {
       geocoder.geocode({ 'latLng': latlng }, function (results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
               if (results[1]) {
-                  locationName = results[1].formatted_address;
-                  // alert(locationName);
-                  // document.getElementById('geolocation').value = locationName;
+                console.log(results[1].address_components[0].types[0]);
+                console.log(results[1]);
+
+                var locString = [];
+                var locString2;
+
+                for (var i = 0; i < results[1].address_components.length; i++) {
+
+                  if (results[1].address_components[i].types[0]!='administrative_area_level_2') {
+                    locString.push(results[1].address_components[i].long_name);
+                  }
+                  locString2 = locString.join(', ');
+                }
+                locationName = locString2;
               }
               else {
                   locationName = "Unknown";
@@ -106,9 +121,43 @@ export class GeolocationService {
           else {
               locationName = "Couldn't find location. Error code: " + status;
           }
-          // document.getElementById('geolocation').value = locationName;
           callback(locationName);
       });
+  }
+
+  autoComplete(){
+    console.log('lll');
+    var me = this;
+
+    // console.log(document.getElementById('geo'));
+    // console.log(new google.maps.places);
+    var input = document.getElementById('geolocation').getElementsByTagName('input')[0];
+    // console.log(new google.maps.places.Autocomplete(document.getElementById('geo')));
+    var autocomplete = new google.maps.places.Autocomplete(input);
+    autocomplete.addListener('place_changed', function() {
+      var place = autocomplete.getPlace();
+      me.latlng.lat = place.geometry.location.lat();
+      me.latlng.lng = place.geometry.location.lng();
+
+      var autolocString = [];
+      var autolocString2;
+
+      for (var i = 0; i < place.address_components.length; i++) {
+
+        if (place.address_components[i].types[0]!='administrative_area_level_2') {
+          autolocString.push(place.address_components[i].long_name);
+        }
+        autolocString2 = autolocString.join(', ');
+      }
+      me.latlng.locationName = autolocString2;
+      // setTimeout(function() {
+        me.nav.push(MainPage, { geoloc: me.latlng });
+
+      // }, 2000);
+
+    });
+
+
   }
 }
 // create new function for google place filter
