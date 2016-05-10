@@ -22,13 +22,18 @@ export class RestaurantPage {
 
   constructor(nav,navParams,geolocationService) {
     this.RestaurantPage = RestaurantPage;
+    this.nav = nav;
     this.navParams = navParams;
-    // this.geolocationService = geolocationService;
-    // get geoCoords
-    this.geoCoords = navParams.get('geoloc');
-    console.log(this.geoCoords);
+    this.geolocationService = geolocationService;
 
-    // this.restoCoords();
+    this.details = navParams.get('geoloc');
+    console.log(this.details);
+
   }
+
+  onPageLoaded(){
+    this.geolocationService.getPlaces(this.details);
+  }
+
 
 }
