@@ -81,7 +81,7 @@ getPlaces(gcrds){
   // });
 
     // var pyrmont = {lat: gcrds.lat, lng: gcrds.lng };
-    var pyrmont = {lat: parseInt(gcrds.lat), lng: parseInt(gcrds.lng)};
+    var pyrmont = {lat: parseFloat(gcrds.lat), lng: parseFloat(gcrds.lng)};
 
     map = new google.maps.Map(document.getElementById('places_map'), {
       center: pyrmont,
