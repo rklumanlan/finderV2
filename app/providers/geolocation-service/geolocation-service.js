@@ -27,7 +27,7 @@ export class GeolocationService {
     this.nav = nav;
     this.MainPage  = MainPage;
 
-    this.getPlaces();
+    // this.getPlaces();
 
   }
 
