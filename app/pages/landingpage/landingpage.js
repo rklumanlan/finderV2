@@ -92,14 +92,4 @@ export class LandingPage {
 
   }
 
-  // passGeoloc(ctr) {
-  //   var me = this;
-  //
-  //   if (ctr == 'mainp'){
-  //     this.nav.push(MainPage, { geoloc: me.geoCoords});
-  //   }
-  //   else{
-  //     console.log("no location yet");
-  //   }
-
 }

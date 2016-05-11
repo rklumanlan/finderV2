@@ -19,6 +19,8 @@ export class GeolocationService {
     this.mapInitialised = false;
     this.apiKey = 'AIzaSyD4zGo9cejtd83MbUFQL8YU71b8_A5XZpc';
     this.loadGeolocation();
+    // this.getPlaces();
+
     // this.geolocation = null;
     // console.log(this.geolocation);
   }
@@ -65,6 +67,36 @@ export class GeolocationService {
 
     }
   }
+// getPlaces function Here
+getPlaces(gcrds){
+
+  console.log("Get Places Working");
+  console.log(document.getElementById('places_map'));
+  console.log(gcrds.lat);
+
+  // var map = new google.maps.Map(document.getElementById('places_map'), {
+  // center: {lat: -34.397, lng: 150.644},
+  // scrollwheel: false,
+  // zoom: 8
+  // });
+
+    // var pyrmont = {lat: gcrds.lat, lng: gcrds.lng };
+    var pyrmont = {lat: parseFloat(gcrds.lat), lng: parseFloat(gcrds.lng)};
+
+    map = new google.maps.Map(document.getElementById('places_map'), {
+      center: pyrmont,
+      zoom: 17
+    });
+
+    // var service = new google.maps.places.PlacesService(map);
+    // service.nearbySearch({
+    //   location: pyrmont,
+    //   radius: 1000,
+    //   type: ['restaurant']
+    // }, processResults);
+  }
+
+
 
   setLocationName(ctr){
     var me = this;
@@ -110,8 +142,72 @@ export class GeolocationService {
           callback(locationName);
       });
   }
+  //
+  // getPlaces(){
+  //   console.log("Get Places Working");
+  //
+  //     var pyrmont = {lat: 15.151023200000001, lng: 120.55812309999999};
+  //
+  //     map = new google.maps.Map(document.getElementById('map'), {
+  //       center: pyrmont,
+  //       zoom: 17
+  //     });
+  //
+  //     // var service = new google.maps.places.PlacesService(map);
+  //     // service.nearbySearch({
+  //     //   location: pyrmont,
+  //     //   radius: 1000,
+  //     //   type: ['restaurant']
+  //     // }, processResults);
+  //   }
+
+    // processResults(results, status, pagination) {
+    //   if (status !== google.maps.places.PlacesServiceStatus.OK) {
+    //     return;
+    //     }
+    //   else {
+    //     createMarkers(results);
+    //
+    //     if (pagination.hasNextPage) {
+    //       var moreButton = document.getElementById('more');
+    //
+    //       moreButton.disabled = false;
+    //
+    //       moreButton.addEventListener('click', function() {
+    //         moreButton.disabled = true;
+    //         pagination.nextPage();
+    //       });
+    //     }
+    //   }
+    // }
+    //
+    // createMarkers(places) {
+    //   var bounds = new google.maps.LatLngBounds();
+    //   var placesList = document.getElementById('places');
+    //
+    //   for (var i = 0, place; place = places[i]; i++) {
+    //     var image = {
+    //       url: place.icon,
+    //       size: new google.maps.Size(71, 71),
+    //       origin: new google.maps.Point(0, 0),
+    //       anchor: new google.maps.Point(17, 34),
+    //       scaledSize: new google.maps.Size(25, 25)
+    //     };
+    //
+    //     // var marker = new google.maps.Marker({
+    //     //   map: map,
+    //     //   icon: image,
+    //     //   title: place.name,
+    //     //   position: place.geometry.location
+    //     // });
+    //
+    //     placesList.innerHTML += '<li>' + place.name + '</li>';
+    //
+    //     bounds.extend(place.geometry.location);
+    //   }
+    //   map.fitBounds(bounds);
+  // }
+// }
+
+
 }
-// create new function for google place filter
-// to call function in another page
-// -import service
-// call this.servicename.functioname
