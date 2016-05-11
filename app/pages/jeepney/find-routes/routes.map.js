@@ -2689,9 +2689,7 @@ export class RoutesMapsPage {
         options.fromId = me.from;
         options.toId = me.to;
 
-        data.then((result) => {
-          return pointMarker2;
-        }).then((result) => {
+        pointMarker2.then((result) => {
           me.googleMapsService.loadGoogleMaps(options);
         });
     }

@@ -1,7 +1,10 @@
+import {NavController} from 'ionic-angular';
 import {Injectable, Inject} from 'angular2/core';
 import {Http} from 'angular2/http';
 
 import {ConnectivityService} from '../../providers/connectivity-service/connectivity-service';
+
+import {MainPage} from '../../pages/main/main';
 
 /*
   Generated class for the GeolocationService provider.
@@ -12,17 +15,20 @@ import {ConnectivityService} from '../../providers/connectivity-service/connecti
 @Injectable()
 export class GeolocationService {
   static get parameters(){
-    return [[ConnectivityService]];
+    return [[ConnectivityService],[NavController]];
   }
-  constructor(connectivityService) {
+  constructor(connectivityService,nav) {
     this.connectivity = connectivityService;
     this.mapInitialised = false;
     this.apiKey = 'AIzaSyD4zGo9cejtd83MbUFQL8YU71b8_A5XZpc';
     this.loadGeolocation();
+
+    this.latlng = {};
+    this.nav = nav;
+    this.MainPage  = MainPage;
+
     // this.getPlaces();
 
-    // this.geolocation = null;
-    // console.log(this.geolocation);
   }
 
   loadGeolocation(ctr){
@@ -127,9 +133,20 @@ getPlaces(gcrds){
       geocoder.geocode({ 'latLng': latlng }, function (results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
               if (results[1]) {
-                  locationName = results[1].formatted_address;
-                  // alert(locationName);
-                  // document.getElementById('geolocation').value = locationName;
+                console.log(results[1].address_components[0].types[0]);
+                console.log(results[1]);
+
+                var locString = [];
+                var locString2;
+
+                for (var i = 0; i < results[1].address_components.length; i++) {
+
+                  if (results[1].address_components[i].types[0]!='administrative_area_level_2') {
+                    locString.push(results[1].address_components[i].long_name);
+                  }
+                  locString2 = locString.join(', ');
+                }
+                locationName = locString2;
               }
               else {
                   locationName = "Unknown";
@@ -138,76 +155,42 @@ getPlaces(gcrds){
           else {
               locationName = "Couldn't find location. Error code: " + status;
           }
-          // document.getElementById('geolocation').value = locationName;
           callback(locationName);
       });
   }
-  //
-  // getPlaces(){
-  //   console.log("Get Places Working");
-  //
-  //     var pyrmont = {lat: 15.151023200000001, lng: 120.55812309999999};
-  //
-  //     map = new google.maps.Map(document.getElementById('map'), {
-  //       center: pyrmont,
-  //       zoom: 17
-  //     });
-  //
-  //     // var service = new google.maps.places.PlacesService(map);
-  //     // service.nearbySearch({
-  //     //   location: pyrmont,
-  //     //   radius: 1000,
-  //     //   type: ['restaurant']
-  //     // }, processResults);
-  //   }
 
-    // processResults(results, status, pagination) {
-    //   if (status !== google.maps.places.PlacesServiceStatus.OK) {
-    //     return;
-    //     }
-    //   else {
-    //     createMarkers(results);
-    //
-    //     if (pagination.hasNextPage) {
-    //       var moreButton = document.getElementById('more');
-    //
-    //       moreButton.disabled = false;
-    //
-    //       moreButton.addEventListener('click', function() {
-    //         moreButton.disabled = true;
-    //         pagination.nextPage();
-    //       });
-    //     }
-    //   }
-    // }
-    //
-    // createMarkers(places) {
-    //   var bounds = new google.maps.LatLngBounds();
-    //   var placesList = document.getElementById('places');
-    //
-    //   for (var i = 0, place; place = places[i]; i++) {
-    //     var image = {
-    //       url: place.icon,
-    //       size: new google.maps.Size(71, 71),
-    //       origin: new google.maps.Point(0, 0),
-    //       anchor: new google.maps.Point(17, 34),
-    //       scaledSize: new google.maps.Size(25, 25)
-    //     };
-    //
-    //     // var marker = new google.maps.Marker({
-    //     //   map: map,
-    //     //   icon: image,
-    //     //   title: place.name,
-    //     //   position: place.geometry.location
-    //     // });
-    //
-    //     placesList.innerHTML += '<li>' + place.name + '</li>';
-    //
-    //     bounds.extend(place.geometry.location);
-    //   }
-    //   map.fitBounds(bounds);
-  // }
-// }
+  autoComplete(){
+    console.log('lll');
+    var me = this;
+
+    // console.log(document.getElementById('geo'));
+    // console.log(new google.maps.places);
+    var input = document.getElementById('geolocation').getElementsByTagName('input')[0];
+    // console.log(new google.maps.places.Autocomplete(document.getElementById('geo')));
+    var autocomplete = new google.maps.places.Autocomplete(input);
+    autocomplete.addListener('place_changed', function() {
+      var place = autocomplete.getPlace();
+      me.latlng.lat = place.geometry.location.lat();
+      me.latlng.lng = place.geometry.location.lng();
+
+      var autolocString = [];
+      var autolocString2;
+
+      for (var i = 0; i < place.address_components.length; i++) {
+
+        if (place.address_components[i].types[0]!='administrative_area_level_2') {
+          autolocString.push(place.address_components[i].long_name);
+        }
+        autolocString2 = autolocString.join(', ');
+      }
+      me.latlng.locationName = autolocString2;
+      // setTimeout(function() {
+        me.nav.push(MainPage, { geoloc: me.latlng });
+
+      // }, 2000);
+
+    });
 
 
+  }
 }
