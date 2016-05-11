@@ -4,22 +4,22 @@
 div.ph_map{
 	position:absolute;
 	z-index:1;
-	background-image: $ph_map;
-	width: 100%;
-  height: 90vh;
-  background-size: 93%;
-  background-repeat: no-repeat;
+	// background-image: $ph_map;
+	// width: 95%;
+  // height: 90vh;
+  // background-size: 93%;
+  // background-repeat: no-repeat;
 }
 div.pin_icon {
 		z-index:10;
     position: absolute;
-    overflow: auto;
-    background-image: $map_pin;
-    width: 100%;
-    height: 35%;
-    background-repeat: no-repeat;
-		background-size: 36%;
-    margin: 30% 0% 0% 30%;
+    width: 95%;
+    height: 40%;
+}
+img.pin {
+    width: 40%;
+    margin: 30% 30% 0% 30%;
+    position: absolute;
 }
 .geo_inpt{
 	padding-left: 10px;

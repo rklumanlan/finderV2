@@ -44,7 +44,8 @@ export class MainPage{
     this.details = navParams.get('geoloc');
     console.log(this.details);
 
-    this.geolocation2 = this.details.locName
+    this.geolocation2 = this.details.locName;
+
 
   }
   showlatlong(event) {
@@ -76,6 +77,37 @@ export class MainPage{
 
       );
 
+  }
+
+  nextPage(ctr){
+    var ctr;
+    var me = this;
+    //push another page onto the history stack
+    //causing the nav controller to animate the new page in
+    if(ctr == 'resto'){
+      this.nav.push( RestaurantPage, {geoloc: me.details} );
+    }
+    else if(ctr == 'hotels'){
+      this.nav.push( HotelsPage );
+    }
+    else if(ctr == 'malls'){
+      this.nav.push( MallsPage );
+    }
+    else if(ctr == 'supermarkets'){
+      this.nav.push( SupermarketsPage );
+    }
+    else if(ctr == 'salons'){
+      this.nav.push( SalonsPage );
+    }
+    else if(ctr == 'police'){
+      this.nav.push( PolicePage );
+    }
+    else if(ctr == 'hospitals'){
+      this.nav.push( HospitalsPage );
+    }
+    else{
+      return;
+    }
   }
 
 }

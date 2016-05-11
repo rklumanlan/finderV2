@@ -22,9 +22,13 @@ export class GeolocationService {
     this.mapInitialised = false;
     this.apiKey = 'AIzaSyD4zGo9cejtd83MbUFQL8YU71b8_A5XZpc';
     this.loadGeolocation();
+
     this.latlng = {};
     this.nav = nav;
     this.MainPage  = MainPage;
+
+    this.getPlaces();
+
   }
 
   loadGeolocation(ctr){
@@ -69,6 +73,36 @@ export class GeolocationService {
 
     }
   }
+// getPlaces function Here
+getPlaces(gcrds){
+
+  console.log("Get Places Working");
+  console.log(document.getElementById('places_map'));
+  console.log(gcrds.lat);
+
+  // var map = new google.maps.Map(document.getElementById('places_map'), {
+  // center: {lat: -34.397, lng: 150.644},
+  // scrollwheel: false,
+  // zoom: 8
+  // });
+
+    // var pyrmont = {lat: gcrds.lat, lng: gcrds.lng };
+    var pyrmont = {lat: parseFloat(gcrds.lat), lng: parseFloat(gcrds.lng)};
+
+    map = new google.maps.Map(document.getElementById('places_map'), {
+      center: pyrmont,
+      zoom: 17
+    });
+
+    // var service = new google.maps.places.PlacesService(map);
+    // service.nearbySearch({
+    //   location: pyrmont,
+    //   radius: 1000,
+    //   type: ['restaurant']
+    // }, processResults);
+  }
+
+
 
   setLocationName(ctr){
     var me = this;
@@ -160,7 +194,3 @@ export class GeolocationService {
 
   }
 }
-// create new function for google place filter
-// to call function in another page
-// -import service
-// call this.servicename.functioname
