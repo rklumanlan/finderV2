@@ -10,9 +10,9 @@
 
 <ion-content padding class="landingpage">
   <div class="mainBackDiv" >
-    <ion-row>
-      <div class="ph_map"> <img src="../../img/ph_map.png" class="mp"/> </div>
-      <div class="pin_icon"> <img src="../../img/pin.png" class="pin"/> </div>
+    <!-- <div class="ph_map"> <img src="img/mainBG/ph_map.png" class="mp"/> </div> -->
+    <div class="pin_icon"> <img src="img/mainBG/pin.png" class="pin"/> </div>
+    <div id="trigger">
       <div class="getgeoloc">
         <div class="geoloc_inputlp">
           <ion-input type="text" id='geolocation' [(ngModel)]="geolocation"(input)="autocomplete($event)" placeholder="Enter a location" class="geo_inpt" ></ion-input>
@@ -23,6 +23,24 @@
           </button>
         </div>
       </div>
-    </ion-row>
+    </div>
+
+
+    <!-- <ion-row>
+      <div class="ph_map"> <img src="img/mainBG/ph_map.png" class="mp"/> </div>
+      <div class="pin_icon"> <img src="img/mainBG/pin.png" class="pin"/> </div>
+      <div id="trigger">
+        <div class="getgeoloc">
+          <div class="geoloc_inputlp">
+            <ion-input type="text" id='geolocation' [(ngModel)]="geolocation"(input)="autocomplete($event)" placeholder="Enter a location" class="geo_inpt" ></ion-input>
+          </div>
+          <div class="geoloc_btnlp">
+            <button block clear (click)="showlatlong(mainp)">
+              <ion-icon name="locate"></ion-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </ion-row> -->
   </div>
 </ion-content>
