@@ -28,7 +28,7 @@ export class LandingPage {
 
   autocomplete(searchbar){
     var me = this;
-    me.geolocationService.autoComplete();
+    me.geolocationService.autoComplete('landingpage');
   }
 
   showlatlong(event) {

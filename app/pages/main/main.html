@@ -15,7 +15,7 @@
 <ion-toolbar class="geoloc_toolbar">
   <ion-row>
     <div class="geoloc_input">
-      <ion-input type="text" [(ngModel)]="geolocation2" placeholder=" Enter a location" style="padding-left: 10px;" ></ion-input>
+      <ion-input type="text" id="geolocation2" [(ngModel)]="geolocation2" (input)="autocomplete($event)" placeholder=" Enter a location" style="padding-left: 10px;" ></ion-input>
     </div>
     <div class="geoloc_btn">
 
@@ -29,7 +29,7 @@
 <ion-content padding >
   <div class="mainBackDiv" >
 
-  <div  class="lowerDiv" padding>
+  <div  class="lowerDiv" id="lowerDiv" padding style="display:none">
     <!-- jeeps and resto -->
     <ion-row center>
       <ion-col width-50>

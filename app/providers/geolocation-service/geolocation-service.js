@@ -159,13 +159,22 @@ getPlaces(gcrds){
       });
   }
 
-  autoComplete(){
+  autoComplete(ctr){
     console.log('lll');
     var me = this;
 
     // console.log(document.getElementById('geo'));
     // console.log(new google.maps.places);
-    var input = document.getElementById('geolocation').getElementsByTagName('input')[0];
+    var input;
+    if (ctr =='landingpage') {
+      console.log('land');
+      input = document.getElementById('geolocation').getElementsByTagName('input')[0];
+    }
+    else {
+      console.log('main');
+      input = document.getElementById('geolocation2').getElementsByTagName('input')[0];
+    }
+
     // console.log(new google.maps.places.Autocomplete(document.getElementById('geo')));
     var autocomplete = new google.maps.places.Autocomplete(input);
     autocomplete.addListener('place_changed', function() {
@@ -184,10 +193,10 @@ getPlaces(gcrds){
         autolocString2 = autolocString.join(', ');
       }
       me.latlng.locationName = autolocString2;
-      // setTimeout(function() {
-        me.nav.push(MainPage, { geoloc: me.latlng });
 
-      // }, 2000);
+      if (ctr == 'landingpage') {
+        me.nav.push(MainPage, { geoloc: me.latlng });
+      }
 
     });
 

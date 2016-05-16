@@ -44,10 +44,23 @@ export class MainPage{
     this.details = navParams.get('geoloc');
     console.log(this.details);
 
-    this.geolocation2 = this.details.locName;
+    this.geolocation2 = this.details.locationName;
 
 
   }
+  onPageLoaded(){
+    setTimeout(function() {
+      document.getElementById("lowerDiv").style.display = "inline";
+
+    },600);
+
+  }
+
+  autocomplete(searchbar){
+    var me = this;
+    me.geolocationService.autoComplete();
+  }
+
   showlatlong(event) {
     var me = this;
     var geoCoords2 = {};
