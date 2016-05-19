@@ -27,6 +27,8 @@ export class GeolocationService {
     this.nav = nav;
     this.MainPage  = MainPage;
 
+    this.map = null;
+
     // this.getPlaces();
 
   }
@@ -73,35 +75,90 @@ export class GeolocationService {
 
     }
   }
-// getPlaces function Here
-getPlaces(gcrds){
+  // getPlaces function Here
+  getPlaces(pageDetails, callback){
+    console.log(pageDetails);
+    var me = this;
+    var loc = {lat: parseFloat(pageDetails.geoloc.lat), lng: parseFloat(pageDetails.geoloc.lng)};
 
-  console.log("Get Places Working");
-  console.log(document.getElementById('places_map'));
-  console.log(gcrds.lat);
-
-  // var map = new google.maps.Map(document.getElementById('places_map'), {
-  // center: {lat: -34.397, lng: 150.644},
-  // scrollwheel: false,
-  // zoom: 8
-  // });
-
-    // var pyrmont = {lat: gcrds.lat, lng: gcrds.lng };
-    var pyrmont = {lat: parseFloat(gcrds.lat), lng: parseFloat(gcrds.lng)};
-
-    map = new google.maps.Map(document.getElementById('places_map'), {
-      center: pyrmont,
+    me.map = new google.maps.Map(document.getElementById('map'), {
+      center: loc,
       zoom: 17
     });
 
-    // var service = new google.maps.places.PlacesService(map);
-    // service.nearbySearch({
-    //   location: pyrmont,
-    //   radius: 1000,
-    //   type: ['restaurant']
-    // }, processResults);
+    var type,keyword;
+
+    // if (pageDetails.placeType == 'restaurant') {
+      console.log('enter');
+      type = pageDetails.placeType;
+      keyword = pageDetails.cuisine;
+    // }
+
+    var service = new google.maps.places.PlacesService(map);
+    service.nearbySearch({
+      location: loc,
+      rankBy: google.maps.places.RankBy.DISTANCE,
+      type: [type],
+      keyword: [keyword]
+    }, callback);
+    console.log(service);
+
+  }
+  processResults(results, status, pagination) {
+    var me = this;
+    // console.log(me.map);
+    if (status !== google.maps.places.PlacesServiceStatus.OK) {
+      return;
+    } else {
+      console.log(results);
+      // createMarkers(results);
+      var bounds = new google.maps.LatLngBounds();
+      var placesList = document.getElementById('places');
+
+      var items = [];
+
+
+
+      // me.map.fitBounds(bounds);
+      var moreButton = document.getElementById('more');
+      //
+      // moreButton.disabled = false;
+
+
+      // moreButton.addEventListener('click', function() {
+        if (pagination.hasNextPage) {
+          callback(results)
+          console.log('pd');
+          // moreButton.disabled = true;
+          pagination.nextPage();
+          for (var i = 0; i < results.length; i++) {
+            items.push(results[i]);
+            placesList.innerHTML += '<button class="item" detail-push="" ion-item=""role="link"><ion-thumbnail item-left=""><img src="img/jeeps/sm_c_point_holy.jpg"></ion-thumbnail><div class="item-inner"><!--template bindings={}--><ion-label<h2>CHECK-POINT-HOLY</h2><h3>Gray</h3></ion-label></div><ion-button-effect></ion-button-effect (click)="alert("dfd")"></button>';
+
+            // bounds.extend(place.geometry.location);
+          }
+
+        }
+
+      // });
+    }
   }
 
+  setPlaces(pageDetails){
+    var items;
+
+    me.getPlaces(pageDetails, function(result,status, pagination){
+        items =  result;
+    });
+
+    return new Promise(function(resolve, reject) {
+      // Only `delay` is able to resolve or reject the promise
+      setTimeout(function() {
+        resolve(items); // After 3 seconds, resolve the promise with value 42
+      }, 2000);
+    });
+
+  }
 
 
   setLocationName(ctr){
@@ -184,6 +241,7 @@ getPlaces(gcrds){
 
       var autolocString = [];
       var autolocString2;
+      console.log(place);
 
       for (var i = 0; i < place.address_components.length; i++) {
 
@@ -193,6 +251,8 @@ getPlaces(gcrds){
         autolocString2 = autolocString.join(', ');
       }
       me.latlng.locationName = autolocString2;
+      console.log(me.latlng.locationName);
+      console.log(me.latlng.lat);
 
       if (ctr == 'landingpage') {
         me.nav.push(MainPage, { geoloc: me.latlng });
@@ -201,5 +261,12 @@ getPlaces(gcrds){
     });
 
 
+  }
+
+
+  getLatlng(){
+    var me = this;
+    console.log(me.latlng);
+    return me.latlng;
   }
 }

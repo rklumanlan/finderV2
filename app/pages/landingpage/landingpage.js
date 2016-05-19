@@ -42,7 +42,7 @@ export class LandingPage {
 
         (position) => {
             geoCoords.lat = position.coords.latitude;
-            geoCoords.long = position.coords.longitude;
+            geoCoords.lng = position.coords.longitude;
             // me.geoCoords = position.coords.latitude  + ',' + position.coords.longitude;
 
             var gCoords = position.coords.latitude  + ',' + position.coords.longitude;
@@ -51,7 +51,7 @@ export class LandingPage {
                 // Log the value once it is resolved
              me.geolocation = locName;
 
-             geoCoords.locName = locName;
+             geoCoords.locationName = locName;
 
                setTimeout(function() {
                  me.nav.push(MainPage, { geoloc: geoCoords });

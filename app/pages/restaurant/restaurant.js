@@ -29,10 +29,52 @@ export class RestaurantPage {
     this.details = navParams.get('geoloc');
     console.log(this.details);
 
+    // this.cuisine = 'any';
+    // this.placeType = 'restaurant';
+    // this.sort = 'PROMINENCE';
+
+    this.params = {};
+
+    this.placeType;
+
   }
 
   onPageLoaded(){
-    this.geolocationService.getPlaces(this.details);
+    console.log('loaded1');
+    var me = this;
+    me.params.geoloc = this.details;
+    me.params.placeType = 'restaurant';
+    me.params.cuisine = 'food';
+    me.params.sort = 'PROMINENCE';
+    me.geolocationService.setPlaces(me.params).then(function (res) {
+      console.log(res);
+    });
+    console.log('res');
+
+
+  }
+  loading(){
+
+  }
+  updatePlaceType(){
+    document.getElementById('places').innerHTML = '';
+    var me = this;
+    console.log(this.placeType);
+    me.params.geoloc = this.details;
+    me.params.placeType = this.placeType;
+    me.params.cuisine = this.cuisine;
+    me.params.sort = 'PROMINENCE';
+    me.geolocationService.setPlaces(me.params).then(function (res) {console.log(res);
+
+    });
+  }
+
+  updateCuisine(){
+
+  }
+
+  updateSort(){
+
   }
 
 

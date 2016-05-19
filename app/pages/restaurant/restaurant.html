@@ -20,40 +20,60 @@
 
 <ion-content padding class="restaurant">
   <div class="mainBackDiv">
-    <ion-row center class="upperDiv" id="drpdown">
-          <!-- Place Type options -->
-          <ion-col width-33>
-            <ion-label class="input_lbl">Place Type</ion-label>
-            <select class="drpdown">
-              <option selected>Restaurant</option>
-              <option>Coffee Shop</option>
-              <option>Fastfood</option>
-            </select>
-          </ion-col>
+    <ion-row class="upperDiv" id="drpdown">
 
-          <!-- Cuisine Type options -->
-          <ion-col width-33>
-            <ion-label class="input_lbl">Cuisine</ion-label>
-            <select class="drpdown">
-              <option selected>Filipino</option>
-              <option>Japanese</option>
-              <option>Chinese</option>
-            </select>
-          </ion-col>
+      <!-- <ion-col width-33> -->
+      <ion-item>
+          <ion-label class="input_lbl">Place Type</ion-label>
+          <ion-select id ='1' [ngModel]="placeType" (ngModelChange)="updatePlaceType($event)" class="drpdown">
+            <ion-option value="restaurant" checked="true">Restaurant</ion-option>
+            <ion-option value="cafe">Cafe</ion-option>
+          </ion-select>
+        </ion-item>
+      <!-- </ion-col> -->
+      <ion-item>
+      <!-- <ion-col width-33> -->
+        <ion-label id ='2' class="input_lbl">Cuisine</ion-label>
+        <ion-select  [(ngModel)]="cuisine"  class="drpdown">
+          <ion-option value="" checked="true">Any Cuisine</ion-option>
+          <ion-option value="African">African</ion-option>
+          <ion-option value="American">American</ion-option>
+          <ion-option value="Chinese">Chinese</ion-option>
+          <ion-option value="East European">East European</ion-option>
+          <ion-option value="Filipino">Filipino</ion-option>
+          <ion-option value="Indian">Indian</ion-option>
+          <ion-option value="Italian">Italian</ion-option>
+          <ion-option value="Japanese">Japanese</ion-option>
+          <ion-option value="Lebanese">Lebanese</ion-option>
+          <ion-option value="Mexican">Mexican</ion-option>
+          <ion-option value="Spanish">Spanish</ion-option>
+          <ion-option value="Thai">Thai</ion-option>
+          <ion-option value="Turkish">Turkish</ion-option>
+          <ion-option value="Vietnamese">Vietnamese</ion-option>
+        </ion-select>
 
-          <!-- Sort according to ... -->
-          <ion-col width-33>
-            <ion-label class="input_lbl">Sort</ion-label>
-            <select class="drpdown">
-              <option selected>Rating</option>
-              <option>Alphabetically</option>
-              <option>Distance</option>
-            </select>
-          </ion-col>
+      </ion-item>
+      <!-- </ion-col> -->
+
+      <!-- <ion-col width-33> -->
+      <ion-item>
+        <ion-label class="input_lbl">Sort</ion-label>
+        <ion-select  [(ngModel)]="sort" (ngModelChange)="updateSort($event)" class="drpdown">
+          <ion-option value="Prominence" checked="true">Prominence</ion-option>
+          <ion-option value="Alphabetically">Alphabetically</ion-option>
+          <ion-option value="Rating">Rating</ion-option>
+          <ion-option value="Distance">Distance</ion-option>
+        </ion-select>
+      </ion-item>
+      <!-- </ion-col> -->
+
     </ion-row>
 
 <!--Places results  -->
-    <div id="places_map"></div>
+    <div id="map" style="height: 100%;display:none"></div>
+    <div id="right-panel">
+      <ion-list id="places"></ion-list>
+    </div>
   </div>
 
 </ion-content>
