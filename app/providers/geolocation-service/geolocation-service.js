@@ -87,75 +87,50 @@ export class GeolocationService {
     });
 
     var type,keyword;
+    console.log('enter');
+    type = pageDetails.placeType;
+    keyword = pageDetails.cuisine;
 
-    // if (pageDetails.placeType == 'restaurant') {
-      console.log('enter');
-      type = pageDetails.placeType;
-      keyword = pageDetails.cuisine;
-    // }
-
-    var service = new google.maps.places.PlacesService(map);
-    service.nearbySearch({
+    var distance = new google.maps.places.PlacesService(map);
+    distance.nearbySearch({
       location: loc,
       rankBy: google.maps.places.RankBy.DISTANCE,
       type: [type],
       keyword: [keyword]
     }, callback);
-    console.log(service);
-
-  }
-  processResults(results, status, pagination) {
-    var me = this;
-    // console.log(me.map);
-    if (status !== google.maps.places.PlacesServiceStatus.OK) {
-      return;
-    } else {
-      console.log(results);
-      // createMarkers(results);
-      var bounds = new google.maps.LatLngBounds();
-      var placesList = document.getElementById('places');
-
-      var items = [];
+    console.log('distance');
 
 
 
-      // me.map.fitBounds(bounds);
-      var moreButton = document.getElementById('more');
-      //
-      // moreButton.disabled = false;
-
-
-      // moreButton.addEventListener('click', function() {
-        if (pagination.hasNextPage) {
-          callback(results)
-          console.log('pd');
-          // moreButton.disabled = true;
-          pagination.nextPage();
-          for (var i = 0; i < results.length; i++) {
-            items.push(results[i]);
-            placesList.innerHTML += '<button class="item" detail-push="" ion-item=""role="link"><ion-thumbnail item-left=""><img src="img/jeeps/sm_c_point_holy.jpg"></ion-thumbnail><div class="item-inner"><!--template bindings={}--><ion-label<h2>CHECK-POINT-HOLY</h2><h3>Gray</h3></ion-label></div><ion-button-effect></ion-button-effect (click)="alert("dfd")"></button>';
-
-            // bounds.extend(place.geometry.location);
-          }
-
-        }
-
-      // });
-    }
   }
 
   setPlaces(pageDetails){
-    var items;
+    var me = this;
+    var items = [];
+    var a = 1;
 
     me.getPlaces(pageDetails, function(result,status, pagination){
-        items =  result;
+        // items =  result;
+        // if (status === google.maps.places.PlacesServiceStatus.OK) {
+          // if (pagination.hasNextPage) {
+            console.log(a);
+            a++;
+            pagination.nextPage();
+            for (var m = 0; m < result.length; m++) {
+              items.push(result[m]);
+            }
+
+          // }
+        // }
+
     });
+
 
     return new Promise(function(resolve, reject) {
       // Only `delay` is able to resolve or reject the promise
       setTimeout(function() {
         resolve(items); // After 3 seconds, resolve the promise with value 42
-      }, 2000);
+      }, 6000);
     });
 
   }

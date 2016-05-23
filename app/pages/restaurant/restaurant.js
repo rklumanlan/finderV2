@@ -2,7 +2,7 @@ import {Page, NavController, NavParams} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 // import {DataService} from '../../../services/data';
-// import {LoadingModal} from '../../components/loading-modal/loading-modal';
+import {LoadingModal} from '../../components/loading-modal/loading-modal';
 
 /*
   Generated class for the RestaurantPage page.
@@ -12,7 +12,7 @@ import {GeolocationService} from '../../providers/geolocation-service/geolocatio
 */
 @Page({
   templateUrl: 'build/pages/restaurant/restaurant.html',
-  // directives: [LoadingModal],
+  directives: [LoadingModal],
    providers: [GeolocationService]
 })
 export class RestaurantPage {
@@ -45,9 +45,10 @@ export class RestaurantPage {
     me.params.geoloc = this.details;
     me.params.placeType = 'restaurant';
     me.params.cuisine = 'food';
-    me.params.sort = 'PROMINENCE';
+    me.params.sort = 'DISTANCE';
     me.geolocationService.setPlaces(me.params).then(function (res) {
       console.log(res);
+      me.items = res;
     });
     console.log('res');
 

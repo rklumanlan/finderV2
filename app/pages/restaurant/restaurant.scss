@@ -28,8 +28,9 @@ ion-row.enter {
     height: 45px;
 }
 
-.mainBackDiv{
+.mainBackDivRes{
   //position: absolute;
+  z-index: 0;
   overflow: auto;
   top: 0;
   bottom: 0;
