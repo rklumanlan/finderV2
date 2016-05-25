@@ -35,7 +35,11 @@ export class RestaurantPage {
 
     this.params = {};
 
-    this.placeType;
+    this.placeType = 'restaurant';
+    this.sort = 'Distance';
+    this.cuisine = 'food';
+
+    this.items = null;
 
   }
 
@@ -48,34 +52,78 @@ export class RestaurantPage {
     me.params.sort = 'DISTANCE';
     me.geolocationService.setPlaces(me.params).then(function (res) {
       console.log(res);
-      me.items = res;
+
+      setTimeout(function() {
+        console.log('res');
+        console.log(res);
+
+        me.items = res;
+      }, 8000);
+
     });
-    console.log('res');
 
 
   }
-  loading(){
 
-  }
   updatePlaceType(){
-    document.getElementById('places').innerHTML = '';
     var me = this;
-    console.log(this.placeType);
     me.params.geoloc = this.details;
-    me.params.placeType = this.placeType;
-    me.params.cuisine = this.cuisine;
-    me.params.sort = 'PROMINENCE';
-    me.geolocationService.setPlaces(me.params).then(function (res) {console.log(res);
-
+    me.params.placeType = me.placeType;
+    if (me.placeType == 'cafe') {
+      me.params.cuisine = '';
+      document.getElementById('cuisine').getElementsByTagName('button')[0].disabled=true;
+    }
+    else {
+      me.params.cuisine = me.cuisine;
+      document.getElementById('cuisine').getElementsByTagName('button')[0].disabled=false;
+    }
+    me.geolocationService.setPlaces(me.params).then(function (res) {
+      console.log(res);
+      me.items = res;
     });
   }
 
   updateCuisine(){
+    var me = this;
+    me.params.geoloc = this.details;
+    me.params.placeType = me.placeType;
+    me.params.cuisine = me.cuisine;
+    me.geolocationService.setPlaces(me.params).then(function (res) {
+      console.log(res);
+      me.items = res;
+    });
 
   }
 
   updateSort(){
+    var me = this;
 
+    if (me.sort == 'Alphabetically') {
+      me.items.sort(function(a,b) {
+        if(a.name < b.name) return -1;
+        if(a.name > b.name) return 1;
+        return 0;
+      });
+      console.log('enter alpha');
+
+    }
+    else if (me.sort== 'Rating') {
+      me.items.sort(function(a,b) {
+        a = a.rating;
+        b = b.rating;
+        return a < b ? 1 : (a > b ? -1 : 0);
+      });
+      console.log('enter rating');
+    }
+    else {
+      console.log('enter distance');
+      me.items.sort(function(a,b) {
+        a = a.distance;
+        b = b.distance;
+        return a < b ? -1 : (a > b ? 1 : 0);
+      });
+    }
+    console.log(me.items);
   }
 
 

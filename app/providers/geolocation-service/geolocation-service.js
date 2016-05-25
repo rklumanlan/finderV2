@@ -47,7 +47,7 @@ export class GeolocationService {
 
             let script = document.createElement("script");
             script.id = "geoLocation";
-            script.src = 'https://maps.googleapis.com/maps/api/js?key='+me.apiKey+'&libraries=places';
+            script.src = 'https://maps.googleapis.com/maps/api/js?key='+me.apiKey+'&libraries=places,geometry';
 
 
             document.body.appendChild(script);
@@ -108,8 +108,10 @@ export class GeolocationService {
     var me = this;
     var items = [];
     var a = 1;
+    var p1 = new google.maps.LatLng(pageDetails.geoloc.lat, pageDetails.geoloc.lng)
 
     me.getPlaces(pageDetails, function(result,status, pagination){
+      console.log(pageDetails.geoloc.lat);
         // items =  result;
         // if (status === google.maps.places.PlacesServiceStatus.OK) {
           // if (pagination.hasNextPage) {
@@ -117,7 +119,11 @@ export class GeolocationService {
             a++;
             pagination.nextPage();
             for (var m = 0; m < result.length; m++) {
+              result[m]['distance']= (google.maps.geometry.spherical.computeDistanceBetween(p1, result[m].geometry.location) / 1000).toFixed(2)+" km";
               items.push(result[m]);
+              if (result[m].rating===undefined) {
+                result[m].rating = 0;
+              }
             }
 
           // }
@@ -128,9 +134,10 @@ export class GeolocationService {
 
     return new Promise(function(resolve, reject) {
       // Only `delay` is able to resolve or reject the promise
-      setTimeout(function() {
+      // setTimeout(function() {
+        console.log(items);
         resolve(items); // After 3 seconds, resolve the promise with value 42
-      }, 6000);
+      // }, 0);
     });
 
   }

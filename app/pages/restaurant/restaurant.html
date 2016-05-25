@@ -17,58 +17,64 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-navbar>
+<ion-toolbar position="top">
+  <ion-row class="upperDiv" id="drpdown">
 
-<ion-content padding class="restaurant">
-  <loading-modal id="loading" style="z-index:100;"></loading-modal>
-  <div class="mainBackDivRes">
 
-    <ion-row class="upperDiv" id="drpdown">
-
-      <!-- <ion-col width-33> -->
-      <ion-item>
-          <ion-label class="input_lbl">Place Type</ion-label>
-          <ion-select id ='1' [ngModel]="placeType" (ngModelChange)="updatePlaceType($event)" class="drpdown">
-            <ion-option value="restaurant" checked="true">Restaurant</ion-option>
-            <ion-option value="cafe">Cafe</ion-option>
-          </ion-select>
-        </ion-item>
-      <!-- </ion-col> -->
-      <ion-item>
-      <!-- <ion-col width-33> -->
-        <ion-label id ='2' class="input_lbl">Cuisine</ion-label>
-        <ion-select  [(ngModel)]="cuisine"  class="drpdown">
-          <ion-option value="" checked="true">Any Cuisine</ion-option>
-          <ion-option value="African">African</ion-option>
-          <ion-option value="American">American</ion-option>
-          <ion-option value="Chinese">Chinese</ion-option>
-          <ion-option value="East European">East European</ion-option>
-          <ion-option value="Filipino">Filipino</ion-option>
-          <ion-option value="Indian">Indian</ion-option>
-          <ion-option value="Italian">Italian</ion-option>
-          <ion-option value="Japanese">Japanese</ion-option>
-          <ion-option value="Lebanese">Lebanese</ion-option>
-          <ion-option value="Mexican">Mexican</ion-option>
-          <ion-option value="Spanish">Spanish</ion-option>
-          <ion-option value="Thai">Thai</ion-option>
-          <ion-option value="Turkish">Turkish</ion-option>
-          <ion-option value="Vietnamese">Vietnamese</ion-option>
-        </ion-select>
-
-      </ion-item>
-      <!-- </ion-col> -->
-
-      <!-- <ion-col width-33> -->
-      <ion-item>
-        <ion-label class="input_lbl">Sort</ion-label>
-        <ion-select  [(ngModel)]="sort" (ngModelChange)="updateSort($event)" class="drpdown">
-          <ion-option value="Distance" checked="true">Distance</ion-option>
-          <ion-option value="Alphabetically">Alphabetically</ion-option>
-          <ion-option value="Rating">Rating</ion-option>
+    <ion-item>
+        <ion-label class="input_lbl">Place Type</ion-label>
+        <ion-select id ='1' [(ngModel)]="placeType" (ngModelChange)="updatePlaceType($event)" class="drpdown">
+          <ion-option value="restaurant" >Restaurant</ion-option>
+          <ion-option value="cafe">Cafe</ion-option>
         </ion-select>
       </ion-item>
-      <!-- </ion-col> -->
 
-    </ion-row>
+    <ion-item>
+
+      <ion-label id ='2' class="input_lbl">Cuisine</ion-label>
+      <ion-select id="cuisine" [(ngModel)]="cuisine"  (ngModelChange)="updateCuisine($event)" class="drpdown">
+        <ion-option value="food" >Any Cuisine</ion-option>
+        <ion-option value="African">African</ion-option>
+        <ion-option value="American">American</ion-option>
+        <ion-option value="Chinese">Chinese</ion-option>
+        <ion-option value="East European">East European</ion-option>
+        <ion-option value="Filipino">Filipino</ion-option>
+        <ion-option value="Indian">Indian</ion-option>
+        <ion-option value="Italian">Italian</ion-option>
+        <ion-option value="Japanese">Japanese</ion-option>
+        <ion-option value="Lebanese">Lebanese</ion-option>
+        <ion-option value="Mexican">Mexican</ion-option>
+        <ion-option value="Spanish">Spanish</ion-option>
+        <ion-option value="Thai">Thai</ion-option>
+        <ion-option value="Turkish">Turkish</ion-option>
+        <ion-option value="Vietnamese">Vietnamese</ion-option>
+      </ion-select>
+
+    </ion-item>
+
+
+
+    <ion-item>
+      <ion-label class="input_lbl">Sort</ion-label>
+      <ion-select [(ngModel)]="sort" (ngModelChange)="updateSort($event)" class="drpdown">
+        <ion-option value="Distance">Distance</ion-option>
+        <ion-option value="Alphabetically">Alphabetically</ion-option>
+        <ion-option value="Rating">Rating</ion-option>
+      </ion-select>
+    </ion-item>
+
+
+  </ion-row>
+
+</ion-toolbar>
+
+<ion-content >
+  <loading-modal id="loading" ></loading-modal>
+
+  <div class="bg" >
+
+
+
 
 <!--Places results  -->
 
@@ -80,6 +86,10 @@
     <ion-list>
       <button ion-item *ngFor="#item of items" [navPush]="[JeepDetailsPage, {jeep: cjeep}]">
         <h2>{{item.name}}</h2>
+        <h4>{{item.rating}}</h4>
+        <h4>{{item.distance}}</h4>
+        <h4>{{item.types[0]}} {{item.types[1]}}</h4>
+        <h4>{{item.vicinity}}</h4>
       </button>
 
 
