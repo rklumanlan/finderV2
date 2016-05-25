@@ -27,11 +27,6 @@ export class RestaurantPage {
     this.geolocationService = geolocationService;
 
     this.details = navParams.get('geoloc');
-    console.log(this.details);
-
-    // this.cuisine = 'any';
-    // this.placeType = 'restaurant';
-    // this.sort = 'PROMINENCE';
 
     this.params = {};
 
@@ -44,25 +39,15 @@ export class RestaurantPage {
   }
 
   onPageLoaded(){
-    console.log('loaded1');
     var me = this;
     me.params.geoloc = this.details;
     me.params.placeType = 'restaurant';
     me.params.cuisine = 'food';
-    me.params.sort = 'DISTANCE';
     me.geolocationService.setPlaces(me.params).then(function (res) {
-      console.log(res);
-
       setTimeout(function() {
-        console.log('res');
-        console.log(res);
-
         me.items = res;
       }, 8000);
-
     });
-
-
   }
 
   updatePlaceType(){
@@ -78,8 +63,10 @@ export class RestaurantPage {
       document.getElementById('cuisine').getElementsByTagName('button')[0].disabled=false;
     }
     me.geolocationService.setPlaces(me.params).then(function (res) {
-      console.log(res);
-      me.items = res;
+      setTimeout(function() {
+        me.items = res;
+        me.sorting(me.sort);
+      }, 1000);
     });
   }
 
@@ -89,42 +76,41 @@ export class RestaurantPage {
     me.params.placeType = me.placeType;
     me.params.cuisine = me.cuisine;
     me.geolocationService.setPlaces(me.params).then(function (res) {
-      console.log(res);
-      me.items = res;
+      setTimeout(function() {
+        me.items = res;
+        me.sorting(me.sort);
+      }, 1000);
     });
-
   }
 
   updateSort(){
     var me = this;
+    me.sorting(me.sort);
+  }
 
-    if (me.sort == 'Alphabetically') {
+  sorting(sortVal){
+    var me = this;
+    if (sortVal == 'Alphabetically') {
       me.items.sort(function(a,b) {
         if(a.name < b.name) return -1;
         if(a.name > b.name) return 1;
         return 0;
       });
-      console.log('enter alpha');
-
     }
-    else if (me.sort== 'Rating') {
+    else if (sortVal== 'Rating') {
       me.items.sort(function(a,b) {
         a = a.rating;
         b = b.rating;
         return a < b ? 1 : (a > b ? -1 : 0);
       });
-      console.log('enter rating');
     }
     else {
-      console.log('enter distance');
       me.items.sort(function(a,b) {
         a = a.distance;
         b = b.distance;
         return a < b ? -1 : (a > b ? 1 : 0);
       });
     }
-    console.log(me.items);
   }
-
-
+  
 }

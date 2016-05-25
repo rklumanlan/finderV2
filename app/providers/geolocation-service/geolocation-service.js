@@ -117,6 +117,7 @@ export class GeolocationService {
           // if (pagination.hasNextPage) {
             console.log(a);
             a++;
+            console.log(result);
             pagination.nextPage();
             for (var m = 0; m < result.length; m++) {
               result[m]['distance']= (google.maps.geometry.spherical.computeDistanceBetween(p1, result[m].geometry.location) / 1000).toFixed(2)+" km";
