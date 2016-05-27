@@ -193,4 +193,47 @@ getPlaces(gcrds){
 
 
   }
+
+  // Police Station Map
+  getPolice(poldetail){
+
+    console.log("Get Police Lat Working");
+    // console.log(document.getElementById('police_map'));
+    console.log(poldetail.lat, poldetail.lng);
+
+    var mapcoords = {lat: parseFloat(poldetail.lat), lng: parseFloat(poldetail.lng)};
+
+    map = new google.maps.Map(document.getElementById('police_map'), {
+      center: mapcoords,
+      zoom: 15
+      });
+
+    var marker = new google.maps.Marker({
+      position: mapcoords,
+      map: map,
+      title: 'Hello World!'
+    });
+    }
+
+  // Police Station Map
+  getHospital(hospdetail){
+
+    console.log("Get Hospital Lat Working");
+    // console.log(document.getElementById('police_map'));
+    console.log(hospdetail.lat, hospdetail.lng);
+
+    var mapcoords = {lat: parseFloat(hospdetail.lat), lng: parseFloat(hospdetail.lng)};
+
+    map = new google.maps.Map(document.getElementById('hosp_map'), {
+      center: mapcoords,
+      zoom: 15
+      });
+
+    var marker = new google.maps.Marker({
+      position: mapcoords,
+      map: map,
+      title: 'Hello World!'
+    });
+    }
+
 }

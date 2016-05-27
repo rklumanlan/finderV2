@@ -163,9 +163,9 @@ p {
   height:80%;
   padding: 0%;
 }
-.toolbar-background {
-    border-color: #FFFFFF;
-    background-image: $bg-pattern;;
+ion-toolbar.geoloc_toolbar .toolbar-background {
+    border-color: #FFFFFF !important;
+    background-image: $bg-pattern;
 }
 
 div.geoloc_input{

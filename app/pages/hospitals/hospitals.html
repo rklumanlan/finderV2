@@ -18,7 +18,22 @@
   </ion-toolbar>
 </ion-navbar>
 
-<ion-content padding class="hospitals">
+<ion-toolbar>
+  <ion-title>Hospitals</ion-title>
+</ion-toolbar>
+<ion-content class="hospitals">
+
   <div class="mainBackDiv">
+    <ion-item-group>
+      <button ion-item detail-push *ngFor="#hospitaldetail of hospitaldetails" [navPush]="[HospitalDetailsPage, { hospdetail: hospitaldetail}]">
+        <h2 class="pol_name">{{hospitaldetail.name}}</h2>
+        <span class="pol_address">{{hospitaldetail.address}}</span><br/>
+        <ion-icon name="mail" class="gray-icon"></ion-icon><span class="pol_email">{{hospitaldetail.email}}</span><br/>
+        <ul class="pol_contacts">
+          <li><ion-icon name="call" class="gray-icon"></ion-icon><span>{{hospitaldetail.landline}}</span></li>
+          <li><ion-icon name="pin" class="gray-icon"></ion-icon></li>
+        </ul>
+      </button>
+    </ion-item-group>
   </div>
 </ion-content>

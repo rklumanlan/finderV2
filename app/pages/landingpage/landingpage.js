@@ -55,7 +55,7 @@ export class LandingPage {
 
                setTimeout(function() {
                  me.nav.push(MainPage, { geoloc: geoCoords });
-               }, 6000);
+               }, 5000);
                console.log(me.geolocation);
               });
         },
