@@ -76,6 +76,7 @@
       <button ion-item *ngFor="#item of items" [navPush]="[JeepDetailsPage, {jeep: cjeep}]">
         <h2>{{item.name}}</h2>
         <h4 class="star"></h4>
+        <h4 class="operatingHR"></h4>
         <h4>{{item.distance}}</h4>
         <h4>{{item.types[0]}} {{item.types[1]}}</h4>
         <h4>{{item.vicinity}}</h4>
