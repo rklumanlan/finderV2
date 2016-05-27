@@ -1,25 +1,65 @@
 .landingpage {
 
 }
-div.ph_map{
-	position:absolute;
-	z-index:1;
-	// background-image: $ph_map;
-	// width: 95%;
-  // height: 90vh;
-  // background-size: 93%;
-  // background-repeat: no-repeat;
-}
+
+
+// div.ph_map{
+// 	position:absolute;
+// 	z-index:1;
+// 	// background-image: $ph_map;
+// 	// width: 95%;
+//   // height: 90vh;
+//   // background-size: 93%;
+//   // background-repeat: no-repeat;
+// }
 div.pin_icon {
 		z-index:10;
     position: absolute;
-    width: 95%;
-    height: 40%;
+    height: 60%;
+		width: 100%;
+		display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+   -webkit-align-items: center;
+   align-items: center;
+   -webkit-justify-content: center;
+   justify-content: center;
+
+	 padding: 0% 10%;
+
+
+  background-image: $map_pin;
+ 	background-repeat: no-repeat;
+ 	background-repeat:no-repeat;
+ 	background-position: center center;
+ 	-webkit-background-size: 40%;
+ 	-moz-background-size: 40%;
+ 	-o-background-size: 40%;
+ 	background-size: 40%;
 }
-img.pin {
-    width: 40%;
-    margin: 30% 30% 0% 30%;
-    position: absolute;
+
+div#map_ph {
+	z-index: 100;
+  display: -webkit-flexbox;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  background-image: $ph_map;
+	background-repeat: no-repeat;
+	background-repeat:no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+	-webkit-background-size: contain;
+	-moz-background-size: contain;
+	-o-background-size: contain;
+	background-size: contain;
 }
 .geo_inpt{
 	padding-left: 10px;
@@ -30,7 +70,7 @@ div.getgeoloc {
 	z-index:100;
     display: inline-flex;
     width: 100%;
-		margin-top: 80%;
+		// margin-top: 80%;
 		padding: 0% 10%;
 }
 div.geoloc_inputlp{
@@ -48,9 +88,12 @@ div.geoloc_btnlp{
   border: 1px solid #9FCCFF;
   background: #fff;
 }
-div.geoloc_btnlp button.disable-hover.button.button-clear.button-block.button-icon-only {
-    margin: 3% 0%;
+
+div.geoloc_btnlp button {
+    height:100%;
+		margin: 0px;
 }
+
 ion-input#geolocation input.text-input {
     margin: 10px 5px !important;
 }

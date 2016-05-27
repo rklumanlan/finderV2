@@ -5,55 +5,85 @@
   Ionic pages and navigation.
 -->
 <ion-navbar *navbar primary>
-  <ion-toolbar class="toolbar">
-    <ion-title class="title_left">Restaurants</ion-title>
-    <ion-buttons end>
-      <button>
-        <ion-icon name="search"></ion-icon>
-      </button>
-      <button>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-    </ion-buttons>
+  <ion-toolbar >
+    <ion-title >Restaurants</ion-title>
   </ion-toolbar>
 </ion-navbar>
+<ion-toolbar position="top">
+  <ion-row class="upperDiv" id="drpdown">
 
-<ion-content padding class="restaurant">
-  <div class="mainBackDiv">
-    <ion-row center class="upperDiv" id="drpdown">
-          <!-- Place Type options -->
-          <ion-col width-33>
-            <ion-label class="input_lbl">Place Type</ion-label>
-            <select class="drpdown">
-              <option selected>Restaurant</option>
-              <option>Coffee Shop</option>
-              <option>Fastfood</option>
-            </select>
-          </ion-col>
 
-          <!-- Cuisine Type options -->
-          <ion-col width-33>
-            <ion-label class="input_lbl">Cuisine</ion-label>
-            <select class="drpdown">
-              <option selected>Filipino</option>
-              <option>Japanese</option>
-              <option>Chinese</option>
-            </select>
-          </ion-col>
+    <ion-item>
+        <ion-label class="input_lbl">Place Type</ion-label>
+        <ion-select id ='1' [(ngModel)]="placeType" (ngModelChange)="updatePlaceType($event)" class="drpdown">
+          <ion-option value="restaurant" >Restaurant</ion-option>
+          <ion-option value="cafe">Cafe</ion-option>
+        </ion-select>
+      </ion-item>
 
-          <!-- Sort according to ... -->
-          <ion-col width-33>
-            <ion-label class="input_lbl">Sort</ion-label>
-            <select class="drpdown">
-              <option selected>Rating</option>
-              <option>Alphabetically</option>
-              <option>Distance</option>
-            </select>
-          </ion-col>
-    </ion-row>
+    <ion-item>
+
+      <ion-label id ='2' class="input_lbl">Cuisine</ion-label>
+      <ion-select id="cuisine" [(ngModel)]="cuisine"  (ngModelChange)="updateCuisine($event)" class="drpdown">
+        <ion-option value="food" >Any Cuisine</ion-option>
+        <ion-option value="American">American</ion-option>
+        <ion-option value="Chinese">Chinese</ion-option>
+        <ion-option value="Filipino">Filipino</ion-option>
+        <ion-option value="Indian">Indian</ion-option>
+        <ion-option value="Italian">Italian</ion-option>
+        <ion-option value="Japanese">Japanese</ion-option>
+        <ion-option value="Lebanese">Lebanese</ion-option>
+        <ion-option value="Mexican">Mexican</ion-option>
+        <ion-option value="Spanish">Spanish</ion-option>
+        <ion-option value="Thai">Thai</ion-option>
+        <ion-option value="Vietnamese">Vietnamese</ion-option>
+      </ion-select>
+
+    </ion-item>
+
+
+
+    <ion-item>
+      <ion-label class="input_lbl">Sort</ion-label>
+      <ion-select [(ngModel)]="sort" (ngModelChange)="updateSort($event)" class="drpdown">
+        <ion-option value="Distance">Distance</ion-option>
+        <ion-option value="Alphabetically">Alphabetically</ion-option>
+        <ion-option value="Rating">Rating</ion-option>
+      </ion-select>
+    </ion-item>
+
+
+  </ion-row>
+
+</ion-toolbar>
+
+<ion-content >
+  <loading-modal id="loading" ></loading-modal>
+
+  <div class="bg" >
+
+
+
 
 <!--Places results  -->
-    <div id="places_map"></div>
+
+
+    <div id="map" style="height: 100%;display:none"></div>
+    <div id="right-panel">
+      <ion-list id="places"></ion-list>
+    </div>
+    <ion-list>
+      <button ion-item *ngFor="#item of items" [navPush]="[JeepDetailsPage, {jeep: cjeep}]">
+        <h2>{{item.name}}</h2>
+        <h4 class="star"></h4>
+        <h4 class="operatingHR"></h4>
+        <h4>{{item.distance}}</h4>
+        <h4>{{item.types[0]}} {{item.types[1]}}</h4>
+        <h4>{{item.vicinity}}</h4>
+      </button>
+
+
+    </ion-list>
   </div>
 
 </ion-content>
