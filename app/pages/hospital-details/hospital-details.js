@@ -2,6 +2,9 @@ import {Page, NavParams, Storage, SqlStorage, IonicApp, NavController} from 'ion
 import {DataService} from '../../services/data';
 import {HospitalsPage} from '../hospitals/hospitals';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
+
+
+import {LoadingModal} from '../../components/loading-modal/loading-modal';
 /*
   Generated class for the HospitalDetailsPage page.
 
@@ -10,6 +13,7 @@ import {GeolocationService} from '../../providers/geolocation-service/geolocatio
 */
 @Page({
   templateUrl: 'build/pages/hospital-details/hospital-details.html',
+  directives: [LoadingModal],
   providers: [GeolocationService]
 })
 export class HospitalDetailsPage {
@@ -27,7 +31,7 @@ export class HospitalDetailsPage {
     this.hospdetail = this.navParams.get('hospdetail');
   }
 
-  onPageLoaded(){
-    this.geolocationService.getHospital(this.hospdetail);
+  onPageDidEnter(){
+    this.geolocationService.getPolHosp(this.hospdetail,'hosp');
   }
 }

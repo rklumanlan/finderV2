@@ -69,9 +69,6 @@
 
 
     <div id="map" style="height: 100%;display:none"></div>
-    <div id="right-panel">
-      <ion-list id="places"></ion-list>
-    </div>
     <ion-list>
       <button ion-item *ngFor="#item of items" [navPush]="[JeepDetailsPage, {jeep: cjeep}]">
         <h2>{{item.name}}</h2>
