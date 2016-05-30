@@ -27,6 +27,8 @@ export class GeolocationService {
     this.nav = nav;
     this.MainPage  = MainPage;
 
+    this.map = null;
+
     // this.getPlaces();
 
   }
@@ -45,7 +47,7 @@ export class GeolocationService {
 
             let script = document.createElement("script");
             script.id = "geoLocation";
-            script.src = 'https://maps.googleapis.com/maps/api/js?key='+me.apiKey+'&libraries=places';
+            script.src = 'https://maps.googleapis.com/maps/api/js?key='+me.apiKey+'&libraries=places,geometry';
 
 
             document.body.appendChild(script);
@@ -73,35 +75,73 @@ export class GeolocationService {
 
     }
   }
-// getPlaces function Here
-getPlaces(gcrds){
+  // getPlaces function Here
+  getPlaces(pageDetails, callback){
+    console.log(pageDetails);
+    var me = this;
+    var loc = {lat: parseFloat(pageDetails.geoloc.lat), lng: parseFloat(pageDetails.geoloc.lng)};
 
-  console.log("Get Places Working");
-  console.log(document.getElementById('places_map'));
-  console.log(gcrds.lat);
-
-  // var map = new google.maps.Map(document.getElementById('places_map'), {
-  // center: {lat: -34.397, lng: 150.644},
-  // scrollwheel: false,
-  // zoom: 8
-  // });
-
-    // var pyrmont = {lat: gcrds.lat, lng: gcrds.lng };
-    var pyrmont = {lat: parseFloat(gcrds.lat), lng: parseFloat(gcrds.lng)};
-
-    map = new google.maps.Map(document.getElementById('places_map'), {
-      center: pyrmont,
+    me.map = new google.maps.Map(document.getElementById('map'), {
+      center: loc,
       zoom: 17
     });
 
-    // var service = new google.maps.places.PlacesService(map);
-    // service.nearbySearch({
-    //   location: pyrmont,
-    //   radius: 1000,
-    //   type: ['restaurant']
-    // }, processResults);
+    var type,keyword;
+    console.log('enter');
+    type = pageDetails.placeType;
+    keyword = pageDetails.cuisine;
+
+    var distance = new google.maps.places.PlacesService(map);
+    distance.nearbySearch({
+      location: loc,
+      rankBy: google.maps.places.RankBy.DISTANCE,
+      type: [type],
+      keyword: [keyword]
+    }, callback);
+    console.log('distance');
+
+
+
   }
 
+  setPlaces(pageDetails){
+    var me = this;
+    var items = [];
+    var a = 1;
+    var p1 = new google.maps.LatLng(pageDetails.geoloc.lat, pageDetails.geoloc.lng)
+
+    me.getPlaces(pageDetails, function(result,status, pagination){
+      console.log(pageDetails.geoloc.lat);
+        // items =  result;
+        // if (status === google.maps.places.PlacesServiceStatus.OK) {
+          // if (pagination.hasNextPage) {
+            console.log(a);
+            a++;
+            console.log(result);
+            pagination.nextPage();
+            for (var m = 0; m < result.length; m++) {
+              result[m]['distance']= (google.maps.geometry.spherical.computeDistanceBetween(p1, result[m].geometry.location) / 1000).toFixed(2)+" km";
+              items.push(result[m]);
+              if (result[m].rating===undefined) {
+                result[m].rating = 0;
+              }
+            }
+
+          // }
+        // }
+
+    });
+
+
+    return new Promise(function(resolve, reject) {
+      // Only `delay` is able to resolve or reject the promise
+      // setTimeout(function() {
+        console.log(items);
+        resolve(items); // After 3 seconds, resolve the promise with value 42
+      // }, 0);
+    });
+
+  }
 
 
   setLocationName(ctr){
@@ -159,13 +199,22 @@ getPlaces(gcrds){
       });
   }
 
-  autoComplete(){
+  autoComplete(ctr){
     console.log('lll');
     var me = this;
 
     // console.log(document.getElementById('geo'));
     // console.log(new google.maps.places);
-    var input = document.getElementById('geolocation').getElementsByTagName('input')[0];
+    var input;
+    if (ctr =='landingpage') {
+      console.log('land');
+      input = document.getElementById('geolocation').getElementsByTagName('input')[0];
+    }
+    else {
+      console.log('main');
+      input = document.getElementById('geolocation2').getElementsByTagName('input')[0];
+    }
+
     // console.log(new google.maps.places.Autocomplete(document.getElementById('geo')));
     var autocomplete = new google.maps.places.Autocomplete(input);
     autocomplete.addListener('place_changed', function() {
@@ -175,6 +224,7 @@ getPlaces(gcrds){
 
       var autolocString = [];
       var autolocString2;
+      console.log(place);
 
       for (var i = 0; i < place.address_components.length; i++) {
 
@@ -184,13 +234,66 @@ getPlaces(gcrds){
         autolocString2 = autolocString.join(', ');
       }
       me.latlng.locationName = autolocString2;
-      // setTimeout(function() {
-        me.nav.push(MainPage, { geoloc: me.latlng });
+      console.log(me.latlng.locationName);
+      console.log(me.latlng.lat);
 
-      // }, 2000);
+      if (ctr == 'landingpage') {
+        me.nav.push(MainPage, { geoloc: me.latlng });
+      }
 
     });
 
 
   }
+
+
+  // Police Station Map
+  getPolice(poldetail){
+
+    console.log("Get Police Lat Working");
+    // console.log(document.getElementById('police_map'));
+    console.log(poldetail.lat, poldetail.lng);
+
+    var mapcoords = {lat: parseFloat(poldetail.lat), lng: parseFloat(poldetail.lng)};
+
+    map = new google.maps.Map(document.getElementById('police_map'), {
+      center: mapcoords,
+      zoom: 15
+      });
+
+    var marker = new google.maps.Marker({
+      position: mapcoords,
+      map: map,
+      title: 'Hello World!'
+    });
+    }
+
+  // Police Station Map
+  getHospital(hospdetail){
+
+    console.log("Get Hospital Lat Working");
+    // console.log(document.getElementById('police_map'));
+    console.log(hospdetail.lat, hospdetail.lng);
+
+    var mapcoords = {lat: parseFloat(hospdetail.lat), lng: parseFloat(hospdetail.lng)};
+
+    map = new google.maps.Map(document.getElementById('hosp_map'), {
+      center: mapcoords,
+      zoom: 15
+      });
+
+    var marker = new google.maps.Marker({
+      position: mapcoords,
+      map: map,
+      title: 'Hello World!'
+    });
+    }
+
+
+  getLatlng(){
+    var me = this;
+    console.log(me.latlng);
+    return me.latlng;
+  }
+
 }

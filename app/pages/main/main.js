@@ -44,10 +44,23 @@ export class MainPage{
     this.details = navParams.get('geoloc');
     console.log(this.details);
 
-    this.geolocation2 = this.details.locName;
+    this.geolocation2 = this.details.locationName;
 
 
   }
+  onPageLoaded(){
+    setTimeout(function() {
+      document.getElementById("lowerDiv").style.display = "inline";
+
+    },600);
+
+  }
+
+  autocomplete(searchbar){
+    var me = this;
+    me.geolocationService.autoComplete();
+  }
+
   showlatlong(event) {
     var me = this;
     var geoCoords2 = {};
@@ -59,7 +72,7 @@ export class MainPage{
 
         (position) => {
             geoCoords2.lat = position.coords.latitude;
-            geoCoords2.long = position.coords.longitude;
+            geoCoords2.lng = position.coords.longitude;
             // me.geoCoords = position.coords.latitude  + ',' + position.coords.longitude;
 
             var gCoords = position.coords.latitude  + ',' + position.coords.longitude;
@@ -82,10 +95,27 @@ export class MainPage{
   nextPage(ctr){
     var ctr;
     var me = this;
+    var latlng = me.geolocationService.getLatlng();
+    console.log(me.details.locationName);
+    console.log(latlng.locationName);
     //push another page onto the history stack
     //causing the nav controller to animate the new page in
+
+    var geoloc;
+
+    if (latlng.locationName!=undefined) {
+      console.log('aaaaaaaa');
+      geoloc = latlng;
+
+    }
+    else{
+      console.log('bbbbbb');
+      geoloc = me.details;
+      console.log(geoloc);
+    }
+
     if(ctr == 'resto'){
-      this.nav.push( RestaurantPage, {geoloc: me.details} );
+      this.nav.push( RestaurantPage, {geoloc: geoloc} );
     }
     else if(ctr == 'hotels'){
       this.nav.push( HotelsPage );

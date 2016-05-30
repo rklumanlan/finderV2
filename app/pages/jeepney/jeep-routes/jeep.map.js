@@ -26,11 +26,8 @@ export class JeepMapsPage {
     this.nav = nav;
 
     this.http = http;
-
-
+    
     this.connectivity = connectivityService;
-
-
 
     this.dataService = dataService;
     this.googleMapsService = googleMapsService;
