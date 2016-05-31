@@ -39,7 +39,6 @@ export class LandingPage {
     document.getElementById('lndLoaderLoc').style.display = "inline";
 
     console.log("geolocation working");
-    let options = {timeout: 10000, enableHighAccuracy: true};
 
     navigator.geolocation.getCurrentPosition(
 
@@ -65,10 +64,24 @@ export class LandingPage {
 
         (error) => {
             console.log(error);
-        }, options
-
-      );
+            me.locErrMsg();
+        });
 
   }
+
+  locErrMsg(){
+    let alert = Alert.create({
+      title: 'No location found',
+      subTitle: 'Please enable your GPS location.',
+      buttons: [{
+        text: 'OK',
+        handler: data => {
+          this.nav.pop();
+        }
+      }]
+    });
+    this.nav.present(alert);
+  }
+
 
 }

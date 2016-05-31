@@ -69,7 +69,6 @@ export class MainPage{
     document.getElementById('mainLoaderLoc').style.display = "inline";
 
     console.log("geolocation working");
-    let options = {timeout: 10000, enableHighAccuracy: true};
 
     navigator.geolocation.getCurrentPosition(
 
@@ -94,12 +93,25 @@ export class MainPage{
 
         (error) => {
             console.log(error);
-        }, options
-
-      );
-
+            me.locErrMsg();
+        });
 
 
+
+  }
+
+  locErrMsg(){
+    let alert = Alert.create({
+      title: 'No location found',
+      subTitle: 'Please enable your GPS location.',
+      buttons: [{
+        text: 'OK',
+        handler: data => {
+          this.nav.pop();
+        }
+      }]
+    });
+    this.nav.present(alert);
   }
 
   nextPage(ctr){
