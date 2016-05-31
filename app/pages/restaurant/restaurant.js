@@ -34,7 +34,9 @@ export class RestaurantPage {
     this.sort = 'Distance';
     this.cuisine = 'food';
 
-    this.items = null;
+    this.items = [];
+    this.res = null;
+    this.count = null;
 
   }
 
@@ -45,12 +47,43 @@ export class RestaurantPage {
     me.params.cuisine = 'food';
     me.geolocationService.setPlaces(me.params).then(function (res) {
       setTimeout(function() {
-        me.items = res;
+        console.log(res);
+        me.res = res;
+        for (me.count = 0; me.count < 20; me.count++) {
+          me.items.push(res[me.count]);
+        }
         me.setRating();
-
-
-      }, 8000);
+      }, 2000);
     });
+  }
+
+  doInfinite(infiniteScroll) {
+    //visibility:hidden
+    var me = this;
+    console.log('Begin async operation');
+    console.log(me.res);
+    console.log( me.count);
+
+    setTimeout(() => {
+      var i;
+      for (i = me.count; i < me.res.length; i++) {
+        me.items.push(me.res[i]);
+        console.log(i);
+      }
+
+      me.count = i;
+      console.log(i);
+
+
+
+      console.log('Async operation has ended');
+      console.log(me.count);
+      infiniteScroll.complete();
+      if (i==me.res.length) {
+        infiniteScroll.enable(false);
+      }
+    }, 1000);
+
   }
 
   updatePlaceType(){

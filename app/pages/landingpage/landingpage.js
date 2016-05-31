@@ -35,6 +35,9 @@ export class LandingPage {
     var me = this;
     var geoCoords = {};
 
+    document.getElementById('lndBtnLoc').style.display = "none";
+    document.getElementById('lndLoaderLoc').style.display = "inline";
+
     console.log("geolocation working");
     let options = {timeout: 10000, enableHighAccuracy: true};
 
