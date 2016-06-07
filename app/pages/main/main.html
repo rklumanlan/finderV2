@@ -19,9 +19,10 @@
     </div>
     <div class="geoloc_btn">
 
-      <button block clear (click)="showlatlong()">
+      <button id="mainBtnLoc" block clear (click)="showlatlong()">
         <ion-icon name="locate"></ion-icon>
       </button>
+      <div id="mainLoaderLoc" class="loader"></div>
     </div>
   </ion-row>
 </ion-toolbar>

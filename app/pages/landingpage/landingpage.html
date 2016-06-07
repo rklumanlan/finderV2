@@ -17,9 +17,10 @@
           <ion-input type="text" id='geolocation' [(ngModel)]="geolocation"(input)="autocomplete($event)" placeholder="Enter a location" class="geo_inpt" ></ion-input>
         </div>
         <div class="geoloc_btnlp">
-          <button block clear (click)="showlatlong(mainp)">
+          <button id="lndBtnLoc" block clear (click)="showlatlong(mainp)">
             <ion-icon name="locate"></ion-icon>
           </button>
+          <div id="lndLoaderLoc" class="loader"></div>
         </div>
       </div>
     </div>

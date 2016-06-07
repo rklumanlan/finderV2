@@ -65,8 +65,10 @@ export class MainPage{
     var me = this;
     var geoCoords2 = {};
 
+    document.getElementById('mainBtnLoc').style.display = "none";
+    document.getElementById('mainLoaderLoc').style.display = "inline";
+
     console.log("geolocation working");
-    let options = {timeout: 10000, enableHighAccuracy: true};
 
     navigator.geolocation.getCurrentPosition(
 
@@ -81,15 +83,35 @@ export class MainPage{
                 // Log the value once it is resolved
              me.geolocation2 = locName;
 
+             if (me.geolocation2!==null) {
+               document.getElementById('mainBtnLoc').style.display = "inline";
+               document.getElementById('mainLoaderLoc').style.display = "none";
+             }
+
              });
         },
 
         (error) => {
             console.log(error);
-        }, options
+            me.locErrMsg();
+        });
 
-      );
 
+
+  }
+
+  locErrMsg(){
+    let alert = Alert.create({
+      title: 'No location found',
+      subTitle: 'Please enable your GPS location.',
+      buttons: [{
+        text: 'OK',
+        handler: data => {
+          this.nav.pop();
+        }
+      }]
+    });
+    this.nav.present(alert);
   }
 
   nextPage(ctr){

@@ -5,10 +5,66 @@
   Ionic pages and navigation.
 -->
 <ion-navbar *navbar primary>
-  <ion-title>Hotels</ion-title>
+  <ion-toolbar>
+    <ion-title>Hotels</ion-title>
+  </ion-toolbar>
 </ion-navbar>
 
-<ion-content padding class="hotels">
-  <div class="mainBackDiv">
+<ion-toolbar id="sort_toolbar">
+    <ion-grid>
+      <ion-row class="sort_grid">
+        <ion-col width-33>
+          <span class="sort_label">Sort</span>
+          <ion-item class="slct sort">
+            <ion-label class="input_lbl">Sort</ion-label>
+            <ion-select [(ngModel)]="sort" (ngModelChange)="updateSort($event)" class="drpdown">
+              <ion-option value="Distance">Distance</ion-option>
+              <ion-option value="Alphabetically">Alphabetically</ion-option>
+              <ion-option value="Rating">Rating</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+
+</ion-toolbar>
+
+<ion-content>
+  <loading-modal id="loading" ></loading-modal>
+
+  <div class="bg" >
+
+<!--Places results  -->
+
+    <div id="map" style="height: 100%;display:none"></div>
+
+    <ion-list>
+      <button ion-item *ngFor="#item_hotel of items">
+
+        <ion-row>
+          <ion-col>
+            <span class="itm_name">{{item_hotel.name}}</span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col width-75>
+            <ul class="itm_info">
+              <!-- <li><span class="itm_name">{{item.name}}</span></li> -->
+              <li><span class="itm_type">{{item_hotel.types[0]}} {{item_hotel.types[1]}}</span></li>
+              <li><span class="itm_address">{{item_hotel.vicinity}}</span></li>
+              <li><span class="itm_hours"></span></li>
+            </ul>
+          </ion-col>
+
+          <ion-col width-25>
+            <ul class="itm_info_right">
+              <li><span class="itm_rating"></span></li>
+              <li><span class="itm_distance">{{item_hotel.distance}}</span></li>
+            </ul>
+          </ion-col>
+        </ion-row>
+      </button>
+    </ion-list>
   </div>
 </ion-content>

@@ -54,7 +54,7 @@ export class GeolocationService {
 
         }
         else {
-          // me.disableMap();
+          me.disableMap();
 
           // add error handler if offline -- alert box
         }
@@ -68,7 +68,7 @@ export class GeolocationService {
         }
         else {
             console.log("disabling map");
-            // me.disableMap();
+            me.disableMap();
 
             // add error handler if offline -- alert box
         }
@@ -99,9 +99,6 @@ export class GeolocationService {
       keyword: [keyword]
     }, callback);
     console.log('distance');
-
-
-
   }
 
   setPlaces(pageDetails){
@@ -126,7 +123,6 @@ export class GeolocationService {
                 result[m].rating = 0;
               }
             }
-
           // }
         // }
 
@@ -248,52 +244,81 @@ export class GeolocationService {
 
 
   // Police Station Map
-  getPolice(poldetail){
+  getPolHosp(detail,page){
 
-    console.log("Get Police Lat Working");
-    // console.log(document.getElementById('police_map'));
-    console.log(poldetail.lat, poldetail.lng);
-
-    var mapcoords = {lat: parseFloat(poldetail.lat), lng: parseFloat(poldetail.lng)};
-
-    map = new google.maps.Map(document.getElementById('police_map'), {
-      center: mapcoords,
-      zoom: 15
-      });
-
-    var marker = new google.maps.Marker({
-      position: mapcoords,
-      map: map,
-      title: 'Hello World!'
-    });
-    }
-
-  // Police Station Map
-  getHospital(hospdetail){
+    var mapcoords,img,mapElem;
 
     console.log("Get Hospital Lat Working");
+    console.log(page);
+    console.log('afa');
+    console.log(page === 'hosp');
     // console.log(document.getElementById('police_map'));
-    console.log(hospdetail.lat, hospdetail.lng);
+    console.log(detail);
 
-    var mapcoords = {lat: parseFloat(hospdetail.lat), lng: parseFloat(hospdetail.lng)};
 
-    map = new google.maps.Map(document.getElementById('hosp_map'), {
+
+    if (page === 'hosp') {
+      console.log('entered if');
+      mapcoords = {lat: parseFloat(detail.lat), lng: parseFloat(detail.lng)};
+      img = 'img/pins/hospital.png';
+      mapElem = document.getElementById('hosp_map');
+    }
+    else {
+      mapcoords = {lat: parseFloat(detail.lat), lng: parseFloat(detail.lng)};
+      img = 'img/pins/police.png';
+      mapElem = document.getElementById('police_map');
+    }
+
+    var map = new google.maps.Map(mapElem, {
       center: mapcoords,
-      zoom: 15
-      });
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      disableDefaultUI: true
+    });
+
+    var image = {
+      url: img,
+      scaledSize: new google.maps.Size(23, 36)
+    };
 
     var marker = new google.maps.Marker({
-      position: mapcoords,
-      map: map,
-      title: 'Hello World!'
+        map: map,
+        animation: google.maps.Animation.DROP,
+        position: mapcoords,
+        icon: image
     });
-    }
+
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+
+    var contentString = '<h4 class="pol_name">'+detail.name+'</h4><span class="pol_address">'+detail.address+'</span><br/>';
+
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+  }
 
 
   getLatlng(){
     var me = this;
     console.log(me.latlng);
     return me.latlng;
+  }
+
+  disableMap(){
+    console.log("disable map");
+    let alert = Alert.create({
+      title: 'No connection',
+      subTitle: 'Looks like there is a problem with your network connection. Try again later.',
+      buttons: [{
+        text: 'OK',
+        handler: data => {
+          this.nav.pop();
+        }
+      }]
+    });
+    this.nav.present(alert);
   }
 
 }
