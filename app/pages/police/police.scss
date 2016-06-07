@@ -1,50 +1,9 @@
 .police {
 
 }
-@font-face {
-    font-family: 'icomoon';
-    src:    url('../fonts/icomoon.eot?awjbyu');
-    src:    url('../fonts/icomoon.eot?awjbyu#iefix') format('embedded-opentype'),
-        url('../fonts/icomoon.ttf?awjbyu') format('truetype'),
-        url('../fonts/icomoon.woff?awjbyu') format('woff'),
-        url('../fonts/icomoon.svg?awjbyu#icomoon') format('svg');
-    font-weight: normal;
-    font-style: normal;
+span.icoMoon.icoMoon-marker {
+    font-size: .4em;
 }
-
-[class^="icoMoon-"], [class*=" icoMoon-"] {
-    /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'icomoon';
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-.icoMoon{
-  font-family: 'icomoon';
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.icoMoon-marker:before {
-    content: "\e904";
-    font-size: 1.5em;
-}
-
 .toolbar-background{
   background: #2A7EDD;
 }
@@ -63,6 +22,7 @@
 h2.pol_name {
     font-weight: bold;
     font-style: italic;
+    margin: 3% 0%;
 }
 span.pol_address {
     width: 100%;

@@ -99,9 +99,6 @@ export class GeolocationService {
       keyword: [keyword]
     }, callback);
     console.log('distance');
-
-
-
   }
 
   setPlaces(pageDetails){
@@ -126,7 +123,6 @@ export class GeolocationService {
                 result[m].rating = 0;
               }
             }
-
           // }
         // }
 

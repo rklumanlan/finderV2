@@ -1,0 +1,60 @@
+<!--
+  Generated template for the RestaurantDetailsPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-navbar *navbar primary>
+  <ion-title>{{item_select.name}}</ion-title>
+</ion-navbar>
+
+<ion-content padding class="restaurant-details card-background-page">
+  <div class="mainBackDiv">
+    <ion-card class="item_details">
+      <ion-card-content>
+        <!-- <ion-card-title></ion-card-title> -->
+          <ion-grid>
+            <ion-row class="sort_grid">
+              <ion-col width-20>
+                <!-- {{item_select.photos[0]}} -->
+              </ion-col>
+
+              <ion-col width-70>
+                <h2 style="font-weight:500;">{{item_select.name}}</h2>
+                {{item_select.vicinity}}
+              </ion-col>
+
+              <ion-col width-10>
+                <span id="resto_rating"></span>
+              </ion-col>
+            </ion-row>
+            <ion-row class="hours_row">
+              <span id="operating_hours"></span>
+            </ion-row>
+            <ion-row style="margin-top:0; float:right;padding-left: 60%;">
+                <ul id="item_buttons">
+                  <li class="item_buttons_li">
+                    <button clear>
+                      <span class="icoMoon-marker"></span>
+                    </button><br/>
+                    <span style="font-size:9pt; color: #B7B7B7;">Map</span>
+                  </li>
+                  <li class="item_buttons_li">
+                    <button clear>
+                      <span class="icoMoon-website"></span>
+                    </button><br/>
+                    <span style="font-size:9pt; color: #B7B7B7;">Website</span>
+                  </li>
+                  <!-- <li class="item_buttons_li">
+                    <button clear>
+                      <span class="icoMoon-review"></span><br/>
+                      <span style="font-size:9pt;">Review</span>
+                    </button>
+                  </li> -->
+                </ul>
+            </ion-row>
+          </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

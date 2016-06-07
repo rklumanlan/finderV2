@@ -1,8 +1,9 @@
+
 import {Page, NavController, NavParams} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
-// import {DataService} from '../../../services/data';
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
+import {RestaurantDetailsPage} from '../restaurant-details/restaurant-details';
 
 /*
   Generated class for the RestaurantPage page.
@@ -22,6 +23,7 @@ export class RestaurantPage {
 
   constructor(nav,navParams,geolocationService) {
     this.RestaurantPage = RestaurantPage;
+    this.RestaurantDetailsPage = RestaurantDetailsPage;
     this.nav = nav;
     this.navParams = navParams;
     this.geolocationService = geolocationService;
@@ -60,10 +62,12 @@ export class RestaurantPage {
     if (me.placeType == 'cafe') {
       me.params.cuisine = '';
       document.getElementById('cuisine').getElementsByTagName('button')[0].disabled=true;
+      document.getElementById("cuisine").style.color = "#C2C2C2";
     }
     else {
       me.params.cuisine = me.cuisine;
       document.getElementById('cuisine').getElementsByTagName('button')[0].disabled=false;
+      document.getElementById("cuisine").style.color = "#C2C2C2";
     }
     me.geolocationService.setPlaces(me.params).then(function (res) {
       me.items = null;
@@ -127,8 +131,8 @@ export class RestaurantPage {
     var me = this;
     console.log('setRating');
     setTimeout(function() {
-      var x = document.getElementsByClassName("star");
-      var y = document.getElementsByClassName("operatingHR");
+      var x = document.getElementsByClassName("itm_rating");
+      var y = document.getElementsByClassName("itm_hours");
       var rating,half,remaining;
 
       for (var a = 0; a < me.items.length; a++) {
