@@ -512,7 +512,7 @@ export class DataService {
         name: 'Angeles Medical Center',
         address: 'Rizal Street, Angeles City',
         email: 'angeles_medical_center@yahoo.com',
-        landline: '(63 45)877-7150 / 322-4632 / 625-4392 / 887-3139',
+        landline: '(63 45)877-7150 / 322-4632 / 887-3139',
         lat: '15.141437',
         lng: '120.589142'
       },{
@@ -525,35 +525,35 @@ export class DataService {
       },{
         name: 'Holy Family Medical Center',
         address: '179 Santo Entierro Street, Angeles City',
-        email: '',
+        email: 'Email address not available.',
         landline: '(63 45)888-6620 / 322-3623',
         lat: '15.140357',
         lng: '120.594385'
       },{
         name: 'Rafael Lazatin Memorial Medical Center',
         address: 'Visitacion St., cor Pampang Road, Angeles City',
-        email: '',
+        email: 'Email address not available.',
         landline: '(63 45)322-4495 / 1222 / 887-4133',
         lat: '15.146144',
         lng: '120.580873'
       },{
         name: 'Mother of Perpetual Help Hospital',
         address: '2257 Santo Entierro Street, Angeles City',
-        email: '',
+        email: 'Email address not available.',
         landline: '(63 45)888-1655',
         lat: '15.141261',
         lng: '120.595708'
       },{
         name: 'Dr. Amando L. Garcia Medical Center, Inc.',
         address: '648 Rizal Street, Angeles City',
-        email: '',
+        email: 'Email address not available.',
         landline: '(045)322-0165',
         lat: '15.142835',
         lng: '120.589643'
       },{
         name: 'St. Catherine Of Alexandria',
         address: 'Rizal Street, Angeles City',
-        email: '',
+        email: 'Email address not available.',
         landline: '(045)888-7209',
         lat: '15.135523',
         lng: '120.585090'

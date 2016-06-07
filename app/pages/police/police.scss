@@ -1,17 +1,9 @@
 .police {
 
 }
-@font-face {
-    font-family: 'icomoon';
-    src:    url('../fonts/icomoon.eot?awjbyu');
-    src:    url('../fonts/icomoon.eot?awjbyu#iefix') format('embedded-opentype'),
-        url('../fonts/icomoon.ttf?awjbyu') format('truetype'),
-        url('../fonts/icomoon.woff?awjbyu') format('woff'),
-        url('../fonts/icomoon.svg?awjbyu#icomoon') format('svg');
-    font-weight: normal;
-    font-style: normal;
+span.icoMoon.icoMoon-marker {
+    font-size: .4em;
 }
-
 [class^="icoMoon-"], [class*=" icoMoon-"] {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'icomoon';
@@ -51,6 +43,12 @@
 // .toolbar-title{
 //   color:#fff;
 // }
+.toolbar-background{
+  background: #2A7EDD;
+}
+.toolbar-title{
+  color:#fff;
+}
 // .mainBackDiv{
 //   position: absolute;
 //   overflow: auto;
@@ -63,6 +61,7 @@
 h2.pol_name {
     font-weight: bold;
     font-style: italic;
+    margin: 3% 0%;
 }
 span.pol_address {
     width: 100%;

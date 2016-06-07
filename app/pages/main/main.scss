@@ -163,10 +163,10 @@ p {
   height:80%;
   padding: 0%;
 }
-ion-toolbar.geoloc_toolbar .toolbar-background {
-    border-color: #FFFFFF !important;
-    background-image: $bg-pattern;
-}
+// ion-toolbar.geoloc_toolbar.toolbar .toolbar-background {
+//     // border-color: #FFFFFF !important;
+//     background: $bg-pattern;
+// }
 
 div.geoloc_input{
 	width:80%;
@@ -199,7 +199,7 @@ ion-input#geolocation input.text-input {
     margin: 10px 5px !important;
 }
 ion-toolbar.geoloc_toolbar.toolbar {
-    padding: 10%;
+    padding: 5%;
 }
 ion-input#geolocation input.text-input::-webkit-input-placeholder {
     color: #fff;

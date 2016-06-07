@@ -9,87 +9,95 @@
     <ion-title >Restaurants</ion-title>
   </ion-toolbar>
 </ion-navbar>
-<ion-toolbar position="top">
-  <ion-row class="upperDiv" id="drpdown">
+<ion-toolbar id="sort_toolbar">
+    <ion-grid>
+      <ion-row class="sort_grid">
+        <ion-col width-33>
+          <span class="sort_label">Place Type</span>
+          <ion-item class="slct">
+              <ion-label class="input_lbl">Place Type</ion-label>
+              <ion-select id ='1' [(ngModel)]="placeType" (ngModelChange)="updatePlaceType($event)" class="drpdown">
+                <ion-option value="restaurant" >Restaurant</ion-option>
+                <ion-option value="cafe">Cafe</ion-option>
+              </ion-select>
+          </ion-item>
+        </ion-col>
 
+        <ion-col width-33>
+          <span class="sort_label">Cuisine</span>
+          <ion-item class="slct">
+            <ion-label id ='2' class="input_lbl">Cuisine</ion-label>
+            <ion-select id="cuisine" [(ngModel)]="cuisine"  (ngModelChange)="updateCuisine($event)" class="drpdown">
+              <ion-option value="food" >Any Cuisine</ion-option>
+              <ion-option value="American">American</ion-option>
+              <ion-option value="Chinese">Chinese</ion-option>
+              <ion-option value="Filipino">Filipino</ion-option>
+              <ion-option value="Indian">Indian</ion-option>
+              <ion-option value="Italian">Italian</ion-option>
+              <ion-option value="Japanese">Japanese</ion-option>
+              <ion-option value="Lebanese">Lebanese</ion-option>
+              <ion-option value="Mexican">Mexican</ion-option>
+              <ion-option value="Spanish">Spanish</ion-option>
+              <ion-option value="Thai">Thai</ion-option>
+              <ion-option value="Vietnamese">Vietnamese</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
 
-    <ion-item>
-        <ion-label class="input_lbl">Place Type</ion-label>
-        <ion-select id ='1' [(ngModel)]="placeType" (ngModelChange)="updatePlaceType($event)" class="drpdown">
-          <ion-option value="restaurant" >Restaurant</ion-option>
-          <ion-option value="cafe">Cafe</ion-option>
-        </ion-select>
-      </ion-item>
+        <ion-col width-33>
+          <span class="sort_label">Sort</span>
+          <ion-item class="slct sort">
+            <ion-label class="input_lbl">Sort</ion-label>
+            <ion-select [(ngModel)]="sort" (ngModelChange)="updateSort($event)" class="drpdown">
+              <ion-option value="Distance">Distance</ion-option>
+              <ion-option value="Alphabetically">Alphabetically</ion-option>
+              <ion-option value="Rating">Rating</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
 
-    <ion-item>
-
-      <ion-label id ='2' class="input_lbl">Cuisine</ion-label>
-      <ion-select id="cuisine" [(ngModel)]="cuisine"  (ngModelChange)="updateCuisine($event)" class="drpdown">
-        <ion-option value="food" >Any Cuisine</ion-option>
-        <ion-option value="American">American</ion-option>
-        <ion-option value="Chinese">Chinese</ion-option>
-        <ion-option value="Filipino">Filipino</ion-option>
-        <ion-option value="Indian">Indian</ion-option>
-        <ion-option value="Italian">Italian</ion-option>
-        <ion-option value="Japanese">Japanese</ion-option>
-        <ion-option value="Lebanese">Lebanese</ion-option>
-        <ion-option value="Mexican">Mexican</ion-option>
-        <ion-option value="Spanish">Spanish</ion-option>
-        <ion-option value="Thai">Thai</ion-option>
-        <ion-option value="Vietnamese">Vietnamese</ion-option>
-      </ion-select>
-
-    </ion-item>
-
-
-
-    <ion-item>
-      <ion-label class="input_lbl">Sort</ion-label>
-      <ion-select [(ngModel)]="sort" (ngModelChange)="updateSort($event)" class="drpdown">
-        <ion-option value="Distance">Distance</ion-option>
-        <ion-option value="Alphabetically">Alphabetically</ion-option>
-        <ion-option value="Rating">Rating</ion-option>
-      </ion-select>
-    </ion-item>
-
-
-  </ion-row>
+      </ion-row>
+    </ion-grid>
 
 </ion-toolbar>
 
-<ion-content >
+<ion-content>
   <loading-modal id="loading" ></loading-modal>
 
   <div class="bg" >
 
-
-
-
 <!--Places results  -->
 
-
     <div id="map" style="height: 100%;display:none"></div>
-    <!-- <ion-list>
-      <button ion-item *ngFor="#item of items" [navPush]="[JeepDetailsPage, {jeep: cjeep}]">
-        <h2>{{item.name}}</h2>
-        <h4 class="star"></h4>
-        <h4 class="operatingHR"></h4>
-        <h4>{{item.distance}}</h4>
-        <h4>{{item.types[0]}} {{item.types[1]}}</h4>
-        <h4>{{item.vicinity}}</h4>
-      </button>
-
-
-    </ion-list> -->
     <ion-list>
-       <ion-item *ngFor="#item of items">
-         <h2>{{item.name}}</h2>
-        </ion-item>
-     </ion-list>
+      <button ion-item *ngFor="#item of items" [navPush]="[RestaurantDetailsPage, {item_select:item}]">
 
-     <ion-infinite-scroll *ngIf="items.length!==0" (infinite)="doInfinite($event)" threshold="100px">
-       <ion-infinite-scroll-content></ion-infinite-scroll-content>
-     </ion-infinite-scroll>
+        <ion-row>
+          <ion-col>
+            <span class="itm_name">{{item.name}}</span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col width-75>
+            <ul class="itm_info">
+              <!-- <li><span class="itm_name">{{item.name}}</span></li> -->
+              <li><span class="itm_type">{{item.types[0]}} {{item.types[1]}}</span></li>
+              <li><span class="itm_address">{{item.vicinity}}</span></li>
+              <li><span class="itm_hours"></span></li>
+            </ul>
+          </ion-col>
+
+          <ion-col width-25>
+            <ul class="itm_info_right">
+              <li><span class="itm_rating"></span></li>
+              <li><span class="itm_distance">{{item.distance}}</span></li>
+            </ul>
+          </ion-col>
+        </ion-row>
+      </button>
+    </ion-list>
+    <ion-infinite-scroll *ngIf="items.length!==0" (infinite)="doInfinite($event)" threshold="100px">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
-
 </ion-content>

@@ -1,0 +1,25 @@
+.restaurant-details {
+
+}
+ion-row.hours_row {
+    border-bottom: 1px solid #dedede;
+    border-top: 1px solid #dedede;
+    padding: 0px;
+}
+ul#item_buttons {
+    display: inline-flex;
+    // float: right !important;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+button span.icoMoon-marker, button span.icoMoon-website, button span.icoMoon-review {
+    font-size: .3em;
+    color: #B7B7B7;
+}
+li.item_buttons_li{
+  text-align:center;
+}
+ion-card.item_details{
+  background:#fff;
+}
