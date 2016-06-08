@@ -1,9 +1,11 @@
 
-import {Page, NavController, NavParams} from 'ionic-angular';
+import {Page, NavController, NavParams, Content} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
 import {RestaurantDetailsPage} from '../restaurant-details/restaurant-details';
+
+import {ViewChild} from 'angular2/core';
 
 /*
   Generated class for the RestaurantPage page.
@@ -14,9 +16,13 @@ import {RestaurantDetailsPage} from '../restaurant-details/restaurant-details';
 @Page({
   templateUrl: 'build/pages/restaurant/restaurant.html',
   directives: [LoadingModal],
-   providers: [GeolocationService]
+   providers: [GeolocationService],
+   queries: {
+     content: new ViewChild(Content)
+   }
 })
 export class RestaurantPage {
+
   static get parameters() {
     return [[NavController],[NavParams],[GeolocationService]];
   }
@@ -72,14 +78,13 @@ export class RestaurantPage {
         me.items.push(me.res[i]);
         console.log(i);
       }
+      me.setRating();
 
       me.count = i;
-      console.log(i);
 
 
 
       console.log('Async operation has ended');
-      console.log(me.count);
       infiniteScroll.complete();
       if (i==me.res.length) {
         infiniteScroll.enable(false);
@@ -130,6 +135,7 @@ export class RestaurantPage {
 
   updateSort(){
     var me = this;
+    me.setRating();
     me.sortItems(me.sort);
   }
 
@@ -158,6 +164,7 @@ export class RestaurantPage {
       });
       console.log(me.items);
     }
+    me.content.scrollToTop();
   }
 
   setRating(){
@@ -179,23 +186,28 @@ export class RestaurantPage {
         //reamianing stars to append
         remaining = Math.floor(5 - me.items[a].rating);
 
+        console.log(y[a].innerHTML!="");
         //appending store open
         if (me.items[a].opening_hours!==undefined) {
           if (me.items[a].opening_hours.open_now!==undefined) {
             console.log(me.items[a].opening_hours.open_now);
             console.log(y[a]);
-            if (me.items[a].opening_hours.open_now === true) {
-              y[a].insertAdjacentHTML( 'beforeend', '<ion-label secondary>Open <ion-icon name="clock" role="img" class="ion-ios-clock-outline" aria-label="ios-clock-outline"></ion-icon></ion-label>');
+            if (y[a].innerHTML=="") {
+              if (me.items[a].opening_hours.open_now === true) {
+                y[a].insertAdjacentHTML( 'beforeend', '<ion-label secondary>Open <ion-icon name="clock" role="img" class="ion-ios-clock-outline" aria-label="ios-clock-outline"></ion-icon></ion-label>');
+              }
+              else {
+                y[a].insertAdjacentHTML( 'beforeend', '<ion-label danger>Close <ion-icon name="clock" role="img" class="ion-ios-clock-outline" aria-label="ios-clock-outline"></ion-icon></ion-label>');
+              }
             }
-            else {
-              y[a].insertAdjacentHTML( 'beforeend', '<ion-label danger>Close <ion-icon name="clock" role="img" class="ion-ios-clock-outline" aria-label="ios-clock-outline"></ion-icon></ion-label>');
-              ctr=ctr+1;
-            }
+
 
           }
+        }
 
-          if (me.items[a].rating!=0) {
-            var ctr = 0;
+        if (me.items[a].rating!=0) {
+          var ctr = 0;
+          if (x[a].innerHTML=="") {
             for (var b = 1; b <= rating; b++) {
               x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star" role="img" class="ion-ios-star" aria-label="ios-star"></ion-icon>');
               ctr=ctr+1;
@@ -225,11 +237,14 @@ export class RestaurantPage {
             }
             console.log(ctr+" ctr");
           }
+
         }
+
 
       }
 
-    }, 400);
+
+    }, 500);
 
   }
 
