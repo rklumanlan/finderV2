@@ -1,4 +1,4 @@
-import {Page, NavParams, NavController} from 'ionic-angular';
+import {Page, NavParams, NavController, Alert} from 'ionic-angular';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {MainPage} from '../main/main';
 // import {RestaurantPage} from '../restaurant/restaurant';
@@ -81,6 +81,8 @@ export class LandingPage {
       }]
     });
     this.nav.present(alert);
+    document.getElementById('lndBtnLoc').style.display = "inline";
+    document.getElementById('lndLoaderLoc').style.display = "none";
   }
 
 

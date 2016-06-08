@@ -108,7 +108,7 @@ export class RestaurantPage {
       document.getElementById("cuisine").style.color = "#C2C2C2";
     }
     me.geolocationService.setPlaces(me.params).then(function (res) {
-      me.items = null;
+      me.items = [];
       setTimeout(function() {
         me.items = res;
         me.setRating();
@@ -123,7 +123,7 @@ export class RestaurantPage {
     me.params.placeType = me.placeType;
     me.params.cuisine = me.cuisine;
     me.geolocationService.setPlaces(me.params).then(function (res) {
-      me.items = null;
+      me.items = [];
       setTimeout(function() {
         me.items = res;
         console.log(me.items);
@@ -185,8 +185,6 @@ export class RestaurantPage {
         half = (me.items[a].rating % 1).toFixed(1);
         //reamianing stars to append
         remaining = Math.floor(5 - me.items[a].rating);
-
-        console.log(y[a].innerHTML!="");
         //appending store open
         if (me.items[a].opening_hours!==undefined) {
           if (me.items[a].opening_hours.open_now!==undefined) {
