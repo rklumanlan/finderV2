@@ -1,4 +1,4 @@
-import {Page, Storage, SqlStorage, NavParams, NavController} from 'ionic-angular';
+import {Page, Storage, SqlStorage, NavParams, NavController,Alert} from 'ionic-angular';
 import {TabsPage} from '../jeepney/tabs/tabs';
 // Import menu pages
 import {RestaurantPage} from '../restaurant/restaurant';
@@ -48,11 +48,11 @@ export class MainPage{
 
 
   }
-  onPageLoaded(){
-    setTimeout(function() {
+  onPageDidEnter(){
+    // setTimeout(function() {
       document.getElementById("lowerDiv").style.display = "inline";
 
-    },600);
+    // },600);
 
   }
 
@@ -94,7 +94,7 @@ export class MainPage{
         (error) => {
             console.log(error);
             me.locErrMsg();
-        });
+        }, {timeout: 5000});
 
 
 
@@ -112,6 +112,8 @@ export class MainPage{
       }]
     });
     this.nav.present(alert);
+    document.getElementById('lndBtnLoc').style.display = "inline";
+    document.getElementById('lndLoaderLoc').style.display = "none";
   }
 
   nextPage(ctr){

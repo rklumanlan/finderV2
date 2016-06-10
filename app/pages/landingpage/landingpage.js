@@ -65,7 +65,7 @@ export class LandingPage {
         (error) => {
             console.log(error);
             me.locErrMsg();
-        });
+        }, {timeout: 5000});
 
   }
 
