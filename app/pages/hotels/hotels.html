@@ -6,7 +6,7 @@
 -->
 <ion-navbar *navbar primary>
   <ion-toolbar>
-    <ion-title>Hotels</ion-title>
+    <ion-title>{{'Hotels'|translate}}</ion-title>
   </ion-toolbar>
 </ion-navbar>
 
@@ -40,7 +40,7 @@
     <div id="map" style="height: 100%;display:none"></div>
 
     <ion-list>
-      <button ion-item *ngFor="#item_hotel of items">
+      <button ion-item *ngFor="#item_hotel of items" [navPush]="[HotelDetailsPage, {item_select_hotel:item_hotel}]">
 
         <ion-row>
           <ion-col>
@@ -51,15 +51,15 @@
           <ion-col width-75>
             <ul class="itm_info">
               <!-- <li><span class="itm_name">{{item.name}}</span></li> -->
-              <li><span class="itm_type">{{item_hotel.types[0]}} {{item_hotel.types[1]}}</span></li>
+              <!-- <li><span class="itm_type">{{item_hotel.types[0]}} {{item_hotel.types[1]}}</span></li> -->
               <li><span class="itm_address">{{item_hotel.vicinity}}</span></li>
-              <li><span class="itm_hours"></span></li>
+              <!-- <li><span class="itm_hours"></span></li> -->
             </ul>
           </ion-col>
 
           <ion-col width-25>
             <ul class="itm_info_right">
-              <li><span class="itm_rating"></span></li>
+              <li><span class="hotel_rating"></span></li>
               <li><span class="itm_distance">{{item_hotel.distance}}</span></li>
             </ul>
           </ion-col>

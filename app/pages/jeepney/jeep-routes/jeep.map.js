@@ -11,10 +11,14 @@ import {LoadingModal} from '../../../components/loading-modal/loading-modal';
 import {Http, URLSearchParams} from 'angular2/http';
 import 'rxjs/Rx';
 
+
+import {TranslatePipe} from '../../../pipes/translate';
+
 @Page({
   templateUrl: 'build/pages/jeepney/jeep-routes/jeep.map.html',
   directives: [LoadingModal],
-  providers: [GoogleMapsService]
+  providers: [GoogleMapsService],
+  pipes: [TranslatePipe]
 })
 
 export class JeepMapsPage {

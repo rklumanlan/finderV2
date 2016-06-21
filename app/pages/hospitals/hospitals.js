@@ -3,6 +3,9 @@ import {DataService} from '../../services/data';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {HospitalDetailsPage} from '../hospital-details/hospital-details';
 
+
+import {TranslatePipe} from '../../pipes/translate';
+
 /*
   Generated class for the HospitalsPage page.
 
@@ -11,7 +14,8 @@ import {HospitalDetailsPage} from '../hospital-details/hospital-details';
 */
 @Page({
   templateUrl: 'build/pages/hospitals/hospitals.html',
-  providers: [GeolocationService]
+  providers: [GeolocationService],
+  pipes: [TranslatePipe]
 })
 export class HospitalsPage {
   static get parameters(){

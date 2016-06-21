@@ -1,5 +1,9 @@
-import {Page, NavController} from 'ionic-angular';
+import {TranslatePipe} from '../../pipes/translate';
 
+import {Page, NavController, NavParams} from 'ionic-angular';
+import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
+import {LoadingModal} from '../../components/loading-modal/loading-modal';
+import {MallDetailsPage} from '../mall-details/mall-details';
 /*
   Generated class for the MallsPage page.
 
@@ -8,13 +12,137 @@ import {Page, NavController} from 'ionic-angular';
 */
 @Page({
   templateUrl: 'build/pages/malls/malls.html',
+  pipes:[TranslatePipe],
+  directives: [LoadingModal],
+  providers: [GeolocationService]
 })
 export class MallsPage {
   static get parameters() {
-    return [[NavController]];
+    return [[NavController],[NavParams],[GeolocationService]];
   }
 
-  constructor(nav) {
+  constructor(nav,navParams,geolocationService) {
     this.MallsPage = MallsPage;
+    this.MallDetailsPage = MallDetailsPage;
+    this.nav = nav;
+    this.navParams = navParams;
+    this.geolocationService = geolocationService;
+    // this.setMallRating();
+
+    this.details = navParams.get('geoloc');
+
+    this.params = {};
+
+    this.placeType = 'shopping_mall';
+    this.sort = 'Distance';
+    // this.cuisine = 'food';
+
+    this.items = null;
+
+    console.log(this.details);
+    console.log("Malls list working");
+  }
+  onPageLoaded(){
+    var me = this;
+    me.params.geoloc = this.details;
+    me.params.placeType = 'department_store';
+    // me.params.cuisine = 'food';
+    me.geolocationService.setPlaces(me.params).then(function (res) {
+      setTimeout(function() {
+        me.items = res;
+        // me.setRating();
+
+
+      }, 2000);
+    });
+  }
+
+  updateSort(){
+    var me = this;
+    me.sortItems(me.sort);
+  }
+
+  sortItems(sortVal){
+    var me = this;
+    if (sortVal == 'Alphabetically') {
+      me.items.sort(function(a,b) {
+        if(a.name < b.name) return -1;
+        if(a.name > b.name) return 1;
+        return 0;
+      });
+    }
+    else if (sortVal== 'Rating') {
+      me.items.sort(function(a,b) {
+        a = a.rating;
+        b = b.rating;
+        return a < b ? 1 : (a > b ? -1 : 0);
+      });
+      console.log(me.items);
+    }
+    else {
+      me.items.sort(function(a,b) {
+        a = a.distance;
+        b = b.distance;
+        return a < b ? -1 : (a > b ? 1 : 0);
+      });
+      console.log(me.items);
+    }
+  }
+
+  setMallRating(){
+    var me = this;
+    console.log("setMallRating");
+    setTimeout(function() {
+
+      var x = document.getElementsByClassName('mall_rating');
+      console.log(document.getElementsByClassName('mall_rating'));
+      // var y = document.getElementsById("itm_hours");
+      var rating,half,remaining;
+
+      for (var a = 0; a < me.items.length; a++) {
+        //rating number
+        rating = Math.floor(me.items[a].rating);
+        //get decimal num if there is
+        half = (me.items[a].rating % 1).toFixed(1);
+        //reamianing stars to append
+        remaining = Math.floor(5 - me.items[a].rating);
+
+          if (me.items[a].rating!=0) {
+            var ctr = 0;
+            for (var b = 1; b <= rating; b++) {
+              x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star" role="img" class="ion-ios-star" aria-label="ios-star"></ion-icon>');
+              ctr=ctr+1;
+            }
+            //int
+            if (me.items[a].rating % 1 === 0) {
+              if (remaining !== 0 && ctr<=5) {
+                for (var b = 1; b <= (5-ctr); b++) {
+                  x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
+                }
+                ctr=ctr+1;
+              }
+            }
+            //float
+            else if (me.items[a].rating % 1 !== 0) {
+              if (half !== 0.0 && (me.items[a].rating %1 !== 0)) {
+                x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-half" role="img" class="ion-ios-star-half" aria-label="ios-star-half"></ion-icon>');
+                ctr=ctr+1;
+              }
+              if (remaining !== 0 && ctr<=5) {
+                for (var b = 1; b <= (5-ctr); b++) {
+                  x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
+                  ctr=ctr+1;
+                }
+
+              }
+            }
+            console.log(ctr+" ctr");
+          }
+        // }
+
+      }
+
+    }, 400);
+
   }
 }

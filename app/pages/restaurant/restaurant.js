@@ -1,10 +1,13 @@
 
-import {Page, NavController, NavParams} from 'ionic-angular';
+import {Page, NavController, NavParams, Content} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
 import {RestaurantDetailsPage} from '../restaurant-details/restaurant-details';
 
+import {ViewChild} from 'angular2/core';
+
+import {TranslatePipe} from '../../pipes/translate';
 /*
   Generated class for the RestaurantPage page.
 
@@ -14,9 +17,14 @@ import {RestaurantDetailsPage} from '../restaurant-details/restaurant-details';
 @Page({
   templateUrl: 'build/pages/restaurant/restaurant.html',
   directives: [LoadingModal],
-   providers: [GeolocationService]
+   providers: [GeolocationService],
+   queries: {
+     content: new ViewChild(Content)
+   },
+   pipes: [TranslatePipe]
 })
 export class RestaurantPage {
+
   static get parameters() {
     return [[NavController],[NavParams],[GeolocationService]];
   }
@@ -39,21 +47,25 @@ export class RestaurantPage {
     this.items = [];
     this.res = null;
     this.count = null;
-
   }
 
-  onPageLoaded(){
+  onPageWillEnter(){
     var me = this;
     me.params.geoloc = this.details;
     me.params.placeType = 'restaurant';
     me.params.cuisine = 'food';
     me.geolocationService.setPlaces(me.params).then(function (res) {
+
       setTimeout(function() {
         console.log(res);
         me.res = res;
         for (me.count = 0; me.count < 20; me.count++) {
-          me.items.push(res[me.count]);
+          if (res[me.count]!==undefined) {
+            me.items.push(res[me.count]);
+          }
+
         }
+          console.log(me.items);
         me.setRating();
       }, 2000);
     });
@@ -72,14 +84,13 @@ export class RestaurantPage {
         me.items.push(me.res[i]);
         console.log(i);
       }
+      me.setRating();
 
       me.count = i;
-      console.log(i);
 
 
 
       console.log('Async operation has ended');
-      console.log(me.count);
       infiniteScroll.complete();
       if (i==me.res.length) {
         infiniteScroll.enable(false);
@@ -103,7 +114,7 @@ export class RestaurantPage {
       document.getElementById("cuisine").style.color = "#C2C2C2";
     }
     me.geolocationService.setPlaces(me.params).then(function (res) {
-      me.items = null;
+      me.items = [];
       setTimeout(function() {
         me.items = res;
         me.setRating();
@@ -118,7 +129,7 @@ export class RestaurantPage {
     me.params.placeType = me.placeType;
     me.params.cuisine = me.cuisine;
     me.geolocationService.setPlaces(me.params).then(function (res) {
-      me.items = null;
+      me.items = [];
       setTimeout(function() {
         me.items = res;
         console.log(me.items);
@@ -130,6 +141,7 @@ export class RestaurantPage {
 
   updateSort(){
     var me = this;
+    me.setRating();
     me.sortItems(me.sort);
   }
 
@@ -158,6 +170,7 @@ export class RestaurantPage {
       });
       console.log(me.items);
     }
+    me.content.scrollToTop();
   }
 
   setRating(){
@@ -165,71 +178,78 @@ export class RestaurantPage {
     console.log('setRating');
     setTimeout(function() {
 
-
-
       var x = document.getElementsByClassName("itm_rating");
       var y = document.getElementsByClassName("itm_hours");
       var rating,half,remaining;
 
       for (var a = 0; a < me.items.length; a++) {
-        //rating number
-        rating = Math.floor(me.items[a].rating);
-        //get decimal num if there is
-        half = (me.items[a].rating % 1).toFixed(1);
-        //reamianing stars to append
-        remaining = Math.floor(5 - me.items[a].rating);
+        if (x[a]!==undefined||y[a]!==undefined) {
+          //rating number
+          rating = Math.floor(me.items[a].rating);
+          //get decimal num if there is
+          half = (me.items[a].rating % 1).toFixed(1);
+          //reamianing stars to append
+          remaining = Math.floor(5 - me.items[a].rating);
+          //appending store open
+          if (me.items[a].opening_hours!==undefined) {
+            if (me.items[a].opening_hours.open_now!==undefined) {
+              console.log(me.items[a].opening_hours.open_now);
+              console.log(y[a]);
+              if (y[a].innerHTML=="") {
+                if (me.items[a].opening_hours.open_now === true) {
+                  y[a].insertAdjacentHTML( 'beforeend', '<ion-label secondary>Open <ion-icon name="clock" role="img" class="ion-ios-clock-outline" aria-label="ios-clock-outline"></ion-icon></ion-label>');
+                }
+                else {
+                  y[a].insertAdjacentHTML( 'beforeend', '<ion-label danger>Close <ion-icon name="clock" role="img" class="ion-ios-clock-outline" aria-label="ios-clock-outline"></ion-icon></ion-label>');
+                }
+              }
 
-        //appending store open
-        if (me.items[a].opening_hours!==undefined) {
-          if (me.items[a].opening_hours.open_now!==undefined) {
-            console.log(me.items[a].opening_hours.open_now);
-            console.log(y[a]);
-            if (me.items[a].opening_hours.open_now === true) {
-              y[a].insertAdjacentHTML( 'beforeend', '<ion-label secondary>Open <ion-icon name="clock" role="img" class="ion-ios-clock-outline" aria-label="ios-clock-outline"></ion-icon></ion-label>');
-            }
-            else {
-              y[a].insertAdjacentHTML( 'beforeend', '<ion-label danger>Close <ion-icon name="clock" role="img" class="ion-ios-clock-outline" aria-label="ios-clock-outline"></ion-icon></ion-label>');
-              ctr=ctr+1;
-            }
 
+            }
           }
 
           if (me.items[a].rating!=0) {
             var ctr = 0;
-            for (var b = 1; b <= rating; b++) {
-              x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star" role="img" class="ion-ios-star" aria-label="ios-star"></ion-icon>');
-              ctr=ctr+1;
-            }
-            //int
-            if (me.items[a].rating % 1 === 0) {
-              if (remaining !== 0 && ctr<=5) {
-                for (var b = 1; b <= (5-ctr); b++) {
-                  x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
-                }
+            if (x[a].innerHTML=="") {
+              for (var b = 1; b <= rating; b++) {
+                x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star" role="img" class="ion-ios-star" aria-label="ios-star"></ion-icon>');
                 ctr=ctr+1;
               }
-            }
-            //float
-            else if (me.items[a].rating % 1 !== 0) {
-              if (half !== 0.0 && (me.items[a].rating %1 !== 0)) {
-                x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-half" role="img" class="ion-ios-star-half" aria-label="ios-star-half"></ion-icon>');
-                ctr=ctr+1;
-              }
-              if (remaining !== 0 && ctr<=5) {
-                for (var b = 1; b <= (5-ctr); b++) {
-                  x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
+              //int
+              if (me.items[a].rating % 1 === 0) {
+                if (remaining !== 0 && ctr<=5) {
+                  for (var b = 1; b <= (5-ctr); b++) {
+                    x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
+                  }
                   ctr=ctr+1;
                 }
-
               }
+              //float
+              else if (me.items[a].rating % 1 !== 0) {
+                if (half !== 0.0 && (me.items[a].rating %1 !== 0)) {
+                  x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-half" role="img" class="ion-ios-star-half" aria-label="ios-star-half"></ion-icon>');
+                  ctr=ctr+1;
+                }
+                if (remaining !== 0 && ctr<=5) {
+                  for (var b = 1; b <= (5-ctr); b++) {
+                    x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
+                    ctr=ctr+1;
+                  }
+
+                }
+              }
+              console.log(ctr+" ctr");
             }
-            console.log(ctr+" ctr");
+
           }
         }
 
+
+
       }
 
-    }, 400);
+
+    }, 500);
 
   }
 

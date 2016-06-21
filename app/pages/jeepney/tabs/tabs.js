@@ -3,8 +3,12 @@ import {Page} from 'ionic-angular';
 import {JeepRoutesPage} from '../../jeepney/jeep-routes/jeep.view';
 import {FindRoutesPage} from '../../jeepney/find-routes/routes.view';
 
+
+import {TranslatePipe} from '../../../pipes/translate';
+
 @Page({
-  templateUrl: 'build/pages/jeepney/tabs/tabs.html'
+  templateUrl: 'build/pages/jeepney/tabs/tabs.html',
+  pipes: [TranslatePipe]
 })
 
 export class TabsPage {

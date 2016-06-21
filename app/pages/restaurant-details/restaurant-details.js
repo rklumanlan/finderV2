@@ -2,6 +2,7 @@ import {Page, NavController, NavParams} from 'ionic-angular';
 // import {RestaurantPage} from '../restaurant/restaurant';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
+import {RestaurantMapPage} from '../restaurant-map/restaurant-map';
 
 /*
   Generated class for the RestaurantDetailsPage page.
@@ -18,6 +19,7 @@ export class RestaurantDetailsPage {
   }
 
   constructor(nav,navParams) {
+    this.RestaurantMapPage = RestaurantMapPage;
     this.nav = nav;
     this.navParams = navParams;
     this.item_select = this.navParams.get('item_select');
@@ -30,7 +32,8 @@ export class RestaurantDetailsPage {
     var me = this;
     console.log(me.item_select.rating);
     console.log(me.item_select.opening_hours);
-
+    console.log(me.item_select.geometry.location.lat);
+    console.log("Resto Coordinates");
     // setTimeout(function() {
       var x = document.getElementById("resto_rating");
       var y = document.getElementById("operating_hours");
@@ -77,7 +80,7 @@ export class RestaurantDetailsPage {
         }
         //appending store open
         if (me.item_select.opening_hours!==undefined) {
-          if (me.item_select.opening_hours.open_now!==undefined) {            
+          if (me.item_select.opening_hours.open_now!==undefined) {
             if (me.item_select.opening_hours.open_now === true) {
               y.insertAdjacentHTML( 'beforeend', '<ion-label secondary>Open <ion-icon name="clock" role="img" class="ion-ios-clock-outline" aria-label="ios-clock-outline"></ion-icon></ion-label>');
             }

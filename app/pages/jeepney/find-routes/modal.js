@@ -2,8 +2,12 @@ import {Page,Modal, NavController, ViewController,NavParams, Storage, SqlStorage
 
 import {DataService} from '../../../services/data';
 
+
+import {TranslatePipe} from '../../../pipes/translate';
+
 @Page({
-  templateUrl: 'build/pages/jeepney/find-routes/modal.html'
+  templateUrl: 'build/pages/jeepney/find-routes/modal.html',
+  pipes: [TranslatePipe]
 })
 
 export class MyModal {

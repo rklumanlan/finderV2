@@ -4,9 +4,15 @@
   <div >
       <div *ngFor="#jeepDetail of jeepDetails">
         <img src="{{jeepDetail.image}}">
+<<<<<<< HEAD
         <h1>{{jeepDetail.name}}</h1>
         <h2>{{jeepDetail.color}}</h2>
         <h5>Route Description:<br/>{{jeepDetail.route}}</h5>
+=======
+        <h2>{{jeepDetail.name|translate}}</h2>
+        <h3>{{jeepDetail.color|translate}}</h3>
+        <h4>{{'Route Description:'|translate}}<br/>{{jeepDetail.route|translate}}</h4>
+>>>>>>> ad17b44490b14c6dd5c802e1fbdb66621b97a375
         <h6><br/>{{jeepDetail.route2}}</h6>
         <button full  (click)="presentModal()">View Map</button>
       </div>
