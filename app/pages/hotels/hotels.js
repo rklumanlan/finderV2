@@ -25,7 +25,6 @@ export class HotelsPage {
     this.geolocationService = geolocationService;
     this.HotelsPage = HotelsPage;
     this.HotelDetailsPage = HotelDetailsPage;
-    // this.setHotelRating();
 
     this.details = navParams.get('geoloc');
 
@@ -37,6 +36,7 @@ export class HotelsPage {
 
     this.items = null;
 
+    this.setHotelRating();
     console.log(this.details);
     console.log("Hotels list working");
   }
@@ -51,7 +51,7 @@ export class HotelsPage {
         // me.setRating();
 
 
-      }, 8000);
+      }, 2000);
     });
   }
 
@@ -87,61 +87,61 @@ export class HotelsPage {
     }
   }
 
-//   setHotelRating(){
-//     var me = this;
-//     console.log("setHotelRating");
-//     setTimeout(function() {
-//
-//       var x = document.getElementsByClassName('hotel_rating');
-//       console.log(document.getElementsByClassName('hotel_rating'));
-//       // var y = document.getElementsById("itm_hours");
-//       var rating,half,remaining;
-//
-//       for (var a = 0; a < me.items.length; a++) {
-//         //rating number
-//         rating = Math.floor(me.items[a].rating);
-//         //get decimal num if there is
-//         half = (me.items[a].rating % 1).toFixed(1);
-//         //reamianing stars to append
-//         remaining = Math.floor(5 - me.items[a].rating);
-//
-//           if (me.items[a].rating!=0) {
-//             var ctr = 0;
-//             for (var b = 1; b <= rating; b++) {
-//               x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star" role="img" class="ion-ios-star" aria-label="ios-star"></ion-icon>');
-//               ctr=ctr+1;
-//             }
-//             //int
-//             if (me.items[a].rating % 1 === 0) {
-//               if (remaining !== 0 && ctr<=5) {
-//                 for (var b = 1; b <= (5-ctr); b++) {
-//                   x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
-//                 }
-//                 ctr=ctr+1;
-//               }
-//             }
-//             //float
-//             else if (me.items[a].rating % 1 !== 0) {
-//               if (half !== 0.0 && (me.items[a].rating %1 !== 0)) {
-//                 x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-half" role="img" class="ion-ios-star-half" aria-label="ios-star-half"></ion-icon>');
-//                 ctr=ctr+1;
-//               }
-//               if (remaining !== 0 && ctr<=5) {
-//                 for (var b = 1; b <= (5-ctr); b++) {
-//                   x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
-//                   ctr=ctr+1;
-//                 }
-//
-//               }
-//             }
-//             console.log(ctr+" ctr");
-//           }
-//         // }
-//
-//       }
-//
-//     }, 400);
-//
-// }
+  setHotelRating(){
+    var me = this;
+    console.log("setHotelRating");
+    setTimeout(function() {
+
+      var x = document.getElementsByClassName('hotel_rating');
+      console.log(document.getElementsByClassName('hotel_rating'));
+      // var y = document.getElementsById("itm_hours");
+      var rating,half,remaining;
+
+      for (var a = 0; a < me.items.length; a++) {
+        //rating number
+        rating = Math.floor(me.items[a].rating);
+        //get decimal num if there is
+        half = (me.items[a].rating % 1).toFixed(1);
+        //reamianing stars to append
+        remaining = Math.floor(5 - me.items[a].rating);
+
+          if (me.items[a].rating!=0) {
+            var ctr = 0;
+            for (var b = 1; b <= rating; b++) {
+              x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star" role="img" class="ion-ios-star" aria-label="ios-star"></ion-icon>');
+              ctr=ctr+1;
+            }
+            //int
+            if (me.items[a].rating % 1 === 0) {
+              if (remaining !== 0 && ctr<=5) {
+                for (var b = 1; b <= (5-ctr); b++) {
+                  x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
+                }
+                ctr=ctr+1;
+              }
+            }
+            //float
+            else if (me.items[a].rating % 1 !== 0) {
+              if (half !== 0.0 && (me.items[a].rating %1 !== 0)) {
+                x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-half" role="img" class="ion-ios-star-half" aria-label="ios-star-half"></ion-icon>');
+                ctr=ctr+1;
+              }
+              if (remaining !== 0 && ctr<=5) {
+                for (var b = 1; b <= (5-ctr); b++) {
+                  x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
+                  ctr=ctr+1;
+                }
+
+              }
+            }
+            console.log(ctr+" ctr");
+          }
+        // }
+
+      }
+
+    }, 400);
+
+}
 
 }

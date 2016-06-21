@@ -51,7 +51,7 @@ export class MallsPage {
         // me.setRating();
 
 
-      }, 8000);
+      }, 2000);
     });
   }
 
