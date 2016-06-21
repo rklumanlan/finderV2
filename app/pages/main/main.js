@@ -15,9 +15,13 @@ import {DataService} from '../../services/data';
 // import {GoogleMapsService} from '../../providers/google-maps-service/google-maps-service';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 
+
+import {TranslatePipe} from '../../pipes/translate';
+
 @Page({
   templateUrl: 'build/pages/main/main.html',
-  providers: [GeolocationService]
+  providers: [GeolocationService],
+  pipes: [TranslatePipe]
 
 })
 

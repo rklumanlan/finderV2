@@ -6,52 +6,52 @@
 -->
 <ion-navbar *navbar primary>
   <ion-toolbar >
-    <ion-title >Restaurants</ion-title>
+    <ion-title >{{'Restaurants'|translate}}</ion-title>
   </ion-toolbar>
 </ion-navbar>
 <ion-toolbar id="sort_toolbar">
     <ion-grid>
       <ion-row class="sort_grid">
         <ion-col width-33>
-          <span class="sort_label">Place Type</span>
+          <span class="sort_label">{{'Place Type'|translate}}</span>
           <ion-item class="slct">
-              <ion-label class="input_lbl">Place Type</ion-label>
-              <ion-select id ='1' [(ngModel)]="placeType" (ngModelChange)="updatePlaceType($event)" class="drpdown">
-                <ion-option value="restaurant" >Restaurant</ion-option>
-                <ion-option value="cafe">Cafe</ion-option>
+              <ion-label class="input_lbl">{{'Place Type'|translate}}</ion-label>
+              <ion-select id ='1' [(ngModel)]="placeType" (ngModelChange)="updatePlaceType($event)" class="drpdown" okText="OK" cancelText="{{'Cancel'|translate}}">
+                <ion-option value="restaurant" >{{'Restaurant'|translate}}</ion-option>
+                <ion-option value="cafe">{{'Cafe'|translate}}</ion-option>
               </ion-select>
           </ion-item>
         </ion-col>
 
         <ion-col width-33>
-          <span class="sort_label">Cuisine</span>
+          <span class="sort_label">{{'Cuisine'|translate}}</span>
           <ion-item class="slct">
-            <ion-label id ='2' class="input_lbl">Cuisine</ion-label>
-            <ion-select id="cuisine" [(ngModel)]="cuisine"  (ngModelChange)="updateCuisine($event)" class="drpdown">
-              <ion-option value="food" >Any Cuisine</ion-option>
-              <ion-option value="American">American</ion-option>
-              <ion-option value="Chinese">Chinese</ion-option>
-              <ion-option value="Filipino">Filipino</ion-option>
-              <ion-option value="Indian">Indian</ion-option>
-              <ion-option value="Italian">Italian</ion-option>
-              <ion-option value="Japanese">Japanese</ion-option>
-              <ion-option value="Lebanese">Lebanese</ion-option>
-              <ion-option value="Mexican">Mexican</ion-option>
-              <ion-option value="Spanish">Spanish</ion-option>
-              <ion-option value="Thai">Thai</ion-option>
-              <ion-option value="Vietnamese">Vietnamese</ion-option>
+            <ion-label id ='2' class="input_lbl">{{'Cuisine'|translate}}</ion-label>
+            <ion-select id="cuisine" [(ngModel)]="cuisine"  (ngModelChange)="updateCuisine($event)" class="drpdown" okText="OK" cancelText="{{'Cancel'|translate}}">
+              <ion-option value="food" >{{'Any Cuisine'|translate}}</ion-option>
+              <ion-option value="American">{{'American'|translate}}</ion-option>
+              <ion-option value="Chinese">{{'Chinese'|translate}}</ion-option>
+              <ion-option value="Filipino">{{'Filipino'|translate}}</ion-option>
+              <ion-option value="Indian">{{'Indian'|translate}}</ion-option>
+              <ion-option value="Italian">{{'Italian'|translate}}</ion-option>
+              <ion-option value="Japanese">{{'Japanese'|translate}}</ion-option>
+              <ion-option value="Lebanese">{{'Lebanese'|translate}}</ion-option>
+              <ion-option value="Mexican">{{'Mexican'|translate}}</ion-option>
+              <ion-option value="Spanish">{{'Spanish'|translate}}</ion-option>
+              <ion-option value="Thai">{{'Thai'|translate}}</ion-option>
+              <ion-option value="Vietnamese">{{'Vietnamese'|translate}}</ion-option>
             </ion-select>
           </ion-item>
         </ion-col>
 
         <ion-col width-33>
-          <span class="sort_label">Sort</span>
+          <span class="sort_label">{{'Sort'|translate}}</span>
           <ion-item class="slct sort">
-            <ion-label class="input_lbl">Sort</ion-label>
-            <ion-select [(ngModel)]="sort" (ngModelChange)="updateSort($event)" class="drpdown">
-              <ion-option value="Distance">Distance</ion-option>
-              <ion-option value="Alphabetically">Alphabetically</ion-option>
-              <ion-option value="Rating">Rating</ion-option>
+            <ion-label class="input_lbl">{{'Sort'|translate}}</ion-label>
+            <ion-select [(ngModel)]="sort" (ngModelChange)="updateSort($event)" class="drpdown" okText="OK" cancelText="{{'Cancel'|translate}}">
+              <ion-option value="Distance">{{'Distance'|translate}}</ion-option>
+              <ion-option value="Alphabetically">{{'Alphabetically'|translate}}</ion-option>
+              <ion-option value="Rating">{{'Rating'|translate}}</ion-option>
             </ion-select>
           </ion-item>
         </ion-col>

@@ -1,6 +1,8 @@
 import {Page, NavParams, NavController, Alert} from 'ionic-angular';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {MainPage} from '../main/main';
+
+import {TranslatePipe} from '../../pipes/translate';
 // import {RestaurantPage} from '../restaurant/restaurant';
 /*
   Generated class for the LandingpagePage page.
@@ -10,7 +12,8 @@ import {MainPage} from '../main/main';
 */
 @Page({
   templateUrl: 'build/pages/landingpage/landingpage.html',
-  providers: [GeolocationService]
+  providers: [GeolocationService],
+  pipes: [TranslatePipe]
 })
 export class LandingPage {
   static get parameters() {

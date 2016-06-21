@@ -4,8 +4,12 @@ import {MyModal} from '../../jeepney/find-routes/modal';
 
 import {RoutesMapsPage} from '../../jeepney/find-routes/routes.map';
 
+
+import {TranslatePipe} from '../../../pipes/translate';
+
 @Page({
-  templateUrl: 'build/pages/jeepney/find-routes/routes.view.html'
+  templateUrl: 'build/pages/jeepney/find-routes/routes.view.html',
+  pipes: [TranslatePipe]
 })
 export class FindRoutesPage {
   static get parameters(){

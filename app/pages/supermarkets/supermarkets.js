@@ -1,5 +1,8 @@
 import {Page, NavController} from 'ionic-angular';
 
+
+import {TranslatePipe} from '../../pipes/translate';
+
 /*
   Generated class for the SupermarketsPage page.
 
@@ -8,6 +11,7 @@ import {Page, NavController} from 'ionic-angular';
 */
 @Page({
   templateUrl: 'build/pages/supermarkets/supermarkets.html',
+  pipes: [TranslatePipe]
 })
 export class SupermarketsPage {
   static get parameters() {

@@ -5,8 +5,12 @@ import {DataService} from '../../../services/data';
 //
 import {JeepDetailsPage} from '../../jeepney/jeep-routes/jeep.details';
 
+
+import {TranslatePipe} from '../../../pipes/translate';
+
 @Page({
-  templateUrl: 'build/pages/jeepney/jeep-routes/jeep.view.html'
+  templateUrl: 'build/pages/jeepney/jeep-routes/jeep.view.html',
+  pipes: [TranslatePipe]
 })
 
 export class JeepRoutesPage {
