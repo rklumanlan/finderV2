@@ -47,7 +47,6 @@ export class RestaurantPage {
     this.items = [];
     this.res = null;
     this.count = null;
-
   }
 
   onPageWillEnter(){
@@ -178,8 +177,6 @@ export class RestaurantPage {
     var me = this;
     console.log('setRating');
     setTimeout(function() {
-
-
 
       var x = document.getElementsByClassName("itm_rating");
       var y = document.getElementsByClassName("itm_hours");

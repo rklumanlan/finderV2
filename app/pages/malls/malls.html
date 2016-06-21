@@ -5,20 +5,66 @@
   Ionic pages and navigation.
 -->
 <ion-navbar *navbar primary>
-  <ion-toolbar class="toolbar">
+  <ion-toolbar >
     <ion-title>{{'Malls'|translate}}</ion-title>
-    <ion-buttons end>
-      <button>
-        <ion-icon name="search"></ion-icon>
-      </button>
-      <button>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-navbar>
 
-<ion-content padding class="malls">
-  <div class="mainBackDiv">
-  </div>
-</ion-content>
+<ion-toolbar id="sort_toolbar">
+    <ion-grid>
+      <ion-row class="sort_grid">
+        <ion-col width-33>
+          <span class="sort_label">Sort</span>
+          <ion-item class="slct sort">
+            <ion-label class="input_lbl">Sort</ion-label>
+            <ion-select [(ngModel)]="sort" (ngModelChange)="updateSort($event)" class="drpdown">
+              <ion-option value="Distance">Distance</ion-option>
+              <ion-option value="Alphabetically">Alphabetically</ion-option>
+              <ion-option value="Rating">Rating</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+
+</ion-toolbar>
+
+<ion-content>
+    <loading-modal id="loading" ></loading-modal>
+
+    <div class="bg" >
+
+  <!--Places results  -->
+
+      <div id="map" style="height: 100%;display:none"></div>
+
+      <ion-list>
+        <button ion-item *ngFor="#item_mall of items" [navPush]="[MallDetailsPage, {item_select_mall:item_mall}]">
+
+          <ion-row>
+            <ion-col>
+              <span class="itm_name">{{item_mall.name}}</span>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col width-75>
+              <ul class="itm_info">
+                <!-- <li><span class="itm_name">{{item.name}}</span></li> -->
+                <!-- <li><span class="itm_type">{{item_hotel.types[0]}} {{item_hotel.types[1]}}</span></li> -->
+                <li><span class="itm_address">{{item_mall.vicinity}}</span></li>
+                <!-- <li><span class="itm_hours"></span></li> -->
+              </ul>
+            </ion-col>
+
+            <ion-col width-25>
+              <ul class="itm_info_right">
+                <li><span class="mall_rating"></span></li>
+                <li><span class="itm_distance">{{item_mall.distance}}</span></li>
+              </ul>
+            </ion-col>
+          </ion-row>
+        </button>
+      </ion-list>
+    </div>
+  </ion-content>

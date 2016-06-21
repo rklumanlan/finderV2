@@ -146,16 +146,16 @@ export class MainPage{
       this.nav.push( RestaurantPage, {geoloc: geoloc} );
     }
     else if(ctr == 'hotels'){
-      this.nav.push( HotelsPage );
+      this.nav.push( HotelsPage, {geoloc: geoloc} );
     }
     else if(ctr == 'malls'){
-      this.nav.push( MallsPage );
+      this.nav.push( MallsPage, {geoloc: geoloc}  );
     }
     else if(ctr == 'supermarkets'){
-      this.nav.push( SupermarketsPage );
+      this.nav.push( SupermarketsPage, {geoloc: geoloc}  );
     }
     else if(ctr == 'salons'){
-      this.nav.push( SalonsPage );
+      this.nav.push( SalonsPage, {geoloc: geoloc}  );
     }
     else if(ctr == 'police'){
       this.nav.push( PolicePage );

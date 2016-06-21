@@ -12,7 +12,7 @@
 <ion-content class="police">
 
   <div class="mainBackDiv">
-    <ion-item-group>
+    <ion-list>
       <button ion-item detail-push *ngFor="#policestation of policestations" [navPush]="[PoliceDetailsPage, { poldetail: policestation}]">
         <h2 class="pol_name">{{policestation.name}}</h2>
         <span class="pol_address">{{policestation.address}}</span><br/>
@@ -23,6 +23,6 @@
           <li><span class="icoMoon icoMoon-marker"></span></li>
         </ul>
       </button>
-    </ion-item-group>
+    </ion-list>
   </div>
 </ion-content>

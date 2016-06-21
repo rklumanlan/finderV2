@@ -1,41 +1,37 @@
 import {Page, NavController, NavParams} from 'ionic-angular';
-// import {RestaurantPage} from '../restaurant/restaurant';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
-import {RestaurantMapPage} from '../restaurant-map/restaurant-map';
 
 /*
-  Generated class for the RestaurantDetailsPage page.
+  Generated class for the HotelDetailsPage page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Page({
-  templateUrl: 'build/pages/restaurant-details/restaurant-details.html',
+  templateUrl: 'build/pages/hotel-details/hotel-details.html',
 })
-export class RestaurantDetailsPage {
+export class HotelDetailsPage {
   static get parameters() {
     return [[NavController],[NavParams]];
   }
 
   constructor(nav,navParams) {
-    this.RestaurantMapPage = RestaurantMapPage;
     this.nav = nav;
     this.navParams = navParams;
-    this.item_select = this.navParams.get('item_select');
-    console.log(this.item_select);
-
-    // this.getRating();
+    this.HotelDetailsPage = HotelDetailsPage;
+    this.item_select_hotel = this.navParams.get('item_select_hotel');
+    console.log(this.item_select_hotel);
   }
 
   onPageLoaded(){
     var me = this;
-    console.log(me.item_select.rating);
-    console.log(me.item_select.opening_hours);
-    console.log(me.item_select.geometry.location.lat);
-    console.log("Resto Coordinates");
+    console.log(me.item_select_hotel.rating);
+    console.log(me.item_select_hotel.opening_hours);
+    console.log(me.item_select_hotel.geometry.location.lat);
+    console.log("Hotel Coordinates");
     // setTimeout(function() {
-      var x = document.getElementById("resto_rating");
+      var x = document.getElementById("hotel_rating");
       var y = document.getElementById("operating_hours");
       var rating,half,remaining;
 
@@ -97,4 +93,5 @@ export class RestaurantDetailsPage {
     // }, 400);
 
   // }
+
 }
