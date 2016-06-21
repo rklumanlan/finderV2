@@ -109,6 +109,7 @@ export class GeolocationService {
 
     me.getPlaces(pageDetails, function(result,status, pagination){
       console.log(pageDetails.geoloc.lat);
+      console.log(pageDetails.geoloc.lng);
         // items =  result;
         // if (status === google.maps.places.PlacesServiceStatus.OK) {
           // if (pagination.hasNextPage) {
@@ -255,13 +256,17 @@ export class GeolocationService {
     // console.log(document.getElementById('police_map'));
     console.log(detail);
 
-
-
     if (page === 'hosp') {
       console.log('entered if');
       mapcoords = {lat: parseFloat(detail.lat), lng: parseFloat(detail.lng)};
       img = 'img/pins/hospital.png';
       mapElem = document.getElementById('hosp_map');
+    }
+    else if (page === 'resto') {
+      console.log('Entered Resto map');
+      mapcoords = {lat: parseFloat(item_select.geometry.lat), lng: parseFloat(item_select.geometry.lng)};
+      img = 'img/pins/hospital.png';
+      mapElem = document.getElementById('resto_map');
     }
     else {
       mapcoords = {lat: parseFloat(detail.lat), lng: parseFloat(detail.lng)};

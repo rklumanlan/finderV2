@@ -1,14 +1,14 @@
 <!--
-  Generated template for the RestaurantDetailsPage page.
+  Generated template for the HotelDetailsPage page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-navbar *navbar primary>
-  <ion-title>{{item_select.name}}</ion-title>
+    <ion-title>{{item_select_hotel.name}}</ion-title>
 </ion-navbar>
 
-<ion-content padding class="restaurant-details card-background-page">
+<ion-content padding class="hotel-details card-background-page">
   <div class="mainBackDiv">
     <ion-card class="item_details">
       <ion-card-content>
@@ -20,12 +20,12 @@
               </ion-col>
 
               <ion-col width-70>
-                <h2 style="font-weight:500;">{{item_select.name}}</h2>
-                {{item_select.vicinity}}
+                <h2 style="font-weight:500;">{{item_select_hotel.name}}</h2>
+                {{item_select_hotel.vicinity}}
               </ion-col>
 
               <ion-col width-10>
-                <span id="resto_rating"></span>
+                <span id="hotel_rating"></span>
               </ion-col>
             </ion-row>
             <ion-row class="hours_row">
@@ -34,7 +34,7 @@
             <ion-row style="margin-top:0; float:right;padding-left: 60%;">
                 <ul id="item_buttons">
                   <li class="item_buttons_li">
-                    <button clear [navPush]="[RestaurantMapPage, {item_select:item}]">
+                    <button clear>
                       <span class="icoMoon-marker"></span>
                     </button><br/>
                     <span style="font-size:9pt; color: #B7B7B7;">Map</span>
