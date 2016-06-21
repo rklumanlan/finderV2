@@ -4,6 +4,9 @@ import {GeolocationService} from '../../providers/geolocation-service/geolocatio
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
 import {SupermarketDetailsPage} from '../supermarket-details/supermarket-details';
 
+
+import {TranslatePipe} from '../../pipes/translate';
+
 /*
   Generated class for the SupermarketsPage page.
 
@@ -12,6 +15,7 @@ import {SupermarketDetailsPage} from '../supermarket-details/supermarket-details
 */
 @Page({
   templateUrl: 'build/pages/supermarkets/supermarkets.html',
+  pipes: [TranslatePipe],
   directives: [LoadingModal],
   providers: [GeolocationService]
 })

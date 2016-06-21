@@ -1,4 +1,4 @@
-import {NavController} from 'ionic-angular';
+import {NavController,Alert} from 'ionic-angular';
 import {Injectable, Inject} from 'angular2/core';
 import {Http} from 'angular2/http';
 

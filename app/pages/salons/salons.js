@@ -4,6 +4,9 @@ import {GeolocationService} from '../../providers/geolocation-service/geolocatio
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
 import {SalonDetailsPage} from '../salon-details/salon-details';
 
+
+import {TranslatePipe} from '../../pipes/translate';
+
 /*
   Generated class for the SalonsPage page.
 
@@ -12,6 +15,7 @@ import {SalonDetailsPage} from '../salon-details/salon-details';
 */
 @Page({
   templateUrl: 'build/pages/salons/salons.html',
+  pipes: [TranslatePipe],
   directives: [LoadingModal],
   providers: [GeolocationService]
 })

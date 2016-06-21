@@ -1,3 +1,8 @@
+import {Page, NavController} from 'ionic-angular';
+
+
+import {TranslatePipe} from '../../pipes/translate';
+
 import {Page, NavController, NavParams} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
@@ -11,6 +16,7 @@ import {MallDetailsPage} from '../mall-details/mall-details';
 */
 @Page({
   templateUrl: 'build/pages/malls/malls.html',
+  pipes:[TranslatePipe],
   directives: [LoadingModal],
   providers: [GeolocationService]
 })

@@ -3,6 +3,8 @@ import {DataService} from '../../services/data';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {PoliceDetailsPage} from '../police-details/police-details';
+
+import {TranslatePipe} from '../../pipes/translate';
 /*
   Generated class for the PolicePage page.
 
@@ -11,7 +13,8 @@ import {PoliceDetailsPage} from '../police-details/police-details';
 */
 @Page({
   templateUrl: 'build/pages/police/police.html',
-  providers: [GeolocationService]
+  providers: [GeolocationService],
+  pipes: [TranslatePipe]
 })
 export class PolicePage {
   static get parameters(){

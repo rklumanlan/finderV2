@@ -2,6 +2,8 @@ import {Page, NavController, NavParams} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
+
+import {TranslatePipe} from '../../pipes/translate';
 import {HotelDetailsPage} from '../hotel-details/hotel-details';
 /*
   Generated class for the HotelsPage page.
@@ -12,6 +14,8 @@ import {HotelDetailsPage} from '../hotel-details/hotel-details';
 @Page({
   templateUrl: 'build/pages/hotels/hotels.html',
   directives: [LoadingModal],
+   providers: [GeolocationService],
+   pipes: [TranslatePipe],
   providers: [GeolocationService]
 })
 export class HotelsPage {

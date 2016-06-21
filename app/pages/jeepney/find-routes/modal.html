@@ -8,13 +8,13 @@
 
 </ion-navbar>
 <ion-toolbar>
-  <ion-searchbar [(ngModel)]="searchQuery" (input)="getItems($event)"></ion-searchbar>
+  <ion-searchbar [(ngModel)]="searchQuery" cancelButtonText="{{'Cancel'|translate}}" placeholder="{{'Search'|translate}}" (input)="getItems($event)"></ion-searchbar>
 </ion-toolbar>
 <ion-content >
 
   <ion-list>
     <button ion-item *ngFor="#item of items"  (click)="validateItem(item)">
-      {{item}}
+      {{item|translate}}
     </button>
   </ion-list>
 </ion-content>
