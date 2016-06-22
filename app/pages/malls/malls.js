@@ -1,5 +1,3 @@
-import {Page, NavController} from 'ionic-angular';
-
 
 import {TranslatePipe} from '../../pipes/translate';
 
