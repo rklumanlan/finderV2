@@ -13,7 +13,7 @@
 <ion-content >
 
   <ion-list>
-    <button ion-item *ngFor="#item of items"  (click)="validateItem(item)">
+    <button ion-item detail-none *ngFor="#item of items"  (click)="validateItem(item)">
       {{item|translate}}
     </button>
   </ion-list>

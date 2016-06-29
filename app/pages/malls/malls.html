@@ -40,7 +40,7 @@
       <div id="map" style="height: 100%;display:none"></div>
 
       <ion-list>
-        <button ion-item *ngFor="#item_mall of items" [navPush]="[MallDetailsPage, {item_select_mall:item_mall}]">
+        <button ion-item detail-none *ngFor="#item_mall of items" [navPush]="[MallDetailsPage, {item_select_mall:item_mall}]">
 
           <ion-row>
             <ion-col>

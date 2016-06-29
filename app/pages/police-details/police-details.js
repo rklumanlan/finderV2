@@ -4,6 +4,9 @@ import {PolicePage} from '../police/police';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
+
+
+import {TranslatePipe} from '../../pipes/translate';
 /*
   Generated class for the PoliceDetailsPage page.
 
@@ -13,7 +16,8 @@ import {LoadingModal} from '../../components/loading-modal/loading-modal';
 @Page({
   templateUrl: 'build/pages/police-details/police-details.html',
   directives: [LoadingModal],
-  providers: [GeolocationService]
+  providers: [GeolocationService],
+  pipes: [TranslatePipe]
 })
 export class PoliceDetailsPage {
   static get parameters() {

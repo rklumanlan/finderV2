@@ -48,12 +48,14 @@ export class GeolocationService {
             let script = document.createElement("script");
             script.id = "geoLocation";
             script.src = 'https://maps.googleapis.com/maps/api/js?key='+me.apiKey+'&libraries=places,geometry';
+            console.log('online');
 
 
             document.body.appendChild(script);
 
         }
         else {
+          console.log("offline, loading map");
           me.disableMap();
 
           // add error handler if offline -- alert box
