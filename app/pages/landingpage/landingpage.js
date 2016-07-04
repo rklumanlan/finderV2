@@ -58,11 +58,15 @@ export class LandingPage {
 
              geoCoords.locationName = locName;
 
+             if (locName!==undefined) {
                setTimeout(function() {
                  me.nav.push(MainPage, { geoloc: geoCoords });
                }, 2000);
                console.log(me.geolocation);
-              });
+             }
+
+
+            });
         },
 
         (error) => {

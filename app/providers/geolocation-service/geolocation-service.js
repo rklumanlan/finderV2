@@ -21,7 +21,7 @@ export class GeolocationService {
     this.connectivity = connectivityService;
     this.mapInitialised = false;
     this.apiKey = 'AIzaSyD4zGo9cejtd83MbUFQL8YU71b8_A5XZpc';
-    this.loadGeolocation();
+    // this.loadGeolocation();
 
     this.latlng = {};
     this.nav = nav;
@@ -56,7 +56,7 @@ export class GeolocationService {
         }
         else {
           console.log("offline, loading map");
-          me.disableMap();
+          me.netErrMsg();
 
           // add error handler if offline -- alert box
         }
@@ -70,7 +70,7 @@ export class GeolocationService {
         }
         else {
             console.log("disabling map");
-            me.disableMap();
+            me.netErrMsg();
 
             // add error handler if offline -- alert box
         }
@@ -146,17 +146,143 @@ export class GeolocationService {
   setLocationName(ctr){
     var me = this;
     var geo;
-    me.getLocationName(ctr, function(result){
-      console.log(result);
-        geo =  result;
-    });
+
+    me.addConnectivityListeners();
+    if (document.getElementById('lndBtnLoc')!==undefined&&document.getElementById('lndLoaderLoc')!==undefined) {
+      document.getElementById('lndBtnLoc').style.display = "inline";
+      document.getElementById('lndLoaderLoc').style.display = "none";
+    }
+    else if (document.getElementById('mainBtnLoc')!==undefined&&document.getElementById('mainLoaderLoc')!==undefined) {
+      document.getElementById('mainBtnLoc').style.display = "inline";
+      document.getElementById('mainLoaderLoc').style.display = "none";
+    }
+
+    if(typeof google == "undefined" || typeof google.maps == "undefined"){
+      //
+      if(me.connectivity.isOnline()){
+        me.getLocationName(ctr, function(result){
+          console.log(result);
+            geo =  result;
+        });
+      }
+      else {
+        me.netErrMsg();
+      }
+    }
+    else {
+
+      if(me.connectivity.isOnline()){
+        me.getLocationName(ctr, function(result){
+          console.log(result);
+            geo =  result;
+        });
+      }
+      else {
+        me.netErrMsg();
+      }
+
+
+    }
 
     return new Promise(function(resolve, reject) {
       // Only `delay` is able to resolve or reject the promise
       setTimeout(function() {
-        resolve(geo); // After 3 seconds, resolve the promise with value 42
+        console.log(geo);
+        // if (geo===undefined) {
+        //   me.netErrMsg();
+        // }else {
+          resolve(geo); // After 3 seconds, resolve the promise with value 42
+        // }
       }, 1000);
     });
+
+
+
+  }
+
+  //listener when online or offline
+  addConnectivityListeners(){
+    console.log('dConnecti');
+    var me = this;
+
+    // var onOnline = function(){
+    //   console.log('onlineeeeee');
+    //     setTimeout(function(){
+    //         if(typeof google == "undefined" || typeof google.maps == "undefined"){
+    //             me.loadGeolocation();
+    //         } else {
+    //
+    //         }
+    //     },1000);
+    // };
+    //
+    // var onOffline = function(){
+    //   console.log('offlineeeee');
+    //     me.netErrMsg();
+    // };
+
+    // window.addEventListener('online', me.onOnline );
+    // window.addEventListener('offline', me.onOffline );
+
+    // window.addEventListener('online', function(e) {
+    //     console.log("ONLINE");
+    //     setTimeout(function(){
+    //
+    //         if(typeof google == "undefined" || typeof google.maps == "undefined"){
+    //           console.log('undeffffff');
+    //             me.loadGeolocation();
+    //             console.log(me.loadGeolocation());
+    //         } else {
+    //
+    //         }
+    //     },2000);
+    // }, false);
+    //
+    //  window.addEventListener('offline', function(e) {
+    //     console.log("OFFLINE");
+    // }, false);
+
+    var me = this;
+
+    var onOnline = () => {
+        setTimeout(() => {
+            if(typeof google == "undefined" || typeof google.maps == "undefined"){
+                this.loadGeolocation();
+            } else {
+
+            }
+        }, 2000);
+    };
+
+    var onOffline = () => {
+        this.netErrMsg();
+    };
+
+    document.addEventListener('online', onOnline, false);
+    document.addEventListener('offline', onOffline, false);
+
+  }
+
+  onOnline(){
+    var me = this;
+    console.log('onlineeeeee');
+    console.log(loadGeolocation());
+      // setTimeout(function(){
+
+          // if(typeof google == "undefined" || typeof google.maps == "undefined"){
+          //   console.log('undeffffff');
+              // me.loadGeolocation();
+          //     console.log(me.loadGeolocation());
+          // } else {
+          //
+          // }
+      // },2000);
+  }
+
+  onOffline(){
+    var me = this;
+    console.log('offlineeeee');
+      me.netErrMsg();
   }
 
   getLocationName(ctr, callback) {
@@ -164,7 +290,6 @@ export class GeolocationService {
       var latlngStr = input.split(',', 2);
 
       var locationName;
-      console.log(new google.maps.Geocoder());
       var geocoder = new google.maps.Geocoder();
       var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
 
@@ -192,7 +317,7 @@ export class GeolocationService {
               }
           }
           else {
-              locationName = "Couldn't find location. Error code: " + status;
+              locationName = "";
           }
           callback(locationName);
       });
@@ -313,19 +438,20 @@ export class GeolocationService {
     return me.latlng;
   }
 
-  disableMap(){
+  netErrMsg(){
+    var me = this;
     console.log("disable map");
     let alert = Alert.create({
       title: 'No connection',
       subTitle: 'Looks like there is a problem with your network connection. Try again later.',
       buttons: [{
-        text: 'OK',
-        handler: data => {
-          this.nav.pop();
-        }
+        text: 'OK'
       }]
     });
-    this.nav.present(alert);
+
+    me.nav.present(alert);
+
+
   }
 
 }
