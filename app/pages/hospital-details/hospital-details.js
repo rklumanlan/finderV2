@@ -33,6 +33,7 @@ export class HospitalDetailsPage {
     this.HospitalsPage = HospitalsPage;
 
     this.hospdetail = this.navParams.get('hospdetail');
+    console.log(this.hospdetail);
   }
 
   onPageDidEnter(){

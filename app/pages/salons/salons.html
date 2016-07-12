@@ -14,6 +14,26 @@
     <ion-grid>
       <ion-row class="sort_grid">
         <ion-col width-33>
+          <span class="sort_label">Place Type</span>
+          <ion-item class="slct">
+              <ion-label class="input_lbl">Place Type</ion-label>
+              <ion-select id ='1' [(ngModel)]="placeType" (ngModelChange)="updatePlaceType($event)" class="drpdown" okText="OK" cancelText="Cancel">
+                <ion-option value="beauty_salon">Beauty Salon</ion-option>
+              </ion-select>
+          </ion-item>
+        </ion-col>
+
+        <ion-col width-33>
+          <span class="sort_label">Cuisine</span>
+          <ion-item class="slct">
+            <ion-label id ='2' class="input_lbl">Cuisine</ion-label>
+            <ion-select id="cuisine" [(ngModel)]="cuisine"  (ngModelChange)="updateCuisine($event)" class="drpdown" okText="OK" cancelText="Cancel">
+              <ion-option value="food">Any Cuisine</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+
+        <ion-col width-33>
           <span class="sort_label">Sort</span>
           <ion-item class="slct sort">
             <ion-label class="input_lbl">Sort</ion-label>
@@ -24,7 +44,6 @@
             </ion-select>
           </ion-item>
         </ion-col>
-
       </ion-row>
     </ion-grid>
 
@@ -53,13 +72,13 @@
                 <!-- <li><span class="itm_name">{{item.name}}</span></li> -->
                 <!-- <li><span class="itm_type">{{item_hotel.types[0]}} {{item_hotel.types[1]}}</span></li> -->
                 <li><span class="itm_address">{{item_salon.vicinity}}</span></li>
-                <!-- <li><span class="itm_hours"></span></li> -->
+                <li><span class="salon_hours"></span></li>
               </ul>
             </ion-col>
 
             <ion-col width-25>
               <ul class="itm_info_right">
-                <li><span class="mall_rating"></span></li>
+                <li><span class="salon_rating"></span></li>
                 <li><span class="itm_distance">{{item_salon.distance}}</span></li>
               </ul>
             </ion-col>

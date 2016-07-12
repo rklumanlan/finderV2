@@ -1,9 +1,9 @@
-import {Page, NavController, NavParams} from 'ionic-angular';
+import {Page, NavController, NavParams, Content} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
-
-import {TranslatePipe} from '../../pipes/translate';
+import {ViewChild} from 'angular2/core';
+// import {TranslatePipe} from '../../pipes/translate';
 import {HotelDetailsPage} from '../hotel-details/hotel-details';
 /*
   Generated class for the HotelsPage page.
@@ -15,8 +15,10 @@ import {HotelDetailsPage} from '../hotel-details/hotel-details';
   templateUrl: 'build/pages/hotels/hotels.html',
   directives: [LoadingModal],
    providers: [GeolocationService],
-   pipes: [TranslatePipe],
-  providers: [GeolocationService]
+   queries: {
+     content: new ViewChild(Content)
+   }
+  //  pipes: [TranslatePipe]
 })
 export class HotelsPage {
   static get parameters() {
@@ -29,7 +31,6 @@ export class HotelsPage {
     this.geolocationService = geolocationService;
     this.HotelsPage = HotelsPage;
     this.HotelDetailsPage = HotelDetailsPage;
-    // this.setHotelRating();
 
     this.details = navParams.get('geoloc');
 
@@ -37,30 +38,75 @@ export class HotelsPage {
 
     this.placeType = 'lodging';
     this.sort = 'Distance';
-    // this.cuisine = 'food';
+    this.cuisine = 'food';
 
-    this.items = null;
+    this.items = [];
+    this.res = null;
+    this.count = null;
 
     console.log(this.details);
     console.log("Hotels list working");
   }
-  onPageLoaded(){
+
+  onPageWillEnter(){
     var me = this;
     me.params.geoloc = this.details;
     me.params.placeType = 'lodging';
-    // me.params.cuisine = 'food';
+    me.params.cuisine = 'food';
+
+    document.getElementById('cuisine').getElementsByTagName('button')[0].disabled=true;
+    document.getElementById("cuisine").style.color = "#C2C2C2";
+
     me.geolocationService.setPlaces(me.params).then(function (res) {
       setTimeout(function() {
-        me.items = res;
-        // me.setRating();
+        console.log(res);
+        me.res = res;
+        me.items = [];
+        for (me.count = 0; me.count < 20; me.count++) {
+          if (res[me.count]!==undefined) {
+            me.items.push(res[me.count]);
+          }
 
-
-      }, 8000);
+        }
+          console.log(me.items);
+        me.setHotelRating();
+      }, 2000);
     });
+
+
+  }
+
+  doInfinite(infiniteScroll) {
+    //visibility:hidden
+    var me = this;
+    console.log('Begin async operation');
+    console.log(me.res);
+    console.log( me.count);
+    console.log('Infinite scroll working');
+    setTimeout(() => {
+      var i;
+      for (i = me.count; i < me.res.length; i++) {
+        me.items.push(me.res[i]);
+        console.log(i);
+      }
+      me.setHotelRating();
+
+      me.count = i;
+
+
+
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+      if (i==me.res.length) {
+        infiniteScroll.enable(false);
+      }
+    }, 1000);
+
   }
 
   updateSort(){
     var me = this;
+    me.setHotelRating();
     me.sortItems(me.sort);
   }
 
@@ -89,63 +135,67 @@ export class HotelsPage {
       });
       console.log(me.items);
     }
+    me.content.scrollToTop();
   }
 
-//   setHotelRating(){
-//     var me = this;
-//     console.log("setHotelRating");
-//     setTimeout(function() {
-//
-//       var x = document.getElementsByClassName('hotel_rating');
-//       console.log(document.getElementsByClassName('hotel_rating'));
-//       // var y = document.getElementsById("itm_hours");
-//       var rating,half,remaining;
-//
-//       for (var a = 0; a < me.items.length; a++) {
-//         //rating number
-//         rating = Math.floor(me.items[a].rating);
-//         //get decimal num if there is
-//         half = (me.items[a].rating % 1).toFixed(1);
-//         //reamianing stars to append
-//         remaining = Math.floor(5 - me.items[a].rating);
-//
-//           if (me.items[a].rating!=0) {
-//             var ctr = 0;
-//             for (var b = 1; b <= rating; b++) {
-//               x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star" role="img" class="ion-ios-star" aria-label="ios-star"></ion-icon>');
-//               ctr=ctr+1;
-//             }
-//             //int
-//             if (me.items[a].rating % 1 === 0) {
-//               if (remaining !== 0 && ctr<=5) {
-//                 for (var b = 1; b <= (5-ctr); b++) {
-//                   x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
-//                 }
-//                 ctr=ctr+1;
-//               }
-//             }
-//             //float
-//             else if (me.items[a].rating % 1 !== 0) {
-//               if (half !== 0.0 && (me.items[a].rating %1 !== 0)) {
-//                 x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-half" role="img" class="ion-ios-star-half" aria-label="ios-star-half"></ion-icon>');
-//                 ctr=ctr+1;
-//               }
-//               if (remaining !== 0 && ctr<=5) {
-//                 for (var b = 1; b <= (5-ctr); b++) {
-//                   x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
-//                   ctr=ctr+1;
-//                 }
-//
-//               }
-//             }
-//             console.log(ctr+" ctr");
-//           }
-//         // }
-//
-//       }
-//
-//     }, 400);
-//
-// }
+  setHotelRating(){
+    var me = this;
+    console.log('setHotelRating');
+    setTimeout(function() {
 
+      var s = document.getElementsByClassName("hotel_rating");
+      var rating,half,remaining;
+
+      for (var a = 0; a < me.items.length; a++) {
+        console.log(me.items[a].rating);
+        console.log(s[a]);
+        if (s[a]!==undefined) {
+          //rating number
+          rating = Math.floor(me.items[a].rating);
+          //get decimal num if there is
+          half = (me.items[a].rating % 1).toFixed(1);
+          //reamianing stars to append
+          remaining = Math.floor(5 - me.items[a].itm_rating);
+
+          if (me.items[a].rating!=0) {
+            var ctr = 0;
+            if (s[a].innerHTML=="") {
+              for (var b = 1; b <= rating; b++) {
+                s[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star" role="img" class="ion-ios-star" aria-label="ios-star"></ion-icon>');
+                ctr=ctr+1;
+              }
+              //int
+              if (me.items[a].rating % 1 === 0) {
+                if (remaining !== 0 && ctr<=5) {
+                  for (var b = 1; b <= (5-ctr); b++) {
+                    s[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
+                  }
+                  ctr=ctr+1;
+                }
+              }
+              //float
+              else if (me.items[a].rating % 1 !== 0) {
+                if (half !== 0.0 && (me.items[a].rating %1 !== 0)) {
+                  s[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-half" role="img" class="ion-ios-star-half" aria-label="ios-star-half"></ion-icon>');
+                  ctr=ctr+1;
+                }
+                if (remaining !== 0 && ctr<=5) {
+                  for (var b = 1; b <= (5-ctr); b++) {
+                    s[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
+                    ctr=ctr+1;
+                  }
+
+                }
+              }
+              console.log(ctr+" ctr");
+            }
+
+          }
+        }
+
+      }
+
+    }, 500);
+
+  }
 }

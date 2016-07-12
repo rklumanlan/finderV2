@@ -4,9 +4,7 @@ import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
 import {RestaurantDetailsPage} from '../restaurant-details/restaurant-details';
-
 import {ViewChild} from 'angular2/core';
-
 import {TranslatePipe} from '../../pipes/translate';
 /*
   Generated class for the RestaurantPage page.
@@ -112,7 +110,8 @@ export class RestaurantPage {
     else {
       me.params.cuisine = me.cuisine;
       document.getElementById('cuisine').getElementsByTagName('button')[0].disabled=false;
-      document.getElementById("cuisine").style.color = "#C2C2C2";
+      document.getElementById("cuisine").style.color = "#000";
+      console.log(document.getElementById('cuisine'));
     }
     me.geolocationService.setPlaces(me.params).then(function (res) {
       me.items = [];
@@ -190,7 +189,7 @@ export class RestaurantPage {
           //get decimal num if there is
           half = (me.items[a].rating % 1).toFixed(1);
           //reamianing stars to append
-          remaining = Math.floor(5 - me.items[a].rating);
+          remaining = Math.floor(5 - me.items[a].itm_rating);
           //appending store open
           if (me.items[a].opening_hours!==undefined) {
             if (me.items[a].opening_hours.open_now!==undefined) {
@@ -236,22 +235,13 @@ export class RestaurantPage {
                     x[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
                     ctr=ctr+1;
                   }
-
                 }
               }
               console.log(ctr+" ctr");
             }
-
           }
         }
-
-
-
       }
-
-
     }, 500);
-
   }
-
 }
