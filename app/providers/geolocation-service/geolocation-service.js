@@ -21,7 +21,7 @@ export class GeolocationService {
     this.connectivity = connectivityService;
     this.mapInitialised = false;
     this.apiKey = 'AIzaSyD4zGo9cejtd83MbUFQL8YU71b8_A5XZpc';
-    // this.loadGeolocation();
+    this.loadGeolocation();
 
     this.latlng = {};
     this.nav = nav;
@@ -33,9 +33,10 @@ export class GeolocationService {
 
   }
 
-  loadGeolocation(ctr){
-    console.log(ctr);
+  loadGeolocation(){
     var me = this;
+
+    me.addConnectivityListeners();
 
     if(typeof google == "undefined" || typeof google.maps == "undefined"){
 
@@ -55,10 +56,12 @@ export class GeolocationService {
 
         }
         else {
-          console.log("offline, loading map");
-          me.netErrMsg();
 
-          // add error handler if offline -- alert box
+          setTimeout(function() {
+            console.log("offline, loading map");
+            me.netErrMsg();
+            console.log('a1');
+          }, 3000);
         }
     }
     else {
@@ -71,6 +74,7 @@ export class GeolocationService {
         else {
             console.log("disabling map");
             me.netErrMsg();
+            console.log('a2');
 
             // add error handler if offline -- alert box
         }
@@ -147,7 +151,7 @@ export class GeolocationService {
     var me = this;
     var geo;
 
-    me.addConnectivityListeners();
+
     if (document.getElementById('lndBtnLoc')!==undefined&&document.getElementById('lndLoaderLoc')!==undefined) {
       document.getElementById('lndBtnLoc').style.display = "inline";
       document.getElementById('lndLoaderLoc').style.display = "none";
@@ -202,87 +206,45 @@ export class GeolocationService {
 
   //listener when online or offline
   addConnectivityListeners(){
-    console.log('dConnecti');
     var me = this;
 
-    // var onOnline = function(){
-    //   console.log('onlineeeeee');
-    //     setTimeout(function(){
-    //         if(typeof google == "undefined" || typeof google.maps == "undefined"){
-    //             me.loadGeolocation();
-    //         } else {
-    //
-    //         }
-    //     },1000);
-    // };
-    //
-    // var onOffline = function(){
-    //   console.log('offlineeeee');
-    //     me.netErrMsg();
-    // };
-
-    // window.addEventListener('online', me.onOnline );
-    // window.addEventListener('offline', me.onOffline );
-
-    // window.addEventListener('online', function(e) {
-    //     console.log("ONLINE");
-    //     setTimeout(function(){
-    //
-    //         if(typeof google == "undefined" || typeof google.maps == "undefined"){
-    //           console.log('undeffffff');
-    //             me.loadGeolocation();
-    //             console.log(me.loadGeolocation());
-    //         } else {
-    //
-    //         }
-    //     },2000);
-    // }, false);
-    //
-    //  window.addEventListener('offline', function(e) {
-    //     console.log("OFFLINE");
-    // }, false);
-
-    var me = this;
+    var lastStatus = "";
 
     var onOnline = () => {
+      console.log("ONLINE");
+      if(lastStatus != 'connected') {
+        lastStatus = 'connected';
+        console.log(lastStatus);
+
         setTimeout(() => {
             if(typeof google == "undefined" || typeof google.maps == "undefined"){
-                this.loadGeolocation();
+                me.loadGeolocation();
             } else {
 
             }
         }, 2000);
+      }
+
     };
 
+
+
     var onOffline = () => {
-        this.netErrMsg();
+
+      console.log('OFFLINE');
+      if(lastStatus != 'disconnected') {
+        lastStatus = 'disconnected';
+        console.log(lastStatus);
+        console.log('a3');
+        me.netErrMsg();
+      }
+
+
     };
 
     document.addEventListener('online', onOnline, false);
     document.addEventListener('offline', onOffline, false);
 
-  }
-
-  onOnline(){
-    var me = this;
-    console.log('onlineeeeee');
-    console.log(loadGeolocation());
-      // setTimeout(function(){
-
-          // if(typeof google == "undefined" || typeof google.maps == "undefined"){
-          //   console.log('undeffffff');
-              // me.loadGeolocation();
-          //     console.log(me.loadGeolocation());
-          // } else {
-          //
-          // }
-      // },2000);
-  }
-
-  onOffline(){
-    var me = this;
-    console.log('offlineeeee');
-      me.netErrMsg();
   }
 
   getLocationName(ctr, callback) {

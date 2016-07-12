@@ -43,6 +43,8 @@ export class LandingPage {
 
     console.log("geolocation working");
 
+    var options = {maximumAge: 0, timeout: 10000, enableHighAccuracy:true};
+
     navigator.geolocation.getCurrentPosition(
 
         (position) => {
@@ -70,16 +72,31 @@ export class LandingPage {
         },
 
         (error) => {
-            console.log(error);
+          switch(error.code)
+          {
+          case error.PERMISSION_DENIED:
+            console.log("User denied the request for Geolocation.");
+            break;
+          case error.POSITION_UNAVAILABLE:
+            console.log("Location information is unavailable.");
+            break;
+          case error.TIMEOUT:
+            console.log("The request to get user location timed out.");
+            break;
+          case error.UNKNOWN_ERROR:
+            console.log("An unknown error occurred.");
+            break;
+          }
+            console.log(error.code);
             me.locErrMsg();
-        }, {timeout: 5000});
+        }, options);
 
   }
 
   locErrMsg(){
     let alert = Alert.create({
       title: 'No location found',
-      subTitle: 'Please enable your GPS location.',
+      subTitle: 'Either GPS signals are weak or GPS is switched off',
       buttons: [{
         text: 'OK',
         handler: data => {

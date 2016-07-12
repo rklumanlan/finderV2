@@ -59,6 +59,7 @@ export class RestaurantPage {
       setTimeout(function() {
         console.log(res);
         me.res = res;
+        me.items = [];
         for (me.count = 0; me.count < 20; me.count++) {
           if (res[me.count]!==undefined) {
             me.items.push(res[me.count]);
