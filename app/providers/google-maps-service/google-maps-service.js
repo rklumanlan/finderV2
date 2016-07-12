@@ -768,7 +768,7 @@ loadGoogleMaps(opt){
   addConnectivityListeners(option){
     var me = this;
 
-    var onOnline = function(){
+    var onOnline = () =>{
         setTimeout(function(){
             if(typeof google == "undefined" || typeof google.maps == "undefined"){
                 me.loadGoogleMaps(option);
@@ -780,7 +780,7 @@ loadGoogleMaps(opt){
         }, 2000);
     };
 
-    var onOffline = function(){
+    var onOffline = () =>{
         me.disableMap();
     };
 

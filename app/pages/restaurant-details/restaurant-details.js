@@ -25,18 +25,16 @@ export class RestaurantDetailsPage {
     this.item_select = this.navParams.get('item_select');
     console.log(this.item_select);
 
-    // this.getRating();
+    // this.placeImage();
+
   }
 
   onPageLoaded(){
     var me = this;
-    console.log(me.item_select.rating);
-    console.log(me.item_select.opening_hours);
-    console.log(me.item_select.geometry.location.lat);
-    console.log("Resto Coordinates");
     // setTimeout(function() {
       var x = document.getElementById("resto_rating");
       var y = document.getElementById("operating_hours");
+      var z = document.getElementById("place_photo");
       var rating,half,remaining;
 
       // for (var a = 0; a < me.item_select.rating.length; a++) {
@@ -88,13 +86,10 @@ export class RestaurantDetailsPage {
               y.insertAdjacentHTML( 'beforeend', '<ion-label danger>Close <ion-icon name="clock" role="img" class="ion-ios-clock-outline" aria-label="ios-clock-outline"></ion-icon></ion-label>');
               ctr=ctr+1;
             }
-
-          }
-
         }
-      }
 
-    // }, 400);
+    }
 
-  // }
+  }
+
 }

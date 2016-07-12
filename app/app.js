@@ -3,6 +3,7 @@ import {StatusBar} from 'ionic-native';
 import {MainPage} from './pages/main/main';
 import {TabsPage} from './pages/jeepney/tabs/tabs';
 import {LandingPage} from './pages/landingpage/landingpage';
+import {Splashscreen} from 'ionic-native';
 // import {JeepneyRoutesPage} from './pages/jeepney/jeep-routes/jeep-routes';
 // import {ListPage} from './pages/list/list';
 

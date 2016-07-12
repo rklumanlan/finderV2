@@ -13,7 +13,7 @@
 
   <div class="mainBackDiv">
     <ion-list>
-      <button ion-item detail-push *ngFor="#policestation of policestations" [navPush]="[PoliceDetailsPage, { poldetail: policestation}]">
+      <button ion-item detail-none *ngFor="#policestation of policestations" [navPush]="[PoliceDetailsPage, { poldetail: policestation}]">
         <h2 class="pol_name">{{policestation.name}}</h2>
         <span class="pol_address">{{policestation.address}}</span><br/>
         <ion-icon name="mail" class="gray-icon"></ion-icon><span class="pol_email">{{policestation.email}}</span><br/>

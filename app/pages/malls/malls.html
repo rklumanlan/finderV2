@@ -14,6 +14,29 @@
     <ion-grid>
       <ion-row class="sort_grid">
         <ion-col width-33>
+          <span class="sort_label">Place Type</span>
+          <ion-item class="slct">
+              <ion-label class="input_lbl">Place Type</ion-label>
+              <ion-select id ='1' [(ngModel)]="placeType" (ngModelChange)="updatePlaceType($event)" class="drpdown" okText="OK" cancelText="Cancel">
+                <ion-option value="shopping_mall">Shopping Mall</ion-option>
+                <!-- <ion-option value="department_store">Department Store</ion-option>
+                <ion-option value="clothing_store">Clothing Store</ion-option>
+                <ion-option value="shoe_store">Shoe Store</ion-option> -->
+              </ion-select>
+          </ion-item>
+        </ion-col>
+
+        <ion-col width-33>
+          <span class="sort_label">Cuisine</span>
+          <ion-item class="slct">
+            <ion-label id ='2' class="input_lbl">Cuisine</ion-label>
+            <ion-select id="cuisine" [(ngModel)]="cuisine"  (ngModelChange)="updateCuisine($event)" class="drpdown" okText="OK" cancelText="Cancel">
+              <ion-option value="food">Any Cuisine</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+
+        <ion-col width-33>
           <span class="sort_label">Sort</span>
           <ion-item class="slct sort">
             <ion-label class="input_lbl">Sort</ion-label>
@@ -30,6 +53,7 @@
 
 </ion-toolbar>
 
+
 <ion-content>
     <loading-modal id="loading" ></loading-modal>
 
@@ -40,7 +64,7 @@
       <div id="map" style="height: 100%;display:none"></div>
 
       <ion-list>
-        <button ion-item *ngFor="#item_mall of items" [navPush]="[MallDetailsPage, {item_select_mall:item_mall}]">
+        <button ion-item detail-none *ngFor="#item_mall of items" [navPush]="[MallDetailsPage, {item_select_mall:item_mall}]">
 
           <ion-row>
             <ion-col>
@@ -53,7 +77,7 @@
                 <!-- <li><span class="itm_name">{{item.name}}</span></li> -->
                 <!-- <li><span class="itm_type">{{item_hotel.types[0]}} {{item_hotel.types[1]}}</span></li> -->
                 <li><span class="itm_address">{{item_mall.vicinity}}</span></li>
-                <!-- <li><span class="itm_hours"></span></li> -->
+                <li><span class="mall_hours"></span></li>
               </ul>
             </ion-col>
 

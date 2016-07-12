@@ -247,7 +247,7 @@ export class DataService {
         tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY',
         icon: 'img/pins/subd_brgy.png'
         },{
-        text: 'Savers Mall',
+        text: 'Saver\'s Mall',
         lat: '15.16242',
         lng: '120.59110',
         tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY',

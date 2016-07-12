@@ -200,6 +200,7 @@ ion-input#geolocation input.text-input {
 }
 ion-toolbar.geoloc_toolbar.toolbar {
     padding: 5%;
+    min-height: 7rem;
 }
 ion-input#geolocation input.text-input::-webkit-input-placeholder {
     color: #fff;

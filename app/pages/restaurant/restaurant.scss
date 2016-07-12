@@ -20,9 +20,10 @@ ion-item.slct.item.item-select .item-inner{
 padding-right:0;
 border-bottom:0;
 }
-ion-row.sort_grid {
-    margin-top: 4%;
-    padding-left: 0;
+
+ion-col.ToolbarCol{
+  padding:0;
+  padding-top: 5px;
 }
   // #drpdown {
   //     border-radius: 15px;
@@ -38,13 +39,13 @@ ion-row.enter {
     height: 45px;
 }
 
-// ion-toolbar#sort_toolbar.toolbar {
-//     min-height: 7rem;
-//     border: 2px solid #E2E2E2;
-//     border-radius: 15px;
-//     margin: 1% 1% 0% 1%;
-//     width: 98%;
-// }
+ion-toolbar#sort_toolbar.toolbar {
+    min-height: 7rem;
+    // border: 2px solid #E2E2E2;
+    // border-radius: 15px;
+    // margin: 1% 1% 0% 1%;
+    // width: 98%;
+}
 // ion-toolbar#sort_toolbar .toolbar-background {
 //     background: $bg-pattern;
 // }

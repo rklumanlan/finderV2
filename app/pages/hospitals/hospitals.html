@@ -14,7 +14,7 @@
 
   <div class="mainBackDiv">
     <ion-item-group>
-      <button ion-item detail-push *ngFor="#hospitaldetail of hospitaldetails" [navPush]="[HospitalDetailsPage, { hospdetail: hospitaldetail}]">
+      <button ion-item detail-none *ngFor="#hospitaldetail of hospitaldetails" [navPush]="[HospitalDetailsPage, { hospdetail: hospitaldetail}]">
         <h2 class="pol_name">{{hospitaldetail.name}}</h2>
         <span class="pol_address">{{hospitaldetail.address}}</span><br/>
         <ion-icon name="mail" class="gray-icon"></ion-icon><span class="pol_email">{{hospitaldetail.email}}</span><br/>

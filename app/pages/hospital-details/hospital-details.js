@@ -5,6 +5,9 @@ import {GeolocationService} from '../../providers/geolocation-service/geolocatio
 
 
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
+
+
+import {TranslatePipe} from '../../pipes/translate';
 /*
   Generated class for the HospitalDetailsPage page.
 
@@ -14,7 +17,8 @@ import {LoadingModal} from '../../components/loading-modal/loading-modal';
 @Page({
   templateUrl: 'build/pages/hospital-details/hospital-details.html',
   directives: [LoadingModal],
-  providers: [GeolocationService]
+  providers: [GeolocationService],
+  pipes: [TranslatePipe]
 })
 export class HospitalDetailsPage {
   static get parameters() {
@@ -29,6 +33,7 @@ export class HospitalDetailsPage {
     this.HospitalsPage = HospitalsPage;
 
     this.hospdetail = this.navParams.get('hospdetail');
+    console.log(this.hospdetail);
   }
 
   onPageDidEnter(){

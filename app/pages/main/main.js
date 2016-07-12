@@ -86,6 +86,7 @@ export class MainPage{
              me.geolocationService.setLocationName(gCoords).then(function(locName) { // `delay` returns a promise
                 // Log the value once it is resolved
              me.geolocation2 = locName;
+             console.log(locName);
 
              if (me.geolocation2!==null) {
                document.getElementById('mainBtnLoc').style.display = "inline";
@@ -116,8 +117,8 @@ export class MainPage{
       }]
     });
     this.nav.present(alert);
-    document.getElementById('lndBtnLoc').style.display = "inline";
-    document.getElementById('lndLoaderLoc').style.display = "none";
+    document.getElementById('mainBtnLoc').style.display = "inline";
+    document.getElementById('mainLoaderLoc').style.display = "none";
   }
 
   nextPage(ctr){

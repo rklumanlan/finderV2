@@ -33,9 +33,10 @@ export class GeolocationService {
 
   }
 
-  loadGeolocation(ctr){
-    console.log(ctr);
+  loadGeolocation(){
     var me = this;
+
+    me.addConnectivityListeners();
 
     if(typeof google == "undefined" || typeof google.maps == "undefined"){
 
@@ -48,15 +49,19 @@ export class GeolocationService {
             let script = document.createElement("script");
             script.id = "geoLocation";
             script.src = 'https://maps.googleapis.com/maps/api/js?key='+me.apiKey+'&libraries=places,geometry';
+            console.log('online');
 
 
             document.body.appendChild(script);
 
         }
         else {
-          me.disableMap();
 
-          // add error handler if offline -- alert box
+          setTimeout(function() {
+            console.log("offline, loading map");
+            me.netErrMsg();
+            console.log('a1');
+          }, 3000);
         }
     }
     else {
@@ -68,7 +73,8 @@ export class GeolocationService {
         }
         else {
             console.log("disabling map");
-            me.disableMap();
+            me.netErrMsg();
+            console.log('a2');
 
             // add error handler if offline -- alert box
         }
@@ -144,17 +150,101 @@ export class GeolocationService {
   setLocationName(ctr){
     var me = this;
     var geo;
-    me.getLocationName(ctr, function(result){
-      console.log(result);
-        geo =  result;
-    });
+
+
+    if (document.getElementById('lndBtnLoc')!==undefined&&document.getElementById('lndLoaderLoc')!==undefined) {
+      document.getElementById('lndBtnLoc').style.display = "inline";
+      document.getElementById('lndLoaderLoc').style.display = "none";
+    }
+    else if (document.getElementById('mainBtnLoc')!==undefined&&document.getElementById('mainLoaderLoc')!==undefined) {
+      document.getElementById('mainBtnLoc').style.display = "inline";
+      document.getElementById('mainLoaderLoc').style.display = "none";
+    }
+
+    if(typeof google == "undefined" || typeof google.maps == "undefined"){
+      //
+      if(me.connectivity.isOnline()){
+        me.getLocationName(ctr, function(result){
+          console.log(result);
+            geo =  result;
+        });
+      }
+      else {
+        me.netErrMsg();
+      }
+    }
+    else {
+
+      if(me.connectivity.isOnline()){
+        me.getLocationName(ctr, function(result){
+          console.log(result);
+            geo =  result;
+        });
+      }
+      else {
+        me.netErrMsg();
+      }
+
+
+    }
 
     return new Promise(function(resolve, reject) {
       // Only `delay` is able to resolve or reject the promise
       setTimeout(function() {
-        resolve(geo); // After 3 seconds, resolve the promise with value 42
+        console.log(geo);
+        // if (geo===undefined) {
+        //   me.netErrMsg();
+        // }else {
+          resolve(geo); // After 3 seconds, resolve the promise with value 42
+        // }
       }, 1000);
     });
+
+
+
+  }
+
+  //listener when online or offline
+  addConnectivityListeners(){
+    var me = this;
+
+    var lastStatus = "";
+
+    var onOnline = () => {
+      console.log("ONLINE");
+      if(lastStatus != 'connected') {
+        lastStatus = 'connected';
+        console.log(lastStatus);
+
+        setTimeout(() => {
+            if(typeof google == "undefined" || typeof google.maps == "undefined"){
+                me.loadGeolocation();
+            } else {
+
+            }
+        }, 2000);
+      }
+
+    };
+
+
+
+    var onOffline = () => {
+
+      console.log('OFFLINE');
+      if(lastStatus != 'disconnected') {
+        lastStatus = 'disconnected';
+        console.log(lastStatus);
+        console.log('a3');
+        me.netErrMsg();
+      }
+
+
+    };
+
+    document.addEventListener('online', onOnline, false);
+    document.addEventListener('offline', onOffline, false);
+
   }
 
   getLocationName(ctr, callback) {
@@ -162,7 +252,6 @@ export class GeolocationService {
       var latlngStr = input.split(',', 2);
 
       var locationName;
-      console.log(new google.maps.Geocoder());
       var geocoder = new google.maps.Geocoder();
       var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
 
@@ -190,7 +279,7 @@ export class GeolocationService {
               }
           }
           else {
-              locationName = "Couldn't find location. Error code: " + status;
+              locationName = "";
           }
           callback(locationName);
       });
@@ -244,7 +333,7 @@ export class GeolocationService {
   }
 
 
-  // Police Station Map
+  // Location Map
   getPolHosp(detail,page){
 
     var mapcoords,img,mapElem;
@@ -252,7 +341,7 @@ export class GeolocationService {
     console.log("Get Hospital Lat Working");
     console.log(page);
     console.log('afa');
-    console.log(page === 'hosp');
+    console.log(page === 'supmarket');
     // console.log(document.getElementById('police_map'));
     console.log(detail);
 
@@ -264,9 +353,43 @@ export class GeolocationService {
     }
     else if (page === 'resto') {
       console.log('Entered Resto map');
-      mapcoords = {lat: parseFloat(item_select.geometry.lat), lng: parseFloat(item_select.geometry.lng)};
-      img = 'img/pins/hospital.png';
+
+      mapcoords = detail.geometry.location;
+      img = 'img/pins/restaurant.png';
       mapElem = document.getElementById('resto_map');
+
+    }
+    else if (page === 'hotel') {
+      console.log('Entered Hotel map');
+
+      mapcoords = detail.geometry.location;
+      img = 'img/pins/hotel.png';
+      mapElem = document.getElementById('hotel_map');
+
+    }
+    else if (page === 'mall') {
+      console.log('Entered Mall map');
+
+      mapcoords = detail.geometry.location;
+      img = 'img/pins/mall.png';
+      mapElem = document.getElementById('mall_map');
+
+    }
+    else if (page === 'supermarket') {
+      console.log('Entered Supermarket map');
+
+      mapcoords = detail.geometry.location;
+      img = 'img/pins/supermarket.png';
+      mapElem = document.getElementById('supmarket_map');
+
+    }
+    else if (page === 'salon') {
+      console.log('Entered salon map');
+
+      mapcoords = detail.geometry.location;
+      img = 'img/pins/salon.png';
+      mapElem = document.getElementById('salon_map');
+
     }
     else {
       mapcoords = {lat: parseFloat(detail.lat), lng: parseFloat(detail.lng)};
@@ -276,28 +399,33 @@ export class GeolocationService {
 
     var map = new google.maps.Map(mapElem, {
       center: mapcoords,
-      zoom: 15,
+      zoom: 16,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       disableDefaultUI: true
     });
 
+    var place_ph = {
+      photo: detail.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100})
+    }
+    console.log(place_ph);
     var image = {
       url: img,
       scaledSize: new google.maps.Size(23, 36)
-    };
+    }
 
     var marker = new google.maps.Marker({
-        map: map,
-        animation: google.maps.Animation.DROP,
-        position: mapcoords,
-        icon: image
+    map: map,
+    animation: google.maps.Animation.DROP,
+    position: detail.geometry.location,
+    // photos: photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100}),
+    icon: image
     });
 
     marker.addListener('click', function() {
       infowindow.open(map, marker);
     });
 
-    var contentString = '<h4 class="pol_name">'+detail.name+'</h4><span class="pol_address">'+detail.address+'</span><br/>';
+    var contentString = '<h4 class="pol_name">'+detail.name+'</h4><span class="pol_address">'+detail.vicinity+'</span><br/><img src="'+ place_ph +'"/>';
 
     var infowindow = new google.maps.InfoWindow({
       content: contentString
@@ -311,19 +439,20 @@ export class GeolocationService {
     return me.latlng;
   }
 
-  disableMap(){
+  netErrMsg(){
+    var me = this;
     console.log("disable map");
     let alert = Alert.create({
       title: 'No connection',
       subTitle: 'Looks like there is a problem with your network connection. Try again later.',
       buttons: [{
-        text: 'OK',
-        handler: data => {
-          this.nav.pop();
-        }
+        text: 'OK'
       }]
     });
-    this.nav.present(alert);
+
+    me.nav.present(alert);
+
+
   }
 
 }
