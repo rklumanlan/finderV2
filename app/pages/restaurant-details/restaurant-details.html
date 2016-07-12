@@ -16,7 +16,7 @@
           <ion-grid>
             <ion-row class="sort_grid">
               <ion-col width-20>
-                <!-- {{item_select.photos[0]}} -->
+                <div id="place_photo"></div>
               </ion-col>
 
               <ion-col width-70>
@@ -34,7 +34,7 @@
             <ion-row style="margin-top:0; float:right;padding-left: 60%;">
                 <ul id="item_buttons">
                   <li class="item_buttons_li">
-                    <button clear [navPush]="[RestaurantMapPage, {item_select:item}]">
+                    <button clear [navPush]="[RestaurantMapPage, {item_coordinates:item_select}]">
                       <span class="icoMoon-marker"></span>
                     </button><br/>
                     <span style="font-size:9pt; color: #B7B7B7;">Map</span>
@@ -56,5 +56,6 @@
           </ion-grid>
       </ion-card-content>
     </ion-card>
+
   </div>
 </ion-content>

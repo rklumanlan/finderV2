@@ -1,18 +1,17 @@
 import {Page, NavController, NavParams} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
-// import {RestaurantDetailsPage} from '../restaurant-details/restaurant-details';
 /*
-  Generated class for the RestaurantMapPage page.
+  Generated class for the SupermarketMapPage page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Page({
-  templateUrl: 'build/pages/restaurant-map/restaurant-map.html',
+  templateUrl: 'build/pages/supermarket-map/supermarket-map.html',
   providers: [GeolocationService]
 })
-export class RestaurantMapPage {
+export class SupermarketMapPage {
   static get parameters() {
     return [[NavParams],[NavController],[GeolocationService]];
   }
@@ -22,12 +21,13 @@ export class RestaurantMapPage {
     this.nav = nav;
     this.geolocationService = geolocationService;
 
-    this.item_coordinates = this.navParams.get('item_coordinates');
-    console.log(this.item_coordinates.geometry.location);
-  }
+    this.SupermarketMapPage = SupermarketMapPage;
 
+    this.item_coordinates_supmarket = this.navParams.get('item_coordinates_supmarket');
+    console.log(this.item_coordinates_supmarket.name);
+  }
   onPageDidEnter(){
     var me = this;
-    me.geolocationService.getPolHosp(me.item_coordinates,'resto');
+    me.geolocationService.getPolHosp(me.item_coordinates_supmarket,'supermarket');
   }
 }

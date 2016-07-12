@@ -34,7 +34,7 @@
               <ion-row style="margin-top:0; float:right;padding-left: 60%;">
                   <ul id="item_buttons">
                     <li class="item_buttons_li">
-                      <button clear>
+                      <button clear [navPush]="[SalonMapPage, {item_coordinates_salon:item_select_salon}]">
                         <span class="icoMoon-marker"></span>
                       </button><br/>
                       <span style="font-size:9pt; color: #B7B7B7;">Map</span>

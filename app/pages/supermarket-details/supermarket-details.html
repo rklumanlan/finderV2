@@ -25,16 +25,16 @@
                 </ion-col>
 
                 <ion-col width-10>
-                  <span id="hotel_rating"></span>
+                  <span id="supmarket_rating"></span>
                 </ion-col>
               </ion-row>
               <ion-row class="hours_row">
-                <span id="operating_hours"></span>
+                <span id="supmarket_hours"></span>
               </ion-row>
               <ion-row style="margin-top:0; float:right;padding-left: 60%;">
                   <ul id="item_buttons">
                     <li class="item_buttons_li">
-                      <button clear>
+                      <button clear [navPush]="[SupermarketMapPage, {item_coordinates_supmarket:item_select_supmarket}]">
                         <span class="icoMoon-marker"></span>
                       </button><br/>
                       <span style="font-size:9pt; color: #B7B7B7;">Map</span>

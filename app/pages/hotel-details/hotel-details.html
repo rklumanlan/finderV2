@@ -34,7 +34,7 @@
             <ion-row style="margin-top:0; float:right;padding-left: 60%;">
                 <ul id="item_buttons">
                   <li class="item_buttons_li">
-                    <button clear>
+                    <button clear [navPush]="[HotelMapPage, {item_coordinates_hotel:item_select_hotel}]">
                       <span class="icoMoon-marker"></span>
                     </button><br/>
                     <span style="font-size:9pt; color: #B7B7B7;">Map</span>
