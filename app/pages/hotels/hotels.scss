@@ -1,3 +1,15 @@
 .hotels {
 
 }
+ion-select.drpdown_nc {
+    width: 50% !important;
+    position: fixed;
+    background: #F7F7F7;
+    border-radius: 2px;
+    /* border: 1px solid #E8E8E8; */
+    padding: 5px 5px 5px 5px;
+}
+ion-item.slct.sort.item.item-select ion-select.drpdown_nc {
+    background: #3493FF !important;
+    color: #fff;
+}

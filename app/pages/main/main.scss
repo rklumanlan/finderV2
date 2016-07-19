@@ -1,5 +1,3 @@
-//icomoon custom font icons
-
 @font-face {
     font-family: 'icomoon';
     src:    url('../fonts/icomoon.eot?awjbyu');
@@ -107,13 +105,8 @@
 
 //icomoon custom font icons
 
-.mainBackDiv{
-  position: absolute;
-  overflow: auto;
-  top: 0;
-  bottom: 0;
-  left:0;
-  right:0;
+#mainBackDivMP{
+  // height: 100vh;
   background-image: $bg-pattern;
 }
 
@@ -160,8 +153,8 @@ p {
 }
 .lowerDiv{
   // background-color:#F5F5F5;
-  height:80%;
-  padding: 0%;
+  height:100%;
+  // padding: 0%;
 }
 // ion-toolbar.geoloc_toolbar.toolbar .toolbar-background {
 //     // border-color: #FFFFFF !important;
@@ -199,9 +192,12 @@ ion-input#geolocation input.text-input {
     margin: 10px 5px !important;
 }
 ion-toolbar.geoloc_toolbar.toolbar {
-    padding: 5%;
+    padding: 3%;
     min-height: 7rem;
 }
+// ion-row.opt_row {
+//     margin: 2% 0%;
+// }
 ion-input#geolocation input.text-input::-webkit-input-placeholder {
     color: #fff;
 }

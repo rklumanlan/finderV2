@@ -39,14 +39,14 @@ ion-row.enter {
     height: 45px;
 }
 
-ion-toolbar#sort_toolbar.toolbar {
+ion-toolbar.sort_toolbar.toolbar {
     min-height: 7rem;
     // border: 2px solid #E2E2E2;
     // border-radius: 15px;
     // margin: 1% 1% 0% 1%;
     // width: 98%;
 }
-// ion-toolbar#sort_toolbar .toolbar-background {
+// ion-toolbar.sort_toolbar .toolbar-background {
 //     background: $bg-pattern;
 // }
 ion-item.slct.sort.item.item-select ion-select.drpdown {
