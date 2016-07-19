@@ -87,9 +87,11 @@ export class RestaurantDetailsPage {
               y.insertAdjacentHTML( 'beforeend', '<ion-label danger>Close <ion-icon name="clock" role="img" class="ion-ios-clock-outline" aria-label="ios-clock-outline"></ion-icon></ion-label>');
               ctr=ctr+1;
             }
+          }
+
         }
 
-    }
+        z.insertAdjacentHTML( 'beforeend', '<img src="'+me.item_select.photos[0].getUrl({'maxWidth': 300, 'maxHeight': 300})+'" >');
 
   }
 
