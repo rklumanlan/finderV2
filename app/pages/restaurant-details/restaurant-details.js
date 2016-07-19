@@ -90,8 +90,12 @@ export class RestaurantDetailsPage {
           }
 
         }
-
-        z.insertAdjacentHTML( 'beforeend', '<img src="'+me.item_select.photos[0].getUrl({'maxWidth': 300, 'maxHeight': 300})+'" >');
+        if (me.item_select.photos!==undefined) {
+          z.insertAdjacentHTML( 'beforeend', '<img src="'+me.item_select.photos[0].getUrl({'maxWidth': 300, 'maxHeight': 300})+'" >');
+        }
+        else {
+          z.insertAdjacentHTML( 'beforeend', '<img src="'+me.item_select.icon+'" >');
+        }
 
   }
 
