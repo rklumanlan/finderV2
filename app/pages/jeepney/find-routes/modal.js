@@ -1,11 +1,12 @@
-import {Page,Modal, NavController, ViewController,NavParams, Storage, SqlStorage} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {Modal, NavController, ViewController,NavParams, Storage, SqlStorage} from 'ionic-angular';
 
 import {DataService} from '../../../services/data';
 
 
 import {TranslatePipe} from '../../../pipes/translate';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/jeepney/find-routes/modal.html',
   pipes: [TranslatePipe]
 })

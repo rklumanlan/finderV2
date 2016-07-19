@@ -1,4 +1,5 @@
-import {Page, NavParams, Storage, SqlStorage, IonicApp, NavController, Alert} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavParams, Storage, SqlStorage, NavController, Alert} from 'ionic-angular';
 
 import {DataService} from '../../../services/data';
 
@@ -8,13 +9,13 @@ import {GoogleMapsService} from '../../../providers/google-maps-service/google-m
 
 import {LoadingModal} from '../../../components/loading-modal/loading-modal';
 
-import {Http, URLSearchParams} from 'angular2/http';
+import {Http, URLSearchParams} from '@angular/http';
 import 'rxjs/Rx';
 
 
 import {TranslatePipe} from '../../../pipes/translate';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/jeepney/jeep-routes/jeep.map.html',
   directives: [LoadingModal],
   providers: [GoogleMapsService],
@@ -23,9 +24,9 @@ import {TranslatePipe} from '../../../pipes/translate';
 
 export class JeepMapsPage {
   static get parameters(){
-    return [[DataService],[NavParams],[ConnectivityService],[IonicApp],[GoogleMapsService],[NavController],[Http]];
+    return [[DataService],[NavParams],[ConnectivityService],[GoogleMapsService],[NavController],[Http]];
   }
-  constructor(dataService,navParams,connectivityService,app,googleMapsService,nav,http){
+  constructor(dataService,navParams,connectivityService,googleMapsService,nav,http){
 
     this.nav = nav;
 

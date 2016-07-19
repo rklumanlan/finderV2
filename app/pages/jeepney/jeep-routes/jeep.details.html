@@ -2,7 +2,7 @@
 
 <ion-content padding>
   <div >
-      <div *ngFor="#jeepDetail of jeepDetails">
+      <div *ngFor="let jeepDetail of jeepDetails">
         <img src="{{jeepDetail.image}}">
         <h2>{{jeepDetail.name|translate}}</h2>
         <h3>{{jeepDetail.color|translate}}</h3>

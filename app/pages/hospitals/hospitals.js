@@ -1,4 +1,5 @@
-import {Page, Storage, SqlStorage, NavController, NavParams} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {Storage, SqlStorage, NavController, NavParams} from 'ionic-angular';
 import {DataService} from '../../services/data';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {HospitalDetailsPage} from '../hospital-details/hospital-details';
@@ -12,7 +13,7 @@ import {TranslatePipe} from '../../pipes/translate';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
-@Page({
+@Component({
   templateUrl: 'build/pages/hospitals/hospitals.html',
   providers: [GeolocationService],
   pipes: [TranslatePipe]

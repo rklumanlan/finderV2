@@ -1,4 +1,5 @@
-import {Page, Modal, NavController, Alert} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {Modal, NavController, Alert} from 'ionic-angular';
 
 import {MyModal} from '../../jeepney/find-routes/modal';
 
@@ -7,10 +8,11 @@ import {RoutesMapsPage} from '../../jeepney/find-routes/routes.map';
 
 import {TranslatePipe} from '../../../pipes/translate';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/jeepney/find-routes/routes.view.html',
   pipes: [TranslatePipe]
 })
+
 export class FindRoutesPage {
   static get parameters(){
     return [[NavController]];

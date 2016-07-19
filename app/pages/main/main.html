@@ -1,28 +1,29 @@
-<ion-navbar hideBackButton *navbar primary>
-  <ion-toolbar >
+<ion-header >
+  <ion-navbar hideBackButton primary>
     <ion-title>Angeles Routes</ion-title>
+  </ion-navbar>
+  <ion-toolbar class="geoloc_toolbar">
+    <ion-row>
+      <div class="geoloc_input">
+        <ion-input type="text" id="geolocation2" [(ngModel)]="geolocation2" (input)="autocomplete($event)" placeholder=" Enter a location" style="padding-left: 10px;" ></ion-input>
+      </div>
+      <div class="geoloc_btn">
+
+        <button id="mainBtnLoc" block clear (click)="showlatlong()">
+          <ion-icon name="locate"></ion-icon>
+        </button>
+        <div id="mainLoaderLoc" class="loader"></div>
+      </div>
+    </ion-row>
   </ion-toolbar>
-</ion-navbar>
+</ion-header>
 
-<ion-toolbar class="geoloc_toolbar">
-  <ion-row>
-    <div class="geoloc_input">
-      <ion-input type="text" id="geolocation2" [(ngModel)]="geolocation2" (input)="autocomplete($event)" placeholder=" Enter a location" style="padding-left: 10px;" ></ion-input>
-    </div>
-    <div class="geoloc_btn">
 
-      <button id="mainBtnLoc" block clear (click)="showlatlong()">
-        <ion-icon name="locate"></ion-icon>
-      </button>
-      <div id="mainLoaderLoc" class="loader"></div>
-    </div>
-  </ion-row>
-</ion-toolbar>
 
-<ion-content padding >
-  <div class="mainBackDiv" >
+<ion-content >
+  <div id="mainBackDivMP" padding >
 
-  <div  class="lowerDiv" id="lowerDiv" padding style="display:none">
+  <!-- <div  class="lowerDiv" id="lowerDiv" padding> -->
     <!-- jeeps and resto -->
     <ion-row center>
       <ion-col width-50>
@@ -138,7 +139,7 @@
     </ion-col >
   </ion-row> -->
   <!-- more -->
-  </div>
+  <!-- </div> -->
 
 </div>
 </ion-content>

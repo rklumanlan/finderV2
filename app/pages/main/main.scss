@@ -107,13 +107,8 @@
 
 //icomoon custom font icons
 
-.mainBackDiv{
-  position: absolute;
-  overflow: auto;
-  top: 0;
-  bottom: 0;
-  left:0;
-  right:0;
+#mainBackDivMP{
+  // height: 100vh;
   background-image: $bg-pattern;
 }
 
@@ -160,8 +155,8 @@ p {
 }
 .lowerDiv{
   // background-color:#F5F5F5;
-  height:80%;
-  padding: 0%;
+  height:100%;
+  // padding: 0%;
 }
 // ion-toolbar.geoloc_toolbar.toolbar .toolbar-background {
 //     // border-color: #FFFFFF !important;

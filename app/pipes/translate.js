@@ -1,4 +1,4 @@
-import {Pipe} from 'angular2/core';
+import {Pipe} from '@angular/core';
 
 @Pipe({
   name: 'translate'
@@ -20,6 +20,8 @@ export class TranslatePipe {
       "Hospitals":"病院",
       "Angeles":"アンヘレス",
       "Clark":"クラーク",
+
+      "Supermarket":"スーパーマーケット",
 
       "CHECK-POINT-HOLY": "チェック-ポイント- ホーリーハイー",
       "CHECK-POINT-HOLY-HI-WAY": "チェック-ポイント- ホーリーハイー-ウェイ",
