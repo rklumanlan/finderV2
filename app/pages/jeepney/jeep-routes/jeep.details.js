@@ -1,13 +1,10 @@
-import {Page, NavParams, Storage, SqlStorage, Modal, NavController} from 'ionic-angular';
-
+import {Component} from '@angular/core';
+import {NavParams, Storage, SqlStorage, Modal, NavController} from 'ionic-angular';
 import {JeepMapsPage} from '../../jeepney/jeep-routes/jeep.map';
-
 import {DataService} from '../../../services/data';
-
-
 import {TranslatePipe} from '../../../pipes/translate';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/jeepney/jeep-routes/jeep.details.html',
   pipes: [TranslatePipe]
 })

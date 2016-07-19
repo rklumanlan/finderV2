@@ -1,11 +1,9 @@
-import {Page, NavParams, Storage, SqlStorage, IonicApp, NavController} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavParams, Storage, SqlStorage, IonicApp, NavController} from 'ionic-angular';
 import {DataService} from '../../services/data';
 import {PolicePage} from '../police/police';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
-
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
-
-
 import {TranslatePipe} from '../../pipes/translate';
 /*
   Generated class for the PoliceDetailsPage page.
@@ -13,7 +11,7 @@ import {TranslatePipe} from '../../pipes/translate';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
-@Page({
+@Component({
   templateUrl: 'build/pages/police-details/police-details.html',
   directives: [LoadingModal],
   providers: [GeolocationService],
@@ -34,7 +32,7 @@ export class PoliceDetailsPage {
 
     this.poldetail = this.navParams.get('poldetail');
   }
-  onPageDidEnter(){
+  ionViewDidEnter(){
     this.geolocationService.getPolHosp(this.poldetail,'police');
   }
 }

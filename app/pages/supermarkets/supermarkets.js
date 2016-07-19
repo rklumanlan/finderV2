@@ -1,9 +1,9 @@
-import {Page, NavController, NavParams} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
 import {SupermarketDetailsPage} from '../supermarket-details/supermarket-details';
-
 import {TranslatePipe} from '../../pipes/translate';
 
 /*
@@ -12,7 +12,7 @@ import {TranslatePipe} from '../../pipes/translate';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
-@Page({
+@Component({
   templateUrl: 'build/pages/supermarkets/supermarkets.html',
   pipes: [TranslatePipe],
   directives: [LoadingModal],
@@ -36,7 +36,7 @@ export class SupermarketsPage {
 
     this.placeType = 'grocery_or_supermarket';
     this.sort = 'Distance';
-    this.cuisine = 'food';
+    // this.cuisine = 'food';
 
     this.items = [];
     this.res = null;
@@ -46,14 +46,14 @@ export class SupermarketsPage {
     console.log("SuperMarket list working");
   }
 
-  onPageWillEnter(){
+  ionViewWillEnter(){
     var me = this;
     me.params.geoloc = this.details;
     me.params.placeType = 'grocery_or_supermarket';
-    me.params.cuisine = 'food';
+    // me.params.cuisine = 'food';
 
-    document.getElementById('cuisine').getElementsByTagName('button')[0].disabled=true;
-    document.getElementById("cuisine").style.color = "#C2C2C2";
+    // document.getElementById('cuisine').getElementsByTagName('button')[0].disabled=true;
+    // document.getElementById("cuisine").style.color = "#C2C2C2";
 
     me.geolocationService.setPlaces(me.params).then(function (res) {
       setTimeout(function() {

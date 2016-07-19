@@ -1,9 +1,10 @@
-import {Page, NavController, NavParams, Content} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, NavParams, Content} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
-import {ViewChild} from 'angular2/core';
-// import {TranslatePipe} from '../../pipes/translate';
+import {ViewChild} from '@angular/core';
+import {TranslatePipe} from '../../pipes/translate';
 import {HotelDetailsPage} from '../hotel-details/hotel-details';
 /*
   Generated class for the HotelsPage page.
@@ -11,14 +12,14 @@ import {HotelDetailsPage} from '../hotel-details/hotel-details';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
-@Page({
+@Component({
   templateUrl: 'build/pages/hotels/hotels.html',
   directives: [LoadingModal],
    providers: [GeolocationService],
    queries: {
      content: new ViewChild(Content)
-   }
-  //  pipes: [TranslatePipe]
+   },
+   pipes: [TranslatePipe]
 })
 export class HotelsPage {
   static get parameters() {
@@ -38,7 +39,7 @@ export class HotelsPage {
 
     this.placeType = 'lodging';
     this.sort = 'Distance';
-    this.cuisine = 'food';
+    // this.cuisine = 'food';
 
     this.items = [];
     this.res = null;
@@ -48,14 +49,14 @@ export class HotelsPage {
     console.log("Hotels list working");
   }
 
-  onPageWillEnter(){
+  ionViewWillEnter(){
     var me = this;
     me.params.geoloc = this.details;
     me.params.placeType = 'lodging';
-    me.params.cuisine = 'food';
+    // me.params.cuisine = 'food';
 
-    document.getElementById('cuisine').getElementsByTagName('button')[0].disabled=true;
-    document.getElementById("cuisine").style.color = "#C2C2C2";
+    // document.getElementById('cuisine').getElementsByTagName('button')[0].disabled=true;
+    // document.getElementById("cuisine").style.color = "#C2C2C2";
 
     me.geolocationService.setPlaces(me.params).then(function (res) {
       setTimeout(function() {

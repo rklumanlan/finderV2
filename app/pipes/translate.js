@@ -1,4 +1,4 @@
-import {Pipe} from 'angular2/core';
+import {Pipe} from '@angular/core';
 
 @Pipe({
   name: 'translate'
@@ -109,6 +109,10 @@ export class TranslatePipe {
 
       "Restaurant":"レストラン",
       "Cafe":"カフェ",
+      "Hotel":"ホテル",
+      "Mall":"モール",
+      "Supermarket":"スーパーマーケット",
+      "Salon":"サロン",
 
       "Any Cuisine":"任意の料理",
       "American":"アメリカの料理",
@@ -127,6 +131,9 @@ export class TranslatePipe {
       "Alphabetically":"アルファベット順",
       "Rating":"評定",
       "Cancel":"キャンセル",
+
+      "Map":"地図",
+      "Website":"ウェブサイト",
 
       "Route Description:":"ルート概要:",
 

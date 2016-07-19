@@ -1,4 +1,5 @@
-import {Page, NavParams, Storage, SqlStorage, IonicApp, NavController} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavParams, Storage, SqlStorage, IonicApp, NavController} from 'ionic-angular';
 import {DataService} from '../../services/data';
 import {HospitalsPage} from '../hospitals/hospitals';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
@@ -14,7 +15,7 @@ import {TranslatePipe} from '../../pipes/translate';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
-@Page({
+@Component({
   templateUrl: 'build/pages/hospital-details/hospital-details.html',
   directives: [LoadingModal],
   providers: [GeolocationService],
@@ -36,7 +37,7 @@ export class HospitalDetailsPage {
     console.log(this.hospdetail);
   }
 
-  onPageDidEnter(){
+  ionViewDidEnter(){
     this.geolocationService.getPolHosp(this.hospdetail,'hosp');
   }
 }

@@ -1,8 +1,6 @@
-import {Page, Storage, SqlStorage, IonicApp, NavController, Alert} from 'ionic-angular';
-
-import {Injectable} from 'angular2/core';
-
-import {Http, URLSearchParams} from 'angular2/http';
+import {Storage, SqlStorage, IonicApp, NavController, Alert} from 'ionic-angular';
+import {Injectable} from '@angular/core';
+import {Http, URLSearchParams} from '@angular/http';
 import 'rxjs/Rx';
 
 

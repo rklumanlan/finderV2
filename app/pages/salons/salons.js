@@ -1,10 +1,9 @@
-import {Page, NavController, NavParams} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
 import {SalonDetailsPage} from '../salon-details/salon-details';
-
-
 import {TranslatePipe} from '../../pipes/translate';
 
 /*
@@ -13,7 +12,7 @@ import {TranslatePipe} from '../../pipes/translate';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
-@Page({
+@Component({
   templateUrl: 'build/pages/salons/salons.html',
   pipes: [TranslatePipe],
   directives: [LoadingModal],
@@ -37,7 +36,7 @@ export class SalonsPage {
 
     this.placeType = 'beauty_salon';
     this.sort = 'Distance';
-    this.cuisine = 'food';
+    // this.cuisine = 'food';
 
     this.items = [];
     this.res = null;
@@ -46,14 +45,14 @@ export class SalonsPage {
     console.log(this.details);
     console.log("Salon list working");
   }
-  onPageWillEnter(){
+  ionViewWillEnter(){
     var me = this;
     me.params.geoloc = this.details;
     me.params.placeType = 'beauty_salon';
-    me.params.cuisine = 'food';
+    // me.params.cuisine = 'food';
 
-    document.getElementById('cuisine').getElementsByTagName('button')[0].disabled=true;
-    document.getElementById("cuisine").style.color = "#C2C2C2";
+    // document.getElementById('cuisine').getElementsByTagName('button')[0].disabled=true;
+    // document.getElementById("cuisine").style.color = "#C2C2C2";
 
     me.geolocationService.setPlaces(me.params).then(function (res) {
       setTimeout(function() {

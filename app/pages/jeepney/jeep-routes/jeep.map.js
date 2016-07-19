@@ -1,20 +1,14 @@
-import {Page, NavParams, Storage, SqlStorage, IonicApp, NavController, Alert} from 'ionic-angular';
-
+import {Component} from '@angular/core';
+import {NavParams, Storage, SqlStorage, IonicApp, NavController, Alert} from 'ionic-angular';
 import {DataService} from '../../../services/data';
-
 import {ConnectivityService} from '../../../providers/connectivity-service/connectivity-service';
-
 import {GoogleMapsService} from '../../../providers/google-maps-service/google-maps-service';
-
 import {LoadingModal} from '../../../components/loading-modal/loading-modal';
-
-import {Http, URLSearchParams} from 'angular2/http';
+import {Http, URLSearchParams} from '@angular/http';
 import 'rxjs/Rx';
-
-
 import {TranslatePipe} from '../../../pipes/translate';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/jeepney/jeep-routes/jeep.map.html',
   directives: [LoadingModal],
   providers: [GoogleMapsService],

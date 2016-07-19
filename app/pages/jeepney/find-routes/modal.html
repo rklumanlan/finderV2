@@ -1,15 +1,18 @@
-<ion-navbar *navbar primary>
-  <ion-title>Jeepneys</ion-title>
-  <ion-buttons start>
-    <button (click)="close()">
-      <ion-icon name="md-close"></ion-icon>
-    </button>
-  </ion-buttons>
+<ion-header>
+  <ion-navbar primary>
+    <ion-title>Jeepneys</ion-title>
+    <ion-buttons start>
+      <button (click)="close()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 
-</ion-navbar>
-<ion-toolbar>
-  <ion-searchbar [(ngModel)]="searchQuery" cancelButtonText="{{'Cancel'|translate}}" placeholder="{{'Search'|translate}}" (input)="getItems($event)"></ion-searchbar>
-</ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="searchQuery" cancelButtonText="{{'Cancel'|translate}}" placeholder="{{'Search'|translate}}" (input)="getItems($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content >
 
   <ion-list>

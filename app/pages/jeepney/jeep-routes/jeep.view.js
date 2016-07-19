@@ -1,14 +1,10 @@
-import {Page, Storage, SqlStorage} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {Storage, SqlStorage} from 'ionic-angular';
 import {DataService} from '../../../services/data';
-
-// import {TabsPage} from '../../jeepney/tabs/tabs';
-//
 import {JeepDetailsPage} from '../../jeepney/jeep-routes/jeep.details';
-
-
 import {TranslatePipe} from '../../../pipes/translate';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/jeepney/jeep-routes/jeep.view.html',
   pipes: [TranslatePipe]
 })

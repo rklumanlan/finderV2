@@ -1,12 +1,10 @@
-import {Page, NavParams} from 'ionic-angular';
-
+import {Component} from '@angular/core';
+import {NavParams} from 'ionic-angular';
 import {GoogleMapsService} from '../../../providers/google-maps-service/google-maps-service';
-
 import {DataService} from '../../../services/data';
-
 import {LoadingModal} from '../../../components/loading-modal/loading-modal';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/jeepney/find-routes/routes.map.html',
   directives: [LoadingModal],
   providers: [GoogleMapsService]

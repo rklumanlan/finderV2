@@ -1,8 +1,9 @@
-import {Page, NavController, NavParams} from 'ionic-angular';
-// import {RestaurantPage} from '../restaurant/restaurant';
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {RestaurantMapPage} from '../restaurant-map/restaurant-map';
+import {TranslatePipe} from '../../pipes/translate';
 
 /*
   Generated class for the RestaurantDetailsPage page.
@@ -10,8 +11,9 @@ import {RestaurantMapPage} from '../restaurant-map/restaurant-map';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
-@Page({
+@Component({
   templateUrl: 'build/pages/restaurant-details/restaurant-details.html',
+  pipes: [TranslatePipe]
 })
 export class RestaurantDetailsPage {
   static get parameters() {
@@ -29,7 +31,7 @@ export class RestaurantDetailsPage {
 
   }
 
-  onPageLoaded(){
+  ionViewLoaded(){
     var me = this;
     // setTimeout(function() {
       var x = document.getElementById("resto_rating");

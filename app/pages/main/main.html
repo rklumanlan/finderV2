@@ -1,30 +1,32 @@
-<ion-navbar hideBackButton *navbar primary>
-  <ion-toolbar >
-    <ion-title>Angeles Routes</ion-title>
+<ion-header>
+  <ion-navbar hideBackButton primary>
+      <ion-title>Angeles Routes</ion-title>
+  </ion-navbar>
+
+  <ion-toolbar class="geoloc_toolbar">
+    <ion-row>
+      <div class="geoloc_input">
+        <ion-input type="text" id="geolocation2" [(ngModel)]="geolocation2" (input)="autocomplete($event)" placeholder=" Enter a location" style="padding-left: 10px;" ></ion-input>
+      </div>
+      <div class="geoloc_btn">
+
+        <button id="mainBtnLoc" block clear (click)="showlatlong()">
+          <ion-icon name="locate"></ion-icon>
+        </button>
+        <div id="mainLoaderLoc" class="loader"></div>
+      </div>
+    </ion-row>
   </ion-toolbar>
-</ion-navbar>
+</ion-header>
 
-<ion-toolbar class="geoloc_toolbar">
-  <ion-row>
-    <div class="geoloc_input">
-      <ion-input type="text" id="geolocation2" [(ngModel)]="geolocation2" (input)="autocomplete($event)" placeholder=" Enter a location" style="padding-left: 10px;" ></ion-input>
-    </div>
-    <div class="geoloc_btn">
 
-      <button id="mainBtnLoc" block clear (click)="showlatlong()">
-        <ion-icon name="locate"></ion-icon>
-      </button>
-      <div id="mainLoaderLoc" class="loader"></div>
-    </div>
-  </ion-row>
-</ion-toolbar>
 
 <ion-content padding >
   <div class="mainBackDiv" >
 
   <div  class="lowerDiv" id="lowerDiv" padding style="display:none">
     <!-- jeeps and resto -->
-    <ion-row center>
+    <ion-row center class="opt_row">
       <ion-col width-50>
           <button block primary clear [navPush]="TabsPage" class="btn-menu">
             <div>
@@ -49,7 +51,7 @@
     <!-- jeeps and resto -->
 
     <!-- hotels and malls -->
-    <ion-row center>
+    <ion-row center class="opt_row">
       <ion-col>
           <button block primary clear full (click)="nextPage('hotels')" class="btn-menu">
             <div>
@@ -74,7 +76,7 @@
     <!-- hotels and malls -->
 
     <!-- supermarkets and barbers -->
-    <ion-row center>
+    <ion-row center class="opt_row">
       <ion-col width-50>
           <button block primary clear full (click)="nextPage('supermarkets')" class="btn-menu">
             <div>
@@ -99,7 +101,7 @@
     <!-- supermarkets and barbers -->
 
     <!-- police and hospitals -->
-    <ion-row center>
+    <ion-row center class="opt_row">
       <ion-col width-50>
           <button block primary clear full (click)="nextPage('police')" class="btn-menu">
             <div>
