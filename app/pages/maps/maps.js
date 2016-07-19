@@ -1,5 +1,9 @@
 import {Component} from '@angular/core';
 import {NavParams, Storage, SqlStorage,IonicApp} from 'ionic-angular';
+<<<<<<< HEAD
+=======
+
+>>>>>>> a47b22497114846715a40ee5642b6b391d8a4045
 import {DataService} from '../../services/data';
 import {ConnectivityService} from '../../providers/connectivity-service/connectivity-service';
 import {GoogleMapsService} from '../../providers/google-maps-service/google-maps-service';

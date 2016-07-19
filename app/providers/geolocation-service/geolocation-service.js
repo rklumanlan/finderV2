@@ -197,7 +197,7 @@ export class GeolocationService {
         // }else {
           resolve(geo); // After 3 seconds, resolve the promise with value 42
         // }
-      }, 1000);
+      }, 2000);
     });
 
 
@@ -336,11 +336,20 @@ export class GeolocationService {
   // Location Map
   getPolHosp(detail,page){
 
-    var mapcoords,img,mapElem;
+    var img;
+    var me = this;
+
+    let mapOptions = {
+        center: detail.geometry.location,
+        zoom: 16,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        disableDefaultUI: true
+    }
 
     console.log("Get Hospital Lat Working");
     console.log(page);
     console.log('afa');
+
     console.log(page === 'supmarket');
     // console.log(document.getElementById('police_map'));
     console.log(detail);
@@ -377,10 +386,12 @@ export class GeolocationService {
     }
     else if (page === 'supermarket') {
       console.log('Entered Supermarket map');
-
-      mapcoords = detail.geometry.location;
       img = 'img/pins/supermarket.png';
-      mapElem = document.getElementById('supmarket_map');
+
+      me.map = new google.maps.Map(document.getElementById('supmarket_map'), mapOptions );
+
+
+
 
     }
     else if (page === 'salon') {
@@ -397,39 +408,47 @@ export class GeolocationService {
       mapElem = document.getElementById('police_map');
     }
 
-    var map = new google.maps.Map(mapElem, {
-      center: mapcoords,
-      zoom: 16,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      disableDefaultUI: true
-    });
 
-    var place_ph = {
-      photo: detail.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100})
-    }
-    console.log(place_ph);
-    var image = {
-      url: img,
-      scaledSize: new google.maps.Size(23, 36)
-    }
+    // var contentString = '<h4 class="pol_name">'+detail.name+'</h4><span class="pol_address">'+detail.vicinity+'</span><br/><img src="'+ place_ph +'"/>';
+    //
+    // var infowindow = new google.maps.InfoWindow({
+    //   content: contentString
+    // });
 
-    var marker = new google.maps.Marker({
-    map: map,
-    animation: google.maps.Animation.DROP,
-    position: detail.geometry.location,
-    // photos: photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100}),
-    icon: image
-    });
+    var infoWindowContent;
+    infoWindowContent = '<h4 class="pol_name">'+detail.name+'</h4><span class="pol_address">'+detail.vicinity+'</span><br/><img src="'+ place_ph +'"/>';
+    me.addInfoWindow(marker, infoWindowContent);
 
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });
+      var image = {
+        url: img,
+        scaledSize: new google.maps.Size(23, 36)
+      }
 
-    var contentString = '<h4 class="pol_name">'+detail.name+'</h4><span class="pol_address">'+detail.vicinity+'</span><br/><img src="'+ place_ph +'"/>';
+      console.log(image);
 
-    var infowindow = new google.maps.InfoWindow({
-      content: contentString
-    });
+
+
+
+
+      var marker = new google.maps.Marker({
+      map: me.map,
+      animation: google.maps.Animation.DROP,
+      position: detail.geometry.location,
+      // photos: photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100}),
+      icon: image
+      });
+
+      // var place_ph = {
+      //   photo: detail.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100})
+      // };
+
+      // marker.addListener('click', function() {
+      //   infowindow.open(me.map, marker);
+      // });
+      // google.maps.event.addListener(marker, 'click', function () {
+      //     infoWindow.open(me.map, marker);
+      // });
+
   }
 
 

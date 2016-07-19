@@ -7,14 +7,12 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-
   <ion-toolbar>
     <ion-searchbar [(ngModel)]="searchQuery" cancelButtonText="{{'Cancel'|translate}}" placeholder="{{'Search'|translate}}" (input)="getItems($event)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content >
-
   <ion-list>
     <button ion-item detail-none *ngFor="#item of items"  (click)="validateItem(item)">
       {{item|translate}}

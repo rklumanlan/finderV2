@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavParams, Storage, SqlStorage, IonicApp, NavController, Alert} from 'ionic-angular';
+import {NavParams, Storage, SqlStorage, NavController, Alert} from 'ionic-angular';
 import {DataService} from '../../../services/data';
 import {ConnectivityService} from '../../../providers/connectivity-service/connectivity-service';
 import {GoogleMapsService} from '../../../providers/google-maps-service/google-maps-service';
@@ -17,9 +17,9 @@ import {TranslatePipe} from '../../../pipes/translate';
 
 export class JeepMapsPage {
   static get parameters(){
-    return [[DataService],[NavParams],[ConnectivityService],[IonicApp],[GoogleMapsService],[NavController],[Http]];
+    return [[DataService],[NavParams],[ConnectivityService],[GoogleMapsService],[NavController],[Http]];
   }
-  constructor(dataService,navParams,connectivityService,app,googleMapsService,nav,http){
+  constructor(dataService,navParams,connectivityService,googleMapsService,nav,http){
 
     this.nav = nav;
 

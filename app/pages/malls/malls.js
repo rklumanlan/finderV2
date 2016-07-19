@@ -1,9 +1,11 @@
-import {Component} from '@angular/core';
-import {TranslatePipe} from '../../pipes/translate';
-import {NavController, NavParams} from 'ionic-angular';
+import {Component,ViewChild} from '@angular/core';
+import {NavController, NavParams, Content} from 'ionic-angular';
+import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
 import {MallDetailsPage} from '../mall-details/mall-details';
+import {TranslatePipe} from '../../pipes/translate';
+
 /*
   Generated class for the MallsPage page.
 
@@ -12,9 +14,12 @@ import {MallDetailsPage} from '../mall-details/mall-details';
 */
 @Component({
   templateUrl: 'build/pages/malls/malls.html',
-  pipes:[TranslatePipe],
   directives: [LoadingModal],
-  providers: [GeolocationService]
+   providers: [GeolocationService],
+   queries: {
+     content: new ViewChild(Content)
+   },
+   pipes: [TranslatePipe]
 })
 export class MallsPage {
   static get parameters() {
@@ -34,11 +39,13 @@ export class MallsPage {
 
     this.placeType = 'shopping_mall';
     this.sort = 'Distance';
-    // this.cuisine = 'food';
+    this.cuisine = 'food';
 
     this.items = [];
     this.res = null;
     this.count = null;
+
+    this.disable = null;
 
     console.log(this.details);
     console.log("Malls list working");
@@ -48,10 +55,9 @@ export class MallsPage {
     var me = this;
     me.params.geoloc = this.details;
     me.params.placeType = 'shopping_mall';
-    // me.params.cuisine = 'food';
+    me.params.cuisine = '';
 
-    // document.getElementById('cuisine').getElementsByTagName('button')[0].disabled=true;
-    // document.getElementById("cuisine").style.color = "#C2C2C2";
+    me.disable = true;
 
     me.geolocationService.setPlaces(me.params).then(function (res) {
       setTimeout(function() {
@@ -66,6 +72,7 @@ export class MallsPage {
         }
           console.log(me.items);
         me.setMallRating();
+        document.getElementById('loading').style.display="none";
       }, 2000);
     });
 
@@ -93,7 +100,7 @@ export class MallsPage {
       if (i==me.res.length) {
         infiniteScroll.enable(false);
       }
-    }, 1000);
+    }, 2000);
 
   }
 
@@ -103,6 +110,7 @@ export class MallsPage {
   }
 
   updatePlaceType(){
+    document.getElementById('loading').style.display="inline";
     var me = this;
     me.params.geoloc = this.details;
     me.params.placeType = me.placeType;
@@ -113,6 +121,7 @@ export class MallsPage {
         me.items = res;
         me.setMallRating();
         me.sortItems(me.sort);
+        document.getElementById('loading').style.display="none";
       }, 2000);
     });
   }
@@ -142,6 +151,7 @@ export class MallsPage {
       });
       console.log(me.items);
     }
+    me.content.scrollToTop();
   }
 
   setMallRating(){

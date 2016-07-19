@@ -8,6 +8,7 @@ import {TranslatePipe} from '../../../pipes/translate';
   templateUrl: 'build/pages/jeepney/find-routes/routes.view.html',
   pipes: [TranslatePipe]
 })
+
 export class FindRoutesPage {
   static get parameters(){
     return [[NavController]];

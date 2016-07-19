@@ -1,9 +1,8 @@
-import {Component} from '@angular/core';
+import {Component,ViewChild} from '@angular/core';
 import {NavController, NavParams, Content} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
-import {ViewChild} from '@angular/core';
 import {TranslatePipe} from '../../pipes/translate';
 import {HotelDetailsPage} from '../hotel-details/hotel-details';
 /*
@@ -53,10 +52,7 @@ export class HotelsPage {
     var me = this;
     me.params.geoloc = this.details;
     me.params.placeType = 'lodging';
-    // me.params.cuisine = 'food';
-
-    // document.getElementById('cuisine').getElementsByTagName('button')[0].disabled=true;
-    // document.getElementById("cuisine").style.color = "#C2C2C2";
+    me.params.cuisine = '';
 
     me.geolocationService.setPlaces(me.params).then(function (res) {
       setTimeout(function() {
@@ -71,7 +67,7 @@ export class HotelsPage {
         }
           console.log(me.items);
         me.setHotelRating();
-      }, 2000);
+      }, 6000);
     });
 
 
@@ -101,7 +97,7 @@ export class HotelsPage {
       if (i==me.res.length) {
         infiniteScroll.enable(false);
       }
-    }, 1000);
+    }, 2000);
 
   }
 

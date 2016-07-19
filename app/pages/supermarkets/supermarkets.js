@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {Component,ViewChild} from '@angular/core';
+import {NavController, NavParams, Content} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
@@ -14,9 +14,12 @@ import {TranslatePipe} from '../../pipes/translate';
 */
 @Component({
   templateUrl: 'build/pages/supermarkets/supermarkets.html',
-  pipes: [TranslatePipe],
   directives: [LoadingModal],
-  providers: [GeolocationService]
+   providers: [GeolocationService],
+   queries: {
+     content: new ViewChild(Content)
+   },
+   pipes: [TranslatePipe]
 })
 export class SupermarketsPage {
   static get parameters() {
@@ -50,10 +53,6 @@ export class SupermarketsPage {
     var me = this;
     me.params.geoloc = this.details;
     me.params.placeType = 'grocery_or_supermarket';
-    // me.params.cuisine = 'food';
-
-    // document.getElementById('cuisine').getElementsByTagName('button')[0].disabled=true;
-    // document.getElementById("cuisine").style.color = "#C2C2C2";
 
     me.geolocationService.setPlaces(me.params).then(function (res) {
       setTimeout(function() {
@@ -68,6 +67,7 @@ export class SupermarketsPage {
         }
           console.log(me.items);
         me.setSupMarketRating();
+        document.getElementById('loading').style.display="none";
       }, 2000);
     });
 
@@ -87,7 +87,7 @@ export class SupermarketsPage {
         me.items.push(me.res[i]);
         console.log(i);
       }
-      me.setHotelRating();
+      me.setSupMarketRating();
 
       me.count = i;
 
@@ -98,13 +98,30 @@ export class SupermarketsPage {
       if (i==me.res.length) {
         infiniteScroll.enable(false);
       }
-    }, 1000);
+    }, 2000);
 
   }
 
   updateSort(){
     var me = this;
     me.sortItems(me.sort);
+  }
+
+  updatePlaceType(){
+    document.getElementById('loading').style.display="inline";
+    var me = this;
+    me.params.geoloc = this.details;
+    me.params.placeType = me.placeType;
+
+    me.geolocationService.setPlaces(me.params).then(function (res) {
+      me.items = [];
+      setTimeout(function() {
+        me.items = res;
+        me.setSupMarketRating();
+        me.sortItems(me.sort);
+        document.getElementById('loading').style.display="none";
+      }, 2000);
+    });
   }
 
   sortItems(sortVal){
@@ -132,6 +149,7 @@ export class SupermarketsPage {
       });
       console.log(me.items);
     }
+    me.content.scrollToTop();
   }
 
   setSupMarketRating(){
