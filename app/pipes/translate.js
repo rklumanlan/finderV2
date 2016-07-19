@@ -112,9 +112,8 @@ export class TranslatePipe {
       "Restaurant":"レストラン",
       "Cafe":"カフェ",
       "Hotel":"ホテル",
-      "Mall":"モール",
-      "Supermarket":"スーパーマーケット",
-      "Salon":"サロン",
+      "Shopping Mall":"ショッピングモール",
+      "Beauty Salon":"ビューティーサロン",
 
       "Any Cuisine":"任意の料理",
       "American":"アメリカの料理",

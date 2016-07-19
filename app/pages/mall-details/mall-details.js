@@ -3,16 +3,12 @@ import {NavController, NavParams} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {MallMapPage} from '../mall-map/mall-map';
+import {TranslatePipe} from '../../pipes/translate';
 
-/*
-  Generated class for the MallDetailsPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   templateUrl: 'build/pages/mall-details/mall-details.html',
-  providers: [GeolocationService]
+  providers: [GeolocationService],
+  pipes: [TranslatePipe]
 })
 export class MallDetailsPage {
   static get parameters() {

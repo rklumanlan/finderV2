@@ -15,16 +15,6 @@
             </ion-item>
           </ion-col>
 
-          <!-- <ion-col width-33>
-            <span class="sort_label">Cuisine</span>
-            <ion-item class="slct">
-              <ion-label id ='2' class="input_lbl">Cuisine</ion-label>
-              <ion-select id="cuisine" [(ngModel)]="cuisine"  (ngModelChange)="updateCuisine($event)" class="drpdown" okText="OK" cancelText="Cancel">
-                <ion-option value="food">Any Cuisine</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col> -->
-
           <ion-col width-50>
             <span class="sort_label">{{'Sort'|translate}}</span>
             <ion-item class="slct sort">
@@ -40,53 +30,6 @@
       </ion-grid>
   </ion-toolbar>
 </ion-header>
-<ion-header>
-  <ion-navbar primary>
-      <ion-title>Hotels</ion-title>
-  </ion-navbar>
-  <ion-toolbar class="sort_toolbar">
-      <ion-grid>
-        <ion-row class="sort_grid">
-          <ion-col width-33 class="ToolbarCol">
-            <span class="sort_label">Place Type</span>
-            <ion-item class="slct">
-                <ion-label class="input_lbl">Place Type</ion-label>
-                <ion-select id ='1' [(ngModel)]="placeType" (ngModelChange)="updatePlaceType($event)" class="drpdown" okText="OK" cancelText="Cancel">
-                  <ion-option value="lodging">Hotel</ion-option>
-                </ion-select>
-            </ion-item>
-          </ion-col>
-
-          <ion-col width-33 class="ToolbarCol">
-            <span class="sort_label">Cuisine</span>
-            <ion-item class="slct">
-              <ion-label id ='2' class="input_lbl">Cuisine</ion-label>
-              <ion-select id="cuisine" [(ngModel)]="cuisine" [disabled]='disable ? true : null' (ngModelChange)="updateCuisine($event)" class="drpdown" okText="OK" cancelText="Cancel">
-                <ion-option value="food">Any Cuisine</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-
-          <ion-col width-33 class="ToolbarCol">
-            <span class="sort_label">Sort</span>
-            <ion-item class="slct sort">
-              <ion-label class="input_lbl">Sort</ion-label>
-              <ion-select [(ngModel)]="sort" (ngModelChange)="updateSort($event)" class="drpdown">
-                <ion-option value="Distance">Distance</ion-option>
-                <ion-option value="Alphabetically">Alphabetically</ion-option>
-                <ion-option value="Rating">Rating</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-
-        </ion-row>
-      </ion-grid>
-
-  </ion-toolbar>
-</ion-header>
-
-
->>>>>>> a47b22497114846715a40ee5642b6b391d8a4045
 
 <ion-content>
   <loading-modal id="loading" ></loading-modal>

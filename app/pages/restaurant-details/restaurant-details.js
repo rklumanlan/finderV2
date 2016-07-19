@@ -5,12 +5,6 @@ import {GeolocationService} from '../../providers/geolocation-service/geolocatio
 import {RestaurantMapPage} from '../restaurant-map/restaurant-map';
 import {TranslatePipe} from '../../pipes/translate';
 
-/*
-  Generated class for the RestaurantDetailsPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   templateUrl: 'build/pages/restaurant-details/restaurant-details.html',
   pipes: [TranslatePipe]

@@ -7,11 +7,11 @@
       <ion-grid>
         <ion-row class="sort_grid">
           <ion-col width-50>
-            <span class="sort_label">Place Type</span>
+            <span class="sort_label">{{'Place Type'|translate}}</span>
             <ion-item class="slct">
-                <ion-label class="input_lbl">Place Type</ion-label>
+                <ion-label class="input_lbl">{{'Place Type'|translate}}</ion-label>
                 <ion-select id ='1' [(ngModel)]="placeType" (ngModelChange)="updatePlaceType($event)" class="drpdown_nc" okText="OK" cancelText="Cancel">
-                  <ion-option value="shopping_mall">Shopping Mall</ion-option>
+                  <ion-option value="shopping_mall">{{'Shopping Mall'|translate}}</ion-option>
                   <!-- <ion-option value="department_store">Department Store</ion-option>
                   <ion-option value="clothing_store">Clothing Store</ion-option>
                   <ion-option value="shoe_store">Shoe Store</ion-option> -->
@@ -19,24 +19,14 @@
             </ion-item>
           </ion-col>
 
-          <!-- <ion-col width-33>
-            <span class="sort_label">Cuisine</span>
-            <ion-item class="slct">
-              <ion-label id ='2' class="input_lbl">Cuisine</ion-label>
-              <ion-select id="cuisine" [(ngModel)]="cuisine"  (ngModelChange)="updateCuisine($event)" class="drpdown" okText="OK" cancelText="Cancel">
-                <ion-option value="food">Any Cuisine</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col> -->
-
           <ion-col width-50>
-            <span class="sort_label">Sort</span>
+            <span class="sort_label">{{'Sort'|translate}}</span>
             <ion-item class="slct sort">
-              <ion-label class="input_lbl">Sort</ion-label>
+              <ion-label class="input_lbl">{{'Sort'|translate}}</ion-label>
               <ion-select [(ngModel)]="sort" (ngModelChange)="updateSort($event)" class="drpdown_nc">
-                <ion-option value="Distance">Distance</ion-option>
-                <ion-option value="Alphabetically">Alphabetically</ion-option>
-                <ion-option value="Rating">Rating</ion-option>
+                <ion-option value="Distance">{{'Distance'|translate}}</ion-option>
+                <ion-option value="Alphabetically">{{'Alphabetically'|translate}}</ion-option>
+                <ion-option value="Rating">{{'Rating'|translate}}</ion-option>
               </ion-select>
             </ion-item>
           </ion-col>

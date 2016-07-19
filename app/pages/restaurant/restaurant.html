@@ -1,22 +1,8 @@
 <ion-header>
   <ion-navbar primary>
-<<<<<<< HEAD
       <ion-title >{{'Restaurants'|translate}}</ion-title>
   </ion-navbar>
 
-<ion-toolbar id="sort_toolbar">
-    <ion-grid>
-      <ion-row >
-        <ion-col width-33 class="ToolbarCol">
-          <span class="sort_label">{{'Place Type'|translate}}</span>
-          <ion-item class="slct">
-              <ion-label class="input_lbl">{{'Place Type'|translate}}</ion-label>
-              <ion-select id ='1' [(ngModel)]="placeType" (ngModelChange)="updatePlaceType($event)" class="drpdown" okText="OK" cancelText="{{'Cancel'|translate}}">
-                <ion-option value="restaurant" >{{'Restaurant'|translate}}</ion-option>
-                <ion-option value="cafe">{{'Cafe'|translate}}</ion-option>
-=======
-    <ion-title >{{'Restaurants'|translate}}</ion-title>
-  </ion-navbar>
   <ion-toolbar class="sort_toolbar">
       <ion-grid>
         <ion-row >
@@ -48,7 +34,6 @@
                 <ion-option value="Spanish">{{'Spanish'|translate}}</ion-option>
                 <ion-option value="Thai">{{'Thai'|translate}}</ion-option>
                 <ion-option value="Vietnamese">{{'Vietnamese'|translate}}</ion-option>
->>>>>>> a47b22497114846715a40ee5642b6b391d8a4045
               </ion-select>
             </ion-item>
           </ion-col>
@@ -64,19 +49,11 @@
               </ion-select>
             </ion-item>
           </ion-col>
-
         </ion-row>
       </ion-grid>
-
   </ion-toolbar>
 </ion-header>
 
-<<<<<<< HEAD
-</ion-toolbar>
-</ion-header>
-=======
-
->>>>>>> a47b22497114846715a40ee5642b6b391d8a4045
 <ion-content>
   <loading-modal id="loading" ></loading-modal>
 

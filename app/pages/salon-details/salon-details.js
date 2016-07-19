@@ -3,15 +3,12 @@ import {NavController, NavParams} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {SalonMapPage} from '../salon-map/salon-map';
-/*
-  Generated class for the SalonDetailsPage page.
+import {TranslatePipe} from '../../pipes/translate';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   templateUrl: 'build/pages/salon-details/salon-details.html',
-  providers: [GeolocationService]
+  providers: [GeolocationService],
+  pipes: [TranslatePipe]
 })
 export class SalonDetailsPage {
   static get parameters() {
