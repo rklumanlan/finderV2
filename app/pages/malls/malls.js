@@ -1,5 +1,6 @@
 import {TranslatePipe} from '../../pipes/translate';
-import {Page, NavController, NavParams} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
 import {MallDetailsPage} from '../mall-details/mall-details';
@@ -9,7 +10,7 @@ import {MallDetailsPage} from '../mall-details/mall-details';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
-@Page({
+@Component({
   templateUrl: 'build/pages/malls/malls.html',
   pipes:[TranslatePipe],
   directives: [LoadingModal],
@@ -43,7 +44,7 @@ export class MallsPage {
     console.log("Malls list working");
   }
 
-  onPageWillEnter(){
+  ionViewWillEnter(){
     var me = this;
     me.params.geoloc = this.details;
     me.params.placeType = 'shopping_mall';

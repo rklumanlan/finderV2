@@ -1,4 +1,5 @@
-import {Page, NavController, NavParams} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {HotelMapPage} from '../hotel-map/hotel-map';
@@ -8,7 +9,7 @@ import {HotelMapPage} from '../hotel-map/hotel-map';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
-@Page({
+@Component({
   templateUrl: 'build/pages/hotel-details/hotel-details.html',
   providers: [GeolocationService]
 })
@@ -22,12 +23,12 @@ export class HotelDetailsPage {
     this.navParams = navParams;
     this.HotelDetailsPage = HotelDetailsPage;
     this.HotelMapPage = HotelMapPage;
-    
+
     this.item_select_hotel = this.navParams.get('item_select_hotel');
     console.log(this.item_select_hotel);
   }
 
-  onPageLoaded(){
+  ionViewLoaded(){
     var me = this;
     console.log(me.item_select_hotel.rating);
     console.log(me.item_select_hotel.opening_hours);

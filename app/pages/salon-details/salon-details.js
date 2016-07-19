@@ -1,4 +1,5 @@
-import {Page, NavController, NavParams} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {SalonMapPage} from '../salon-map/salon-map';
@@ -8,7 +9,7 @@ import {SalonMapPage} from '../salon-map/salon-map';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
-@Page({
+@Component({
   templateUrl: 'build/pages/salon-details/salon-details.html',
   providers: [GeolocationService]
 })
@@ -29,7 +30,7 @@ export class SalonDetailsPage {
     console.log(this.item_select_salon);
   }
 
-  onPageLoaded(){
+  ionViewLoaded(){
     var me = this;
     // setTimeout(function() {
       var x = document.getElementById("salon_rating");

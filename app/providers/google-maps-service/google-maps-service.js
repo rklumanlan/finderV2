@@ -1,8 +1,9 @@
-import {Page, Storage, SqlStorage, IonicApp, NavController, Alert} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {Storage, SqlStorage, IonicApp, NavController, Alert} from 'ionic-angular';
 
-import {Injectable} from 'angular2/core';
+import {Injectable} from '@angular/core';
 
-import {Http, URLSearchParams} from 'angular2/http';
+import {Http, URLSearchParams} from '@angular/http';
 import 'rxjs/Rx';
 
 
@@ -12,7 +13,7 @@ import {ConnectivityService} from '../../providers/connectivity-service/connecti
 
 // import {LoadingModal} from '../../components/loading-modal/loading-modal';
 //
-// @Page({
+// @Component({
 //   templateUrl: 'build/pages/maps/maps.html',
 //   directives: [LoadingModal],
 // })

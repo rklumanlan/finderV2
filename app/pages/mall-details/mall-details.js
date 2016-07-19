@@ -1,4 +1,5 @@
-import {Page, NavController, NavParams} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {MallMapPage} from '../mall-map/mall-map';
@@ -9,7 +10,7 @@ import {MallMapPage} from '../mall-map/mall-map';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
-@Page({
+@Component({
   templateUrl: 'build/pages/mall-details/mall-details.html',
   providers: [GeolocationService]
 })
@@ -32,7 +33,7 @@ export class MallDetailsPage {
     console.log(this.item_select_mall);
   }
 
-  onPageLoaded(){
+  ionViewLoaded(){
     var me = this;
     // setTimeout(function() {
       var x = document.getElementById("mall_rating");

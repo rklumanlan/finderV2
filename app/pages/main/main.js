@@ -1,4 +1,5 @@
-import {Page, Storage, SqlStorage, NavParams, NavController,Alert} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {Storage, SqlStorage, NavParams, NavController,Alert} from 'ionic-angular';
 import {TabsPage} from '../jeepney/tabs/tabs';
 // Import menu pages
 import {RestaurantPage} from '../restaurant/restaurant';
@@ -18,7 +19,7 @@ import {GeolocationService} from '../../providers/geolocation-service/geolocatio
 
 import {TranslatePipe} from '../../pipes/translate';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/main/main.html',
   providers: [GeolocationService],
   pipes: [TranslatePipe]
@@ -52,7 +53,7 @@ export class MainPage{
 
 
   }
-  onPageDidEnter(){
+  ionViewDidEnter(){
     // setTimeout(function() {
       document.getElementById("lowerDiv").style.display = "inline";
 

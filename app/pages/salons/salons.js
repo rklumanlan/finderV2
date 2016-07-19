@@ -1,4 +1,5 @@
-import {Page, NavController, NavParams} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
@@ -13,7 +14,7 @@ import {TranslatePipe} from '../../pipes/translate';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
-@Page({
+@Component({
   templateUrl: 'build/pages/salons/salons.html',
   pipes: [TranslatePipe],
   directives: [LoadingModal],
@@ -46,7 +47,7 @@ export class SalonsPage {
     console.log(this.details);
     console.log("Salon list working");
   }
-  onPageWillEnter(){
+  ionViewWillEnter(){
     var me = this;
     me.params.geoloc = this.details;
     me.params.placeType = 'beauty_salon';

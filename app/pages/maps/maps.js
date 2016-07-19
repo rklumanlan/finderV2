@@ -1,4 +1,5 @@
-import {Page,NavParams, Storage, SqlStorage,IonicApp} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavParams, Storage, SqlStorage,IonicApp} from 'ionic-angular';
 
 import {DataService} from '../../services/data';
 
@@ -9,9 +10,9 @@ import {GoogleMapsService} from '../../providers/google-maps-service/google-maps
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
 
 
-@Page({
+@Component({
   templateUrl: 'build/pages/maps/maps.html',
-  
+
 })
 
 export class MapsPage {

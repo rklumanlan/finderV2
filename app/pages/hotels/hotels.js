@@ -1,8 +1,9 @@
-import {Page, NavController, NavParams, Content} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, NavParams, Content} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
-import {ViewChild} from 'angular2/core';
+import {ViewChild} from '@angular/core';
 // import {TranslatePipe} from '../../pipes/translate';
 import {HotelDetailsPage} from '../hotel-details/hotel-details';
 /*
@@ -11,7 +12,7 @@ import {HotelDetailsPage} from '../hotel-details/hotel-details';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
-@Page({
+@Component({
   templateUrl: 'build/pages/hotels/hotels.html',
   directives: [LoadingModal],
    providers: [GeolocationService],
@@ -48,7 +49,7 @@ export class HotelsPage {
     console.log("Hotels list working");
   }
 
-  onPageWillEnter(){
+  ionViewWillEnter(){
     var me = this;
     me.params.geoloc = this.details;
     me.params.placeType = 'lodging';
