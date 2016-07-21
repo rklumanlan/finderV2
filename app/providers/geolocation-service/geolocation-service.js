@@ -399,7 +399,7 @@ export class GeolocationService {
     var image = {
       url: img,
       scaledSize: new google.maps.Size(23, 36)
-    }
+    };
 
     var contentString = '<h4 class="pol_name">'+detail.name+'</h4><span class="pol_address">'+detail.vicinity+'</span>';
 
@@ -427,6 +427,78 @@ export class GeolocationService {
 
   }
 
+  setPlaceDetails(mapElem,id){
+    var me = this;
+    var items = [];
+    var params = {};
+    params.mapElem = mapElem;
+    params.id= id;
+
+    me.getPlaceDetails(params, function(place, status) {
+      console.log(status);
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        console.log('OK');
+        console.log(place);
+        items.push(place);
+      }
+    });
+
+
+    return new Promise(function(resolve, reject) {
+      // Only `delay` is able to resolve or reject the promise
+      setTimeout(function() {
+        console.log(items);
+        console.log('itemu');
+        resolve(items); // After 3 seconds, resolve the promise with value 42
+      }, 500);
+    });
+  }
+
+  getPlaceDetails(params, callback){
+    var me = this;
+    console.log(params);
+    console.log('getPlaceDetails');
+    // console.log('enter getPlaceDetails');
+    // console.log(mapElem);
+    // console.log(id);
+    //
+    var map = new google.maps.Map(document.getElementById(params.mapElem), {
+      center: {lat: -33.866, lng: 151.196},
+      zoom: 15
+    });
+    //
+    var service = new google.maps.places.PlacesService(map);
+    //
+    // console.log(service);
+    //
+    service.getDetails({
+      placeId: params.id
+    }, callback);
+
+
+    // console.log(pageDetails);
+
+    // var loc = {lat: parseFloat(pageDetails.geoloc.lat), lng: parseFloat(pageDetails.geoloc.lng)};
+    //
+    // me.map = new google.maps.Map(document.getElementById('map'), {
+    //   center: loc,
+    //   zoom: 17
+    // });
+
+    // var type,keyword;
+    // console.log('enter');
+    // type = pageDetails.placeType;
+    // keyword = pageDetails.cuisine;
+    //
+    // var distance = new google.maps.places.PlacesService(map);
+    // distance.nearbySearch({
+    //   location: loc,
+    //   rankBy: google.maps.places.RankBy.DISTANCE,
+    //   type: [type],
+    //   keyword: [keyword]
+    // }, callback);
+  }
+
 
   getLatlng(){
     var me = this;
@@ -449,5 +521,7 @@ export class GeolocationService {
 
 
   }
+
+
 
 }

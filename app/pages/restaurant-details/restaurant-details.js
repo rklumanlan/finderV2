@@ -7,14 +7,16 @@ import {TranslatePipe} from '../../pipes/translate';
 
 @Component({
   templateUrl: 'build/pages/restaurant-details/restaurant-details.html',
-  pipes: [TranslatePipe]
+  pipes: [TranslatePipe],
+  providers: [GeolocationService]
 })
 export class RestaurantDetailsPage {
   static get parameters() {
-    return [[NavController],[NavParams]];
+    return [[NavController],[NavParams],[GeolocationService]];
   }
 
-  constructor(nav,navParams) {
+  constructor(nav,navParams,geolocationService) {
+    this.geolocationService = geolocationService;
     this.RestaurantMapPage = RestaurantMapPage;
     this.nav = nav;
     this.navParams = navParams;
@@ -23,10 +25,60 @@ export class RestaurantDetailsPage {
 
     // this.placeImage();
 
+    this.photos = [];
+    this.results = [];
+    this.reviews = [];
+
+  }
+  ionViewWillEnter(){
+    var me = this;
+    console.log('detail');
+    console.log(document.getElementById('resto_map_dtl'));
+    me.geolocationService.setPlaceDetails('resto_map_dtl',me.item_select.place_id).then(function (res) {
+      console.log(res[0]);
+      console.log('inner');
+      me.results = res[0];
+
+      if (res[0].reviews!==undefined) {
+        me.reviews = res[0].reviews;
+      }
+
+      if (res[0].photos!==undefined) {
+        for (var i = 0; i < res[0].photos.length; i++) {
+          me.photos.push(res[0].photos[i].getUrl({'maxWidth': 300, 'maxHeight': 300}));
+        }
+        console.log(me.photos);
+      }
+      else {
+        me.photos.push(res[0].icon);
+      }
+
+    });
   }
 
   ionViewLoaded(){
     var me = this;
+    // console.log('detail');
+    // console.log(document.getElementById('resto_map_dtl'));
+    // me.geolocationService.setPlaceDetails('resto_map_dtl',me.item_select.place_id).then(function (res) {
+    //   console.log(res[0]);
+    //   console.log('inner');
+    //   me.results = res[0];
+    //
+    //   console.log(me.results);
+    //   console.log(me.results.name);
+    //
+    //   if (res[0].photos!==undefined) {
+    //     // z.insertAdjacentHTML( 'beforeend', '<img src="'+me.item_select.photos[1].getUrl({'maxWidth': 300, 'maxHeight': 300})+'" >');
+    //     for (var i = 0; i < res[0].photos.length; i++) {
+    //       console.log('pic'+i);
+    //     }
+    //   }
+    //   // else {
+    //   //   z.insertAdjacentHTML( 'beforeend', '<img src="'+me.item_select.icon+'" >');
+    //   // }
+    // });
+
     // setTimeout(function() {
       var x = document.getElementById("resto_rating");
       var y = document.getElementById("operating_hours");
@@ -83,15 +135,6 @@ export class RestaurantDetailsPage {
               ctr=ctr+1;
             }
           }
-
         }
-        if (me.item_select.photos!==undefined) {
-          z.insertAdjacentHTML( 'beforeend', '<img src="'+me.item_select.photos[0].getUrl({'maxWidth': 300, 'maxHeight': 300})+'" >');
-        }
-        else {
-          z.insertAdjacentHTML( 'beforeend', '<img src="'+me.item_select.icon+'" >');
-        }
-
   }
-
 }
