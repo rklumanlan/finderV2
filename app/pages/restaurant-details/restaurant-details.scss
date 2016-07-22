@@ -1,10 +1,40 @@
 .restaurant-details {
 
 }
+span#operating_hours {
+    font-size: 12pt;
+}
+p.review_text{
+  width: 100%;
+  word-break: break-all;
+  white-space: normal;
+}
+
+ion-list-header.list_review_header {
+    background: #dedede;
+    color: #424242;
+    font-size: 12pt;
+    font-weight: bold;
+}
+span.review_rating{
+  float:right;
+}
+ion-item.review_item_list.item {
+    background: rgba(255, 255, 255, 0.48);
+    padding-left: 3%;
+    width: 100%;
+}
+// ion-card-content.card_details {
+//     padding: 2% 6%;
+// }
+ion-grid.grid_details {
+    padding: 1% 3%;
+}
 .details_btn{
   margin-top:0;
   float:right;
-  padding-left: 55%;
+  // padding-left: 55%;
+  border-top: 1px solid #bfbfbf;
 }
 ion-row.hours_row {
     border-bottom: 1px solid #dedede;
@@ -16,7 +46,7 @@ ul#item_buttons {
     // float: right !important;
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding-left: 15%;
 }
 button span.icoMoon-website, button span.icoMoon-review {
     font-size: .3em;
