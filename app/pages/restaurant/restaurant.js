@@ -67,7 +67,9 @@ export class RestaurantPage {
         }
           console.log(me.items);
         me.setRating();
-        document.getElementById('loading').style.display="none";
+        if (document.getElementById('loading')!==null) {
+          document.getElementById('loading').style.display="none";
+        }
       }, 2000);
     });
   }
