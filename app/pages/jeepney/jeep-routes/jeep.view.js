@@ -1,12 +1,7 @@
 import {Component} from '@angular/core';
 import {Storage, SqlStorage} from 'ionic-angular';
 import {DataService} from '../../../services/data';
-
-// import {TabsPage} from '../../jeepney/tabs/tabs';
-//
 import {JeepDetailsPage} from '../../jeepney/jeep-routes/jeep.details';
-
-
 import {TranslatePipe} from '../../../pipes/translate';
 
 @Component({

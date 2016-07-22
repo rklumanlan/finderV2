@@ -53,7 +53,7 @@ export class MainPage{
 
 
   }
-  onPageDidEnter(){
+  ionViewDidEnter(){
     // setTimeout(function() {
       document.getElementById("lowerDiv").style.display = "inline";
 

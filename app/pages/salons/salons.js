@@ -39,13 +39,11 @@ export class SalonsPage {
 
     this.placeType = 'beauty_salon';
     this.sort = 'Distance';
-    this.cuisine = 'food';
+    // this.cuisine = 'food';
 
     this.items = [];
     this.res = null;
     this.count = null;
-
-    this.disable = null;
 
     console.log(this.details);
     console.log("Salon list working");
@@ -54,10 +52,6 @@ export class SalonsPage {
     var me = this;
     me.params.geoloc = this.details;
     me.params.placeType = 'beauty_salon';
-    me.params.cuisine = '';
-
-
-    me.disable = true;
 
     me.geolocationService.setPlaces(me.params).then(function (res) {
       setTimeout(function() {

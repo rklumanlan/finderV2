@@ -3,10 +3,7 @@ import {NavParams, Storage, SqlStorage, IonicApp, NavController} from 'ionic-ang
 import {DataService} from '../../services/data';
 import {PolicePage} from '../police/police';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
-
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
-
-
 import {TranslatePipe} from '../../pipes/translate';
 /*
   Generated class for the PoliceDetailsPage page.
@@ -35,7 +32,7 @@ export class PoliceDetailsPage {
 
     this.poldetail = this.navParams.get('poldetail');
   }
-  onPageDidEnter(){
+  ionViewDidEnter(){
     this.geolocationService.getPolHosp(this.poldetail,'police');
   }
 }

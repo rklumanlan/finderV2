@@ -6,37 +6,27 @@
   <ion-toolbar id="sort_toolbar">
       <ion-grid>
         <ion-row class="sort_grid">
-          <ion-col width-33>
-            <span class="sort_label">Place Type</span>
+          <ion-col width-50>
+            <span class="sort_label">{{'Place Type'|translate}}</span>
             <ion-item class="slct">
-                <ion-label class="input_lbl">Place Type</ion-label>
-                <ion-select id ='1' [(ngModel)]="placeType" (ngModelChange)="updatePlaceType($event)" class="drpdown" okText="OK" cancelText="Cancel">
-                  <ion-option value="shopping_mall">Shopping Mall</ion-option>
-                  <ion-option value="department_store">Department Store</ion-option>
+                <ion-label class="input_lbl">{{'Place Type'|translate}}</ion-label>
+                <ion-select id ='1' [(ngModel)]="placeType" (ngModelChange)="updatePlaceType($event)" class="drpdown_nc" okText="OK" cancelText="Cancel">
+                  <ion-option value="shopping_mall">{{'Shopping Mall'|translate}}</ion-option>
+                  <!-- <ion-option value="department_store">Department Store</ion-option>
                   <ion-option value="clothing_store">Clothing Store</ion-option>
-                  <ion-option value="shoe_store">Shoe Store</ion-option>
+                  <ion-option value="shoe_store">Shoe Store</ion-option> -->
                 </ion-select>
             </ion-item>
           </ion-col>
 
-          <ion-col width-33>
-            <span class="sort_label">Cuisine</span>
-            <ion-item class="slct">
-              <ion-label id ='2' class="input_lbl">Cuisine</ion-label>
-              <ion-select id="cuisine" [(ngModel)]="cuisine" [disabled]='disable ? true : null' (ngModelChange)="updateCuisine($event)" class="drpdown" okText="OK" cancelText="Cancel">
-                <ion-option value="food">Any Cuisine</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-
-          <ion-col width-33>
-            <span class="sort_label">Sort</span>
+          <ion-col width-50>
+            <span class="sort_label">{{'Sort'|translate}}</span>
             <ion-item class="slct sort">
-              <ion-label class="input_lbl">Sort</ion-label>
-              <ion-select [(ngModel)]="sort" (ngModelChange)="updateSort($event)" class="drpdown">
-                <ion-option value="Distance">Distance</ion-option>
-                <ion-option value="Alphabetically">Alphabetically</ion-option>
-                <ion-option value="Rating">Rating</ion-option>
+              <ion-label class="input_lbl">{{'Sort'|translate}}</ion-label>
+              <ion-select [(ngModel)]="sort" (ngModelChange)="updateSort($event)" class="drpdown_nc">
+                <ion-option value="Distance">{{'Distance'|translate}}</ion-option>
+                <ion-option value="Alphabetically">{{'Alphabetically'|translate}}</ion-option>
+                <ion-option value="Rating">{{'Rating'|translate}}</ion-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -56,7 +46,7 @@
       <div id="map" style="height: 100%;display:none"></div>
 
       <ion-list>
-        <button ion-item detail-none *ngFor="let item_mall of items" [navPush]="[MallDetailsPage, {item_select_mall:item_mall}]">
+        <button ion-item detail-none *ngFor="#item_mall of items" [navPush]="[MallDetailsPage, {item_select_mall:item_mall}]">
 
           <ion-row>
             <ion-col>

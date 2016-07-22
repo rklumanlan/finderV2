@@ -3,15 +3,12 @@ import {NavController, NavParams} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {SupermarketMapPage} from '../supermarket-map/supermarket-map';
-/*
-  Generated class for the SupermarketDetailsPage page.
+import {TranslatePipe} from '../../pipes/translate';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   templateUrl: 'build/pages/supermarket-details/supermarket-details.html',
-  providers: [GeolocationService]
+  providers: [GeolocationService],
+  pipes: [TranslatePipe]
 })
 export class SupermarketDetailsPage {
   static get parameters() {
@@ -30,7 +27,7 @@ export class SupermarketDetailsPage {
     console.log(this.item_select_supmarket);
   }
 
-  onPageLoaded(){
+  ionViewLoaded(){
     var me = this;
     // setTimeout(function() {
       var x = document.getElementById("supmarket_rating");
