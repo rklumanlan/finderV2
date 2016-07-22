@@ -1,5 +1,4 @@
-import {Component} from '@angular/core';
-import {Storage, SqlStorage, IonicApp, NavController, Alert} from 'ionic-angular';
+import {Storage, SqlStorage, NavController, Alert} from 'ionic-angular';
 
 import {Injectable} from '@angular/core';
 
@@ -22,10 +21,10 @@ import {ConnectivityService} from '../../providers/connectivity-service/connecti
 export class GoogleMapsService {
 
   static get parameters(){
-    return [[DataService],[ConnectivityService],[IonicApp],[NavController],[Http]];
+    return [[DataService],[ConnectivityService],[NavController],[Http]];
   }
 
-  constructor(dataService,connectivityService,app,nav,http){
+  constructor(dataService,connectivityService,nav,http){
     this.nav = nav;
 
     this.http = http;

@@ -1,11 +1,9 @@
-import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {Component,ViewChild} from '@angular/core';
+import {NavController, NavParams, Content} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
 import {SalonDetailsPage} from '../salon-details/salon-details';
-
-
 import {TranslatePipe} from '../../pipes/translate';
 
 /*
@@ -16,9 +14,12 @@ import {TranslatePipe} from '../../pipes/translate';
 */
 @Component({
   templateUrl: 'build/pages/salons/salons.html',
-  pipes: [TranslatePipe],
   directives: [LoadingModal],
-  providers: [GeolocationService]
+   providers: [GeolocationService],
+   queries: {
+     content: new ViewChild(Content)
+   },
+   pipes: [TranslatePipe]
 })
 export class SalonsPage {
   static get parameters() {
@@ -44,6 +45,8 @@ export class SalonsPage {
     this.res = null;
     this.count = null;
 
+    this.disable = null;
+
     console.log(this.details);
     console.log("Salon list working");
   }
@@ -51,10 +54,10 @@ export class SalonsPage {
     var me = this;
     me.params.geoloc = this.details;
     me.params.placeType = 'beauty_salon';
-    me.params.cuisine = 'food';
+    me.params.cuisine = '';
 
-    document.getElementById('cuisine').getElementsByTagName('button')[0].disabled=true;
-    document.getElementById("cuisine").style.color = "#C2C2C2";
+
+    me.disable = true;
 
     me.geolocationService.setPlaces(me.params).then(function (res) {
       setTimeout(function() {
@@ -69,6 +72,7 @@ export class SalonsPage {
         }
           console.log(me.items);
         me.setSalonRating();
+        document.getElementById('loading').style.display="none";
       }, 2000);
     });
 
@@ -88,7 +92,7 @@ export class SalonsPage {
         me.items.push(me.res[i]);
         console.log(i);
       }
-      me.setHotelRating();
+      me.setSalonRating();
 
       me.count = i;
 
@@ -99,7 +103,7 @@ export class SalonsPage {
       if (i==me.res.length) {
         infiniteScroll.enable(false);
       }
-    }, 1000);
+    }, 2000);
 
   }
 
@@ -133,6 +137,7 @@ export class SalonsPage {
       });
       console.log(me.items);
     }
+    me.content.scrollToTop();
   }
 
   setSalonRating(){

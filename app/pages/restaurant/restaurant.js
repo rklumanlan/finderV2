@@ -1,10 +1,9 @@
-import {Component} from '@angular/core';
+import {Component,ViewChild} from '@angular/core';
 import {NavController, NavParams, Content} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
 import {RestaurantDetailsPage} from '../restaurant-details/restaurant-details';
-import {ViewChild} from '@angular/core';
 import {TranslatePipe} from '../../pipes/translate';
 /*
   Generated class for the RestaurantPage page.
@@ -45,6 +44,8 @@ export class RestaurantPage {
     this.items = [];
     this.res = null;
     this.count = null;
+
+    this.disable = null;
   }
 
   ionViewWillEnter(){
@@ -66,6 +67,7 @@ export class RestaurantPage {
         }
           console.log(me.items);
         me.setRating();
+        document.getElementById('loading').style.display="none";
       }, 2000);
     });
   }
@@ -94,24 +96,22 @@ export class RestaurantPage {
       if (i==me.res.length) {
         infiniteScroll.enable(false);
       }
-    }, 1000);
+    }, 2000);
 
   }
 
   updatePlaceType(){
+    document.getElementById('loading').style.display="inline";
     var me = this;
     me.params.geoloc = this.details;
     me.params.placeType = me.placeType;
     if (me.placeType == 'cafe') {
       me.params.cuisine = '';
-      document.getElementById('cuisine').getElementsByTagName('button')[0].disabled=true;
-      document.getElementById("cuisine").style.color = "#C2C2C2";
+      me.disable = true;
     }
     else {
       me.params.cuisine = me.cuisine;
-      document.getElementById('cuisine').getElementsByTagName('button')[0].disabled=false;
-      document.getElementById("cuisine").style.color = "#000";
-      console.log(document.getElementById('cuisine'));
+      me.disable = false;
     }
     me.geolocationService.setPlaces(me.params).then(function (res) {
       me.items = [];
@@ -119,6 +119,7 @@ export class RestaurantPage {
         me.items = res;
         me.setRating();
         me.sortItems(me.sort);
+        document.getElementById('loading').style.display="none";
       }, 6000);
     });
   }

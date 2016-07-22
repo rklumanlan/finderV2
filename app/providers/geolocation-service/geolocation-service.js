@@ -197,7 +197,7 @@ export class GeolocationService {
         // }else {
           resolve(geo); // After 3 seconds, resolve the promise with value 42
         // }
-      }, 1000);
+      }, 2000);
     });
 
 
@@ -336,11 +336,20 @@ export class GeolocationService {
   // Location Map
   getPolHosp(detail,page){
 
-    var mapcoords,img,mapElem;
+    var img;
+    var me = this;
+
+    let mapOptions = {
+        center: detail.geometry.location,
+        zoom: 16,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        disableDefaultUI: true
+    }
 
     console.log("Get Hospital Lat Working");
     console.log(page);
     console.log('afa');
+
     console.log(page === 'supmarket');
     // console.log(document.getElementById('police_map'));
     console.log(detail);
@@ -353,42 +362,31 @@ export class GeolocationService {
     }
     else if (page === 'resto') {
       console.log('Entered Resto map');
-
-      mapcoords = detail.geometry.location;
       img = 'img/pins/restaurant.png';
-      mapElem = document.getElementById('resto_map');
+      me.map = new google.maps.Map(document.getElementById('resto_map'), mapOptions );
 
     }
     else if (page === 'hotel') {
       console.log('Entered Hotel map');
-
-      mapcoords = detail.geometry.location;
       img = 'img/pins/hotel.png';
-      mapElem = document.getElementById('hotel_map');
+      me.map = new google.maps.Map(document.getElementById('hotel_map'), mapOptions );
 
     }
     else if (page === 'mall') {
       console.log('Entered Mall map');
-
-      mapcoords = detail.geometry.location;
       img = 'img/pins/mall.png';
-      mapElem = document.getElementById('mall_map');
+      me.map = new google.maps.Map(document.getElementById('mall_map'), mapOptions );
 
     }
     else if (page === 'supermarket') {
       console.log('Entered Supermarket map');
-
-      mapcoords = detail.geometry.location;
       img = 'img/pins/supermarket.png';
-      mapElem = document.getElementById('supmarket_map');
-
+      me.map = new google.maps.Map(document.getElementById('supmarket_map'), mapOptions );
     }
     else if (page === 'salon') {
       console.log('Entered salon map');
-
-      mapcoords = detail.geometry.location;
       img = 'img/pins/salon.png';
-      mapElem = document.getElementById('salon_map');
+      me.map = new google.maps.Map(document.getElementById('salon_map'), mapOptions );
 
     }
     else {
@@ -397,39 +395,108 @@ export class GeolocationService {
       mapElem = document.getElementById('police_map');
     }
 
-    var map = new google.maps.Map(mapElem, {
-      center: mapcoords,
-      zoom: 16,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      disableDefaultUI: true
-    });
 
-    var place_ph = {
-      photo: detail.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100})
-    }
-    console.log(place_ph);
     var image = {
       url: img,
       scaledSize: new google.maps.Size(23, 36)
+    };
+
+    var contentString = '<h4 class="pol_name">'+detail.name+'</h4><span class="pol_address">'+detail.vicinity+'</span>';
+
+    if (detail.photos!==undefined) {
+      var place_ph = detail.photos[0].getUrl({'maxWidth': 300, 'maxHeight': 300});
+      contentString=contentString+'<br/><img src="'+place_ph+'"/>';
     }
 
+    var infowindow = new google.maps.InfoWindow({
+     content: contentString
+    });
+
+
     var marker = new google.maps.Marker({
-    map: map,
-    animation: google.maps.Animation.DROP,
-    position: detail.geometry.location,
-    // photos: photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100}),
-    icon: image
+      map: me.map,
+      animation: google.maps.Animation.DROP,
+      position: detail.geometry.location,
+      icon: image
     });
 
     marker.addListener('click', function() {
-      infowindow.open(map, marker);
+      infowindow.open(me.map, marker);
     });
 
-    var contentString = '<h4 class="pol_name">'+detail.name+'</h4><span class="pol_address">'+detail.vicinity+'</span><br/><img src="'+ place_ph +'"/>';
 
-    var infowindow = new google.maps.InfoWindow({
-      content: contentString
+  }
+
+  setPlaceDetails(mapElem,id){
+    var me = this;
+    var items = [];
+    var params = {};
+    params.mapElem = mapElem;
+    params.id= id;
+
+    me.getPlaceDetails(params, function(place, status) {
+      console.log(status);
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        console.log('OK');
+        console.log(place);
+        items.push(place);
+      }
     });
+
+
+    return new Promise(function(resolve, reject) {
+      // Only `delay` is able to resolve or reject the promise
+      setTimeout(function() {
+        console.log(items);
+        console.log('itemu');
+        resolve(items); // After 3 seconds, resolve the promise with value 42
+      }, 500);
+    });
+  }
+
+  getPlaceDetails(params, callback){
+    var me = this;
+    console.log(params);
+    console.log('getPlaceDetails');
+    // console.log('enter getPlaceDetails');
+    // console.log(mapElem);
+    // console.log(id);
+    //
+    var map = new google.maps.Map(document.getElementById(params.mapElem), {
+      center: {lat: -33.866, lng: 151.196},
+      zoom: 15
+    });
+    //
+    var service = new google.maps.places.PlacesService(map);
+    //
+    // console.log(service);
+    //
+    service.getDetails({
+      placeId: params.id
+    }, callback);
+
+
+    // console.log(pageDetails);
+
+    // var loc = {lat: parseFloat(pageDetails.geoloc.lat), lng: parseFloat(pageDetails.geoloc.lng)};
+    //
+    // me.map = new google.maps.Map(document.getElementById('map'), {
+    //   center: loc,
+    //   zoom: 17
+    // });
+
+    // var type,keyword;
+    // console.log('enter');
+    // type = pageDetails.placeType;
+    // keyword = pageDetails.cuisine;
+    //
+    // var distance = new google.maps.places.PlacesService(map);
+    // distance.nearbySearch({
+    //   location: loc,
+    //   rankBy: google.maps.places.RankBy.DISTANCE,
+    //   type: [type],
+    //   keyword: [keyword]
+    // }, callback);
   }
 
 
@@ -454,5 +521,7 @@ export class GeolocationService {
 
 
   }
+
+
 
 }

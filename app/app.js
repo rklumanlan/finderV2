@@ -26,17 +26,6 @@ import {LoadingModal} from './components/loading-modal/loading-modal';
   templateUrl: 'build/app.html'
   // providers: [DataService,ConnectivityService],
   // directives: [LoadingModal]
-  // config: {
-  //   iconMode: 'md',
-  //   modalEnter: 'modal-slide-in',
-  //   modalLeave: 'modal-slide-out',
-  //   pageTransition: 'ios',
-  //   tabSubPages: false,
-  //   backButtonIcon: 'ios-arrow-back',
-  //   tabbarPlacement: 'top',
-  //   backButtonText: ''
-  //   // menuType: 'reveal'
-  // } // http://ionicframework.com/docs/v2/api/config/Config/
 })
 export class MyApp {
   static get parameters() {
@@ -81,4 +70,4 @@ ionicBootstrap(MyApp, [DataService,ConnectivityService], {
   backButtonIcon: 'ios-arrow-back',
   tabbarPlacement: 'top',
   backButtonText: ''
-})
+});

@@ -21,6 +21,8 @@ export class TranslatePipe {
       "Angeles":"アンヘレス",
       "Clark":"クラーク",
 
+      "Supermarket":"スーパーマーケット",
+
       "CHECK-POINT-HOLY": "チェック-ポイント- ホーリーハイー",
       "CHECK-POINT-HOLY-HI-WAY": "チェック-ポイント- ホーリーハイー-ウェイ",
       "CHECK-POINT-HENSONVILLE-HOLY":"チェック-ポイント-ヘンソンヴィル-ホーリー",

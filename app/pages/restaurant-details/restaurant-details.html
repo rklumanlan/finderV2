@@ -5,11 +5,10 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-<ion-navbar primary>
-  <ion-title>{{item_select.name}}</ion-title>
-</ion-navbar>
+  <ion-navbar primary>
+    <ion-title>{{item_select.name}}</ion-title>
+  </ion-navbar>
 </ion-header>
-
 <ion-content padding class="restaurant-details card-background-page">
   <div class="mainBackDiv">
     <ion-card class="item_details">
@@ -17,8 +16,11 @@
         <!-- <ion-card-title></ion-card-title> -->
           <ion-grid>
             <ion-row class="sort_grid">
-              <ion-col width-20>
-                <div id="place_photo"></div>
+              <ion-col width-20 >
+                <div id="place_photo">
+                  <!-- <img src="{{photos[0]}}" > -->
+                  <!-- {{results.photos.[0]}} -->
+                </div>
               </ion-col>
 
               <ion-col width-70>
@@ -58,6 +60,22 @@
           </ion-grid>
       </ion-card-content>
     </ion-card>
+    <ion-list>
+      <ion-list-header>
+        Reviews & Ratings
+      </ion-list-header>
+      <ion-item *ngFor="let review of reviews">
+        <h2>{{review.author_name}}</h2>
+        <h3>{{review.rating}}</h3>
+        <h3>{{review.text}}</h3>
+      </ion-item>
+    </ion-list>
+    <ion-slides >
+      <ion-slide *ngFor="let photo of photos">
+        <img src="{{photo}}" >
+      </ion-slide>
+    </ion-slides>
+    <div id="resto_map_dtl" style="width:100%; height:100%; display:none"></div>
 
   </div>
 </ion-content>
