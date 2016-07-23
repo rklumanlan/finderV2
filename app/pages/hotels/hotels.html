@@ -2,10 +2,10 @@
   <ion-navbar primary>
     <ion-title>{{'Hotels'|translate}}</ion-title>
   </ion-navbar>
-  <ion-toolbar id="sort_toolbar">
+  <ion-toolbar class="sort_toolbar">
       <ion-grid>
         <ion-row class="sort_grid">
-          <ion-col width-50>
+          <ion-col width-50 class="ToolbarCol">
             <span class="sort_label">{{'Place Type'|translate}}</span>
             <ion-item class="slct">
                 <ion-label class="input_lbl">{{'Place Type'|translate}}</ion-label>
@@ -15,7 +15,7 @@
             </ion-item>
           </ion-col>
 
-          <ion-col width-50>
+          <ion-col width-50 class="ToolbarCol">
             <span class="sort_label">{{'Sort'|translate}}</span>
             <ion-item class="slct sort">
               <ion-label class="input_lbl">{{'Sort'|translate}}</ion-label>
