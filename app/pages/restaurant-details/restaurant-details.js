@@ -23,8 +23,6 @@ export class RestaurantDetailsPage {
     this.item_select = this.navParams.get('item_select');
     console.log(this.item_select);
 
-    // this.placeImage();
-
     this.photos = [];
     this.results = [];
     this.reviews = [];
@@ -66,7 +64,6 @@ export class RestaurantDetailsPage {
     // setTimeout(function() {
       var x = document.getElementById("resto_rating");
       var y = document.getElementById("operating_hours");
-      var z = document.getElementById("place_photo");
       var rating,half,remaining;
 
       // for (var a = 0; a < me.item_select.rating.length; a++) {

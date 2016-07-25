@@ -5,66 +5,8 @@
 </ion-header>
 <ion-content padding class="restaurant-details card-background-page">
   <div class="mainBackDiv">
-    <!-- <ion-card class="item_details"> -->
-      <!-- <ion-card-content class="card_details">
-        <ion-card-title></ion-card-title> -->
-          <!-- <ion-grid>
-            <ion-row class="sort_grid">
-              <ion-col>
-                <ion-slides>
-                  <ion-slide *ngFor="let photo of photos">
-                    <img src="{{photo}}" >
-                  </ion-slide>
-                </ion-slides>
-              </ion-col>
-            </ion-row>
-            <ion-row class="sort_grid">
-              <ion-col>
-                <h2 style="font-weight:500; width:100%;">{{item_select.name}}</h2>
-                {{item_select.vicinity}}
-              </ion-col>
-            </ion-row> -->
-
-            <!-- <ion-row class="sort_grid">
-              <ion-col>
-                <span id="resto_rating"></span>
-              </ion-col>
-            </ion-row>
-
-            <ion-row class="details_btn">
-              <ion-col width-50 class="hours_row">
-                <span id="operating_hours"></span>
-              </ion-col>
-
-              <ion-col width-50>
-                <ul id="item_buttons">
-                  <li class="item_buttons_li">
-                    <button clear [navPush]="[RestaurantMapPage, {item_coordinates:item_select}]">
-                      <span class="icoMoon-marker"></span>
-                    </button><br/>
-                    <span style="font-size:9pt; color: #B7B7B7;">{{'Map'|translate}}</span>
-                  </li>
-                  <li class="item_buttons_li">
-                    <button clear>
-                      <span class="icoMoon-website"></span>
-                    </button><br/>
-                    <span style="font-size:9pt; color: #B7B7B7;">{{'Website'|translate}}</span>
-                  </li> -->
-                  <!-- <li class="item_buttons_li">
-                    <button clear>
-                      <span class="icoMoon-review"></span><br/>
-                      <span style="font-size:9pt;">Review</span>
-                    </button>
-                  </li> -->
-                <!-- </ul>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-      </ion-card-content>
-    </ion-card> -->
-
     <ion-grid class="grid_details">
-      <ion-row class="sort_grid">
+      <ion-row>
         <ion-col>
           <ion-slides>
             <ion-slide *ngFor="let photo of photos">
@@ -73,14 +15,14 @@
           </ion-slides>
         </ion-col>
       </ion-row>
-      <ion-row class="sort_grid">
+      <ion-row>
         <ion-col>
           <h3 style="font-weight:500; width:100%;">{{item_select.name}}</h3>
           {{item_select.vicinity}}
         </ion-col>
       </ion-row>
 
-      <ion-row class="sort_grid">
+      <ion-row>
         <ion-col>
           <span id="resto_rating"></span>
         </ion-col>

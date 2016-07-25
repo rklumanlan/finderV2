@@ -390,9 +390,12 @@ export class GeolocationService {
 
     }
     else {
-      mapcoords = {lat: parseFloat(detail.lat), lng: parseFloat(detail.lng)};
+      // mapcoords = {lat: parseFloat(detail.lat), lng: parseFloat(detail.lng)};
+      // img = 'img/pins/police.png';
+      // mapElem = document.getElementById('police_map');
+      console.log('Entered police map');
       img = 'img/pins/police.png';
-      mapElem = document.getElementById('police_map');
+      me.map = new google.maps.Map(document.getElementById('police_map'), mapOptions );
     }
 
 

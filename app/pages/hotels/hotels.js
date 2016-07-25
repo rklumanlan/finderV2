@@ -144,8 +144,8 @@ export class HotelsPage {
       var rating,half,remaining;
 
       for (var a = 0; a < me.items.length; a++) {
-        console.log(me.items[a].rating);
-        console.log(s[a]);
+        // console.log(me.items[a].rating);
+        // console.log(s[a]);
         if (s[a]!==undefined) {
           //rating number
           rating = Math.floor(me.items[a].rating);
