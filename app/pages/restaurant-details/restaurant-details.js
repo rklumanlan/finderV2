@@ -44,14 +44,7 @@ export class RestaurantDetailsPage {
       if (res[0].reviews!==undefined) {
         me.reviews = res[0].reviews;
         me.setReviewRating();
-        for (var i = 0; i < me.reviews.length; i++) {
-          if (navigator.language=='en-US') {
-            me.reviews[i].time = new Date(me.reviews[i].time*1000).toLocaleDateString('ja-JP');
-          }
-          else {
-            me.reviews[i].time = new Date(me.reviews[i].time*1000).toLocaleDateString('en-US');
-          }
-        }
+        
       }
 
       if (res[0].photos!==undefined) {

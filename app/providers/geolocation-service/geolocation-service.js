@@ -438,7 +438,15 @@ export class GeolocationService {
       console.log(status);
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         console.log('OK');
-        console.log(place);
+        console.log(place.reviews);
+        for (var i = 0; i < place.reviews.length; i++) {
+          if (navigator.language=='en-US') {
+            place.reviews[i].time = new Date(place.reviews[i].time*1000).toLocaleDateString('ja-JP');
+          }
+          else {
+            place.reviews[i].time = new Date(place.reviews[i].time*1000).toLocaleDateString('en-US');
+          }
+        }
         items.push(place);
       }
     });
