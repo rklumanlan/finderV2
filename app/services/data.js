@@ -7,9 +7,9 @@ export class DataService {
 
         this.initDB();
         this.insertJeepsData();
-        this.insertPointsData();
-        this.insertPoliceData();
-        this.insertHospitalData();
+        // this.insertPointsData();
+        // this.insertPoliceData();
+        // this.insertHospitalData();
 
     }
 
@@ -444,133 +444,133 @@ export class DataService {
 
         }
     }
-      insertPoliceData(){
-        this.police = [{
-          name: 'Police Station No. 1',
-          address: 'Sto. Rosario St., Angeles City',
-          email: 'acpo_station1@yahoo.com',
-          landline: '(63 45) 322-7742',
-          mobile: '0932-252-5056',
-          lat: '15.13454299',
-          lng: '120.59104002'
-        },{
-          name: 'Police Station No. 2',
-          address: 'San Francisco Street, Barangay Sta. Teresita Angeles City',
-          email: 'acpo_cs2@yahoo.com',
-          landline: '(63 45)322-3872',
-          mobile: '0932-303-7127',
-          lat: '15.152118',
-          lng: '120.585225'
-        },{
-          name: 'Police Station No. 3',
-          address: 'Magalang Road, Barangay Pulung Maragul, Angeles City',
-          email: 'ps3_opn@yahoo.com',
-          landline: '(63 45)322-2146',
-          mobile: '0932-252-5037 / 9017-474-6996',
-          lat: '15.160938',
-          lng: '120.608948'
-        },{
-          name: 'Police Station No. 4',
-          address: 'Constine Street, corner MA Roxas Avenue, Balibago, Angeles City',
-          email: 'acpo_ps4@yahoo.com',
-          landline: '(63 45)322-2146',
-          mobile: '0932-252-8670',
-          lat: '15.169390',
-          lng: '120.585166'
-        },{
-          name: 'Police Station No. 5',
-          address: 'Barangay Cuayan, Angeles City',
-          email: 'acpo_ps5@yahoo.com',
-          landline: '(63 45)322-9188',
-          mobile: '0932-610-2042',
-          lat: '15.144749',
-          lng: '120.559218'
-        },{
-          name: 'Police Station No. 6',
-          address: 'Barangay Lourdes Sur East, McArthur Highway, Angeles City',
-          email: 'acpo_ps6@yahoo.com',
-          landline: '(63 45)322-8256',
-          mobile: '0933-610-2043 / 0933-510-6691',
-          lat: '15.146031',
-          lng: '120.594740'
-        }];
-        var a,b,item3;
-
-        for(a=0, b=this.police.length; a < b; a++){
-          item3=this.police[a];
-
-          this.storage.query("INSERT OR REPLACE INTO police (id, name, address, email, landline, mobile, lat, lng) VALUES ('"+a+"','"+item3.name+"','"+item3.address+"','"+item3.email+"','"+item3.landline+"','"+item3.mobile+"','"+item3.lat+"','"+item3.lng+"')").then((data) => {
-              console.log(JSON.stringify(data.res));
-          }, (error) => {
-            console.log(error);
-              console.log("ERROR -> " + JSON.stringify(error.err));
-          });
-        }
-    }
-    insertHospitalData(){
-      this.hospital = [{
-        name: 'Angeles Medical Center',
-        address: 'Rizal Street, Angeles City',
-        email: 'angeles_medical_center@yahoo.com',
-        landline: '(63 45)877-7150 / 322-4632 / 887-3139',
-        lat: '15.141437',
-        lng: '120.589142'
-      },{
-        name: 'Angeles University Medical Center',
-        address: 'McArthur Highway, Angeles City',
-        email: 'alvin@auf.edu.ph',
-        landline: '(63 45)322-8876 / 8880 / 888-22668',
-        lat: '15.145463',
-        lng: '120.594934'
-      },{
-        name: 'Holy Family Medical Center',
-        address: '179 Santo Entierro Street, Angeles City',
-        email: 'Email address not available.',
-        landline: '(63 45)888-6620 / 322-3623',
-        lat: '15.140357',
-        lng: '120.594385'
-      },{
-        name: 'Rafael Lazatin Memorial Medical Center',
-        address: 'Visitacion St., cor Pampang Road, Angeles City',
-        email: 'Email address not available.',
-        landline: '(63 45)322-4495 / 1222 / 887-4133',
-        lat: '15.146144',
-        lng: '120.580873'
-      },{
-        name: 'Mother of Perpetual Help Hospital',
-        address: '2257 Santo Entierro Street, Angeles City',
-        email: 'Email address not available.',
-        landline: '(63 45)888-1655',
-        lat: '15.141261',
-        lng: '120.595708'
-      },{
-        name: 'Dr. Amando L. Garcia Medical Center, Inc.',
-        address: '648 Rizal Street, Angeles City',
-        email: 'Email address not available.',
-        landline: '(045)322-0165',
-        lat: '15.142835',
-        lng: '120.589643'
-      },{
-        name: 'St. Catherine Of Alexandria',
-        address: 'Rizal Street, Angeles City',
-        email: 'Email address not available.',
-        landline: '(045)888-7209',
-        lat: '15.135523',
-        lng: '120.585090'
-      }];
-      var c,d,item4;
-
-      for(c=0, d=this.hospital.length; c < d; c++){
-        item4=this.hospital[c];
-
-        this.storage.query("INSERT OR REPLACE INTO hospital (id, name, address, email, landline, lat, lng) VALUES ('"+c+"','"+item4.name+"','"+item4.address+"','"+item4.email+"','"+item4.landline+"','"+item4.lat+"','"+item4.lng+"')").then((data) => {
-            console.log(JSON.stringify(data.res));
-        }, (error) => {
-          console.log(error);
-            console.log("ERROR -> " + JSON.stringify(error.err));
-        });
-      }
-  }
+  //     insertPoliceData(){
+  //       this.police = [{
+  //         name: 'Police Station No. 1',
+  //         address: 'Sto. Rosario St., Angeles City',
+  //         email: 'acpo_station1@yahoo.com',
+  //         landline: '(63 45) 322-7742',
+  //         mobile: '0932-252-5056',
+  //         lat: '15.13454299',
+  //         lng: '120.59104002'
+  //       },{
+  //         name: 'Police Station No. 2',
+  //         address: 'San Francisco Street, Barangay Sta. Teresita Angeles City',
+  //         email: 'acpo_cs2@yahoo.com',
+  //         landline: '(63 45)322-3872',
+  //         mobile: '0932-303-7127',
+  //         lat: '15.152118',
+  //         lng: '120.585225'
+  //       },{
+  //         name: 'Police Station No. 3',
+  //         address: 'Magalang Road, Barangay Pulung Maragul, Angeles City',
+  //         email: 'ps3_opn@yahoo.com',
+  //         landline: '(63 45)322-2146',
+  //         mobile: '0932-252-5037 / 9017-474-6996',
+  //         lat: '15.160938',
+  //         lng: '120.608948'
+  //       },{
+  //         name: 'Police Station No. 4',
+  //         address: 'Constine Street, corner MA Roxas Avenue, Balibago, Angeles City',
+  //         email: 'acpo_ps4@yahoo.com',
+  //         landline: '(63 45)322-2146',
+  //         mobile: '0932-252-8670',
+  //         lat: '15.169390',
+  //         lng: '120.585166'
+  //       },{
+  //         name: 'Police Station No. 5',
+  //         address: 'Barangay Cuayan, Angeles City',
+  //         email: 'acpo_ps5@yahoo.com',
+  //         landline: '(63 45)322-9188',
+  //         mobile: '0932-610-2042',
+  //         lat: '15.144749',
+  //         lng: '120.559218'
+  //       },{
+  //         name: 'Police Station No. 6',
+  //         address: 'Barangay Lourdes Sur East, McArthur Highway, Angeles City',
+  //         email: 'acpo_ps6@yahoo.com',
+  //         landline: '(63 45)322-8256',
+  //         mobile: '0933-610-2043 / 0933-510-6691',
+  //         lat: '15.146031',
+  //         lng: '120.594740'
+  //       }];
+  //       var a,b,item3;
+  //
+  //       for(a=0, b=this.police.length; a < b; a++){
+  //         item3=this.police[a];
+  //
+  //         this.storage.query("INSERT OR REPLACE INTO police (id, name, address, email, landline, mobile, lat, lng) VALUES ('"+a+"','"+item3.name+"','"+item3.address+"','"+item3.email+"','"+item3.landline+"','"+item3.mobile+"','"+item3.lat+"','"+item3.lng+"')").then((data) => {
+  //             console.log(JSON.stringify(data.res));
+  //         }, (error) => {
+  //           console.log(error);
+  //             console.log("ERROR -> " + JSON.stringify(error.err));
+  //         });
+  //       }
+  //   }
+  //   insertHospitalData(){
+  //     this.hospital = [{
+  //       name: 'Angeles Medical Center',
+  //       address: 'Rizal Street, Angeles City',
+  //       email: 'angeles_medical_center@yahoo.com',
+  //       landline: '(63 45)877-7150 / 322-4632 / 887-3139',
+  //       lat: '15.141437',
+  //       lng: '120.589142'
+  //     },{
+  //       name: 'Angeles University Medical Center',
+  //       address: 'McArthur Highway, Angeles City',
+  //       email: 'alvin@auf.edu.ph',
+  //       landline: '(63 45)322-8876 / 8880 / 888-22668',
+  //       lat: '15.145463',
+  //       lng: '120.594934'
+  //     },{
+  //       name: 'Holy Family Medical Center',
+  //       address: '179 Santo Entierro Street, Angeles City',
+  //       email: 'Email address not available.',
+  //       landline: '(63 45)888-6620 / 322-3623',
+  //       lat: '15.140357',
+  //       lng: '120.594385'
+  //     },{
+  //       name: 'Rafael Lazatin Memorial Medical Center',
+  //       address: 'Visitacion St., cor Pampang Road, Angeles City',
+  //       email: 'Email address not available.',
+  //       landline: '(63 45)322-4495 / 1222 / 887-4133',
+  //       lat: '15.146144',
+  //       lng: '120.580873'
+  //     },{
+  //       name: 'Mother of Perpetual Help Hospital',
+  //       address: '2257 Santo Entierro Street, Angeles City',
+  //       email: 'Email address not available.',
+  //       landline: '(63 45)888-1655',
+  //       lat: '15.141261',
+  //       lng: '120.595708'
+  //     },{
+  //       name: 'Dr. Amando L. Garcia Medical Center, Inc.',
+  //       address: '648 Rizal Street, Angeles City',
+  //       email: 'Email address not available.',
+  //       landline: '(045)322-0165',
+  //       lat: '15.142835',
+  //       lng: '120.589643'
+  //     },{
+  //       name: 'St. Catherine Of Alexandria',
+  //       address: 'Rizal Street, Angeles City',
+  //       email: 'Email address not available.',
+  //       landline: '(045)888-7209',
+  //       lat: '15.135523',
+  //       lng: '120.585090'
+  //     }];
+  //     var c,d,item4;
+  //
+  //     for(c=0, d=this.hospital.length; c < d; c++){
+  //       item4=this.hospital[c];
+  //
+  //       this.storage.query("INSERT OR REPLACE INTO hospital (id, name, address, email, landline, lat, lng) VALUES ('"+c+"','"+item4.name+"','"+item4.address+"','"+item4.email+"','"+item4.landline+"','"+item4.lat+"','"+item4.lng+"')").then((data) => {
+  //           console.log(JSON.stringify(data.res));
+  //       }, (error) => {
+  //         console.log(error);
+  //           console.log("ERROR -> " + JSON.stringify(error.err));
+  //       });
+  //     }
+  // }
 
     getAllData(ctr) {
       return this.storage.query("SELECT * FROM jeeps WHERE category = '"+ctr+"'");
@@ -587,10 +587,11 @@ export class DataService {
     getPointsOrigin(ctr){
       return this.storage.query("SELECT * FROM points WHERE text = '"+ctr+"'");
     }
-    getPoliceDetails(ctr){
-      return this.storage.query("SELECT * FROM police");
-    }
-    getHospitalDetails(ctr){
-      return this.storage.query("SELECT * FROM hospital");
-    }
+
+    // getPoliceDetails(ctr){
+    //   return this.storage.query("SELECT * FROM police");
+    // }
+    // getHospitalDetails(ctr){
+    //   return this.storage.query("SELECT * FROM hospital");
+    // }
 }

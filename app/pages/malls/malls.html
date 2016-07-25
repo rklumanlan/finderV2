@@ -2,7 +2,6 @@
   <ion-navbar primary>
       <ion-title>{{'Malls'|translate}}</ion-title>
   </ion-navbar>
-
   <ion-toolbar class="sort_toolbar">
       <ion-grid>
         <ion-row>
@@ -18,7 +17,6 @@
                 </ion-select>
             </ion-item>
           </ion-col>
-
           <ion-col width-50 class="ToolbarCol">
             <span class="sort_label">{{'Sort'|translate}}</span>
             <ion-item class="slct sort">
@@ -46,7 +44,7 @@
       <div id="map" style="height: 100%;display:none"></div>
 
       <ion-list>
-        <button ion-item detail-none *ngFor="#item_mall of items" [navPush]="[MallDetailsPage, {item_select_mall:item_mall}]">
+        <button ion-item detail-none *ngFor="let item_mall of items" [navPush]="[MallDetailsPage, {item_select_mall:item_mall}]">
 
           <ion-row>
             <ion-col>
@@ -72,8 +70,11 @@
           </ion-row>
         </button>
       </ion-list>
+<<<<<<< HEAD
       <ion-infinite-scroll *ngIf="items.length!==0" (ionInfinite)="doInfinite($event)" threshold="100px">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
       </ion-infinite-scroll>
+=======
+>>>>>>> 2c7387f6cd9894298b56d37ba1d8f4a3b0e74ff5
     </div>
   </ion-content>
