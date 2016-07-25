@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
-<<<<<<< HEAD
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
 import {PoliceMapPage} from '../police-map/police-map';
 import {TranslatePipe} from '../../pipes/translate';
@@ -55,8 +54,7 @@ export class PoliceDetailsPage {
         me.photos.push(res[0].icon);
       }
 
-    });
->>>>>>> 2c7387f6cd9894298b56d37ba1d8f4a3b0e74ff5
+    }); 
   }
 
   ionViewLoaded(){
