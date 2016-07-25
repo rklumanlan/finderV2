@@ -27,7 +27,7 @@ export class SupermarketMapPage {
     this.item_coordinates_supmarket = this.navParams.get('item_coordinates_supmarket');
     console.log(this.item_coordinates_supmarket.name);
   }
-  onPageDidEnter(){
+  ionViewDidEnter(){
     var me = this;
     me.geolocationService.getPolHosp(me.item_coordinates_supmarket,'supermarket');
   }
