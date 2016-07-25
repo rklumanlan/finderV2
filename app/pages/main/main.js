@@ -160,10 +160,10 @@ export class MainPage{
       this.nav.push( SalonsPage, {geoloc: geoloc}  );
     }
     else if(ctr == 'police'){
-      this.nav.push( PolicePage );
+      this.nav.push( PolicePage, {geoloc: geoloc} );
     }
     else if(ctr == 'hospitals'){
-      this.nav.push( HospitalsPage );
+      this.nav.push( HospitalsPage, {geoloc: geoloc} );
     }
     else{
       return;

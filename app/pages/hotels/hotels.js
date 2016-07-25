@@ -38,13 +38,11 @@ export class HotelsPage {
 
     this.placeType = 'lodging';
     this.sort = 'Distance';
-    this.cuisine = 'food';
+    // this.cuisine = 'food';
 
     this.items = [];
     this.res = null;
     this.count = null;
-
-    this.disable = null;
 
     console.log(this.details);
     console.log("Hotels list working");
@@ -55,8 +53,6 @@ export class HotelsPage {
     me.params.geoloc = this.details;
     me.params.placeType = 'lodging';
     me.params.cuisine = '';
-
-    me.disable = true;
 
     me.geolocationService.setPlaces(me.params).then(function (res) {
       setTimeout(function() {
@@ -149,8 +145,8 @@ export class HotelsPage {
       var rating,half,remaining;
 
       for (var a = 0; a < me.items.length; a++) {
-        console.log(me.items[a].rating);
-        console.log(s[a]);
+        // console.log(me.items[a].rating);
+        // console.log(s[a]);
         if (s[a]!==undefined) {
           //rating number
           rating = Math.floor(me.items[a].rating);

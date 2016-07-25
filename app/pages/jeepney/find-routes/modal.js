@@ -1,9 +1,6 @@
 import {Component} from '@angular/core';
 import {Modal, NavController, ViewController,NavParams, Storage, SqlStorage} from 'ionic-angular';
-
 import {DataService} from '../../../services/data';
-
-
 import {TranslatePipe} from '../../../pipes/translate';
 
 @Component({

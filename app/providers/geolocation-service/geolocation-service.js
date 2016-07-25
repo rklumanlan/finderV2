@@ -390,9 +390,12 @@ export class GeolocationService {
 
     }
     else {
-      mapcoords = {lat: parseFloat(detail.lat), lng: parseFloat(detail.lng)};
+      // mapcoords = {lat: parseFloat(detail.lat), lng: parseFloat(detail.lng)};
+      // img = 'img/pins/police.png';
+      // mapElem = document.getElementById('police_map');
+      console.log('Entered police map');
       img = 'img/pins/police.png';
-      mapElem = document.getElementById('police_map');
+      me.map = new google.maps.Map(document.getElementById('police_map'), mapOptions );
     }
 
 
@@ -438,7 +441,15 @@ export class GeolocationService {
       console.log(status);
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         console.log('OK');
-        console.log(place);
+        console.log(place.reviews);
+        for (var i = 0; i < place.reviews.length; i++) {
+          if (navigator.language=='en-US') {
+            place.reviews[i].time = new Date(place.reviews[i].time*1000).toLocaleDateString('ja-JP');
+          }
+          else {
+            place.reviews[i].time = new Date(place.reviews[i].time*1000).toLocaleDateString('en-US');
+          }
+        }
         items.push(place);
       }
     });

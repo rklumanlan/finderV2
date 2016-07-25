@@ -3,16 +3,8 @@ import {Storage, SqlStorage, NavController, NavParams} from 'ionic-angular';
 import {DataService} from '../../services/data';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {HospitalDetailsPage} from '../hospital-details/hospital-details';
-
-
 import {TranslatePipe} from '../../pipes/translate';
 
-/*
-  Generated class for the HospitalsPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   templateUrl: 'build/pages/hospitals/hospitals.html',
   providers: [GeolocationService],

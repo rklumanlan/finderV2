@@ -39,13 +39,11 @@ export class SupermarketsPage {
 
     this.placeType = 'grocery_or_supermarket';
     this.sort = 'Distance';
-    this.cuisine = 'food';
+    // this.cuisine = 'food';
 
     this.items = [];
     this.res = null;
     this.count = null;
-
-    this.disable = null;
 
     console.log(this.details);
     console.log("SuperMarket list working");
@@ -55,9 +53,6 @@ export class SupermarketsPage {
     var me = this;
     me.params.geoloc = this.details;
     me.params.placeType = 'grocery_or_supermarket';
-    me.params.cuisine = '';
-
-    me.disable = true;
 
     me.geolocationService.setPlaces(me.params).then(function (res) {
       setTimeout(function() {

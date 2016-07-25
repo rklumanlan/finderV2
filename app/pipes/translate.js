@@ -111,6 +111,9 @@ export class TranslatePipe {
 
       "Restaurant":"レストラン",
       "Cafe":"カフェ",
+      "Hotel":"ホテル",
+      "Shopping Mall":"ショッピングモール",
+      "Beauty Salon":"ビューティーサロン",
 
       "Any Cuisine":"任意の料理",
       "American":"アメリカの料理",
@@ -129,6 +132,9 @@ export class TranslatePipe {
       "Alphabetically":"アルファベット順",
       "Rating":"評定",
       "Cancel":"キャンセル",
+
+      "Map":"地図",
+      "Website":"ウェブサイト",
 
       "Route Description:":"ルート概要:",
 

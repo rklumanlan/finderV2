@@ -7,8 +7,9 @@
 -->
 <ion-header>
   <ion-navbar primary>
-    <ion-title >{{'Restaurants'|translate}}</ion-title>
+      <ion-title >{{'Restaurants'|translate}}</ion-title>
   </ion-navbar>
+
   <ion-toolbar class="sort_toolbar">
       <ion-grid>
         <ion-row >
@@ -55,18 +56,10 @@
               </ion-select>
             </ion-item>
           </ion-col>
-
         </ion-row>
       </ion-grid>
-
   </ion-toolbar>
 </ion-header>
-
-<<<<<<< HEAD
-</ion-toolbar>
-</ion-header>
-=======
->>>>>>> 4b31853793f22d8de9537bcc38def64fd5d0075d
 
 <ion-content>
   <loading-modal id="loading" ></loading-modal>
@@ -81,11 +74,11 @@
 
         <ion-row>
           <ion-col>
-            <span class="itm_name">{{item.name}}</span>
+            <h2 class="itm_name">{{item.name}}</h2>
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col width-75>
+          <ion-col width-70>
             <ul class="itm_info">
               <!-- <li><span class="itm_name">{{item.name}}</span></li> -->
               <li><span class="itm_type">{{item.types[0]}} {{item.types[1]}}</span></li>
@@ -94,7 +87,7 @@
             </ul>
           </ion-col>
 
-          <ion-col width-25>
+          <ion-col width-30>
             <ul class="itm_info_right">
               <li><span class="itm_rating"></span></li>
               <li><span class="itm_distance">{{item.distance}}</span></li>
