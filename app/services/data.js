@@ -7,7 +7,7 @@ export class DataService {
 
         this.initDB();
         this.insertJeepsData();
-        // this.insertPointsData();
+        this.insertPointsData();
         // this.insertPoliceData();
         // this.insertHospitalData();
 
