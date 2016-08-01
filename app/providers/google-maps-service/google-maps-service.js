@@ -7,7 +7,7 @@ import {ConnectivityService} from '../../providers/connectivity-service/connecti
 
 // import {LoadingModal} from '../../components/loading-modal/loading-modal';
 //
-// @Page({
+// @Component({
 //   templateUrl: 'build/pages/maps/maps.html',
 //   directives: [LoadingModal],
 // })
