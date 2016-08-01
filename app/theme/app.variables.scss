@@ -25,7 +25,7 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222,
+  dark:       #2A7EDD,
   favorite:   #69BB7B
 );
 
@@ -34,3 +34,12 @@ $map_pin: url("../../img/mainBG/pin.png");
 $ph_map: url("../../img/mainBG/ph_map.png");
 $list-background-color: transparent;
 $toolbar-border-color: #2A7EDD;
+
+//tabs
+$tabbar-ios-background: #2A7EDD;
+$tab-button-ios-active-color: #F7F7F7;
+$tab-button-ios-inactive-color: #a2ccfb;
+
+$tabbar-md-background: #2A7EDD;
+$tab-button-md-active-color: #F7F7F7;
+$tab-button-md-inactive-color: #a2ccfb;

@@ -23,7 +23,7 @@ export class TranslatePipe {
 
       "Supermarket":"スーパーマーケット",
 
-      "CHECK-POINT-HOLY": "チェック-ポイント- ホーリーハイー",
+      "CHECK-POINT-HOLY": "チェック-ポイント- ホーリー",
       "CHECK-POINT-HOLY-HI-WAY": "チェック-ポイント- ホーリーハイー-ウェイ",
       "CHECK-POINT-HENSONVILLE-HOLY":"チェック-ポイント-ヘンソンヴィル-ホーリー",
       "PANDAN-PAMPANG":"パンダン-パンパング",
@@ -155,7 +155,7 @@ export class TranslatePipe {
 
 
 
-    }]
+    }];
 
     if (navigator.language.split('-')[0]=='en') {
       console.log(jp);

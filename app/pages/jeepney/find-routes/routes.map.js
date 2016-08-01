@@ -44,7 +44,7 @@ export class RoutesMapsPage {
       me.getJeep(jeep1,jeep2,null,null,jeep1End,jeep2End,null,null,'back','back');
 
     }
-    else if((me.from == 'Angeles City Hall'||me.from=='Citi Center'||me.from=='Marquee Mall') && (me.to == 'Angeles University Foundation' || me.to == 'Angeles University Foundation Medical Center' || me.to == 'Diamond Subdivision' || me.to == 'Immaculate Concepcion Parish' || me.to == 'Main Gate Terminal' || me.to == 'SM City Clark' || me.to == 'Marisol' || me.to == 'Savers Mall' || me.to == 'Systems Plus College Foundation')){
+    else if((me.from == 'Angeles City Hall'||me.from=='Citi Center'||me.from=='Marquee Mall') && (me.to == 'Angeles University Foundation' || me.to == 'Angeles University Foundation Medical Center' || me.to == 'Diamond Subdivision' || me.to == 'Immaculate Concepcion Parish' || me.to == 'Main Gate Terminal' || me.to == 'SM City Clark' || me.to == 'Marisol' || me.to == "Saver's Mall" || me.to == 'Systems Plus College Foundation')){
       jeep1 = 'PANDAN-PAMPANG';
       jeep2 = 'CHECK-POINT-HOLY-HI-WAY';
       jeep1End = '15.142913,120.596736';
@@ -153,7 +153,7 @@ export class RoutesMapsPage {
       me.getJeep(jeep1,jeep2,null,null,jeep1End,jeep2End,null,null,'forth','back');
     }
 
-    else if((me.from == 'Angeles Medical Center Inc.'||me.from=='Dr. Amando L. Garcia Medical Center, Inc.' )&& (me.to == 'Immaculate Concepcion Parish'||me.to == 'Marisol'||me.to == 'Main Gate Terminal'||me.to == 'SM City Clark'||me.to == 'Systems Plus College Foundation'||me.to == 'Diamond Subdivision'||me.to == 'Savers Mall')){
+    else if((me.from == 'Angeles Medical Center Inc.'||me.from=='Dr. Amando L. Garcia Medical Center, Inc.' )&& (me.to == 'Immaculate Concepcion Parish'||me.to == 'Marisol'||me.to == 'Main Gate Terminal'||me.to == 'SM City Clark'||me.to == 'Systems Plus College Foundation'||me.to == 'Diamond Subdivision'||me.to == "Saver's Mall")){
       jeep1 = 'MARISOL-PAMPANG-Walking';
       jeep2 = 'CHECK-POINT-HOLY';
       jeep1End = '15.14131,120.58783';
@@ -384,7 +384,7 @@ export class RoutesMapsPage {
       me.getJeep(jeep1,jeep2,null,null,jeep1End,jeep2End,null,null,'forth','back');
     }
 
-    else if((me.from==='Angeles University Foundation'||me.from==='Angeles University Foundation Medical Center'||me.from=='The Medical City Angeles') && me.to == 'Savers Mall' ){
+    else if((me.from==='Angeles University Foundation'||me.from==='Angeles University Foundation Medical Center'||me.from=='The Medical City Angeles') && me.to == "Saver's Mall" ){
       jeep1 = 'CHECK-POINT-HOLY-HI-WAY';
       jeep1End = '15.16242,120.59110';
       me.getJeep(jeep1,null,null,null,jeep1End,null,null,null,'back',null);
@@ -559,7 +559,7 @@ export class RoutesMapsPage {
       me.getJeep(jeep1,jeep2,null,null,jeep1End,jeep2End,null,null,'forth','forth');
     }
 
-    else if((me.from==='Anunas'||me.from==='Carmenville'||me.from==='City College of Angeles'||me.from==='Cuayan'||me.from=='Friendship'||me.from=='Friendship Plaza'||me.from=='Margot'||me.from=='Sapang Bato'||me.from=='Timog Park Gate 1'||me.from=='Timog Park Gate 2'||me.from=='Timog Park Gate 3'||me.from=='Transfer'||me.from=='Villa Sol') && (me.to == 'Diamond Subdivision' || me.to == 'Immaculate Concepcion Parish'||me.to == 'Main Gate Terminal'||me.to=='Marisol'||me.to=='SM City Clark'||me.to=='Savers Mall'||me.to=='Systems Plus College Foundation')){
+    else if((me.from==='Anunas'||me.from==='Carmenville'||me.from==='City College of Angeles'||me.from==='Cuayan'||me.from=='Friendship'||me.from=='Friendship Plaza'||me.from=='Margot'||me.from=='Sapang Bato'||me.from=='Timog Park Gate 1'||me.from=='Timog Park Gate 2'||me.from=='Timog Park Gate 3'||me.from=='Transfer'||me.from=='Villa Sol') && (me.to == 'Diamond Subdivision' || me.to == 'Immaculate Concepcion Parish'||me.to == 'Main Gate Terminal'||me.to=='Marisol'||me.to=='SM City Clark'||me.to=="Saver's Mall"||me.to=='Systems Plus College Foundation')){
       jeep1 = 'SAPANG BATO-ANGELES';
       jeep2 = 'CHECK-POINT-HOLY';
       jeep1End = '15.14502,120.58873';
@@ -639,7 +639,7 @@ export class RoutesMapsPage {
 
     }
 
-    else if(me.from==='Bancal' && (me.to == 'Diamond Subdivision' || me.to == 'Immaculate Concepcion Parish'||me.to=='Marisol'||me.to=='Savers Mall'||me.to=='Systems Plus College Foundation')){
+    else if(me.from==='Bancal' && (me.to == 'Diamond Subdivision' || me.to == 'Immaculate Concepcion Parish'||me.to=='Marisol'||me.to=="Saver's Mall"||me.to=='Systems Plus College Foundation')){
       jeep1 = 'CHECK-POINT-HENSONVILLE-HOLY';
       jeep2 = 'CHECK-POINT-HOLY';
       jeep1End = '15.14502,120.58873';
@@ -799,7 +799,7 @@ export class RoutesMapsPage {
       me.getJeep(jeep1,null,null,null,jeep1End,null,null,null,'forth',null);
     }
 
-    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Main Gate Terminal'||me.from=='SM City Clark'||me.from=='Savers Mall'||me.from=='Systems Plus College Foundation')&& (me.to == 'Angeles Medical Center Inc.'||me.to=='Dr. Amando L. Garcia Medical Center, Inc.')){
+    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Main Gate Terminal'||me.from=='SM City Clark'||me.from=="Saver's Mall"||me.from=='Systems Plus College Foundation')&& (me.to == 'Angeles Medical Center Inc.'||me.to=='Dr. Amando L. Garcia Medical Center, Inc.')){
       jeep1 = 'CHECK-POINT-HOLY';
       jeep2 = 'MARISOL-PAMPANG';
       jeep1End = '15.138817,120.587592';
@@ -808,7 +808,7 @@ export class RoutesMapsPage {
     }
 
 
-    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Main Gate Terminal'||me.from=='SM City Clark'||me.from=='Savers Mall'||me.from=='Systems Plus College Foundation')&& (me.to == 'Angeles University Foundation'||me.to == 'Angeles University Foundation Medical Center'||me.to == 'Holy Family Medical Center')){
+    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Main Gate Terminal'||me.from=='SM City Clark'||me.from=="Saver's Mall"||me.from=='Systems Plus College Foundation')&& (me.to == 'Angeles University Foundation'||me.to == 'Angeles University Foundation Medical Center'||me.to == 'Holy Family Medical Center')){
       jeep1 = 'CHECK-POINT-HOLY';
       jeep2 = 'MARISOL-PAMPANG';
       jeep1End = '15.15259,120.59180';
@@ -817,7 +817,7 @@ export class RoutesMapsPage {
     }
 
 
-    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='SM City Clark'||me.from=='Savers Mall'||me.from=='Systems Plus College Foundation')&& (me.to == 'Timog Park Gate 1' || me.to == 'Timog Park Gate 2' || me.to == 'Timog Park Gate 3' || me.to == 'Transfer' || me.to == 'Villa Sol'|| me.to == 'Anunas' ||me.to == 'Carmenville' || me.to == 'City College of Angeles' || me.to == 'Cuayan' || me.to == 'Friendship' || me.to == 'Friendship Plaza')){
+    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='SM City Clark'||me.from=="Saver's Mall"||me.from=='Systems Plus College Foundation')&& (me.to == 'Timog Park Gate 1' || me.to == 'Timog Park Gate 2' || me.to == 'Timog Park Gate 3' || me.to == 'Transfer' || me.to == 'Villa Sol'|| me.to == 'Anunas' ||me.to == 'Carmenville' || me.to == 'City College of Angeles' || me.to == 'Cuayan' || me.to == 'Friendship' || me.to == 'Friendship Plaza')){
       jeep1 = 'CHECK-POINT-HOLY';
       jeep2 = 'SAPANG BATO-ANGELES';
       jeep1End = '15.14186,120.58799';
@@ -825,7 +825,7 @@ export class RoutesMapsPage {
       me.getJeep(jeep1,jeep2,null,null,jeep1End,jeep2End,null,null,'forth','forth');
     }
 
-    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Savers Mall'||me.from=='Systems Plus College Foundation')&& me.to == 'Bancal'){
+    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=="Saver's Mall"||me.from=='Systems Plus College Foundation')&& me.to == 'Bancal'){
       jeep1 = 'CHECK-POINT-HOLY';
       jeep2 = 'CHECK-POINT-HENSONVILLE-HOLY';
       jeep1End = '15.14502,120.58873';
@@ -833,7 +833,7 @@ export class RoutesMapsPage {
       me.getJeep(jeep1,jeep2,null,null,jeep1End,jeep2End,null,null,'forth','back');
     }
 
-    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Main Gate Terminal'||me.from=='Lourdes North West'||me.from=='SM City Clark'||me.from=='Savers Mall'||me.from=='Systems Plus College Foundation')&& (me.to == 'Marquee Mall'||me.to == 'Citi Center'||me.to == 'Republic Central Colleges'||me.to == 'Angeles City Hall')){
+    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Main Gate Terminal'||me.from=='Lourdes North West'||me.from=='SM City Clark'||me.from=="Saver's Mall"||me.from=='Systems Plus College Foundation')&& (me.to == 'Marquee Mall'||me.to == 'Citi Center'||me.to == 'Republic Central Colleges'||me.to == 'Angeles City Hall')){
       jeep1 = 'CHECK-POINT-HOLY';
       jeep2 = 'PANDAN-PAMPANG';
       jeep1End = '15.137851,120.588826';
@@ -853,73 +853,73 @@ export class RoutesMapsPage {
       me.getJeep(jeep1,null,null,null,jeep1End,null,null,null,'back');
     }
 
-    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Savers Mall'||me.from==='Lourdes North West'||me.from=='Systems Plus College Foundation') && me.to == 'Holy Angel University'){
+    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=="Saver's Mall"||me.from==='Lourdes North West'||me.from=='Systems Plus College Foundation') && me.to == 'Holy Angel University'){
       jeep1 = 'CHECK-POINT-HOLY-HI-WAY';
       jeep1End = '15.13417,120.59130';
       me.getJeep(jeep1,null,null,null,jeep1End,null,null,null,'forth');
     }
 
-    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Savers Mall'||me.from==='Lourdes North West'||me.from=='Systems Plus College Foundation') && me.to == 'Holy Rosary Parish Church'){
+    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=="Saver's Mall"||me.from==='Lourdes North West'||me.from=='Systems Plus College Foundation') && me.to == 'Holy Rosary Parish Church'){
       jeep1 = 'CHECK-POINT-HOLY-HI-WAY';
       jeep1End = '15.13483,120.59063';
       me.getJeep(jeep1,null,null,null,jeep1End,null,null,null,'forth');
     }
 
-    else if((me.from==='Diamond Subdivision'||me.from=='SM City Clark'||me.from=='Savers Mall') && me.to == 'Immaculate Concepcion Parish' ){
+    else if((me.from==='Diamond Subdivision'||me.from=='SM City Clark'||me.from=="Saver's Mall") && me.to == 'Immaculate Concepcion Parish' ){
       jeep1 = 'CHECK-POINT-HOLY';
       jeep1End = '15.15900,120.59201';
       me.getJeep(jeep1,null,null,null,jeep1End,null,null,null,'forth',null);
     }
 
-    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Savers Mall'||me.from=='Systems Plus College Foundation') && me.to == 'Jenra Mall'){
+    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=="Saver's Mall"||me.from=='Systems Plus College Foundation') && me.to == 'Jenra Mall'){
       jeep1 = 'CHECK-POINT-HOLY-HI-WAY';
       jeep1End = '15.13622,120.58805';
       me.getJeep(jeep1,null,null,null,jeep1End,null,null,null,'forth',null);
     }
 
-    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Savers Mall'||me.from=='Systems Plus College Foundation') && me.to == 'Nepo Mall'){
+    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=="Saver's Mall"||me.from=='Systems Plus College Foundation') && me.to == 'Nepo Mall'){
       jeep1 = 'CHECK-POINT-HOLY-HI-WAY';
       jeep1End = '15.13567,120.58914';
       me.getJeep(jeep1,null,null,null,jeep1End,null,null,null,'forth',null);
     }
 
-    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='SM City Clark'||me.from=='Savers Mall'||me.from=='Systems Plus College Foundation') && me.to == 'Lourdes North West'){
+    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='SM City Clark'||me.from=="Saver's Mall"||me.from=='Systems Plus College Foundation') && me.to == 'Lourdes North West'){
       jeep1 = 'CHECK-POINT-HOLY';
       jeep1End = '15.14186,120.58799';
       me.getJeep(jeep1,null,null,null,jeep1End,null,null,null,'forth',null);
     }
 
-    else if((me.from==='Diamond Subdivision'||me.from=='Savers Mall') && me.to == 'Systems Plus College Foundation'){
+    else if((me.from==='Diamond Subdivision'||me.from=="Saver's Mall") && me.to == 'Systems Plus College Foundation'){
       jeep1 = 'CHECK-POINT-HOLY';
       jeep1End = '15.15828,120.59222';
       me.getJeep(jeep1,null,null,null,jeep1End,null,null,null,'forth',null);
     }
 
-    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Marisol'||me.from=='Savers Mall'||me.from=='Systems Plus College Foundation') && me.to == 'Main Gate Terminal'){
+    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Marisol'||me.from=="Saver's Mall"||me.from=='Systems Plus College Foundation') && me.to == 'Main Gate Terminal'){
       jeep1 = 'CHECK-POINT-HOLY-HI-WAY';
       jeep1End = '15.16840,120.58442';
       me.getJeep(jeep1,null,null,null,jeep1End,null,null,null,'back',null);
     }
 
-    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Main Gate Terminal'||me.from=='Savers Mall'||me.from=='Systems Plus College Foundation') && me.to == 'Marisol'){
+    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Main Gate Terminal'||me.from=="Saver's Mall"||me.from=='Systems Plus College Foundation') && me.to == 'Marisol'){
       jeep1 = 'CHECK-POINT-HOLY-HI-WAY';
       jeep1End = '15.152765,120.591903';
       me.getJeep(jeep1,null,null,null,jeep1End,null,null,null,'forth',null);
     }
 
-    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Savers Mall'||me.from=='Systems Plus College Foundation') && me.to == 'SM City Clark'){
+    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=="Saver's Mall"||me.from=='Systems Plus College Foundation') && me.to == 'SM City Clark'){
       jeep1 = 'CHECK-POINT-HOLY-HI-WAY';
       jeep1End = '15.16834,120.58275';
       me.getJeep(jeep1,null,null,null,jeep1End,null,null,null,'back',null);
     }
 
-    else if((me.from==='Immaculate Concepcion Parish'||me.from=='Marisol'||me.from=='Systems Plus College Foundation') && me.to == 'Savers Mall'){
+    else if((me.from==='Immaculate Concepcion Parish'||me.from=='Marisol'||me.from=='Systems Plus College Foundation') && me.to == "Saver's Mall"){
       jeep1 = 'CHECK-POINT-HOLY-HI-WAY';
       jeep1End = '15.16242,120.59110';
       me.getJeep(jeep1,null,null,null,jeep1End,null,null,null,'back',null);
     }
 
-    else if ((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Main Gate Terminal'||me.from=='SM City Clark'||me.from=='Savers Mall'||me.from=='Systems Plus College Foundation') &&(me.to=='Margot' || me.to == 'Sapang Bato')) {
+    else if ((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Main Gate Terminal'||me.from=='SM City Clark'||me.from=="Saver's Mall"||me.from=='Systems Plus College Foundation') &&(me.to=='Margot' || me.to == 'Sapang Bato')) {
       jeep1 = 'CHECK-POINT-HOLY-HI-WAY';
       jeep2 = 'SAPANG BATO-ANGELES';
       jeep3 = 'SAPANG BATO-ANGELES';
@@ -929,7 +929,7 @@ export class RoutesMapsPage {
       me.getJeep(jeep1,jeep2,jeep3,null,jeep1End,jeep2End,jeep3End,null,'forth','forth','forth');
     }
 
-    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Lourdes North West'||me.from=='Main Gate Terminal'||me.from=='SM City Clark'||me.from=='Savers Mall'||me.from=='Systems Plus College Foundation') && me.to == 'Rafael Lazatin Memorial Medical Center'){
+    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Lourdes North West'||me.from=='Main Gate Terminal'||me.from=='SM City Clark'||me.from=="Saver's Mall"||me.from=='Systems Plus College Foundation') && me.to == 'Rafael Lazatin Memorial Medical Center'){
       jeep1 = 'CHECK-POINT-HOLY';
       jeep2 = 'PAMPANG-HOLY';
       jeep1End = '15.13914,120.58746';
@@ -937,7 +937,7 @@ export class RoutesMapsPage {
       me.getJeep(jeep1,jeep2,null,null,jeep1End,jeep2End,null,null,'forth','forth');
     }
 
-    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Main Gate Terminal'||me.from=='Savers Mall'||me.from=='Systems Plus College Foundation') && me.to == 'Sacred Heart Medical Center'){
+    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Main Gate Terminal'||me.from=="Saver's Mall"||me.from=='Systems Plus College Foundation') && me.to == 'Sacred Heart Medical Center'){
       jeep1 = 'CHECK-POINT-HOLY-HI-WAY';
       jeep2 = 'VILLA-PAMPANG';
       jeep1End = '15.13642,120.58772';
@@ -945,7 +945,7 @@ export class RoutesMapsPage {
       me.getJeep(jeep1,jeep2,null,null,jeep1End,jeep2End,null,null,'forth','back');
     }
 
-    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=='Savers Mall'||me.from=='Systems Plus College Foundation'||me.from=='Main Gate Terminal') && me.to == 'The Medical City Angeles'){
+    else if((me.from==='Diamond Subdivision'||me.from==='Immaculate Concepcion Parish'||me.from=="Saver's Mall"||me.from=='Systems Plus College Foundation'||me.from=='Main Gate Terminal') && me.to == 'The Medical City Angeles'){
       jeep1  = 'CHECK-POINT-HOLY-HI-WAY';
       jeep1End = '15.13834,120.59335';
       me.getJeep(jeep1,null,null,null,jeep1End,null,null,null,'forth');
@@ -1068,7 +1068,7 @@ export class RoutesMapsPage {
       me.getJeep(jeep1,null,null,null,jeep1End,null,null,null,'back');
     }
 
-    else if((me.from==='Holy Angel University'||me.from==='Holy Family Medical Center'||me.from=='Holy Rosary Parish Church'||me.from=='Jenra Mall'||me.from=='Nepo Mall') && me.to == 'Savers Mall'){
+    else if((me.from==='Holy Angel University'||me.from==='Holy Family Medical Center'||me.from=='Holy Rosary Parish Church'||me.from=='Jenra Mall'||me.from=='Nepo Mall') && me.to == "Saver's Mall"){
       jeep1  = 'CHECK-POINT-HOLY-HI-WAY';
       jeep1End = '15.16242,120.59110';
       me.getJeep(jeep1,null,null,null,jeep1End,null,null,null,'back');
@@ -1428,7 +1428,7 @@ export class RoutesMapsPage {
       me.getJeep(jeep1,null,null,null,jeep1End,null,null,null,'back');
     }
 
-    else if(me.from==='Lourdes North West' && me.to == 'Savers Mall'){
+    else if(me.from==='Lourdes North West' && me.to == "Saver's Mall"){
       jeep1 = 'CHECK-POINT-HOLY';
       jeep1End = '15.16242,120.59110';
       me.getJeep(jeep1,null,null,null,jeep1End,null,null,null,'back');
@@ -1816,7 +1816,7 @@ export class RoutesMapsPage {
       me.getJeep(jeep1,jeep2,null,null,jeep1End,jeep2End,null,null,'back','back');
     }
 
-    else if(me.from==='Rafael Lazatin Memorial Medical Center' &&(me.to == 'Immaculate Concepcion Parish'||me.to == 'Marisol'||me.to == 'Main Gate Terminal'||me.to == 'SM City Clark'||me.to == 'Systems Plus College Foundation'||me.to == 'Diamond Subdivision'||me.to == 'Savers Mall'||me.to=='Lourdes North West')){
+    else if(me.from==='Rafael Lazatin Memorial Medical Center' &&(me.to == 'Immaculate Concepcion Parish'||me.to == 'Marisol'||me.to == 'Main Gate Terminal'||me.to == 'SM City Clark'||me.to == 'Systems Plus College Foundation'||me.to == 'Diamond Subdivision'||me.to == "Saver's Mall"||me.to=='Lourdes North West')){
       jeep1 = 'PAMPANG-HOLY';
       jeep2 = 'CHECK-POINT-HOLY';
       jeep1End = '15.13914,120.58746';
@@ -1926,7 +1926,7 @@ export class RoutesMapsPage {
       me.getJeep(jeep1,jeep2,jeep3,jeep4,jeep1End,jeep2End,jeep3End,jeep4End,'back','back','forth','forth');
     }
 
-    else if(me.from==='Republic Central Colleges' &&(me.to == 'Diamond Subdivision' || me.to == 'Immaculate Concepcion Parish'||me.to == 'Main Gate Terminal'||me.to=='Marisol'||me.to=='SM City Clark'||me.to=='Savers Mall'||me.to=='Systems Plus College Foundation'||me.to=='Lourdes North West')){
+    else if(me.from==='Republic Central Colleges' &&(me.to == 'Diamond Subdivision' || me.to == 'Immaculate Concepcion Parish'||me.to == 'Main Gate Terminal'||me.to=='Marisol'||me.to=='SM City Clark'||me.to=="Saver's Mall"||me.to=='Systems Plus College Foundation'||me.to=='Lourdes North West')){
       jeep1 = 'PANDAN-PAMPANG-Walking2';
       jeep2 = 'CHECK-POINT-HOLY';
       jeep1End = '15.13784,120.58891';
@@ -1984,7 +1984,7 @@ export class RoutesMapsPage {
       me.getJeep(jeep1,null,null,null,jeep1End,null,null,null,'forth');
     }
 
-    else if((me.from == 'SM City Clark'||me.from=='Main Gate Terminal')&&me.to == 'Savers Mall'){
+    else if((me.from == 'SM City Clark'||me.from=='Main Gate Terminal')&&me.to == "Saver's Mall"){
       jeep1 = 'CHECK-POINT-HOLY';
       jeep1End = '15.16242,120.59110';
       me.getJeep(jeep1,null,null,null,jeep1End,null,null,null,'forth');
@@ -2081,7 +2081,7 @@ export class RoutesMapsPage {
       jeep2End = '15.137851,120.588826';
       me.getJeep(jeep1,jeep2,null,null,jeep1End,jeep2End,null,null,'forth','back');
     }
-    else if(me.from==='Sacred Heart Medical Center' &&(me.to == 'Immaculate Concepcion Parish'||me.to == 'Marisol'||me.to == 'Main Gate Terminal'||me.to == 'SM City Clark'||me.to == 'Systems Plus College Foundation'||me.to == 'Diamond Subdivision'||me.to == 'Savers Mall'||me.to=='Lourdes North West')){
+    else if(me.from==='Sacred Heart Medical Center' &&(me.to == 'Immaculate Concepcion Parish'||me.to == 'Marisol'||me.to == 'Main Gate Terminal'||me.to == 'SM City Clark'||me.to == 'Systems Plus College Foundation'||me.to == 'Diamond Subdivision'||me.to == "Saver's Mall"||me.to=='Lourdes North West')){
       jeep1  = 'VILLA-PAMPANG';
       jeep2  = 'CHECK-POINT-HOLY';
       jeep1End = '15.13784,120.58891';
@@ -2191,6 +2191,7 @@ export class RoutesMapsPage {
         else {
           data = me.getJeepDocs(jeep1)
             .then((result) => {
+              console.log(result);
               options.jeep_1 = result;
               return options;
             });

@@ -7,7 +7,7 @@ export class DataService {
 
         this.initDB();
         this.insertJeepsData();
-        // this.insertPointsData();
+        this.insertPointsData();
         // this.insertPoliceData();
         // this.insertHospitalData();
 
@@ -247,7 +247,7 @@ export class DataService {
         tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY',
         icon: 'img/pins/subd_brgy.png'
         },{
-        text: 'Saver\'s Mall',
+        text: "Saver\'s Mall",
         lat: '15.16242',
         lng: '120.59110',
         tags: 'CHECK-POINT-HOLY-HI-WAY,CHECK-POINT-HOLY',
@@ -434,15 +434,24 @@ export class DataService {
 
       for(x=0, y=this.points.length; x < y; x++){
         item2=this.points[x];
+        console.log(item2.text);
+        // console.log(this.points[x]);
 
-        this.storage.query("INSERT OR REPLACE INTO points (id, text, lat, lng, tags,icon) VALUES ('"+x+"','"+item2.text+"','"+item2.lat+"','"+item2.lng+"','"+item2.tags+"','"+item2.icon+"')").then((data) => {
-            console.log(JSON.stringify(data.res));
-        }, (error) => {
-          console.log(error);
-            console.log("ERROR -> " + JSON.stringify(error.err));
-        });
+        // this.storage.query("INSERT OR REPLACE INTO points (id, text, lat, lng, tags,icon) VALUES ('"+x+"','"+item2.text+"','"+item2.lat+"','"+item2.lng+"','"+item2.tags+"','"+item2.icon+"')").then((data) => {
+        //     console.log(JSON.stringify(data.res));
+        // }, (error) => {
+        //   console.log(error);
+        //     console.log("ERROR -> " + JSON.stringify(error.err));
+        // });
 
-        }
+          this.storage.query('INSERT OR REPLACE INTO points (id, text, lat, lng, tags,icon) VALUES ("'+x+'","'+item2.text+'","'+item2.lat+'","'+item2.lng+'","'+item2.tags+'","'+item2.icon+'")').then((data) => {
+              console.log(data);
+          }, (error) => {
+            console.log(error);
+              console.log("ERROR -> " + JSON.stringify(error.err));
+          });
+
+      }
     }
   //     insertPoliceData(){
   //       this.police = [{
@@ -577,7 +586,7 @@ export class DataService {
     }
 
     getJeepDetails(ctr) {
-      return this.storage.query("SELECT * FROM jeeps WHERE name = '"+ctr+"'");
+      return this.storage.query('SELECT * FROM jeeps WHERE name = "'+ctr+'"');
     }
 
     getPoints(){
@@ -585,7 +594,7 @@ export class DataService {
     }
 
     getPointsOrigin(ctr){
-      return this.storage.query("SELECT * FROM points WHERE text = '"+ctr+"'");
+      return this.storage.query('SELECT * FROM points WHERE text = "'+ctr+'"');
     }
 
     // getPoliceDetails(ctr){

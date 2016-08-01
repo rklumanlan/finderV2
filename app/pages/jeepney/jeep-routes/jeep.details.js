@@ -20,6 +20,7 @@ export class JeepDetailsPage {
     this.navParams = navParams;
 
     this.details = navParams.get('jeep');
+    console.log(this.details);
 
     this.jeepDetails = [];
     console.log(this.details.name);
