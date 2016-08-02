@@ -82,7 +82,9 @@ export class PolicePage {
         }
           console.log(me.items);
         me.setPoliceRating();
-        document.getElementById('loading').style.display="none";
+        if (document.getElementById('loading')!==null) {
+          document.getElementById('loading').style.display="none";
+        }
       }, 2000);
     });
 

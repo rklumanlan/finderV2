@@ -34,11 +34,12 @@ export class RestaurantDetailsPage {
     var me = this;
     console.log('detail');
     console.log(document.getElementById('resto_map_dtl'));
+
     me.geolocationService.setPlaceDetails('resto_map_dtl',me.item_select.place_id).then(function (res) {
       console.log(res[0]);
       console.log('inner');
       me.results = res[0];
-
+      
       if (res[0].reviews!==undefined) {
         me.reviews = res[0].reviews;
         me.setReviewRating();

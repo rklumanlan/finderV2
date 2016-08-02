@@ -3,14 +3,11 @@ import {NavController, NavParams} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {SupermarketMapPage} from '../supermarket-map/supermarket-map';
-/*
-  Generated class for the SupermarketDetailsPage page.
+import {TranslatePipe} from '../../pipes/translate';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   templateUrl: 'build/pages/supermarket-details/supermarket-details.html',
+  pipes: [TranslatePipe],
   providers: [GeolocationService]
 })
 export class SupermarketDetailsPage {
@@ -22,12 +19,42 @@ export class SupermarketDetailsPage {
     this.navParams = navParams;
     this.nav = nav;
     this.geolocationService = geolocationService;
-
-    this.SupermarketDetailsPage = SupermarketDetailsPage;
     this.SupermarketMapPage = SupermarketMapPage;
 
     this.item_select_supmarket = this.navParams.get('item_select_supmarket');
     console.log(this.item_select_supmarket);
+
+    this.photos = [];
+    this.results = [];
+    this.reviews = [];
+  }
+
+  ionViewWillEnter(){
+    var me = this;
+    console.log('detail');
+    console.log(document.getElementById('supmarket_map_dtl'));
+
+      me.geolocationService.setPlaceDetails('supmarket_map_dtl',me.item_select_supmarket.place_id).then(function (res) {
+        console.log('inner');
+        me.results = res[0];
+        console.log(me.results);
+        
+        if (res[0].reviews!==undefined) {
+          me.reviews = res[0].reviews;
+          me.setReviewRating();
+        }
+
+        if (res[0].photos!==undefined) {
+          for (var i = 0; i < res[0].photos.length; i++) {
+            me.photos.push(res[0].photos[i].getUrl({'maxWidth': 300, 'maxHeight': 300}));
+          }
+          console.log(me.photos);
+        }
+        else {
+          me.photos.push(res[0].icon);
+        }
+
+      });
   }
 
   ionViewLoaded(){
@@ -96,4 +123,62 @@ export class SupermarketDetailsPage {
     // }, 400);
 
   // }
+
+  setReviewRating(){
+    var me = this;
+
+    setTimeout(function() {
+    var w = document.getElementsByClassName("review_rating");
+    var rating,half,remaining;
+
+    console.log("Set Review Rating");
+    console.log(me.reviews);
+    console.log(document.getElementsByClassName("review_rating"));
+
+    for (var a = 0; a < me.reviews.length; a++) {
+      if (w[a]!==undefined) {
+        //rating number
+        rating = Math.floor(me.reviews[a].rating);
+        //get decimal num if there is
+        half = (me.reviews[a].rating % 1).toFixed(1);
+        //reamianing stars to append
+        remaining = Math.floor(5 - me.reviews[a].itm_rating);
+
+        if (me.reviews[a].rating!=0) {
+          var ctr = 0;
+          if (w[a].innerHTML=="") {
+            for (var b = 1; b <= rating; b++) {
+              w[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star" role="img" class="ion-ios-star" aria-label="ios-star"></ion-icon>');
+              ctr=ctr+1;
+            }
+            //int
+            if (me.reviews[a].rating % 1 === 0) {
+              if (remaining !== 0 && ctr<=5) {
+                for (var b = 1; b <= (5-ctr); b++) {
+                  w[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
+                }
+                ctr=ctr+1;
+              }
+            }
+            //float
+            else if (me.reviews[a].rating % 1 !== 0) {
+              if (half !== 0.0 && (me.reviews[a].rating %1 !== 0)) {
+                w[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-half" role="img" class="ion-ios-star-half" aria-label="ios-star-half"></ion-icon>');
+                ctr=ctr+1;
+              }
+              if (remaining !== 0 && ctr<=5) {
+                for (var b = 1; b <= (5-ctr); b++) {
+                  w[a].insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
+                  ctr=ctr+1;
+                }
+              }
+            }
+            console.log(ctr+" ctr");
+          }
+        }
+      }
+    }
+  }, 500);
+}
+
 }

@@ -2,11 +2,8 @@ import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
-<<<<<<< HEAD
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
-=======
 import {PoliceMapPage} from '../police-map/police-map';
->>>>>>> 2c7387f6cd9894298b56d37ba1d8f4a3b0e74ff5
 import {TranslatePipe} from '../../pipes/translate';
 
 @Component({
@@ -33,10 +30,9 @@ export class PoliceDetailsPage {
     this.reviews = [];
 
   }
-<<<<<<< HEAD
-  ionViewDidEnter(){
-    this.geolocationService.getPolHosp(this.poldetail,'police');
-=======
+
+  // ionViewDidEnter(){
+  //   this.geolocationService.getPolHosp(this.poldetail,'police');
 
   ionViewWillEnter(){
     var me = this;
@@ -63,7 +59,6 @@ export class PoliceDetailsPage {
       }
 
     });
->>>>>>> 2c7387f6cd9894298b56d37ba1d8f4a3b0e74ff5
   }
 
   ionViewLoaded(){

@@ -1,17 +1,9 @@
 import {NavController,Alert} from 'ionic-angular';
 import {Injectable, Inject} from '@angular/core';
 import {Http} from '@angular/http';
-
 import {ConnectivityService} from '../../providers/connectivity-service/connectivity-service';
-
 import {MainPage} from '../../pages/main/main';
 
-/*
-  Generated class for the GeolocationService provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class GeolocationService {
   static get parameters(){
@@ -354,11 +346,14 @@ export class GeolocationService {
     // console.log(document.getElementById('police_map'));
     console.log(detail);
 
-    if (page === 'hosp') {
+    if (page === 'hospital') {
       console.log('entered if');
-      mapcoords = {lat: parseFloat(detail.lat), lng: parseFloat(detail.lng)};
+      // mapcoords = {lat: parseFloat(detail.lat), lng: parseFloat(detail.lng)};
+      // img = 'img/pins/hospital.png';
+      // mapElem = document.getElementById('hospital_map');
+      console.log('Entered hospital map');
       img = 'img/pins/hospital.png';
-      mapElem = document.getElementById('hosp_map');
+      me.map = new google.maps.Map(document.getElementById('hospital_map'), mapOptions );
     }
     else if (page === 'resto') {
       console.log('Entered Resto map');
@@ -436,22 +431,35 @@ export class GeolocationService {
     var params = {};
     params.mapElem = mapElem;
     params.id= id;
+    console.log(id);
 
     me.getPlaceDetails(params, function(place, status) {
-      console.log(status);
+      console.log(place);
+
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         console.log('OK');
         console.log(place.reviews);
-        for (var i = 0; i < place.reviews.length; i++) {
-          if (navigator.language=='en-US') {
-            place.reviews[i].time = new Date(place.reviews[i].time*1000).toLocaleDateString('ja-JP');
+        // console.log(place.icon);
+
+        if (place.reviews !== undefined){
+          for (var i = 0; i < place.reviews.length; i++) {
+            if (navigator.language=='en-US') {
+              place.reviews[i].time = new Date(place.reviews[i].time*1000).toLocaleDateString('ja-JP');
+            }
+            else {
+              place.reviews[i].time = new Date(place.reviews[i].time*1000).toLocaleDateString('en-US');
+            }
           }
-          else {
-            place.reviews[i].time = new Date(place.reviews[i].time*1000).toLocaleDateString('en-US');
+          items.push(place);
+        }
+        else {
+          {
+            items.push(place);
+            console.log("Place selected has no reviews.");
           }
         }
-        items.push(place);
       }
+
     });
 
 

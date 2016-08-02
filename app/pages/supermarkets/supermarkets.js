@@ -67,7 +67,9 @@ export class SupermarketsPage {
         }
           console.log(me.items);
         me.setSupMarketRating();
-        document.getElementById('loading').style.display="none";
+        if (document.getElementById('loading')!==null) {
+          document.getElementById('loading').style.display="none";
+        }
       }, 2000);
     });
 
@@ -85,7 +87,7 @@ export class SupermarketsPage {
       var i;
       for (i = me.count; i < me.res.length; i++) {
         me.items.push(me.res[i]);
-        console.log(i);
+        // console.log(i);
       }
       me.setSupMarketRating();
 
