@@ -22,7 +22,7 @@ export class PoliceMapPage {
     this.nav = nav;
     this.geolocationService = geolocationService;
 
-    this.MallMapPage = PoliceMapPage;
+    this.HospitalMapPage = PoliceMapPage;
 
     this.item_coordinates_police = this.navParams.get('item_coordinates_police');
     console.log(this.item_coordinates_police.name);

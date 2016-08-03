@@ -35,6 +35,7 @@ export class SalonDetailsPage {
     console.log('detail');
     console.log(document.getElementById('salon_map_dtl'));
     me.geolocationService.setPlaceDetails('salon_map_dtl',me.item_select_salon.place_id).then(function (res) {
+      console.log(me.item_select_salon.place_id);
       console.log(res[0]);
       console.log('inner');
       me.results = res[0];
