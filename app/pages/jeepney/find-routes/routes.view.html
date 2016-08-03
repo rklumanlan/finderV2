@@ -3,22 +3,10 @@
     <ion-title>{{'Jeepneys'|translate}}</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content>
-  <div class="backDiv">
-        <div class="strechDiv" >
-          <form name="findRoutesForm" novalidate>
-            <!-- <ion-item-group padding>
-
-              <ion-item-divider light>From</ion-item-divider>
-              <ion-item >
-                <ion-label>Password
-                  <button (click)="clicked()" item-right>
-                    <ion-icon name="arrow-dropdown"></ion-icon>
-                  </button>
-                </ion-label>
-              </ion-item>
-
-            </ion-item-group> -->
+<ion-content padding class="bg">
+  <!-- <div class="backDiv">
+        <div class="strechDiv" > -->
+          <!-- <form name="findRoutesForm" novalidate>
             <ion-item-group>
               <ion-item-divider light>{{'From:'|translate}}</ion-item-divider>
               <button ion-item detail-none (click)="showModal('from')">
@@ -41,8 +29,36 @@
                 {{'Find Routes'|translate}}
               </button>
             </ion-item-group>
-        </form>
-        </div>
-      </div>
+        </form> -->
+        <!-- </div>
+      </div> -->
+      <ion-card style="background-color:white">
+        <ion-card-header>{{'From:'|translate}}</ion-card-header>
+        <ion-list>
+          <button ion-item detail-none (click)="showModal('from')">
+            {{from|translate}}
+            <button item-right>
+              &nbsp;<ion-icon name="arrow-dropdown"></ion-icon>&nbsp;
+            </button>
+
+          </button>
+          <input type="hidden" id="hiddenFrom"/>
+        </ion-list>
+        <ion-card-header>{{'To:'|translate}}</ion-card-header>
+        <ion-list>
+          <button ion-item detail-none (click)="showModal('to')">
+            {{to|translate}}
+            <button item-right>
+              &nbsp;<ion-icon name="arrow-dropdown"></ion-icon>&nbsp;
+            </button>
+          </button>
+          <input type="hidden" id="hiddenTo"/>
+        </ion-list>
+        <ion-list>
+          <button full (click)="submitForm(from,to)">
+            {{'Find Routes'|translate}}
+          </button>
+        </ion-list>
+      </ion-card>
 
 </ion-content>

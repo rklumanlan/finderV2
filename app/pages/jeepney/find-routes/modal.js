@@ -96,20 +96,27 @@ export class MyModal {
     this.initializeItems();
 
     // set q to the value of the searchbar
-    var q = searchbar.target.value;
+     let val = searchbar.target.value;
 
     // if the value is an empty string don't filter the items
-    if (q.trim() == '') {
-      return;
-    }
+    // if (q.trim() == '') {
+    //   return;
+    // }
+    //
+    // this.items = this.items.filter((v) => {
+    //   console.log(v);
+    //   if (v.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+    //     return true;
+    //   }
+    //   return false;
+    // })
 
-    this.items = this.items.filter((v) => {
-      console.log(v);
-      if (v.toLowerCase().indexOf(q.toLowerCase()) > -1) {
-        return true;
+    // if the value is an empty string don't filter the items
+      if (val && val.trim() != '') {
+        this.items = this.items.filter((item) => {
+          return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        })
       }
-      return false;
-    })
   }
 
   initializeItems() {

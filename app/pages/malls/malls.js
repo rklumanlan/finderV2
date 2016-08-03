@@ -47,6 +47,19 @@ export class MallsPage {
 
     this.disable = null;
 
+    this.pl_type_items = [
+      { value: "shopping_mall", text: 'Hotel', checked: true},
+      { value: "department_store", text: 'Department Store', checked: false},
+      { value: "clothing_store", text: 'Clothing Store', checked: false},
+      { value: "shoe_store", text: 'Shoe Store', checked: false},
+    ];
+
+    this.sort_items = [
+      { value: "Distance", text: 'Distance', checked: true},
+      { value: "Alphabetically", text: 'Alphabetically', checked: false},
+      { value: "Rating", text: 'Rating', checked: false},
+    ];
+
     console.log(this.details);
     console.log("Malls list working");
   }
@@ -72,7 +85,9 @@ export class MallsPage {
         }
           console.log(me.items);
         me.setMallRating();
-        document.getElementById('loading').style.display="none";
+        if (document.getElementById('loading')!==null) {
+          document.getElementById('loading').style.display="none";
+        }
       }, 2000);
     });
 

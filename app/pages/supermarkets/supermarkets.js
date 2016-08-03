@@ -45,6 +45,15 @@ export class SupermarketsPage {
     this.res = null;
     this.count = null;
 
+
+    this.pl_type_items = [{ value: "grocery_or_supermarket", text: 'Supermarket', checked: true}];
+
+    this.sort_items = [
+      { value: "Distance", text: 'Distance', checked: true},
+      { value: "Alphabetically", text: 'Alphabetically', checked: false},
+      { value: "Rating", text: 'Rating', checked: false},
+    ];
+
     console.log(this.details);
     console.log("SuperMarket list working");
   }
@@ -67,7 +76,9 @@ export class SupermarketsPage {
         }
           console.log(me.items);
         me.setSupMarketRating();
-        document.getElementById('loading').style.display="none";
+        if (document.getElementById('loading')!==null) {
+          document.getElementById('loading').style.display="none";
+        }
       }, 2000);
     });
 

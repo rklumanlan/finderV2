@@ -37,15 +37,41 @@ export class RestaurantPage {
 
     this.params = {};
 
-    this.placeType = 'restaurant';
-    this.sort = 'Distance';
-    this.cuisine = 'food';
+    // this.placeType = 'restaurant';
+    // this.sort = 'Distance';
+    // this.cuisine = 'food';
 
     this.items = [];
     this.res = null;
     this.count = null;
 
     this.disable = null;
+
+    this.pl_type_items = [
+      { value: "restaurant", text: 'Restaurant', checked: true},
+      { value: "cafe", text: 'Cafe', checked: false},
+    ];
+
+    this.cui_items = [
+      { value: "food", text: 'Any Cuisine', checked: true},
+      { value: "American", text: 'American', checked: false},
+      { value: "Chinese", text: 'Chinese', checked: false},
+      { value: "Filipino", text: 'Filipino', checked: false},
+      { value: "Indian", text: 'Indian', checked: false},
+      { value: "Italian", text: 'Italian', checked: false},
+      { value: "Japanese", text: 'Japanese', checked: false},
+      { value: "Lebanese", text: 'Lebanese', checked: false},
+      { value: "Mexican", text: 'Mexican', checked: false},
+      { value: "Spanish", text: 'Spanish', checked: false},
+      { value: "Thai", text: 'Thai', checked: false},
+      { value: "Vietnamese", text: 'Vietnamese', checked: false},
+    ];
+
+    this.sort_items = [
+      { value: "Distance", text: 'Distance', checked: true},
+      { value: "Alphabetically", text: 'Alphabetically', checked: false},
+      { value: "Rating", text: 'Rating', checked: false},
+    ];
   }
 
   ionViewWillEnter(){
@@ -122,15 +148,18 @@ export class RestaurantPage {
         me.setRating();
         me.sortItems(me.sort);
         document.getElementById('loading').style.display="none";
-      }, 6000);
+      }, 2000);
     });
   }
 
-  updateCuisine(){
+  updateCuisine(cuisine){
+    console.log('up cu');
+    document.getElementById('loading').style.display="inline";
     var me = this;
     me.params.geoloc = this.details;
-    me.params.placeType = me.placeType;
-    me.params.cuisine = me.cuisine;
+    me.params.placeType = 'restaurant';
+    me.params.cuisine = cuisine;
+    console.log(me.params);
     me.geolocationService.setPlaces(me.params).then(function (res) {
       me.items = [];
       setTimeout(function() {
@@ -138,7 +167,8 @@ export class RestaurantPage {
         console.log(me.items);
         me.setRating();
         me.sortItems(me.sort);
-      }, 6000);
+        document.getElementById('loading').style.display="none";
+      }, 2000);
     });
   }
 

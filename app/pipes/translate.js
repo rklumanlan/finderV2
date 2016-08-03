@@ -22,6 +22,10 @@ export class TranslatePipe {
       "Clark":"クラーク",
 
       "Supermarket":"スーパーマーケット",
+      "Department Store":"デパート",
+      "Clothing Store":"洋服店",
+      "Shoe Store":"靴屋",
+
 
       "CHECK-POINT-HOLY": "チェック-ポイント- ホーリー",
       "CHECK-POINT-HOLY-HI-WAY": "チェック-ポイント- ホーリーハイー-ウェイ",

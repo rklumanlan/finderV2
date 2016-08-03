@@ -45,6 +45,15 @@ export class SalonsPage {
     this.res = null;
     this.count = null;
 
+
+    this.pl_type_items = [{ value: "beauty_salon", text: 'Beauty Salon', checked: true}];
+
+    this.sort_items = [
+      { value: "Distance", text: 'Distance', checked: true},
+      { value: "Alphabetically", text: 'Alphabetically', checked: false},
+      { value: "Rating", text: 'Rating', checked: false},
+    ];
+
     console.log(this.details);
     console.log("Salon list working");
   }
@@ -66,7 +75,9 @@ export class SalonsPage {
         }
           console.log(me.items);
         me.setSalonRating();
-        document.getElementById('loading').style.display="none";
+        if (document.getElementById('loading')!==null) {
+          document.getElementById('loading').style.display="none";
+        }
       }, 2000);
     });
 
