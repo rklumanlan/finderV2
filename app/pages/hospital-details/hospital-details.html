@@ -20,7 +20,7 @@
         <ion-col>
           <ion-slides>
             <ion-slide *ngFor="let photo of photos">
-              <img src="{{photo}}" >
+              <img src="{{photo}}">
             </ion-slide>
           </ion-slides>
         </ion-col>
@@ -30,6 +30,9 @@
           <h3 style="font-weight:500; width:100%;">{{item_select_hospital.name}}</h3>
           {{item_select_hospital.vicinity}}
         </ion-col>
+      </ion-row>
+      <ion-row>
+          <span id="place_contact"></span>
       </ion-row>
 
       <ion-row>

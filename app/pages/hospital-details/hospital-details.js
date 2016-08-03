@@ -58,6 +58,9 @@ export class HospitalDetailsPage {
         me.photos.push(res[0].icon);
       }
 
+      me.contact = res[0].international_phone_number;
+      me.insertPlaceContact();
+
     });
   }
 
@@ -185,49 +188,18 @@ export class HospitalDetailsPage {
   }, 500);
 }
 
+insertPlaceContact(){
+  var me = this;
+  var v = document.getElementById('place_contact');
+  console.log(me.contact);
+
+    if (me.contact !== undefined){
+      v.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="ios-call" role="img" class="ion-ios-call" aria-label="ios-call"></ion-icon><span class="contact_no">&nbsp;&nbsp;'+ me.contact + '</span>');
+    }
+
+    else{
+      v.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="ios-call" role="img" class="ion-ios-call" aria-label="ios-call" style="color:#B7B7B7;"></ion-icon><span style="color:#B7B7B7;">&nbsp;&nbsp;(No contact number provided.)</span>');
+    }
+  }
+
 }
-
-
-// import {Component} from '@angular/core';
-// import {NavParams, Storage, SqlStorage, IonicApp, NavController} from 'ionic-angular';
-// import {DataService} from '../../services/data';
-// import {HospitalsPage} from '../hospitals/hospitals';
-// import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
-//
-//
-// import {LoadingModal} from '../../components/loading-modal/loading-modal';
-//
-//
-// import {TranslatePipe} from '../../pipes/translate';
-// /*
-//   Generated class for the HospitalDetailsPage page.
-//
-//   See http://ionicframework.com/docs/v2/components/#navigation for more info on
-//   Ionic pages and navigation.
-// */
-// @Component({
-//   templateUrl: 'build/pages/hospital-details/hospital-details.html',
-//   directives: [LoadingModal],
-//   providers: [GeolocationService],
-//   pipes: [TranslatePipe]
-// })
-// export class HospitalDetailsPage {
-//   static get parameters() {
-//     return [[DataService],[NavParams],[NavController],[GeolocationService]];
-//   }
-//
-//   constructor(dataService,navParams,nav,geolocationService) {
-//     this.dataService = dataService;
-//     this.navParams = navParams;
-//     this.nav = nav;
-//     this.geolocationService = geolocationService;
-//     this.HospitalsPage = HospitalsPage;
-//
-//     this.hospdetail = this.navParams.get('hospdetail');
-//     console.log(this.hospdetail);
-//   }
-//
-//   ionViewDidEnter(){
-//     this.geolocationService.getPolHosp(this.hospdetail,'hosp');
-//   }
-// }
