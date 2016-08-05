@@ -1,12 +1,12 @@
-import {Page, Storage, SqlStorage} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {Storage, SqlStorage} from 'ionic-angular';
 import {DataService} from '../../../services/data';
-
-// import {TabsPage} from '../../jeepney/tabs/tabs';
-//
 import {JeepDetailsPage} from '../../jeepney/jeep-routes/jeep.details';
+import {TranslatePipe} from '../../../pipes/translate';
 
-@Page({
-  templateUrl: 'build/pages/jeepney/jeep-routes/jeep.view.html'
+@Component({
+  templateUrl: 'build/pages/jeepney/jeep-routes/jeep.view.html',
+  pipes: [TranslatePipe]
 })
 
 export class JeepRoutesPage {
@@ -26,7 +26,7 @@ export class JeepRoutesPage {
     // this.dataService.insertJeepsData();
 
     this.dataService.getAllData('Angeles').then((data) => {
-      console.log(data.result);
+      // console.log(data.result);
       if(data.res.rows.length > 0) {
         for(var i = 0; i < data.res.rows.length; i++) {
           this.acjeeps.push({name: data.res.rows.item(i).name, color: data.res.rows.item(i).color, image:data.res.rows.item(i).image});

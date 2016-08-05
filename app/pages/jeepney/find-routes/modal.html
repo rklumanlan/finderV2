@@ -1,15 +1,21 @@
+<ion-header>
+  <ion-navbar primary>
+    <ion-title>Jeepneys</ion-title>
+    <ion-buttons start>
+      <button (click)="close()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-searchbar cancelButtonText="{{'Cancel'|translate}}" placeholder="{{'Search'|translate}}"  (ionInput)="getItems($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
 
-<ion-navbar *navbar primary>
-<ion-buttons start>
-  <button (click)="close()">
-    <ion-icon name="ios-arrow-back"></ion-icon>
-  </button>
-</ion-buttons><ion-title>Jeepneys</ion-title>
-</ion-navbar>
 <ion-content >
   <ion-list>
-  <button ion-item *ngFor="#point of points" (click)="validateItem(point.name)">
-    {{point.name}}
-  </button>
-</ion-list>
+    <button ion-item detail-none *ngFor="let item of items"  (click)="validateItem(item)">
+      {{item}}
+    </button>
+  </ion-list>
 </ion-content>

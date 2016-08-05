@@ -1,7 +1,14 @@
-import {App, IonicApp, Platform, Storage, SqlStorage} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {Platform, ionicBootstrap, Storage, SqlStorage} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
+
+
+// import {App, IonicApp, Platform, Storage, SqlStorage} from 'ionic-angular';
+// import {StatusBar} from 'ionic-native';
 import {MainPage} from './pages/main/main';
 import {TabsPage} from './pages/jeepney/tabs/tabs';
+import {LandingPage} from './pages/landingpage/landingpage';
+// import {Splashscreen} from 'ionic-native';
 // import {JeepneyRoutesPage} from './pages/jeepney/jeep-routes/jeep-routes';
 // import {ListPage} from './pages/list/list';
 
@@ -15,36 +22,25 @@ import {LoadingModal} from './components/loading-modal/loading-modal';
 
 
 
-@App({
-  templateUrl: 'build/app.html',
-  providers: [DataService,ConnectivityService],
-  directives: [LoadingModal],
-  config: {
-    iconMode: 'md',
-    modalEnter: 'modal-slide-in',
-    modalLeave: 'modal-slide-out',
-    pageTransition: 'ios',
-    tabSubPages: false,
-    backButtonIcon: 'ios-arrow-back',
-    tabbarPlacement: 'top',
-    backButtonText: ''
-    // menuType: 'reveal'
-  } // http://ionicframework.com/docs/v2/api/config/Config/
+@Component({
+  templateUrl: 'build/app.html'
+  // providers: [DataService,ConnectivityService],
+  // directives: [LoadingModal]
 })
-class MyApp {
+export class MyApp {
   static get parameters() {
-    return [[IonicApp], [Platform]];
+    return [[Platform]];
   }
 
-  constructor(app, platform) {
-    // set up our app
-    this.app = app;
+  constructor(platform) {
 
     this.platform = platform;
     this.initializeApp();
     // make HelloIonicPage the root (or first) page
-    this.rootPage = MainPage;
+    this.rootPage = LandingPage;
   }
+
+
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -62,4 +58,16 @@ class MyApp {
     });
   }
 
+
+
 }
+ionicBootstrap(MyApp, [DataService,ConnectivityService], {
+  iconMode: 'md',
+  // modalEnter: 'modal-slide-in',
+  // modalLeave: 'modal-slide-out',
+  // pageTransition: 'ios',
+  tabSubPages: false,
+  backButtonIcon: 'ios-arrow-back',
+  tabbarPlacement: 'top',
+  backButtonText: ''
+});

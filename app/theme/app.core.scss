@@ -7,13 +7,32 @@
 // By default each design mode includes these shared imports.
 // App Shared Sass variables belong in app.variables.scss.
 
+@import "../pages/landingpage/landingpage";
 @import "../pages/main/main";
 @import "../pages/jeepney/find-routes/routes.view";
 @import "../pages/jeepney/jeep-routes/jeep.view";
 @import "../pages/jeepney/jeep-routes/jeep.map";
 @import "../pages/jeepney/find-routes/routes.map";
-// @import "../pages/maps/maps";
+@import "../pages/jeepney/tabs/tabs";
+
+@import "../pages/restaurant/restaurant";
+@import "../pages/hospitals/hospitals";
+@import "../pages/hotels/hotels";
+@import "../pages/malls/malls";
+@import "../pages/maps/maps";
+@import "../pages/police/police";
+@import "../pages/salons/salons";
+@import "../pages/supermarkets/supermarkets";
+
+@import "../pages/police-details/police-details";
+@import "../pages/hospital-details/hospital-details";
+@import "../pages/restaurant-details/restaurant-details";
+
+@import "../pages/restaurant-map/restaurant-map";
+@import "../pages/hotel-map/hotel-map";
+@import "../pages/mall-map/mall-map";
+// @import "../pages/supermarket-map/supermakret-map";
+@import "../pages/salon-map/salon-map";
 
 @import "../components/loading-modal/loading-modal";
-
 // @import "../pages/item-details/item-details";
