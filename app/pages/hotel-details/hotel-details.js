@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, Platform, Page} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {HotelMapPage} from '../hotel-map/hotel-map';
@@ -29,6 +29,12 @@ export class HotelDetailsPage {
     this.reviews = [];
   }
 
+  launch(url) {
+          this.platform.ready().then(() => {
+              cordova.InAppBrowser.open(url, "_system", "location=true");
+          });
+      }
+
   ionViewWillEnter(){
     var me = this;
     console.log(me.item_select_hotel.place_id);
@@ -55,6 +61,9 @@ export class HotelDetailsPage {
 
       me.contact = res[0].international_phone_number;
       me.insertPlaceContact();
+
+      me.website = res[0].website;
+      me.insertWebURL();
 
     });
   }
@@ -195,5 +204,17 @@ insertPlaceContact(){
       v.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="ios-call" role="img" class="ion-ios-call" aria-label="ios-call" style="color:#B7B7B7;"></ion-icon><span style="color:#B7B7B7;">&nbsp;&nbsp;(No contact number provided.)</span>');
     }
   }
+
+insertWebURL(){
+  var me = this;
+
+  if (me.website !== undefined){
+    console.log(me.website);
+  }
+
+  else{
+    console.log("No Website");
+  }
+}
 
 }
