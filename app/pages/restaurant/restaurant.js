@@ -37,41 +37,79 @@ export class RestaurantPage {
 
     this.params = {};
 
-    this.placeType = 'restaurant';
-    this.sort = 'Distance';
-    this.cuisine = 'food';
+    // this.placeType = 'restaurant';
+    // this.sort = 'Distance';
+    // this.cuisine = 'food';
 
     this.items = [];
     this.res = null;
     this.count = null;
 
     this.disable = null;
+
+    this.pl_type_items = [
+      { value: "restaurant", text: 'Restaurant', checked: true},
+      { value: "cafe", text: 'Cafe', checked: false},
+    ];
+
+    this.cui_items = [
+      { value: "food", text: 'Any Cuisine', checked: true},
+      { value: "American", text: 'American', checked: false},
+      { value: "Chinese", text: 'Chinese', checked: false},
+      { value: "Filipino", text: 'Filipino', checked: false},
+      { value: "Indian", text: 'Indian', checked: false},
+      { value: "Italian", text: 'Italian', checked: false},
+      { value: "Japanese", text: 'Japanese', checked: false},
+      { value: "Lebanese", text: 'Lebanese', checked: false},
+      { value: "Mexican", text: 'Mexican', checked: false},
+      { value: "Spanish", text: 'Spanish', checked: false},
+      { value: "Thai", text: 'Thai', checked: false},
+      { value: "Vietnamese", text: 'Vietnamese', checked: false},
+    ];
+
+    this.sort_items = [
+      { value: "Distance", text: 'Distance', checked: true},
+      { value: "Alphabetically", text: 'Alphabetically', checked: false},
+      { value: "Rating", text: 'Rating', checked: false},
+    ];
+
+    this.enterCTR = 1;
   }
 
   ionViewWillEnter(){
     var me = this;
     me.params.geoloc = this.details;
+    this.sort = me.sort;
     me.params.placeType = 'restaurant';
     me.params.cuisine = 'food';
-    me.geolocationService.setPlaces(me.params).then(function (res) {
+    if (me.enterCTR === 1){
+      me.geolocationService.setPlaces(me.params).then(function (res) {
 
-      setTimeout(function() {
-        console.log(res);
-        me.res = res;
-        me.items = [];
-        for (me.count = 0; me.count < 20; me.count++) {
-          if (res[me.count]!==undefined) {
-            me.items.push(res[me.count]);
+        setTimeout(function() {
+          console.log(res);
+          me.res = res;
+          me.items = [];
+          for (me.count = 0; me.count < 20; me.count++) {
+            if (res[me.count]!==undefined) {
+              me.items.push(res[me.count]);
+            }
+
           }
+            console.log(me.items);
+          me.setRating();
+          me.sortItems(me.sort);
+          if (document.getElementById('loading')!==null) {
+            document.getElementById('loading').style.display="none";
+          }
+        }, 2000);
+      });
+    }
 
-        }
-          console.log(me.items);
-        me.setRating();
-        if (document.getElementById('loading')!==null) {
-          document.getElementById('loading').style.display="none";
-        }
-      }, 2000);
-    });
+  }
+
+  ionViewDidLeave(){
+    this.enterCTR += 1;
+    console.log('didleave'+this.enterCTR);
   }
 
   doInfinite(infiniteScroll) {
@@ -95,7 +133,7 @@ export class RestaurantPage {
 
       console.log('Async operation has ended');
       infiniteScroll.complete();
-      if (i==me.res.length) {
+      if (me.res.length==60) {
         infiniteScroll.enable(false);
       }
     }, 2000);
@@ -122,15 +160,18 @@ export class RestaurantPage {
         me.setRating();
         me.sortItems(me.sort);
         document.getElementById('loading').style.display="none";
-      }, 6000);
+      }, 2000);
     });
   }
 
-  updateCuisine(){
+  updateCuisine(cuisine){
+    console.log('up cu');
+    document.getElementById('loading').style.display="inline";
     var me = this;
     me.params.geoloc = this.details;
-    me.params.placeType = me.placeType;
-    me.params.cuisine = me.cuisine;
+    me.params.placeType = 'restaurant';
+    me.params.cuisine = cuisine;
+    console.log(me.params);
     me.geolocationService.setPlaces(me.params).then(function (res) {
       me.items = [];
       setTimeout(function() {
@@ -138,7 +179,8 @@ export class RestaurantPage {
         console.log(me.items);
         me.setRating();
         me.sortItems(me.sort);
-      }, 6000);
+        document.getElementById('loading').style.display="none";
+      }, 2000);
     });
   }
 

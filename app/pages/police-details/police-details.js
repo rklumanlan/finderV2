@@ -205,11 +205,10 @@ insertPlaceContact(){
   }
 
 }
-
 // import {Component} from '@angular/core';
 // import {NavParams, Storage, SqlStorage, IonicApp, NavController} from 'ionic-angular';
 // import {DataService} from '../../services/data';
-// import {PolicePage} from '../police/police';
+// import {PoliceMapPage} from '../police-map/police-map';
 // import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 // import {LoadingModal} from '../../components/loading-modal/loading-modal';
 // import {TranslatePipe} from '../../pipes/translate';
@@ -236,7 +235,7 @@ insertPlaceContact(){
 //     this.nav = nav;
 //     this.geolocationService = geolocationService;
 //
-//     this.PolicePage = PolicePage;
+//     this.PoliceMapPage = PoliceMapPage;
 //
 //     this.poldetail = this.navParams.get('poldetail');
 //   }

@@ -53,10 +53,8 @@ export class SupermarketDetailsPage {
         else {
           me.photos.push(res[0].icon);
         }
-
         me.contact = res[0].international_phone_number;
         me.insertPlaceContact();
-
       });
   }
 

@@ -39,7 +39,7 @@ export class RestaurantDetailsPage {
       console.log(res[0]);
       console.log('inner');
       me.results = res[0];
-
+      
       if (res[0].reviews!==undefined) {
         me.reviews = res[0].reviews;
         me.setReviewRating();

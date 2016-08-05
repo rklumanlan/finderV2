@@ -36,13 +36,22 @@ export class HotelsPage {
 
     this.params = {};
 
-    this.placeType = 'lodging';
-    this.sort = 'Distance';
+    // this.placeType = 'lodging';
+    // this.sort = 'Distance';
     // this.cuisine = 'food';
 
     this.items = [];
     this.res = null;
     this.count = null;
+
+
+    this.pl_type_items = [{ value: "hotel", text: 'Hotel', checked: true}];
+
+    this.sort_items = [
+      { value: "Distance", text: 'Distance', checked: true},
+      { value: "Alphabetically", text: 'Alphabetically', checked: false},
+      { value: "Rating", text: 'Rating', checked: false},
+    ];
 
     console.log(this.details);
     console.log("Hotels list working");

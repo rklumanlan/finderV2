@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams, Platform, Page} from 'ionic-angular';
+import {NavController, NavParams, Platform} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {HotelMapPage} from '../hotel-map/hotel-map';

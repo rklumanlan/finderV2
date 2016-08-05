@@ -18,12 +18,25 @@ export class TranslatePipe {
       "Supermarkets":"スーパーマーケット",
       "Police Stations":"警察署",
       "Hospitals":"病院",
+      
       "Angeles":"アンヘレス",
       "Clark":"クラーク",
 
+      "Hotel":"ホテル",
+      "Hospital":"病院",
       "Supermarket":"スーパーマーケット",
+      "Department Store":"デパート",
+      "Clothing Store":"洋服店",
+      "Shoe Store":"靴屋",
+      "Police Station":"警察署",
+      "Restaurant":"レストラン",
+      "Cafe":"カフェ",
+      "Hotel":"ホテル",
+      "Shopping Mall":"ショッピングモール",
+      "Beauty Salon":"ビューティーサロン",
 
-      "CHECK-POINT-HOLY": "チェック-ポイント- ホーリーハイー",
+
+      "CHECK-POINT-HOLY": "チェック-ポイント- ホーリー",
       "CHECK-POINT-HOLY-HI-WAY": "チェック-ポイント- ホーリーハイー-ウェイ",
       "CHECK-POINT-HENSONVILLE-HOLY":"チェック-ポイント-ヘンソンヴィル-ホーリー",
       "PANDAN-PAMPANG":"パンダン-パンパング",
@@ -109,12 +122,6 @@ export class TranslatePipe {
       "Cuisine":"料理",
       "Sort":"並べ替え",
 
-      "Restaurant":"レストラン",
-      "Cafe":"カフェ",
-      "Hotel":"ホテル",
-      "Shopping Mall":"ショッピングモール",
-      "Beauty Salon":"ビューティーサロン",
-
       "Any Cuisine":"任意の料理",
       "American":"アメリカの料理",
       "Chinese":"中国料理",
@@ -155,7 +162,7 @@ export class TranslatePipe {
 
 
 
-    }]
+    }];
 
     if (navigator.language.split('-')[0]=='en') {
       console.log(jp);

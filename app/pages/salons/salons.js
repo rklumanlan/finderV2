@@ -45,6 +45,15 @@ export class SalonsPage {
     this.res = null;
     this.count = null;
 
+
+    this.pl_type_items = [{ value: "beauty_salon", text: 'Beauty Salon', checked: true}];
+
+    this.sort_items = [
+      { value: "Distance", text: 'Distance', checked: true},
+      { value: "Alphabetically", text: 'Alphabetically', checked: false},
+      { value: "Rating", text: 'Rating', checked: false},
+    ];
+
     console.log(this.details);
     console.log("Salon list working");
   }
