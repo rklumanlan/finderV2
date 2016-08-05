@@ -60,6 +60,16 @@ export class PolicePage {
     this.res = null;
     this.count = null;
 
+    this.pl_type_items = [
+      { value: "police", text: 'Police Station', checked: true}
+    ];
+
+    this.sort_items = [
+      { value: "Distance", text: 'Distance', checked: true},
+      { value: "Alphabetically", text: 'Alphabetically', checked: false},
+      { value: "Rating", text: 'Rating', checked: false},
+    ];
+
     console.log(this.details);
     console.log("Police list working");
   }

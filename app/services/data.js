@@ -445,7 +445,7 @@ export class DataService {
         // });
 
           this.storage.query('INSERT OR REPLACE INTO points (id, text, lat, lng, tags,icon) VALUES ("'+x+'","'+item2.text+'","'+item2.lat+'","'+item2.lng+'","'+item2.tags+'","'+item2.icon+'")').then((data) => {
-              console.log(data);
+              // console.log(data);
           }, (error) => {
             console.log(error);
               console.log("ERROR -> " + JSON.stringify(error.err));

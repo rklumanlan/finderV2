@@ -189,7 +189,7 @@ export class GeolocationService {
         // }else {
           resolve(geo); // After 3 seconds, resolve the promise with value 42
         // }
-      }, 2000);
+      }, 500);
     });
 
 
@@ -444,20 +444,17 @@ export class GeolocationService {
         if (place.reviews !== undefined){
           for (var i = 0; i < place.reviews.length; i++) {
             if (navigator.language=='en-US') {
-              place.reviews[i].time = new Date(place.reviews[i].time*1000).toLocaleDateString('ja-JP');
+              place.reviews[i].newTime = new Date(place.reviews[i].time*1000).toLocaleDateString('ja-JP');
             }
             else {
-              place.reviews[i].time = new Date(place.reviews[i].time*1000).toLocaleDateString('en-US');
+              place.reviews[i].newTime = new Date(place.reviews[i].time*1000).toLocaleDateString('en-US');
             }
           }
-          items.push(place);
         }
         else {
-          {
-            items.push(place);
-            console.log("Place selected has no reviews.");
-          }
+          console.log("Place selected has no reviews.");
         }
+        items.push(place);
       }
 
     });
@@ -469,7 +466,7 @@ export class GeolocationService {
         console.log(items);
         console.log('itemu');
         resolve(items); // After 3 seconds, resolve the promise with value 42
-      }, 500);
+      }, 2000);
     });
   }
 

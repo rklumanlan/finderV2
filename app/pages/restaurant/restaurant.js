@@ -72,32 +72,44 @@ export class RestaurantPage {
       { value: "Alphabetically", text: 'Alphabetically', checked: false},
       { value: "Rating", text: 'Rating', checked: false},
     ];
+
+    this.enterCTR = 1;
   }
 
   ionViewWillEnter(){
     var me = this;
     me.params.geoloc = this.details;
+    this.sort = me.sort;
     me.params.placeType = 'restaurant';
     me.params.cuisine = 'food';
-    me.geolocationService.setPlaces(me.params).then(function (res) {
+    if (me.enterCTR === 1){
+      me.geolocationService.setPlaces(me.params).then(function (res) {
 
-      setTimeout(function() {
-        console.log(res);
-        me.res = res;
-        me.items = [];
-        for (me.count = 0; me.count < 20; me.count++) {
-          if (res[me.count]!==undefined) {
-            me.items.push(res[me.count]);
+        setTimeout(function() {
+          console.log(res);
+          me.res = res;
+          me.items = [];
+          for (me.count = 0; me.count < 20; me.count++) {
+            if (res[me.count]!==undefined) {
+              me.items.push(res[me.count]);
+            }
+
           }
+            console.log(me.items);
+          me.setRating();
+          me.sortItems(me.sort);
+          if (document.getElementById('loading')!==null) {
+            document.getElementById('loading').style.display="none";
+          }
+        }, 2000);
+      });
+    }
 
-        }
-          console.log(me.items);
-        me.setRating();
-        if (document.getElementById('loading')!==null) {
-          document.getElementById('loading').style.display="none";
-        }
-      }, 2000);
-    });
+  }
+
+  ionViewDidLeave(){
+    this.enterCTR += 1;
+    console.log('didleave'+this.enterCTR);
   }
 
   doInfinite(infiniteScroll) {
@@ -121,7 +133,7 @@ export class RestaurantPage {
 
       console.log('Async operation has ended');
       infiniteScroll.complete();
-      if (i==me.res.length) {
+      if (me.res.length==60) {
         infiniteScroll.enable(false);
       }
     }, 2000);
