@@ -444,7 +444,7 @@ export class GeolocationService {
 
         if (place.reviews !== undefined){
           for (var i = 0; i < place.reviews.length; i++) {
-            if (navigator.language=='en-US') {
+            if (navigator.language=='ja-JP') {
               place.reviews[i].newTime = new Date(place.reviews[i].time*1000).toLocaleDateString('ja-JP');
             }
             else {

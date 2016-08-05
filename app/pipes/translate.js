@@ -18,7 +18,7 @@ export class TranslatePipe {
       "Supermarkets":"スーパーマーケット",
       "Police Stations":"警察署",
       "Hospitals":"病院",
-      
+
       "Angeles":"アンヘレス",
       "Clark":"クラーク",
 
@@ -164,16 +164,16 @@ export class TranslatePipe {
 
     }];
 
-    if (navigator.language.split('-')[0]=='en') {
+    if (navigator.language.split('-')[0]=='jp') {
       console.log(jp);
       newValue = jp[0][value];
       console.log(newValue);
 
       return newValue;
     }
-    // else {
-    //   return value;
-    // }
+    else {
+      return value;
+    }
 
 
   }
