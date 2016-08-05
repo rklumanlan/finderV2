@@ -30,8 +30,7 @@ export class HospitalsPage {
     this.navParams = navParams;
     this.geolocationService = geolocationService;
     this.HospitalDetailsPage = HospitalDetailsPage;
-
-
+    
     this.pl_type_items = [{ value: "hospital", text: 'Hospital', checked: true}];
 
     this.sort_items = [
@@ -39,7 +38,6 @@ export class HospitalsPage {
       { value: "Alphabetically", text: 'Alphabetically', checked: false},
       { value: "Rating", text: 'Rating', checked: false},
     ];
-
     // this.hospitals = [];
 
     // this.dataService.insertJeepsData();

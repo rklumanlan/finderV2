@@ -17,7 +17,7 @@
                   <ion-option value="shoe_store">Shoe Store</ion-option> -->
                 <!-- </ion-select> -->
                 <ion-select id ='1' [(ngModel)]="placeType" (ionChange)="updatePlaceType($event)" class="drpdown_nc" okText="OK" cancelText="{{'Cancel'|translate}}">
-                  <ion-option *ngFor="let pl_item of pl_type_items" value="{{pl_item.value}}" checked="{{pl_item.checked}}">{{pl_item.text|translate}} </ion-option>
+                  <ion-option *ngFor="let pl_item of pl_type_items" value="{{pl_item.value}}" checked="{{pl_item.checked}}">{{pl_item.text|translate}} </ion-option>3
                 </ion-select>
             </ion-item>
           </ion-col>

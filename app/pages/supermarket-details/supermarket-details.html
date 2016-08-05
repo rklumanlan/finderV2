@@ -6,9 +6,6 @@
 
 <ion-content padding class="supermarket-details card-background-page">
     <div class="mainBackDiv">
-<<<<<<< HEAD
-
-=======
       <ion-grid class="grid_details">
         <ion-row>
           <ion-col>
@@ -24,6 +21,10 @@
             <h3 style="font-weight:500; width:100%;">{{item_select_supmarket.name}}</h3>
             {{item_select_supmarket.vicinity}}
           </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <span id="place_contact"></span>
         </ion-row>
 
         <ion-row>
@@ -64,7 +65,7 @@
 
       <ion-list class="list_reviews">
         <ion-list-header class="list_review_header">
-          Reviews & Ratings
+          Reviews
         </ion-list-header>
         <ion-item *ngFor="let review of reviews" class="review_item_list">
           <ion-row>

@@ -1,18 +1,16 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, Platform, Page} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
-import {LoadingModal} from '../../components/loading-modal/loading-modal';
-import {HospitalsPage} from '../hospitals/hospitals';
-import {HospitalMapPage} from '../hospital-map/hospital-map';
+import {HotelMapPage} from '../hotel-map/hotel-map';
 import {TranslatePipe} from '../../pipes/translate';
 
 @Component({
-  templateUrl: 'build/pages/hospital-details/hospital-details.html',
-  pipes: [TranslatePipe],
-  providers: [GeolocationService]
+  templateUrl: 'build/pages/hotel-details/hotel-details.html',
+  providers: [GeolocationService],
+  pipes: [TranslatePipe]
 })
-export class HospitalDetailsPage {
+export class HotelDetailsPage {
   static get parameters() {
     return [[NavParams],[NavController],[GeolocationService]];
   }
@@ -21,34 +19,37 @@ export class HospitalDetailsPage {
     this.navParams = navParams;
     this.nav = nav;
     this.geolocationService = geolocationService;
-    this.HospitalMapPage = HospitalMapPage;
+    this.HotelMapPage = HotelMapPage;
 
-    this.item_select_hospital = this.navParams.get('item_select_hospital');
-    console.log(this.item_select_hospital);
+    this.item_select_hotel = this.navParams.get('item_select_hotel');
+    console.log(this.item_select_hotel);
 
     this.photos = [];
     this.results = [];
     this.reviews = [];
-
   }
+
+  launch(url) {
+          this.platform.ready().then(() => {
+              cordova.InAppBrowser.open(url, "_system", "location=true");
+          });
+      }
 
   ionViewWillEnter(){
     var me = this;
-    console.log('detail');
-    console.log(document.getElementById('hospital_map_dtl'));
-    console.log(me.item_select_hospital.place_id);
-    me.geolocationService.setPlaceDetails('hospital_map_dtl',me.item_select_hospital.place_id).then(function (res) {
+    console.log(me.item_select_hotel.place_id);
+    console.log(document.getElementById('hotel_map_dtl'));
+    me.geolocationService.setPlaceDetails('hotel_map_dtl',me.item_select_hotel.place_id).then(function (res) {
       console.log(res[0]);
       console.log('inner');
       me.results = res[0];
 
       if (res[0].reviews!==undefined) {
         me.reviews = res[0].reviews;
-        me.setReviewRating();
+        me.setHotelReviewRating();
       }
 
       if (res[0].photos!==undefined) {
-
         for (var i = 0; i < res[0].photos.length; i++) {
           me.photos.push(res[0].photos[i].getUrl({'maxWidth': 300, 'maxHeight': 300}));
         }
@@ -58,31 +59,38 @@ export class HospitalDetailsPage {
         me.photos.push(res[0].icon);
       }
 
+      me.contact = res[0].international_phone_number;
+      me.insertPlaceContact();
+
+      me.website = res[0].website;
+      me.insertWebURL();
+
     });
   }
 
   ionViewLoaded(){
     var me = this;
     // setTimeout(function() {
-      var x = document.getElementById("hospital_rating");
+      var x = document.getElementById("hotel_rating");
       var y = document.getElementById("operating_hours");
       var rating,half,remaining;
-      // for (var a = 0; a < me.item_select.rating.length; a++) {
-        //rating number
-        rating = Math.floor(me.item_select_hospital.rating);
-        //get decimal num if there is
-        half = (me.item_select_hospital.rating % 1).toFixed(1);
-        //reamianing stars to append
-        remaining = Math.floor(5 - me.item_select_hospital.rating);
 
-        if (me.item_select_hospital.rating!=0) {
+      // for (var a = 0; a < me.item_select_hotel.rating.length; a++) {
+        //rating number
+        rating = Math.floor(me.item_select_hotel.rating);
+        //get decimal num if there is
+        half = (me.item_select_hotel.rating % 1).toFixed(1);
+        //reamianing stars to append
+        remaining = Math.floor(5 - me.item_select_hotel.rating);
+
+        if (me.item_select_hotel.rating!=0) {
           var ctr = 0;
           for (var b = 1; b <= rating; b++) {
             x.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star" role="img" class="ion-ios-star" aria-label="ios-star"></ion-icon>');
             ctr=ctr+1;
           }
           //int
-          if (me.item_select_hospital.rating % 1 === 0) {
+          if (me.item_select_hotel.rating % 1 === 0) {
             if (remaining !== 0 && ctr<=5) {
               for (var b = 1; b <= (5-ctr); b++) {
                 x.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
@@ -91,8 +99,8 @@ export class HospitalDetailsPage {
             }
           }
           //float
-          else if (me.item_select_hospital.rating % 1 !== 0) {
-            if (half !== 0.0 && (me.item_select_hospital.rating %1 !== 0)) {
+          else if (me.item_select_hotel.rating % 1 !== 0) {
+            if (half !== 0.0 && (me.item_select_hotel.rating %1 !== 0)) {
               x.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-half" role="img" class="ion-ios-star-half" aria-label="ios-star-half"></ion-icon>');
               ctr=ctr+1;
             }
@@ -106,11 +114,10 @@ export class HospitalDetailsPage {
           }
           console.log(ctr+" ctr");
         }
-        //appending store open
-        console.log(me.item_select_hospital.opening_hours);
-        if (me.item_select_hospital.opening_hours!==undefined) {
-          if (me.item_select_hospital.opening_hours.open_now!==undefined) {
-            if (me.item_select_hospital.opening_hours.open_now === true) {
+        // appending store open
+        if (me.item_select_hotel.opening_hours!==undefined) {
+          if (me.item_select_hotel.opening_hours.open_now!==undefined) {
+            if (me.item_select_hotel.opening_hours.open_now === true) {
               y.insertAdjacentHTML( 'beforeend', '<ion-label secondary>Open <ion-icon name="clock" role="img" class="ion-ios-clock-outline" aria-label="ios-clock-outline"></ion-icon></ion-label>');
             }
             else {
@@ -121,14 +128,13 @@ export class HospitalDetailsPage {
           }
 
         }
-      }
+      // }
 
     // }, 400);
 
-  // }
+  }
 
-
-  setReviewRating(){
+  setHotelReviewRating(){
     var me = this;
 
     setTimeout(function() {
@@ -185,49 +191,30 @@ export class HospitalDetailsPage {
   }, 500);
 }
 
+  insertPlaceContact(){
+    var me = this;
+    var v = document.getElementById('place_contact');
+    console.log(me.contact);
+
+    if (me.contact !== undefined){
+      v.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="ios-call" role="img" class="ion-ios-call" aria-label="ios-call"></ion-icon><span class="contact_no">&nbsp;&nbsp;'+ me.contact + '</span>');
+    }
+
+    else{
+      v.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="ios-call" role="img" class="ion-ios-call" aria-label="ios-call" style="color:#B7B7B7;"></ion-icon><span style="color:#B7B7B7;">&nbsp;&nbsp;(No contact number provided.)</span>');
+    }
+  }
+
+  insertWebURL(){
+    var me = this;
+
+    if (me.website !== undefined){
+      console.log(me.website);
+    }
+
+    else{
+      console.log("No Website");
+    }
+  }
+
 }
-
-
-// import {Component} from '@angular/core';
-// import {NavParams, Storage, SqlStorage, IonicApp, NavController} from 'ionic-angular';
-// import {DataService} from '../../services/data';
-// import {HospitalsPage} from '../hospitals/hospitals';
-// import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
-//
-//
-// import {LoadingModal} from '../../components/loading-modal/loading-modal';
-//
-//
-// import {TranslatePipe} from '../../pipes/translate';
-// /*
-//   Generated class for the HospitalDetailsPage page.
-//
-//   See http://ionicframework.com/docs/v2/components/#navigation for more info on
-//   Ionic pages and navigation.
-// */
-// @Component({
-//   templateUrl: 'build/pages/hospital-details/hospital-details.html',
-//   directives: [LoadingModal],
-//   providers: [GeolocationService],
-//   pipes: [TranslatePipe]
-// })
-// export class HospitalDetailsPage {
-//   static get parameters() {
-//     return [[DataService],[NavParams],[NavController],[GeolocationService]];
-//   }
-//
-//   constructor(dataService,navParams,nav,geolocationService) {
-//     this.dataService = dataService;
-//     this.navParams = navParams;
-//     this.nav = nav;
-//     this.geolocationService = geolocationService;
-//     this.HospitalsPage = HospitalsPage;
-//
-//     this.hospdetail = this.navParams.get('hospdetail');
-//     console.log(this.hospdetail);
-//   }
-//
-//   ionViewDidEnter(){
-//     this.geolocationService.getPolHosp(this.hospdetail,'hosp');
-//   }
-// }

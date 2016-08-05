@@ -58,6 +58,11 @@ export class PoliceDetailsPage {
         me.photos.push(res[0].icon);
       }
 
+      if (res[0].international_phone_number !== undefined){
+        me.contact = res[0].international_phone_number;
+        me.insertPlaceContact();
+      }
+
     });
   }
 
@@ -184,6 +189,20 @@ export class PoliceDetailsPage {
     }
   }, 500);
 }
+
+insertPlaceContact(){
+  var me = this;
+
+  setTimeout(function() {
+      var v = document.getElementById('place_contact');
+      // var rating,half,remaining;
+
+      console.log("Place contact method");
+      console.log(me.contact);
+
+      v.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="ios-call" role="img" class="ion-ios-call" aria-label="ios-call"></ion-icon><span class="contact_no">&nbsp;&nbsp;&nbsp;'+ me.contact + '</span>');
+    }, 500);
+  }
 
 }
 // import {Component} from '@angular/core';

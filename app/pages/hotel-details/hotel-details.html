@@ -24,6 +24,10 @@
       </ion-row>
 
       <ion-row>
+          <span id="place_contact"></span>
+      </ion-row>
+
+      <ion-row>
         <ion-col>
           <span id="hotel_rating"></span>
         </ion-col>
@@ -43,9 +47,10 @@
               <span style="font-size:9pt; color: #B7B7B7;">{{'Map'|translate}}</span>
             </li>
             <li class="item_buttons_li">
-              <button clear>
+              <!-- <button clear>
                 <span class="icoMoon-website"></span>
-              </button><br/>
+              </button><br/> -->
+              <button (click)="launch('https://www.thepolyglotdeveloper.com')">Launch URL</button>
               <span style="font-size:9pt; color: #B7B7B7;">{{'Website'|translate}}</span>
             </li>
             <!-- <li class="item_buttons_li">
@@ -62,7 +67,7 @@
     <!-- Reviews list  -->
     <ion-list class="list_reviews">
       <ion-list-header class="list_review_header">
-        Reviews & Ratings
+        Reviews
       </ion-list-header>
       <ion-item *ngFor="let review of reviews" class="review_item_list">
         <ion-row>

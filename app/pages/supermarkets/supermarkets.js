@@ -96,7 +96,7 @@ export class SupermarketsPage {
       var i;
       for (i = me.count; i < me.res.length; i++) {
         me.items.push(me.res[i]);
-        console.log(i);
+        // console.log(i);
       }
       me.setSupMarketRating();
 

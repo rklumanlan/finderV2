@@ -20,7 +20,7 @@
         <ion-col>
           <ion-slides>
             <ion-slide *ngFor="let photo of photos">
-              <img src="{{photo}}" >
+              <img src="{{photo}}">
             </ion-slide>
           </ion-slides>
         </ion-col>
@@ -31,7 +31,9 @@
           {{item_select_hospital.vicinity}}
         </ion-col>
       </ion-row>
-
+      <ion-row>
+          <span id="place_contact"></span>
+      </ion-row>
       <ion-row>
         <ion-col>
           <span id="hospital_rating"></span>
@@ -70,7 +72,7 @@
 
     <ion-list class="list_reviews">
       <ion-list-header class="list_review_header">
-        Reviews & Ratings
+        Reviews
       </ion-list-header>
       <ion-item *ngFor="let review of reviews" class="review_item_list">
         <ion-row>
