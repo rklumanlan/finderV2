@@ -38,7 +38,7 @@ export class SupermarketDetailsPage {
         console.log('inner');
         me.results = res[0];
         console.log(me.results);
-        
+
         if (res[0].reviews!==undefined) {
           me.reviews = res[0].reviews;
           me.setReviewRating();
