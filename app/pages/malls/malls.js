@@ -72,7 +72,9 @@ export class MallsPage {
         }
           console.log(me.items);
         me.setMallRating();
+        if (document.getElementById('loading')!==null) {
         document.getElementById('loading').style.display="none";
+        }
       }, 2000);
     });
 

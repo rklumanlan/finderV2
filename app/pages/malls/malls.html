@@ -35,7 +35,7 @@
 
 
 <ion-content>
-    <loading-modal id="loading" ></loading-modal>
+    <loading-modal id="loading"></loading-modal>
 
     <div class="bg" >
 
@@ -70,5 +70,9 @@
           </ion-row>
         </button>
       </ion-list>
+
+      <ion-infinite-scroll *ngIf="items.length!==0" (ionInfinite)="doInfinite($event)" threshold="100px">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
     </div>
   </ion-content>

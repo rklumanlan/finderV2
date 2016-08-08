@@ -14,25 +14,13 @@
                 </ion-select>
             </ion-item>
           </ion-col>
-<<<<<<< HEAD
-
-          <ion-col width-33 class="ToolbarCol">
-            <span class="sort_label">Cuisine</span>
-            <ion-item class="slct">
-              <ion-label id ='2' class="input_lbl">Cuisine</ion-label>
-              <ion-select id="cuisine" [(ngModel)]="cuisine" [disabled]='disable ? true : null' (ngModelChange)="updateCuisine($event)" class="drpdown" okText="OK" cancelText="Cancel">
-                <ion-option value="food">Any Cuisine</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
->>>>>>> 4b31853793f22d8de9537bcc38def64fd5d0075d
 
           <ion-col width-33 class="ToolbarCol">
             <span class="sort_label">Sort</span>
-=======
+          </ion-col>
+
           <ion-col width-50 class="ToolbarCol">
             <span class="sort_label">{{'Sort'|translate}}</span>
->>>>>>> 6924f69a92fdd4a4d147d5e7b9f1336d1027899b
             <ion-item class="slct sort">
               <ion-label class="input_lbl">{{'Sort'|translate}}</ion-label>
               <ion-select [(ngModel)]="sort" (ngModelChange)="updateSort($event)" class="drpdown_nc">
@@ -47,13 +35,6 @@
   </ion-toolbar>
 </ion-header>
 
-<<<<<<< HEAD
-
-
-</ion-header>
-
-=======
->>>>>>> 6924f69a92fdd4a4d147d5e7b9f1336d1027899b
 <ion-content>
   <loading-modal id="loading" ></loading-modal>
 

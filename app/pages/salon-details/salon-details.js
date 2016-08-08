@@ -35,6 +35,7 @@ export class SalonDetailsPage {
     console.log('detail');
     console.log(document.getElementById('salon_map_dtl'));
     me.geolocationService.setPlaceDetails('salon_map_dtl',me.item_select_salon.place_id).then(function (res) {
+      console.log(me.item_select_salon.place_id);
       console.log(res[0]);
       console.log('inner');
       me.results = res[0];
@@ -53,6 +54,9 @@ export class SalonDetailsPage {
       else {
         me.photos.push(res[0].icon);
       }
+
+      me.contact = res[0].international_phone_number;
+      me.insertPlaceContact();
 
     });
   }
@@ -181,4 +185,17 @@ export class SalonDetailsPage {
   }, 500);
 }
 
+insertPlaceContact(){
+  var me = this;
+  var v = document.getElementById('place_contact');
+  console.log(me.contact);
+
+    if (me.contact !== undefined){
+      v.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="ios-call" role="img" class="ion-ios-call" aria-label="ios-call"></ion-icon><span class="contact_no">&nbsp;&nbsp;'+ me.contact + '</span>');
+    }
+
+    else{
+      v.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="ios-call" role="img" class="ion-ios-call" aria-label="ios-call" style="color:#B7B7B7;"></ion-icon><span style="color:#B7B7B7;">&nbsp;&nbsp;(No contact number provided.)</span>');
+    }
+  }
 }

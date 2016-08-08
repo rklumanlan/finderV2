@@ -135,6 +135,7 @@ export class TranslatePipe {
 
       "Map":"地図",
       "Website":"ウェブサイト",
+      "Reviews":"レビュー",
 
       "Route Description:":"ルート概要:",
 
@@ -149,7 +150,6 @@ export class TranslatePipe {
       "Sunset-Nepo is from Teresa Avenue to Fil-Am Friendship.":"スンセト-ネポはテレサ・アベニューからのFil-アムの友情にあります。",
       "Villa-Pampang is from Essel Park to Holy Angel University.":"ビラ-パンパングはエッセルパークからホーリーエンジェル大学までです。",
       "Plaridel-Capaya is from Plaridel Street to Capaya.":"Plaridel-カパヤ川はカパヤ川にPlaridelストリートからです。"
-
 
 
 

@@ -51,7 +51,7 @@
       <div id="map" style="height: 100%;display:none"></div>
 
       <ion-list>
-        <button ion-item detail-none *ngFor="#item_supmarket of items" [navPush]="[SupermarketDetailsPage, {item_select_supmarket:item_supmarket}]">
+        <button ion-item detail-none *ngFor="let item_supmarket of items" [navPush]="[SupermarketDetailsPage, {item_select_supmarket:item_supmarket}]">
 
           <ion-row>
             <ion-col>

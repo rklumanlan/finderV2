@@ -68,7 +68,10 @@ export class HotelsPage {
         }
           console.log(me.items);
         me.setHotelRating();
-      }, 6000);
+        if (document.getElementById('loading')!==null) {
+          document.getElementById('loading').style.display="none";
+        }
+      }, 2000);
     });
 
 

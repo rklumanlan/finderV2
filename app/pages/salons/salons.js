@@ -66,7 +66,9 @@ export class SalonsPage {
         }
           console.log(me.items);
         me.setSalonRating();
-        document.getElementById('loading').style.display="none";
+        if (document.getElementById('loading')!==null) {
+          document.getElementById('loading').style.display="none";
+        }
       }, 2000);
     });
 
