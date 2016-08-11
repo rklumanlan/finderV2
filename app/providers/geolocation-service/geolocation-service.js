@@ -467,7 +467,7 @@ export class GeolocationService {
         console.log(items);
         console.log('itemu');
         resolve(items); // After 3 seconds, resolve the promise with value 42
-      }, 2000);
+      }, 500);
     });
   }
 

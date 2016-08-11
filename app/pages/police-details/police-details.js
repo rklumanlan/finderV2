@@ -34,37 +34,37 @@ export class PoliceDetailsPage {
   // ionViewDidEnter(){
   //   this.geolocationService.getPolHosp(this.poldetail,'police');
 
-  ionViewWillEnter(){
-    var me = this;
-    console.log('detail');
-    console.log(document.getElementById('police_map_dtl'));
-    me.geolocationService.setPlaceDetails('police_map_dtl',me.item_select_police.place_id).then(function (res) {
-      console.log(res[0]);
-      console.log('inner');
-      me.results = res[0];
-
-      if (res[0].reviews!==undefined) {
-        me.reviews = res[0].reviews;
-        me.setReviewRating();
-      }
-
-      if (res[0].photos!==undefined) {
-        for (var i = 0; i < res[0].photos.length; i++) {
-          me.photos.push(res[0].photos[i].getUrl({'maxWidth': 300, 'maxHeight': 300}));
-        }
-        console.log(me.photos);
-      }
-      else {
-        me.photos.push(res[0].icon);
-      }
-
-      if (res[0].international_phone_number !== undefined){
-        me.contact = res[0].international_phone_number;
-        me.insertPlaceContact();
-      }
-
-    });
-  }
+  // ionViewWillEnter(){
+  //   var me = this;
+  //   console.log('detail');
+  //   console.log(document.getElementById('police_map_dtl'));
+  //   me.geolocationService.setPlaceDetails('police_map_dtl',me.item_select_police.place_id).then(function (res) {
+  //     console.log(res[0]);
+  //     console.log('inner');
+  //     me.results = res[0];
+  //
+  //     if (me.item_select_police.reviews!==undefined) {
+  //       me.reviews = me.item_select_police.reviews;
+  //       me.setReviewRating();
+  //     }
+  //
+  //     if (me.item_select_police.photos!==undefined) {
+  //       for (var i = 0; i < me.item_select_police.photos.length; i++) {
+  //         me.photos.push(me.item_select_police.photos[i].getUrl({'maxWidth': 300, 'maxHeight': 300}));
+  //       }
+  //       console.log(me.photos);
+  //     }
+  //     else {
+  //       me.photos.push(me.item_select_police.icon);
+  //     }
+  //
+  //     if (me.item_select_police.international_phone_number !== undefined){
+  //       me.contact = me.item_select_police.international_phone_number;
+  //       me.insertPlaceContact();
+  //     }
+  //
+  //   });
+  // }
 
   ionViewLoaded(){
     var me = this;
@@ -126,11 +126,30 @@ export class PoliceDetailsPage {
           }
 
         }
-      }
+        if (me.item_select_police.reviews!==undefined) {
+          me.reviews = me.item_select_police.reviews;
+          me.setReviewRating();
+        }
+
+        if (me.item_select_police.photos!==undefined) {
+          for (var i = 0; i < me.item_select_police.photos.length; i++) {
+            me.photos.push(me.item_select_police.photos[i].getUrl({'maxWidth': 300, 'maxHeight': 300}));
+          }
+          console.log(me.photos);
+        }
+        else {
+          me.photos.push(me.item_select_police.icon);
+        }
+
+        if (me.item_select_police.international_phone_number !== undefined){
+          me.contact = me.item_select_police.international_phone_number;
+          me.insertPlaceContact();
+        }
+      // }
 
     // }, 400);
 
-  // }
+  }
 
 
   setReviewRating(){

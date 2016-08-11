@@ -74,6 +74,8 @@ export class RestaurantPage {
     ];
 
     this.enterCTR = 1;
+
+    this.results = [];
   }
 
   ionViewWillEnter(){
@@ -107,13 +109,34 @@ export class RestaurantPage {
 
   }
 
+  displayDetails(ctr){
+
+    var item = ctr;
+
+    console.log(item);
+    var me = this;
+
+    me.geolocationService.setPlaceDetails('map',item.place_id).then(function (res) {
+      console.log('inner');
+      me.results = res[0];
+      me.results.rating = item.rating;
+
+
+      console.log(me.results);
+      me.nav.push(RestaurantDetailsPage, {item_select:me.results});
+    });
+
+  }
+
+
   ionViewDidLeave(){
     this.enterCTR += 1;
     console.log('didleave'+this.enterCTR);
+
+
   }
 
   doInfinite(infiniteScroll) {
-    //visibility:hidden
     var me = this;
     console.log('Begin async operation');
     console.log(me.res);
@@ -133,7 +156,7 @@ export class RestaurantPage {
 
       console.log('Async operation has ended');
       infiniteScroll.complete();
-      if (me.res.length==60) {
+      if (me.res.length >= me.count && me.res.length <= me.count) {
         infiniteScroll.enable(false);
       }
     }, 2000);
@@ -156,7 +179,19 @@ export class RestaurantPage {
     me.geolocationService.setPlaces(me.params).then(function (res) {
       me.items = [];
       setTimeout(function() {
-        me.items = res;
+        // me.items = res;
+        // me.setRating();
+        // me.sortItems(me.sort);
+        console.log(res);
+        me.res = res;
+        me.items = [];
+        for (me.count = 0; me.count < 20; me.count++) {
+          if (res[me.count]!==undefined) {
+            me.items.push(res[me.count]);
+          }
+
+        }
+          console.log(me.items);
         me.setRating();
         me.sortItems(me.sort);
         document.getElementById('loading').style.display="none";
@@ -175,8 +210,20 @@ export class RestaurantPage {
     me.geolocationService.setPlaces(me.params).then(function (res) {
       me.items = [];
       setTimeout(function() {
-        me.items = res;
-        console.log(me.items);
+        // me.items = res;
+        // console.log(me.items);
+        // me.setRating();
+        // me.sortItems(me.sort);
+        console.log(res);
+        me.res = res;
+        me.items = [];
+        for (me.count = 0; me.count < 20; me.count++) {
+          if (res[me.count]!==undefined) {
+            me.items.push(res[me.count]);
+          }
+
+        }
+          console.log(me.items);
         me.setRating();
         me.sortItems(me.sort);
         document.getElementById('loading').style.display="none";
