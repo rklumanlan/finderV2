@@ -30,101 +30,118 @@ export class MallDetailsPage {
 
   }
 
-  ionViewWillEnter(){
-    var me = this;
-    console.log('detail');
-    console.log(document.getElementById('mall_map_dtl'));
-    me.geolocationService.setPlaceDetails('mall_map_dtl',me.item_select_mall.place_id).then(function (res) {
-      console.log(res[0]);
-      console.log('inner');
-      me.results = res[0];
-
-      if (res[0].reviews!==undefined) {
-        me.reviews = res[0].reviews;
-        me.setReviewRating();
-      }
-
-      if (res[0].photos!==undefined) {
-        for (var i = 0; i < res[0].photos.length; i++) {
-          me.photos.push(res[0].photos[i].getUrl({'maxWidth': 300, 'maxHeight': 300}));
-        }
-        console.log(me.photos);
-      }
-      else {
-        me.photos.push(res[0].icon);
-      }
-
-      me.contact = res[0].international_phone_number;
-      me.insertPlaceContact();
-
-    });
-  }
+  // ionViewWillEnter(){
+  //   var me = this;
+  //   console.log('detail');
+  //   console.log(document.getElementById('mall_map_dtl'));
+  //   me.geolocationService.setPlaceDetails('mall_map_dtl',me.item_select_mall.place_id).then(function (res) {
+  //     console.log(res[0]);
+  //     console.log('inner');
+  //     me.results = res[0];
+  //
+  //     if (me.item_select_mall.reviews!==undefined) {
+  //       me.reviews = me.item_select_mall.reviews;
+  //       me.setReviewRating();
+  //     }
+  //
+  //     if (me.item_select_mall.photos!==undefined) {
+  //       for (var i = 0; i < me.item_select_mall.photos.length; i++) {
+  //         me.photos.push(me.item_select_mall.photos[i].getUrl({'maxWidth': 300, 'maxHeight': 300}));
+  //       }
+  //       console.log(me.photos);
+  //     }
+  //     else {
+  //       me.photos.push(me.item_select_mall.icon);
+  //     }
+  //
+  //     me.contact = me.item_select_mall.international_phone_number;
+  //     me.insertPlaceContact();
+  //
+  //   });
+  // }
 
   ionViewLoaded(){
+    console.log('loaded');
     var me = this;
-    // setTimeout(function() {
-      var x = document.getElementById("mall_rating");
-      var y = document.getElementById("mall_hours");
-      var rating,half,remaining;
-      // for (var a = 0; a < me.item_select.rating.length; a++) {
-        //rating number
-        rating = Math.floor(me.item_select_mall.rating);
-        //get decimal num if there is
-        half = (me.item_select_mall.rating % 1).toFixed(1);
-        //reamianing stars to append
-        remaining = Math.floor(5 - me.item_select_mall.rating);
 
-        if (me.item_select_mall.rating!=0) {
-          var ctr = 0;
-          for (var b = 1; b <= rating; b++) {
-            x.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star" role="img" class="ion-ios-star" aria-label="ios-star"></ion-icon>');
-            ctr=ctr+1;
-          }
-          //int
-          if (me.item_select_mall.rating % 1 === 0) {
-            if (remaining !== 0 && ctr<=5) {
-              for (var b = 1; b <= (5-ctr); b++) {
-                x.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
-              }
-              ctr=ctr+1;
-            }
-          }
-          //float
-          else if (me.item_select_mall.rating % 1 !== 0) {
-            if (half !== 0.0 && (me.item_select_mall.rating %1 !== 0)) {
-              x.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-half" role="img" class="ion-ios-star-half" aria-label="ios-star-half"></ion-icon>');
-              ctr=ctr+1;
-            }
-            if (remaining !== 0 && ctr<=5) {
-              for (var b = 1; b <= (5-ctr); b++) {
-                x.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
-                ctr=ctr+1;
-              }
 
-            }
+    var x = document.getElementById("mall_rating");
+    var y = document.getElementById("mall_hours");
+    var rating,half,remaining;
+
+    //rating number
+    rating = Math.floor(me.item_select_mall.rating);
+    //get decimal num if there is
+    half = (me.item_select_mall.rating % 1).toFixed(1);
+    //reamianing stars to append
+    remaining = Math.floor(5 - me.item_select_mall.rating);
+
+    if (me.item_select_mall.rating!=0) {
+      var ctr = 0;
+      for (var b = 1; b <= rating; b++) {
+        x.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star" role="img" class="ion-ios-star" aria-label="ios-star"></ion-icon>');
+        ctr=ctr+1;
+      }
+      //int
+      if (me.item_select_mall.rating % 1 === 0) {
+        if (remaining !== 0 && ctr<=5) {
+          for (var b = 1; b <= (5-ctr); b++) {
+            x.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
           }
-          console.log(ctr+" ctr");
+          ctr=ctr+1;
         }
-        //appending store open
-        console.log(me.item_select_mall.opening_hours);
-        if (me.item_select_mall.opening_hours!==undefined) {
-          if (me.item_select_mall.opening_hours.open_now!==undefined) {
-            if (me.item_select_mall.opening_hours.open_now === true) {
-              y.insertAdjacentHTML( 'beforeend', '<ion-label secondary>Open <ion-icon name="clock" role="img" class="ion-ios-clock-outline" aria-label="ios-clock-outline"></ion-icon></ion-label>');
-            }
-            else {
-              y.insertAdjacentHTML( 'beforeend', '<ion-label danger>Close <ion-icon name="clock" role="img" class="ion-ios-clock-outline" aria-label="ios-clock-outline"></ion-icon></ion-label>');
-              ctr=ctr+1;
-            }
-
+      }
+      //float
+      else if (me.item_select_mall.rating % 1 !== 0) {
+        if (half !== 0.0 && (me.item_select_mall.rating %1 !== 0)) {
+          x.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-half" role="img" class="ion-ios-star-half" aria-label="ios-star-half"></ion-icon>');
+          ctr=ctr+1;
+        }
+        if (remaining !== 0 && ctr<=5) {
+          for (var b = 1; b <= (5-ctr); b++) {
+            x.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
+            ctr=ctr+1;
           }
 
         }
       }
+      console.log(ctr+" ctr");
+    }
+    //appending store open
+    console.log(me.item_select_mall.opening_hours);
+    if (me.item_select_mall.opening_hours!==undefined) {
+      if (me.item_select_mall.opening_hours.open_now!==undefined) {
+        if (me.item_select_mall.opening_hours.open_now === true) {
+          y.insertAdjacentHTML( 'beforeend', '<ion-label secondary>Open <ion-icon name="clock" role="img" class="ion-ios-clock-outline" aria-label="ios-clock-outline"></ion-icon></ion-label>');
+        }
+        else {
+          y.insertAdjacentHTML( 'beforeend', '<ion-label danger>Close <ion-icon name="clock" role="img" class="ion-ios-clock-outline" aria-label="ios-clock-outline"></ion-icon></ion-label>');
+          ctr=ctr+1;
+        }
 
-    // }, 400);
+      }
 
-  // }
+    }
+
+    if (me.item_select_mall.reviews!==undefined) {
+      console.log('lllllllll');
+      me.reviews = me.item_select_mall.reviews;
+      me.setReviewRating();
+    }
+
+    if (me.item_select_mall.photos!==undefined) {
+      for (var i = 0; i < me.item_select_mall.photos.length; i++) {
+        me.photos.push(me.item_select_mall.photos[i].getUrl({'maxWidth': 300, 'maxHeight': 300}));
+      }
+      console.log(me.photos);
+    }
+    else {
+      me.photos.push(me.item_select_mall.icon);
+    }
+
+    me.contact = me.item_select_mall.international_phone_number;
+    me.insertPlaceContact();
+  }
 
 
   setReviewRating(){

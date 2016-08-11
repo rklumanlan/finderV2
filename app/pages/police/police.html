@@ -53,7 +53,7 @@
     <div id="map" style="height: 100%;display:none"></div>
 
     <ion-list>
-      <button ion-item detail-none *ngFor="let item_police of items" [navPush]="[PoliceDetailsPage, {item_select_police:item_police}]">
+      <button ion-item detail-none *ngFor="let item_police of items" (click)="displayDetails(item_police)">
 
         <ion-row>
           <ion-col>
@@ -79,5 +79,9 @@
         </ion-row>
       </button>
     </ion-list>
+    <ion-infinite-scroll *ngIf="items.length!==0&&items.length>=20" (ionInfinite)="doInfinite($event)" threshold="50px">
+      <ion-infinite-scroll-content loadingSpinner="bubbles"
+      loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
 </ion-content>
