@@ -1,14 +1,9 @@
 import {Component} from '@angular/core';
 import {Storage, SqlStorage, NavParams, NavController,Alert} from 'ionic-angular';
 import {TabsPage} from '../jeepney/tabs/tabs';
-// Import menu pages
-import {RestaurantPage} from '../restaurant/restaurant';
-import {HotelsPage} from '../hotels/hotels';
-import {MallsPage} from '../malls/malls';
-import {SupermarketsPage} from '../supermarkets/supermarkets';
-import {SalonsPage} from '../salons/salons';
-import {PolicePage} from '../police/police';
-import {HospitalsPage} from '../hospitals/hospitals';
+
+
+import {UniPage} from '../uni-page/uni-page';
 // Import menu pages until here
 import {DataService} from '../../services/data';
 // import {Geolocation} from 'ionic-native';
@@ -37,14 +32,7 @@ export class MainPage{
     this.navParams = navParams;
     this.nav = nav;
     this.TabsPage = TabsPage;
-    // menu pages
-    this.RestaurantPage = RestaurantPage;
-    this.HotelsPage = HotelsPage;
-    this.MallsPage = MallsPage;
-    this.SupermarketsPage = SupermarketsPage;
-    this.SalonsPage = SalonsPage;
-    this.PolicePage = PolicePage;
-    this.HopitalsPage = HospitalsPage;
+    
 
     this.details = navParams.get('geoloc');
     console.log(this.details);
@@ -144,30 +132,32 @@ export class MainPage{
       console.log(geoloc);
     }
 
-    if(ctr == 'resto'){
-      this.nav.push( RestaurantPage, {geoloc: geoloc} );
-    }
-    else if(ctr == 'hotels'){
-      this.nav.push( HotelsPage, {geoloc: geoloc} );
-    }
-    else if(ctr == 'malls'){
-      this.nav.push( MallsPage, {geoloc: geoloc}  );
-    }
-    else if(ctr == 'supermarkets'){
-      this.nav.push( SupermarketsPage, {geoloc: geoloc}  );
-    }
-    else if(ctr == 'salons'){
-      this.nav.push( SalonsPage, {geoloc: geoloc}  );
-    }
-    else if(ctr == 'police'){
-      this.nav.push( PolicePage, {geoloc: geoloc} );
-    }
-    else if(ctr == 'hospitals'){
-      this.nav.push( HospitalsPage, {geoloc: geoloc} );
-    }
-    else{
-      return;
-    }
+    this.nav.push( UniPage, {geoloc: geoloc, page:ctr} );
+
+    // if(ctr == 'resto'){
+    //   this.nav.push( UniPage, {geoloc: geoloc, page:ctr} );
+    // }
+    // else if(ctr == 'hotels'){
+    //   this.nav.push( HotelsPage, {geoloc: geoloc} );
+    // }
+    // else if(ctr == 'malls'){
+    //   this.nav.push( MallsPage, {geoloc: geoloc}  );
+    // }
+    // else if(ctr == 'supermarkets'){
+    //   this.nav.push( SupermarketsPage, {geoloc: geoloc}  );
+    // }
+    // else if(ctr == 'salons'){
+    //   this.nav.push( SalonsPage, {geoloc: geoloc}  );
+    // }
+    // else if(ctr == 'police'){
+    //   this.nav.push( PolicePage, {geoloc: geoloc} );
+    // }
+    // else if(ctr == 'hospitals'){
+    //   this.nav.push( HospitalsPage, {geoloc: geoloc} );
+    // }
+    // else{
+    //   return;
+    // }
   }
 
 }

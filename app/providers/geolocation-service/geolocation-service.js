@@ -347,42 +347,42 @@ export class GeolocationService {
     // console.log(document.getElementById('police_map'));
     console.log(detail);
 
-    if (page === 'hospital') {
+    if (page === 'hospitals') {
       console.log('entered if');
       // mapcoords = {lat: parseFloat(detail.lat), lng: parseFloat(detail.lng)};
       // img = 'img/pins/hospital.png';
       // mapElem = document.getElementById('hospital_map');
       console.log('Entered hospital map');
       img = 'img/pins/hospital.png';
-      me.map = new google.maps.Map(document.getElementById('hospital_map'), mapOptions );
+      // me.map = new google.maps.Map(document.getElementById('hospital_map'), mapOptions );
     }
     else if (page === 'resto') {
       console.log('Entered Resto map');
       img = 'img/pins/restaurant.png';
-      me.map = new google.maps.Map(document.getElementById('resto_map'), mapOptions );
+      // me.map = new google.maps.Map(document.getElementById('resto_map'), mapOptions );
 
     }
-    else if (page === 'hotel') {
+    else if (page === 'hotels') {
       console.log('Entered Hotel map');
       img = 'img/pins/hotel.png';
-      me.map = new google.maps.Map(document.getElementById('hotel_map'), mapOptions );
+      // me.map = new google.maps.Map(document.getElementById('hotel_map'), mapOptions );
 
     }
-    else if (page === 'mall') {
+    else if (page === 'malls') {
       console.log('Entered Mall map');
       img = 'img/pins/mall.png';
-      me.map = new google.maps.Map(document.getElementById('mall_map'), mapOptions );
+      // me.map = new google.maps.Map(document.getElementById('mall_map'), mapOptions );
 
     }
-    else if (page === 'supermarket') {
+    else if (page === 'supermarkets') {
       console.log('Entered Supermarket map');
       img = 'img/pins/supermarket.png';
-      me.map = new google.maps.Map(document.getElementById('supmarket_map'), mapOptions );
+      // me.map = new google.maps.Map(document.getElementById('supmarket_map'), mapOptions );
     }
-    else if (page === 'salon') {
+    else if (page === 'salons') {
       console.log('Entered salon map');
       img = 'img/pins/salon.png';
-      me.map = new google.maps.Map(document.getElementById('salon_map'), mapOptions );
+      // me.map = new google.maps.Map(document.getElementById('salon_map'), mapOptions );
 
     }
     else {
@@ -391,8 +391,10 @@ export class GeolocationService {
       // mapElem = document.getElementById('police_map');
       console.log('Entered police map');
       img = 'img/pins/police.png';
-      me.map = new google.maps.Map(document.getElementById('police_map'), mapOptions );
+      // me.map = new google.maps.Map(document.getElementById('police_map'), mapOptions );
     }
+
+    me.map = new google.maps.Map(document.getElementById('uni_map'), mapOptions );
 
 
     var image = {
