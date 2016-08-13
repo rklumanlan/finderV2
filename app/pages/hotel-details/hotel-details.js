@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams, Platform} from 'ionic-angular';
-import {Geolocation} from 'ionic-native';
+import {Geolocation,InAppBrowser} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {HotelMapPage} from '../hotel-map/hotel-map';
 import {TranslatePipe} from '../../pipes/translate';
@@ -12,13 +12,14 @@ import {TranslatePipe} from '../../pipes/translate';
 })
 export class HotelDetailsPage {
   static get parameters() {
-    return [[NavParams],[NavController],[GeolocationService]];
+    return [[NavParams],[NavController],[GeolocationService],[Platform]];
   }
 
-  constructor(navParams,nav,geolocationService) {
+  constructor(navParams,nav,geolocationService,platform) {
     this.navParams = navParams;
     this.nav = nav;
     this.geolocationService = geolocationService;
+    this.platform = platform;
     this.HotelMapPage = HotelMapPage;
 
     this.item_select_hotel = this.navParams.get('item_select_hotel');
@@ -28,12 +29,6 @@ export class HotelDetailsPage {
     this.results = [];
     this.reviews = [];
   }
-
-  launch(url) {
-          this.platform.ready().then(() => {
-              cordova.InAppBrowser.open(url, "_system", "location=true");
-          });
-      }
 
   ionViewWillEnter(){
     var me = this;
@@ -63,6 +58,7 @@ export class HotelDetailsPage {
       me.insertPlaceContact();
 
       me.website = res[0].website;
+      me.url = me.website;
       me.insertWebURL();
 
     });
@@ -210,6 +206,11 @@ insertWebURL(){
 
   if (me.website !== undefined){
     console.log(me.website);
+
+    // launch(url) {
+    //     InAppBrowser.open(url, "_blank");
+    //     console.log(me.website);
+    // }
   }
 
   else{

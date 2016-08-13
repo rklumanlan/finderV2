@@ -2,15 +2,8 @@ import {Component} from '@angular/core';
 import {NavParams, NavController, Alert} from 'ionic-angular';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {MainPage} from '../main/main';
-
 import {TranslatePipe} from '../../pipes/translate';
-// import {RestaurantPage} from '../restaurant/restaurant';
-/*
-  Generated class for the LandingpagePage page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   templateUrl: 'build/pages/landingpage/landingpage.html',
   providers: [GeolocationService],
