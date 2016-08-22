@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
-import {Geolocation} from 'ionic-native';
+import {NavController, NavParams, Alert} from 'ionic-angular';
+import {Geolocation,InAppBrowser} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {UniMapPage} from '../uni-map-page/uni-map-page';
 import {TranslatePipe} from '../../pipes/translate';
@@ -121,6 +121,7 @@ export class UniDetailPage {
       }
     }
 
+    // PLace details results storing -Start
     console.log(me.item_select);
 
     if (me.item_select.reviews!==undefined) {
@@ -141,8 +142,37 @@ export class UniDetailPage {
     me.contact = me.item_select.international_phone_number;
     me.insertPlaceContact();
 
+    // PLace details results storing -END
   }
-//
+
+  launchWebsite(url){
+
+    var link = url;
+    var w = document.getElementById('website_btn');
+
+    if (link !== undefined){
+      console.log(link);
+      console.log('launchWebsite function');
+
+      InAppBrowser.open(link, '_blank');
+    }
+    else{
+      console.log("Website not available");
+      let alert = Alert.create({
+        title: 'Website not Available',
+        subTitle: 'This oraganization has no Website Information',
+        buttons: [{
+          text: 'OK',
+          handler: data => {
+            this.nav.pop();
+          }
+        }]
+      });
+      this.nav.present(alert);
+    }
+  }
+
+
   setReviewRating(){
     var me = this;
 
@@ -214,4 +244,5 @@ export class UniDetailPage {
       v.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="ios-call" role="img" class="ion-ios-call" aria-label="ios-call" style="color:#B7B7B7;"></ion-icon><span style="color:#B7B7B7;">&nbsp;&nbsp;(No contact number provided.)</span>');
     }
   }
+
 }

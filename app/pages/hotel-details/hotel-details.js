@@ -4,7 +4,7 @@ import {Geolocation,InAppBrowser} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {HotelMapPage} from '../hotel-map/hotel-map';
 import {TranslatePipe} from '../../pipes/translate';
-import {InAppBrowser} from 'ionic-native';
+
 
 @Component({
   templateUrl: 'build/pages/hotel-details/hotel-details.html',
@@ -13,18 +13,13 @@ import {InAppBrowser} from 'ionic-native';
 })
 export class HotelDetailsPage {
   static get parameters() {
-    return [[NavParams],[NavController],[GeolocationService],[Platform]];
+    return [[NavParams],[NavController],[GeolocationService]];
   }
 
-  constructor(navParams,nav,geolocationService,platform) {
-<<<<<<< HEAD
-=======
-    this.platform = platform;
->>>>>>> 8a90c61f8b97420594ed46189f56b0f66d951071
+  constructor(navParams,nav,geolocationService) {
     this.navParams = navParams;
     this.nav = nav;
     this.geolocationService = geolocationService;
-    this.platform = platform;
     this.HotelMapPage = HotelMapPage;
 
     this.item_select_hotel = this.navParams.get('item_select_hotel');
@@ -37,7 +32,7 @@ export class HotelDetailsPage {
     this.url = 'https://www.google.com';
   }
 
-<<<<<<< HEAD
+
   ionViewWillEnter(){
     var me = this;
     console.log(me.item_select_hotel.place_id);
@@ -70,11 +65,11 @@ export class HotelDetailsPage {
       me.insertWebURL();
 
     });
-=======
+
   launch(url) {
     var item = url;
     InAppBrowser.open(item, '_blank');
->>>>>>> 8a90c61f8b97420594ed46189f56b0f66d951071
+
   }
 
   // ionViewWillEnter(){
@@ -263,21 +258,5 @@ insertPlaceContact(){
     }
   }
 
-insertWebURL(){
-  var me = this;
-
-  if (me.website !== undefined){
-    console.log(me.website);
-
-    // launch(url) {
-    //     InAppBrowser.open(url, "_blank");
-    //     console.log(me.website);
-    // }
-  }
-
-  else{
-    console.log("No Website");
-  }
-}
 
 }

@@ -46,9 +46,12 @@
               <span style="font-size:9pt; color: #B7B7B7;">{{'Map'|translate}}</span>
             </li>
             <li class="item_buttons_li">
-              <button clear>
+              <!-- <button clear>
                 <span class="icoMoon-website"></span>
-              </button><br/>
+              </button><br/> -->
+              <button clear (click)="launchWebsite(item_select.website)">
+                <span class="icoMoon-website"></span>
+              </button>
               <span style="font-size:9pt; color: #B7B7B7;">{{'Website'|translate}}</span>
             </li>
             <!-- <li class="item_buttons_li">

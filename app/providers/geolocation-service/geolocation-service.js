@@ -12,7 +12,7 @@ export class GeolocationService {
     this.connectivity = connectivityService;
     this.mapInitialised = false;
     this.apiKey = 'AIzaSyD4zGo9cejtd83MbUFQL8YU71b8_A5XZpc';
-    this.loadGeolocation();
+    // this.loadGeolocation();
     this.latlng = {};
     this.nav = nav;
     this.MainPage  = MainPage;
