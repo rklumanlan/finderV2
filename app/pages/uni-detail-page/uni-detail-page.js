@@ -1,26 +1,27 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
-import {Geolocation} from 'ionic-native';
+import {NavController, NavParams, Alert} from 'ionic-angular';
+import {Geolocation,InAppBrowser} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
-import {RestaurantMapPage} from '../restaurant-map/restaurant-map';
+import {UniMapPage} from '../uni-map-page/uni-map-page';
 import {TranslatePipe} from '../../pipes/translate';
 
 @Component({
-  templateUrl: 'build/pages/restaurant-details/restaurant-details.html',
+  templateUrl: 'build/pages/uni-detail-page/uni-detail-page.html',
   pipes: [TranslatePipe],
   providers: [GeolocationService]
 })
-export class RestaurantDetailsPage {
+export class UniDetailPage {
   static get parameters() {
     return [[NavController],[NavParams],[GeolocationService]];
   }
 
   constructor(nav,navParams,geolocationService) {
     this.geolocationService = geolocationService;
-    this.RestaurantMapPage = RestaurantMapPage;
+    this.UniMapPage = UniMapPage;
     this.nav = nav;
     this.navParams = navParams;
     this.item_select = this.navParams.get('item_select');
+    this.page = navParams.get('page');
     console.log(this.item_select);
 
     this.photos = [];
@@ -64,19 +65,6 @@ export class RestaurantDetailsPage {
   ionViewLoaded() {
 
     var me = this;
-<<<<<<< HEAD
-    console.log('detail');
-    console.log(document.getElementById('resto_map_dtl'));
-
-    me.geolocationService.setPlaceDetails('resto_map_dtl',me.item_select.place_id).then(function (res) {
-      console.log(res[0]);
-      console.log('inner');
-      me.results = res[0];
-
-      if (res[0].reviews!==undefined) {
-        me.reviews = res[0].reviews;
-        me.setReviewRating();
-=======
 
     var x = document.getElementById("resto_rating");
     var y = document.getElementById("operating_hours");
@@ -103,7 +91,6 @@ export class RestaurantDetailsPage {
           }
           ctr=ctr+1;
         }
->>>>>>> 8a90c61f8b97420594ed46189f56b0f66d951071
       }
       //float
       else if (me.item_select.rating % 1 !== 0) {
@@ -134,6 +121,7 @@ export class RestaurantDetailsPage {
       }
     }
 
+    // PLace details results storing -Start
     console.log(me.item_select);
 
     if (me.item_select.reviews!==undefined) {
@@ -154,8 +142,37 @@ export class RestaurantDetailsPage {
     me.contact = me.item_select.international_phone_number;
     me.insertPlaceContact();
 
+    // PLace details results storing -END
   }
-//
+
+  launchWebsite(url){
+
+    var link = url;
+    var w = document.getElementById('website_btn');
+
+    if (link !== undefined){
+      console.log(link);
+      console.log('launchWebsite function');
+
+      InAppBrowser.open(link, '_blank');
+    }
+    else{
+      console.log("Website not available");
+      let alert = Alert.create({
+        title: 'Website not Available',
+        subTitle: 'This oraganization has no Website Information',
+        buttons: [{
+          text: 'OK',
+          handler: data => {
+            this.nav.pop();
+          }
+        }]
+      });
+      this.nav.present(alert);
+    }
+  }
+
+
   setReviewRating(){
     var me = this;
 
@@ -227,4 +244,5 @@ export class RestaurantDetailsPage {
       v.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="ios-call" role="img" class="ion-ios-call" aria-label="ios-call" style="color:#B7B7B7;"></ion-icon><span style="color:#B7B7B7;">&nbsp;&nbsp;(No contact number provided.)</span>');
     }
   }
+
 }

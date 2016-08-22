@@ -22,6 +22,7 @@ export class SupermarketDetailsPage {
     this.SupermarketMapPage = SupermarketMapPage;
 
     this.item_select_supmarket = this.navParams.get('item_select_supmarket');
+    console.log('me.item_select_supmarket.reviews');
     console.log(this.item_select_supmarket);
 
     this.photos = [];
@@ -29,36 +30,34 @@ export class SupermarketDetailsPage {
     this.reviews = [];
   }
 
-  ionViewWillEnter(){
-    var me = this;
-    console.log('detail');
-    console.log(document.getElementById('supmarket_map_dtl'));
-
-      me.geolocationService.setPlaceDetails('supmarket_map_dtl',me.item_select_supmarket.place_id).then(function (res) {
-        console.log('inner');
-        me.results = res[0];
-        console.log(me.results);
-
-        if (res[0].reviews!==undefined) {
-          me.reviews = res[0].reviews;
-          me.setReviewRating();
-        }
-
-        if (res[0].photos!==undefined) {
-          for (var i = 0; i < res[0].photos.length; i++) {
-            me.photos.push(res[0].photos[i].getUrl({'maxWidth': 300, 'maxHeight': 300}));
-          }
-          console.log(me.photos);
-        }
-        else {
-          me.photos.push(res[0].icon);
-        }
-
-        me.contact = res[0].international_phone_number;
-        me.insertPlaceContact();
-
-      });
-  }
+  // ionViewWillEnter(){
+  //   var me = this;
+  //   console.log('detail');
+  //   console.log(document.getElementById('supmarket_map_dtl'));
+  //
+  //     me.geolocationService.setPlaceDetails('supmarket_map_dtl',me.item_select_supmarket.place_id).then(function (res) {
+  //       console.log('inner');
+  //       me.results = res[0];
+  //       console.log(me.results);
+  //
+  //       if (me.item_select_supmarket.reviews!==undefined) {
+  //         me.reviews = me.item_select_supmarket.reviews;
+  //         me.setReviewRating();
+  //       }
+  //
+  //       if (me.item_select_supmarket.photos!==undefined) {
+  //         for (var i = 0; i < me.item_select_supmarket.photos.length; i++) {
+  //           me.photos.push(me.item_select_supmarket.photos[i].getUrl({'maxWidth': 300, 'maxHeight': 300}));
+  //         }
+  //         console.log(me.photos);
+  //       }
+  //       else {
+  //         me.photos.push(me.item_select_supmarket.icon);
+  //       }
+  //       me.contact = me.item_select_supmarket.international_phone_number;
+  //       me.insertPlaceContact();
+  //     });
+  // }
 
   ionViewLoaded(){
     var me = this;
@@ -121,11 +120,29 @@ export class SupermarketDetailsPage {
           }
 
         }
-      }
+        console.log('popo');
+        console.log(me.item_select_supmarket);
+        if (me.item_select_supmarket.reviews!==undefined) {
+          me.reviews = me.item_select_supmarket.reviews;
+          me.setReviewRating();
+        }
+
+        if (me.item_select_supmarket.photos!==undefined) {
+          for (var i = 0; i < me.item_select_supmarket.photos.length; i++) {
+            me.photos.push(me.item_select_supmarket.photos[i].getUrl({'maxWidth': 300, 'maxHeight': 300}));
+          }
+          console.log(me.photos);
+        }
+        else {
+          me.photos.push(me.item_select_supmarket.icon);
+        }
+        me.contact = me.item_select_supmarket.international_phone_number;
+        me.insertPlaceContact();
+      // }
 
     // }, 400);
 
-  // }
+  }
 
   setReviewRating(){
     var me = this;

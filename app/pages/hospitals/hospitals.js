@@ -31,22 +31,29 @@ export class HospitalsPage {
     this.geolocationService = geolocationService;
     this.HospitalDetailsPage = HospitalDetailsPage;
 
-    // this.hospitals = [];
+    this.pl_type_items = [{ value: "hospital", text: 'Hospital', checked: true}];
 
-    // this.dataService.insertJeepsData();
+    this.sort_items = [
+      { value: "Distance", text: 'Distance', checked: true},
+      { value: "Alphabetically", text: 'Alphabetically', checked: false},
+      { value: "Rating", text: 'Rating', checked: false},
+    ];
+      // this.hospitals = [];
 
-    // this.dataService.getHospitalDetails().then((data) => {
-      // console.log(data.result);
-    //   if(data.res.rows.length > 0) {
-    //     for(var i = 0; i < data.res.rows.length; i++) {
-    //       this.hospitals.push({name: data.res.rows.item(i).name, address: data.res.rows.item(i).address, email:data.res.rows.item(i).email, landline:data.res.rows.item(i).landline, mobile:data.res.rows.item(i).mobile, lat:data.res.rows.item(i).lat, lng:data.res.rows.item(i).lng});
-    //     }
-    //   }
-    //   console.log(this.hospitalstations);
-    //   console.log("hospitals stations getting details");
-    // }, (error) => {
-    //   console.log("ERROR -> " + JSON.stringify(error.err));
-    // });
+      // this.dataServieskce.insertJeepsData();
+
+      // this.dataService.getHospitalDetails().then((data) => {
+        // console.log(data.result);
+      //   if(data.res.rows.length > 0) {
+      //     for(var i = 0; i < data.res.rows.length; i++) {
+      //       this.hospitals.push({name: data.res.rows.item(i).name, address: data.res.rows.item(i).address, email:data.res.rows.item(i).email, landline:data.res.rows.item(i).landline, mobile:data.res.rows.item(i).mobile, lat:data.res.rows.item(i).lat, lng:data.res.rows.item(i).lng});
+      //     }
+      //   }
+      //   console.log(this.hospitalstations);
+      //   console.log("hospitals stations getting details");
+      // }, (error) => {
+      //   console.log("ERROR -> " + JSON.stringify(error.err));
+      // });
 
     this.details = navParams.get('geoloc');
 
@@ -59,6 +66,10 @@ export class HospitalsPage {
     this.res = null;
     this.count = null;
 
+    this.enterCTR = 1;
+
+    this.results = [];
+
     console.log(this.details);
     console.log("Hospital list working");
   }
@@ -67,25 +78,53 @@ export class HospitalsPage {
     var me = this;
     me.params.geoloc = this.details;
     me.params.placeType = 'hospital';
+    if (me.enterCTR === 1){
+      me.geolocationService.setPlaces(me.params).then(function (res) {
+        setTimeout(function() {
+          console.log(res);
+          me.res = res;
+          me.items = [];
+          for (me.count = 0; me.count < 20; me.count++) {
+            if (res[me.count]!==undefined) {
+              me.items.push(res[me.count]);
+            }
 
-    me.geolocationService.setPlaces(me.params).then(function (res) {
-      setTimeout(function() {
-        console.log(res);
-        me.res = res;
-        me.items = [];
-        for (me.count = 0; me.count < 20; me.count++) {
-          if (res[me.count]!==undefined) {
-            me.items.push(res[me.count]);
           }
+            console.log(me.items);
+          me.setHospitalRating();
+          if (document.getElementById('loading')!==null) {
+            document.getElementById('loading').style.display="none";
+          }
+        }, 2000);
+      });
+    }
 
-        }
-          console.log(me.items);
-        me.setHospitalRating();
-        if (document.getElementById('loading')!==null) {
-          document.getElementById('loading').style.display="none";
-        }
-      }, 2000);
+  }
+
+  displayDetails(ctr){
+    console.log('displ');
+
+    var item = ctr;
+
+    console.log(item);
+    var me = this;
+
+    me.geolocationService.setPlaceDetails('map',item.place_id).then(function (res) {
+      console.log('inner');
+      me.results = res[0];
+      me.results.rating = item.rating;
+
+
+      console.log(me.results);
+      me.nav.push(HospitalDetailsPage, {item_select_hosp:me.results});
     });
+
+  }
+
+  ionViewDidLeave(){
+    this.enterCTR += 1;
+    console.log('didleave'+this.enterCTR);
+
 
   }
 
@@ -108,7 +147,7 @@ export class HospitalsPage {
 
       console.log('Async operation has ended');
       infiniteScroll.complete();
-      if (i==me.res.length) {
+      if (me.res.length >= me.count && me.res.length <= me.count) {
         infiniteScroll.enable(false);
       }
     }, 2000);
@@ -129,9 +168,20 @@ export class HospitalsPage {
     me.geolocationService.setPlaces(me.params).then(function (res) {
       me.items = [];
       setTimeout(function() {
-        me.items = res;
+        // me.items = res;
+        // me.setHospitalRating();
+        // me.sortItems(me.sort);
+        console.log(res);
+        me.res = res;
+        me.items = [];
+        for (me.count = 0; me.count < 20; me.count++) {
+          if (res[me.count]!==undefined) {
+            me.items.push(res[me.count]);
+          }
+
+        }
+          console.log(me.items);
         me.setHospitalRating();
-        me.sortItems(me.sort);
         document.getElementById('loading').style.display="none";
       }, 2000);
     });

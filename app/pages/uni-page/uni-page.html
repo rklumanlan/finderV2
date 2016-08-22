@@ -1,26 +1,15 @@
-
-<!--
-  Generated template for the RestaurantPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar primary>
-      <ion-title >{{'Restaurants'|translate}}</ion-title>
+      <ion-title>{{title_header|translate}}</ion-title>
   </ion-navbar>
 
   <ion-toolbar class="sort_toolbar">
       <ion-grid>
-        <ion-row >
+        <ion-row *ngIf="page=='resto'">
           <ion-col width-33 class="ToolbarCol">
             <span class="sort_label">{{'Place Type'|translate}}</span>
             <ion-item class="slct">
                 <ion-label class="input_lbl">{{'Place Type'|translate}}</ion-label>
-                <!-- <ion-select id ='1' [(ngModel)]="placeType" (ionChange)="updatePlaceType($event)" class="drpdown" okText="OK" cancelText="{{'Cancel'|translate}}">
-                  <ion-option value="restaurant" checked="true" >{{'Restaurant'|translate}}</ion-option>
-                  <ion-option value="cafe">{{'Cafe'|translate}}</ion-option>
-                </ion-select> -->
                 <ion-select id ='1' [(ngModel)]="placeType" (ionChange)="updatePlaceType($event)" class="drpdown" okText="OK" cancelText="{{'Cancel'|translate}}">
                   <ion-option *ngFor="let pl_item of pl_type_items" value="{{pl_item.value}}" checked="{{pl_item.checked}}">{{pl_item.text|translate}} </ion-option>
                 </ion-select>
@@ -31,20 +20,6 @@
             <span class="sort_label">{{'Cuisine'|translate}}</span>
             <ion-item class="slct">
               <ion-label id ='2' class="input_lbl">{{'Cuisine'|translate}}</ion-label>
-              <!-- <ion-select id="cuisine" [disabled]='disable ? true : null' [(ngModel)]="cuisine"  (ionChange)="updateCuisine($event)" class="drpdown" okText="OK" cancelText="{{'Cancel'|translate}}">
-                <ion-option value="food" >{{'Any Cuisine'|translate}}</ion-option>
-                <ion-option value="American">{{'American'|translate}}</ion-option>
-                <ion-option value="Chinese">{{'Chinese'|translate}}</ion-option>
-                <ion-option value="Filipino">{{'Filipino'|translate}}</ion-option>
-                <ion-option value="Indian">{{'Indian'|translate}}</ion-option>
-                <ion-option value="Italian">{{'Italian'|translate}}</ion-option>
-                <ion-option value="Japanese">{{'Japanese'|translate}}</ion-option>
-                <ion-option value="Lebanese">{{'Lebanese'|translate}}</ion-option>
-                <ion-option value="Mexican">{{'Mexican'|translate}}</ion-option>
-                <ion-option value="Spanish">{{'Spanish'|translate}}</ion-option>
-                <ion-option value="Thai">{{'Thai'|translate}}</ion-option>
-                <ion-option value="Vietnamese">{{'Vietnamese'|translate}}</ion-option>
-              </ion-select> -->
               <ion-select id="cuisine" [disabled]='disable ? true : null' [(ngModel)]="cuisine"  (ionChange)="updateCuisine($event)" class="drpdown" okText="OK" cancelText="{{'Cancel'|translate}}">
                 <ion-option *ngFor="let cui_item of cui_items" value="{{cui_item.value}}" checked="{{cui_item.checked}}">{{cui_item.text|translate}} </ion-option>
               </ion-select>
@@ -55,17 +30,34 @@
             <span class="sort_label">{{'Sort'|translate}}</span>
             <ion-item class="slct sort">
               <ion-label class="input_lbl">{{'Sort'|translate}}</ion-label>
-              <!-- <ion-select [(ngModel)]="sort" (ionChange)="updateSort($event)" class="drpdown" okText="OK" cancelText="{{'Cancel'|translate}}">
-                <ion-option value="Distance">{{'Distance'|translate}}</ion-option>
-                <ion-option value="Alphabetically">{{'Alphabetically'|translate}}</ion-option>
-                <ion-option value="Rating">{{'Rating'|translate}}</ion-option>
-              </ion-select> -->
               <ion-select [(ngModel)]="sort" (ionChange)="updateSort($event)" class="drpdown" okText="OK" cancelText="{{'Cancel'|translate}}">
                 <ion-option *ngFor="let sort_item of sort_items" value="{{sort_item.value}}" checked="{{sort_item.checked}}">{{sort_item.text|translate}} </ion-option>
               </ion-select>
             </ion-item>
           </ion-col>
         </ion-row>
+
+        <ion-row *ngIf="page!='resto'">
+          <ion-col width-50 class="ToolbarCol">
+            <span class="sort_label">{{'Place Type'|translate}}</span>
+            <ion-item class="slct">
+                <ion-label class="input_lbl">{{'Place Type'|translate}}</ion-label>
+                <ion-select id ='1' [(ngModel)]="placeType" (ionChange)="updatePlaceType($event)" class="drpdown_nc" okText="OK" cancelText="{{'Cancel'|translate}}">
+                  <ion-option *ngFor="let pl_item of pl_type_items" value="{{pl_item.value}}" checked="{{pl_item.checked}}">{{pl_item.text|translate}} </ion-option>
+                </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col width-50 class="ToolbarCol">
+            <span class="sort_label">{{'Sort'|translate}}</span>
+            <ion-item class="slct sort">
+              <ion-label class="input_lbl">{{'Sort'|translate}}</ion-label>
+              <ion-select [(ngModel)]="sort" (ionChange)="updateSort($event)" class="drpdown_nc" okText="OK" cancelText="{{'Cancel'|translate}}">
+                <ion-option *ngFor="let sort_item of sort_items" value="{{sort_item.value}}" checked="{{sort_item.checked}}">{{sort_item.text|translate}} </ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
       </ion-grid>
   </ion-toolbar>
 </ion-header>
@@ -74,8 +66,6 @@
   <loading-modal id="loading" ></loading-modal>
 
   <div class="bg" >
-
-<!--Places results  -->
 
     <div id="map" style="height: 100%;display:none"></div>
     <ion-list>
@@ -89,8 +79,8 @@
         <ion-row>
           <ion-col width-70>
             <ul class="itm_info">
-              <!-- <li><span class="itm_name">{{item.name}}</span></li> -->
-              <li><span class="itm_type">{{item.types[0]}} {{item.types[1]}}</span></li>
+              <li><span class="itm_type" *ngIf="page=='resto'">{{item.types[0]}} {{item.types[1]}}</span></li>
+              <li><span class="itm_type" *ngIf="page!='resto'">{{item.types[0]}}</span></li>
               <li><span class="itm_address">{{item.vicinity}}</span></li>
               <li><span class="itm_hours"></span></li>
             </ul>

@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams, Platform, Page} from 'ionic-angular';
-import {Geolocation} from 'ionic-native';
+import {NavController, NavParams, Platform} from 'ionic-angular';
+import {Geolocation,InAppBrowser} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {HotelMapPage} from '../hotel-map/hotel-map';
 import {TranslatePipe} from '../../pipes/translate';
+
 
 @Component({
   templateUrl: 'build/pages/hotel-details/hotel-details.html',
@@ -27,13 +28,10 @@ export class HotelDetailsPage {
     this.photos = [];
     this.results = [];
     this.reviews = [];
+
+    this.url = 'https://www.google.com';
   }
 
-  launch(url) {
-          this.platform.ready().then(() => {
-              cordova.InAppBrowser.open(url, "_system", "location=true");
-          });
-      }
 
   ionViewWillEnter(){
     var me = this;
@@ -63,74 +61,129 @@ export class HotelDetailsPage {
       me.insertPlaceContact();
 
       me.website = res[0].website;
+      me.url = me.website;
       me.insertWebURL();
 
     });
+
+  launch(url) {
+    var item = url;
+    InAppBrowser.open(item, '_blank');
+
   }
+
+  // ionViewWillEnter(){
+  //   var me = this;
+  //   console.log(me.item_select_hotel.place_id);
+  //   console.log(document.getElementById('hotel_map_dtl'));
+  //   me.geolocationService.setPlaceDetails('hotel_map_dtl',me.item_select_hotel.place_id).then(function (res) {
+  //     console.log(res[0]);
+  //     console.log('inner');
+  //     me.results = res[0];
+  //
+  //     if (res[0].reviews!==undefined) {
+  //       me.reviews = res[0].reviews;
+  //       me.setHotelReviewRating();
+  //     }
+  //
+  //     if (res[0].photos!==undefined) {
+  //       for (var i = 0; i < res[0].photos.length; i++) {
+  //         me.photos.push(res[0].photos[i].getUrl({'maxWidth': 300, 'maxHeight': 300}));
+  //       }
+  //       console.log(me.photos);
+  //     }
+  //     else {
+  //       me.photos.push(res[0].icon);
+  //     }
+  //
+  //     me.contact = res[0].international_phone_number;
+  //     me.insertPlaceContact();
+  //
+  //     me.website = res[0].website;
+  //     me.insertWebURL();
+  //
+  //   });
+  // }
 
   ionViewLoaded(){
     var me = this;
-    // setTimeout(function() {
-      var x = document.getElementById("hotel_rating");
-      var y = document.getElementById("operating_hours");
-      var rating,half,remaining;
+    var x = document.getElementById("hotel_rating");
+    var y = document.getElementById("operating_hours");
+    var rating,half,remaining;
 
-      // for (var a = 0; a < me.item_select_hotel.rating.length; a++) {
-        //rating number
-        rating = Math.floor(me.item_select_hotel.rating);
-        //get decimal num if there is
-        half = (me.item_select_hotel.rating % 1).toFixed(1);
-        //reamianing stars to append
-        remaining = Math.floor(5 - me.item_select_hotel.rating);
+    //rating number
+    rating = Math.floor(me.item_select_hotel.rating);
+    //get decimal num if there is
+    half = (me.item_select_hotel.rating % 1).toFixed(1);
+    //reamianing stars to append
+    remaining = Math.floor(5 - me.item_select_hotel.rating);
 
-        if (me.item_select_hotel.rating!=0) {
-          var ctr = 0;
-          for (var b = 1; b <= rating; b++) {
-            x.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star" role="img" class="ion-ios-star" aria-label="ios-star"></ion-icon>');
+    if (me.item_select_hotel.rating!=0) {
+      var ctr = 0;
+      for (var b = 1; b <= rating; b++) {
+        x.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star" role="img" class="ion-ios-star" aria-label="ios-star"></ion-icon>');
+        ctr=ctr+1;
+      }
+      //int
+      if (me.item_select_hotel.rating % 1 === 0) {
+        if (remaining !== 0 && ctr<=5) {
+          for (var b = 1; b <= (5-ctr); b++) {
+            x.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
+          }
+          ctr=ctr+1;
+        }
+      }
+      //float
+      else if (me.item_select_hotel.rating % 1 !== 0) {
+        if (half !== 0.0 && (me.item_select_hotel.rating %1 !== 0)) {
+          x.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-half" role="img" class="ion-ios-star-half" aria-label="ios-star-half"></ion-icon>');
+          ctr=ctr+1;
+        }
+        if (remaining !== 0 && ctr<=5) {
+          for (var b = 1; b <= (5-ctr); b++) {
+            x.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
             ctr=ctr+1;
           }
-          //int
-          if (me.item_select_hotel.rating % 1 === 0) {
-            if (remaining !== 0 && ctr<=5) {
-              for (var b = 1; b <= (5-ctr); b++) {
-                x.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
-              }
-              ctr=ctr+1;
-            }
-          }
-          //float
-          else if (me.item_select_hotel.rating % 1 !== 0) {
-            if (half !== 0.0 && (me.item_select_hotel.rating %1 !== 0)) {
-              x.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-half" role="img" class="ion-ios-star-half" aria-label="ios-star-half"></ion-icon>');
-              ctr=ctr+1;
-            }
-            if (remaining !== 0 && ctr<=5) {
-              for (var b = 1; b <= (5-ctr); b++) {
-                x.insertAdjacentHTML( 'beforeend', '<ion-icon primary name="star-outline" role="img" class="ion-ios-star-outline" aria-label="ios-star-outline"></ion-icon>');
-                ctr=ctr+1;
-              }
-
-            }
-          }
-          console.log(ctr+" ctr");
-        }
-        // appending store open
-        if (me.item_select_hotel.opening_hours!==undefined) {
-          if (me.item_select_hotel.opening_hours.open_now!==undefined) {
-            if (me.item_select_hotel.opening_hours.open_now === true) {
-              y.insertAdjacentHTML( 'beforeend', '<ion-label secondary>Open <ion-icon name="clock" role="img" class="ion-ios-clock-outline" aria-label="ios-clock-outline"></ion-icon></ion-label>');
-            }
-            else {
-              y.insertAdjacentHTML( 'beforeend', '<ion-label danger>Close <ion-icon name="clock" role="img" class="ion-ios-clock-outline" aria-label="ios-clock-outline"></ion-icon></ion-label>');
-              ctr=ctr+1;
-            }
-
-          }
 
         }
-      // }
+      }
+      console.log(ctr+" ctr");
+    }
+    // appending store open
+    if (me.item_select_hotel.opening_hours!==undefined) {
+      if (me.item_select_hotel.opening_hours.open_now!==undefined) {
+        if (me.item_select_hotel.opening_hours.open_now === true) {
+          y.insertAdjacentHTML( 'beforeend', '<ion-label secondary>Open <ion-icon name="clock" role="img" class="ion-ios-clock-outline" aria-label="ios-clock-outline"></ion-icon></ion-label>');
+        }
+        else {
+          y.insertAdjacentHTML( 'beforeend', '<ion-label danger>Close <ion-icon name="clock" role="img" class="ion-ios-clock-outline" aria-label="ios-clock-outline"></ion-icon></ion-label>');
+          ctr=ctr+1;
+        }
 
-    // }, 400);
+      }
+
+    }
+
+    if ( me.item_select_hotel.reviews!==undefined) {
+      me.reviews = me.item_select_hotel.reviews;
+      me.setHotelReviewRating();
+    }
+
+    if ( me.item_select_hotel.photos!==undefined) {
+      for (var i = 0; i <  me.item_select_hotel.photos.length; i++) {
+        me.photos.push(me.item_select_hotel.photos[i].getUrl({'maxWidth': 300, 'maxHeight': 300}));
+      }
+      console.log(me.photos);
+    }
+    else {
+      me.photos.push( me.item_select_hotel.icon);
+    }
+
+    me.contact =  me.item_select_hotel.international_phone_number;
+    me.insertPlaceContact();
+
+    me.website =  me.item_select_hotel.website;
+    me.insertWebURL();
 
   }
 
@@ -205,16 +258,5 @@ insertPlaceContact(){
     }
   }
 
-insertWebURL(){
-  var me = this;
-
-  if (me.website !== undefined){
-    console.log(me.website);
-  }
-
-  else{
-    console.log("No Website");
-  }
-}
 
 }

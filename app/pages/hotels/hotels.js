@@ -36,13 +36,26 @@ export class HotelsPage {
 
     this.params = {};
 
-    this.placeType = 'lodging';
-    this.sort = 'Distance';
+    // this.placeType = 'lodging';
+    // this.sort = 'Distance';
     // this.cuisine = 'food';
 
     this.items = [];
     this.res = null;
     this.count = null;
+
+
+    this.pl_type_items = [{ value: "lodging", text: 'Hotel', checked: true}];
+
+    this.sort_items = [
+      { value: "Distance", text: 'Distance', checked: true},
+      { value: "Alphabetically", text: 'Alphabetically', checked: false},
+      { value: "Rating", text: 'Rating', checked: false},
+    ];
+
+    this.enterCTR = 1;
+
+    this.results = [];
 
     console.log(this.details);
     console.log("Hotels list working");
@@ -54,16 +67,28 @@ export class HotelsPage {
     me.params.placeType = 'lodging';
     me.params.cuisine = '';
 
-    me.geolocationService.setPlaces(me.params).then(function (res) {
-      setTimeout(function() {
-        console.log(res);
-        me.res = res;
-        me.items = [];
-        for (me.count = 0; me.count < 20; me.count++) {
-          if (res[me.count]!==undefined) {
-            me.items.push(res[me.count]);
-          }
+    if (me.enterCTR === 1){
+      me.geolocationService.setPlaces(me.params).then(function (res) {
+        setTimeout(function() {
+          console.log(res);
+          me.res = res;
+          me.items = [];
+          for (me.count = 0; me.count < 20; me.count++) {
+            if (res[me.count]!==undefined) {
+              me.items.push(res[me.count]);
+            }
 
+          }
+            console.log(me.items);
+          me.setHotelRating();
+          if (document.getElementById('loading')!==null) {
+            document.getElementById('loading').style.display="none";
+          }
+        }, 2000);
+      });
+    }
+
+<<<<<<< HEAD
 
         }
           console.log(me.items);
@@ -72,7 +97,32 @@ export class HotelsPage {
           document.getElementById('loading').style.display="none";
         }
       }, 2000);
+=======
+  }
+
+  displayDetails(ctr){
+
+    var item = ctr;
+
+    console.log(item);
+    var me = this;
+
+    me.geolocationService.setPlaceDetails('map',item.place_id).then(function (res) {
+      console.log('inner');
+      me.results = res[0];
+      me.results.rating = item.rating;
+
+
+      console.log(me.results);
+      me.nav.push(HotelDetailsPage, {item_select_hotel:me.results});
+>>>>>>> 2b79b1251d0c2d6a7133a1efa53c4d3e7a243f13
     });
+
+  }
+
+  ionViewDidLeave(){
+    this.enterCTR += 1;
+    console.log('didleave'+this.enterCTR);
 
 
   }
@@ -83,7 +133,6 @@ export class HotelsPage {
     console.log('Begin async operation');
     console.log(me.res);
     console.log( me.count);
-    console.log('Infinite scroll working');
     setTimeout(() => {
       var i;
       for (i = me.count; i < me.res.length; i++) {
@@ -98,11 +147,41 @@ export class HotelsPage {
 
       console.log('Async operation has ended');
       infiniteScroll.complete();
-      if (i==me.res.length) {
+      if (me.res.length >= me.count && me.res.length <= me.count) {
         infiniteScroll.enable(false);
       }
     }, 2000);
 
+  }
+
+  updatePlaceType(){
+    document.getElementById('loading').style.display="inline";
+    var me = this;
+    me.params.geoloc = this.details;
+    me.params.placeType = me.placeType;
+    me.params.cuisine = '';
+
+    me.geolocationService.setPlaces(me.params).then(function (res) {
+      me.items = [];
+      setTimeout(function() {
+        // me.items = res;
+        // me.setRating();
+        // me.sortItems(me.sort);
+        console.log(res);
+        me.res = res;
+        me.items = [];
+        for (me.count = 0; me.count < 20; me.count++) {
+          if (res[me.count]!==undefined) {
+            me.items.push(res[me.count]);
+          }
+
+        }
+          console.log(me.items);
+        me.setHotelRating();
+        me.sortItems(me.sort);
+        document.getElementById('loading').style.display="none";
+      }, 2000);
+    });
   }
 
   updateSort(){

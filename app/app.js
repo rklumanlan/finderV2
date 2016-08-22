@@ -63,9 +63,9 @@ export class MyApp {
 }
 ionicBootstrap(MyApp, [DataService,ConnectivityService], {
   iconMode: 'md',
-  modalEnter: 'modal-slide-in',
-  modalLeave: 'modal-slide-out',
-  pageTransition: 'ios',
+  // modalEnter: 'modal-slide-in',
+  // modalLeave: 'modal-slide-out',
+  // pageTransition: 'ios',
   tabSubPages: false,
   backButtonIcon: 'ios-arrow-back',
   tabbarPlacement: 'top',

@@ -27,6 +27,47 @@ export class FindRoutesPage {
     // this.modal = Modal.create(MyModal);
     // this.nav.present(this.modal)
     // alert('ads');
+    var trans = [{
+      "アンヘレスシティホール":"Angeles City Hall",
+      "Angeles Medical Center Inc.":"Angeles Medical Center Inc.",
+      "アンヘレスユニバーシティファウンデーション":"Angeles University Foundation",
+      "AUF メディカルセンター":"Angeles University Foundation Medical Center",
+      "アヌナス":"Anunas",
+      "バンカル":"Bancal",
+      "Carmenville":"Carmenville",
+      "シティセンター":"Citi Center",
+      "アンヘレスシティ大学":"City College of Angeles",
+      "Cuayan":"Cuayan",
+      "ダイアモンドサブディビジョン":"Diamond Subdivision",
+      "Dr. Amando L. Garcia Medical Center, Inc.":"Dr. Amando L. Garcia Medical Center, Inc.",
+      "フィールズアベニュー":"Fields Avenue",
+      "フレンドシップ":"Friendship",
+      "フレンドシッププラザ":"Friendship Plaza",
+      "ホリーエンジェル大学":"Holy Angel University",
+      "ホリーファミリーメディカルセンター":"Holy Family Medical Center",
+      "Holy Rosary Parish Church":"Holy Rosary Parish Church",
+      "イマキュレートコンセプションパリッシュ":"Immaculate Concepcion Parish",
+      "Jenra Mall":"Jenra Mall",
+      "ルーデスノースウェスト":"Lourdes North West",
+      "メインゲートターミナル":"Main Gate Terminal",
+      "マーゴット":"Margot",
+      "マリソル":"Marisol",
+      "マーキーモール":"Marquee Mall",
+      "Nepo Mall":"Nepo Mall",
+      "ラファエルラサティンメモリアルメディカルセンター":"Rafael Lazatin Memorial Medical Center",
+      "リパブリックセントラルコレッジズ":"Republic Central Colleges",
+      "SMシティクラーク":"SM City Clark",
+      "サクレッドハートメディカルセンター":"Sacred Heart Medical Center",
+      "サパンベイトー":"Sapang Bato",
+      "Saver\'s Mall":"Saver\'s Mall",
+      "システムズプラスカレッジファウンデーション":"Systems Plus College Foundation",
+      "ザメディカルシティ - アンヘレス":"The Medical City Angeles",
+      "チモグパークゲート1":"Timog Park Gate 1",
+      "チモグパークゲート 2":"Timog Park Gate 2",
+      "チモグパークゲート 3":"Timog Park Gate 3",
+      "トランスファ":"Transfer",
+      "Villa Sol":"Villa Sol",
+    }];
     console.log(ctr);
     let profileModal = Modal.create(MyModal, { ctrId: ctr });
     profileModal.onDismiss(data => {
@@ -34,10 +75,21 @@ export class FindRoutesPage {
       console.log(data!=undefined);
       if (data!=undefined) {
         if (ctr=='from') {
-          this.from = data.point;
+          if (navigator.language.split('-')[0]=='en') {
+            this.from = trans[0][data.point];
+          }
+          else {
+            this.from = data.point;
+          }
+
         }
         else if (ctr=='to') {
-          this.to = data.point;
+          if (navigator.language.split('-')[0]=='en') {
+            this.to = trans[0][data.point];
+          }
+          else {
+            this.to = data.point;
+          }
         }
       }
 

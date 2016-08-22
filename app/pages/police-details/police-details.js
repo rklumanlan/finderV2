@@ -34,6 +34,7 @@ export class PoliceDetailsPage {
   // ionViewDidEnter(){
   //   this.geolocationService.getPolHosp(this.poldetail,'police');
 
+<<<<<<< HEAD
   ionViewWillEnter(){
     var me = this;
     console.log('detail');
@@ -66,6 +67,39 @@ export class PoliceDetailsPage {
     });
 
   }
+=======
+  // ionViewWillEnter(){
+  //   var me = this;
+  //   console.log('detail');
+  //   console.log(document.getElementById('police_map_dtl'));
+  //   me.geolocationService.setPlaceDetails('police_map_dtl',me.item_select_police.place_id).then(function (res) {
+  //     console.log(res[0]);
+  //     console.log('inner');
+  //     me.results = res[0];
+  //
+  //     if (me.item_select_police.reviews!==undefined) {
+  //       me.reviews = me.item_select_police.reviews;
+  //       me.setReviewRating();
+  //     }
+  //
+  //     if (me.item_select_police.photos!==undefined) {
+  //       for (var i = 0; i < me.item_select_police.photos.length; i++) {
+  //         me.photos.push(me.item_select_police.photos[i].getUrl({'maxWidth': 300, 'maxHeight': 300}));
+  //       }
+  //       console.log(me.photos);
+  //     }
+  //     else {
+  //       me.photos.push(me.item_select_police.icon);
+  //     }
+  //
+  //     if (me.item_select_police.international_phone_number !== undefined){
+  //       me.contact = me.item_select_police.international_phone_number;
+  //       me.insertPlaceContact();
+  //     }
+  //
+  //   });
+  // }
+>>>>>>> 2b79b1251d0c2d6a7133a1efa53c4d3e7a243f13
 
   ionViewLoaded(){
     var me = this;
@@ -127,11 +161,30 @@ export class PoliceDetailsPage {
           }
 
         }
-      }
+        if (me.item_select_police.reviews!==undefined) {
+          me.reviews = me.item_select_police.reviews;
+          me.setReviewRating();
+        }
+
+        if (me.item_select_police.photos!==undefined) {
+          for (var i = 0; i < me.item_select_police.photos.length; i++) {
+            me.photos.push(me.item_select_police.photos[i].getUrl({'maxWidth': 300, 'maxHeight': 300}));
+          }
+          console.log(me.photos);
+        }
+        else {
+          me.photos.push(me.item_select_police.icon);
+        }
+
+        if (me.item_select_police.international_phone_number !== undefined){
+          me.contact = me.item_select_police.international_phone_number;
+          me.insertPlaceContact();
+        }
+      // }
 
     // }, 400);
 
-  // }
+  }
 
 
   setReviewRating(){
@@ -206,11 +259,10 @@ insertPlaceContact(){
   }
 
 }
-
 // import {Component} from '@angular/core';
 // import {NavParams, Storage, SqlStorage, IonicApp, NavController} from 'ionic-angular';
 // import {DataService} from '../../services/data';
-// import {PolicePage} from '../police/police';
+// import {PoliceMapPage} from '../police-map/police-map';
 // import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 // import {LoadingModal} from '../../components/loading-modal/loading-modal';
 // import {TranslatePipe} from '../../pipes/translate';
@@ -237,7 +289,7 @@ insertPlaceContact(){
 //     this.nav = nav;
 //     this.geolocationService = geolocationService;
 //
-//     this.PolicePage = PolicePage;
+//     this.PoliceMapPage = PoliceMapPage;
 //
 //     this.poldetail = this.navParams.get('poldetail');
 //   }

@@ -1,8 +1,6 @@
 <ion-header>
   <ion-navbar primary>
-    <ion-toolbar >
-      <ion-title>{{'Beauty Salons'|translate}}</ion-title>
-    </ion-toolbar>
+    <ion-title>{{'Beauty Salons'|translate}}</ion-title>
   </ion-navbar>
 
   <ion-toolbar class="sort_toolbar">
@@ -12,8 +10,11 @@
             <span class="sort_label">{{'Place Type'|translate}}</span>
             <ion-item class="slct">
                 <ion-label class="input_lbl">{{'Place Type'|translate}}</ion-label>
-                <ion-select id ='1' [(ngModel)]="placeType" (ngModelChange)="updatePlaceType($event)" class="drpdown_nc" okText="OK" cancelText="{{'Cancel'|translate}}">
+                <!-- <ion-select id ='1' [(ngModel)]="placeType" (ngModelChange)="updatePlaceType($event)" class="drpdown_nc" okText="OK" cancelText="{{'Cancel'|translate}}">
                   <ion-option value="beauty_salon">{{'Beauty Salon'|translate}}</ion-option>
+                </ion-select> -->
+                <ion-select id ='1' [(ngModel)]="placeType" (ionChange)="updatePlaceType($event)" class="drpdown_nc" okText="OK" cancelText="{{'Cancel'|translate}}">
+                  <ion-option *ngFor="let pl_item of pl_type_items" value="{{pl_item.value}}" checked="{{pl_item.checked}}">{{pl_item.text|translate}} </ion-option>
                 </ion-select>
             </ion-item>
           </ion-col>
@@ -33,10 +34,13 @@
             <span class="sort_label">{{'Sort'|translate}}</span>
             <ion-item class="slct sort">
               <ion-label class="input_lbl">{{'Sort'|translate}}</ion-label>
-              <ion-select [(ngModel)]="sort" (ngModelChange)="updateSort($event)" class="drpdown_nc">
+              <!-- <ion-select [(ngModel)]="sort" (ngModelChange)="updateSort($event)" class="drpdown_nc">
                 <ion-option value="Distance">{{'Distance'|translate}}</ion-option>
                 <ion-option value="Alphabetically">{{'Alphabetically'|translate}}</ion-option>
                 <ion-option value="Rating">{{'Rating'|translate}}</ion-option>
+              </ion-select> -->
+              <ion-select [(ngModel)]="sort" (ionChange)="updateSort($event)" class="drpdown_nc" okText="OK" cancelText="{{'Cancel'|translate}}">
+                <ion-option *ngFor="let sort_item of sort_items" value="{{sort_item.value}}" checked="{{sort_item.checked}}">{{sort_item.text|translate}} </ion-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -55,7 +59,7 @@
       <div id="map" style="height: 100%;display:none"></div>
 
       <ion-list>
-        <button ion-item detail-none *ngFor="let item_salon of items" [navPush]="[SalonDetailsPage, {item_select_salon:item_salon}]">
+        <button ion-item detail-none *ngFor="let item_salon of items" (click)="displayDetails(item_salon)">
 
           <ion-row>
             <ion-col>
@@ -65,8 +69,7 @@
           <ion-row>
             <ion-col width-75>
               <ul class="itm_info">
-                <!-- <li><span class="itm_name">{{item.name}}</span></li> -->
-                <!-- <li><span class="itm_type">{{item_hotel.types[0]}} {{item_hotel.types[1]}}</span></li> -->
+                <li><span class="itm_type">{{item_salon.types[0]}}</span></li>
                 <li><span class="itm_address">{{item_salon.vicinity}}</span></li>
                 <li><span class="salon_hours"></span></li>
               </ul>
