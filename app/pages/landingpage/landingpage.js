@@ -33,6 +33,11 @@ export class LandingPage {
     me.geolocationService.autoComplete('landingpage');
   }
 
+  ionViewWillEnter(){
+    var me = this;
+    me.geolocationService.loadGeolocation()
+  }
+
   showlatlong(event) {
     var me = this;
     var geoCoords = {};
