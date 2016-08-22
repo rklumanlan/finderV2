@@ -36,7 +36,9 @@
     "cordova-plugin-splashscreen",
     "cordova-plugin-inappbrowser",
     "cordova-sqlite-storage",
-    "cordova-plugin-whitelist"
+    "cordova-plugin-whitelist",
+    "cordova-plugin-network-information",
+    "cordova-plugin-compat"
   ],
   "cordovaPlatforms": [
     "ios",

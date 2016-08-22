@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams, Platform} from 'ionic-angular';
-import {Geolocation} from 'ionic-native';
+import {Geolocation,InAppBrowser} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {HotelMapPage} from '../hotel-map/hotel-map';
 import {TranslatePipe} from '../../pipes/translate';
-import {InAppBrowser} from 'ionic-native';
+
 
 @Component({
   templateUrl: 'build/pages/hotel-details/hotel-details.html',
@@ -13,11 +13,10 @@ import {InAppBrowser} from 'ionic-native';
 })
 export class HotelDetailsPage {
   static get parameters() {
-    return [[NavParams],[NavController],[GeolocationService],[Platform]];
+    return [[NavParams],[NavController],[GeolocationService]];
   }
 
-  constructor(navParams,nav,geolocationService,platform) {
-    this.platform = platform;
+  constructor(navParams,nav,geolocationService) {
     this.navParams = navParams;
     this.nav = nav;
     this.geolocationService = geolocationService;
@@ -33,9 +32,44 @@ export class HotelDetailsPage {
     this.url = 'https://www.google.com';
   }
 
+
+  ionViewWillEnter(){
+    var me = this;
+    console.log(me.item_select_hotel.place_id);
+    console.log(document.getElementById('hotel_map_dtl'));
+    me.geolocationService.setPlaceDetails('hotel_map_dtl',me.item_select_hotel.place_id).then(function (res) {
+      console.log(res[0]);
+      console.log('inner');
+      me.results = res[0];
+
+      if (res[0].reviews!==undefined) {
+        me.reviews = res[0].reviews;
+        me.setHotelReviewRating();
+      }
+
+      if (res[0].photos!==undefined) {
+        for (var i = 0; i < res[0].photos.length; i++) {
+          me.photos.push(res[0].photos[i].getUrl({'maxWidth': 300, 'maxHeight': 300}));
+        }
+        console.log(me.photos);
+      }
+      else {
+        me.photos.push(res[0].icon);
+      }
+
+      me.contact = res[0].international_phone_number;
+      me.insertPlaceContact();
+
+      me.website = res[0].website;
+      me.url = me.website;
+      me.insertWebURL();
+
+    });
+
   launch(url) {
     var item = url;
     InAppBrowser.open(item, '_blank');
+
   }
 
   // ionViewWillEnter(){
@@ -224,16 +258,5 @@ insertPlaceContact(){
     }
   }
 
-insertWebURL(){
-  var me = this;
-
-  if (me.website !== undefined){
-    console.log(me.website);
-  }
-
-  else{
-    console.log("No Website");
-  }
-}
 
 }

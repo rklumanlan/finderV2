@@ -38,22 +38,22 @@ export class HospitalsPage {
       { value: "Alphabetically", text: 'Alphabetically', checked: false},
       { value: "Rating", text: 'Rating', checked: false},
     ];
-    // this.hospitals = [];
+      // this.hospitals = [];
 
-    // this.dataService.insertJeepsData();
+      // this.dataServieskce.insertJeepsData();
 
-    // this.dataService.getHospitalDetails().then((data) => {
-      // console.log(data.result);
-    //   if(data.res.rows.length > 0) {
-    //     for(var i = 0; i < data.res.rows.length; i++) {
-    //       this.hospitals.push({name: data.res.rows.item(i).name, address: data.res.rows.item(i).address, email:data.res.rows.item(i).email, landline:data.res.rows.item(i).landline, mobile:data.res.rows.item(i).mobile, lat:data.res.rows.item(i).lat, lng:data.res.rows.item(i).lng});
-    //     }
-    //   }
-    //   console.log(this.hospitalstations);
-    //   console.log("hospitals stations getting details");
-    // }, (error) => {
-    //   console.log("ERROR -> " + JSON.stringify(error.err));
-    // });
+      // this.dataService.getHospitalDetails().then((data) => {
+        // console.log(data.result);
+      //   if(data.res.rows.length > 0) {
+      //     for(var i = 0; i < data.res.rows.length; i++) {
+      //       this.hospitals.push({name: data.res.rows.item(i).name, address: data.res.rows.item(i).address, email:data.res.rows.item(i).email, landline:data.res.rows.item(i).landline, mobile:data.res.rows.item(i).mobile, lat:data.res.rows.item(i).lat, lng:data.res.rows.item(i).lng});
+      //     }
+      //   }
+      //   console.log(this.hospitalstations);
+      //   console.log("hospitals stations getting details");
+      // }, (error) => {
+      //   console.log("ERROR -> " + JSON.stringify(error.err));
+      // });
 
     this.details = navParams.get('geoloc');
 

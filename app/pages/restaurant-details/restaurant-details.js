@@ -64,6 +64,19 @@ export class RestaurantDetailsPage {
   ionViewLoaded() {
 
     var me = this;
+<<<<<<< HEAD
+    console.log('detail');
+    console.log(document.getElementById('resto_map_dtl'));
+
+    me.geolocationService.setPlaceDetails('resto_map_dtl',me.item_select.place_id).then(function (res) {
+      console.log(res[0]);
+      console.log('inner');
+      me.results = res[0];
+
+      if (res[0].reviews!==undefined) {
+        me.reviews = res[0].reviews;
+        me.setReviewRating();
+=======
 
     var x = document.getElementById("resto_rating");
     var y = document.getElementById("operating_hours");
@@ -90,6 +103,7 @@ export class RestaurantDetailsPage {
           }
           ctr=ctr+1;
         }
+>>>>>>> 8a90c61f8b97420594ed46189f56b0f66d951071
       }
       //float
       else if (me.item_select.rating % 1 !== 0) {
