@@ -3,7 +3,9 @@ import {NavController, NavParams, Content} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {LoadingModal} from '../../components/loading-modal/loading-modal';
-import {RestaurantDetailsPage} from '../restaurant-details/restaurant-details';
+// Import menu pages
+import {UniDetailPage} from '../uni-detail-page/uni-detail-page';
+
 import {TranslatePipe} from '../../pipes/translate';
 /*
   Generated class for the RestaurantPage page.
@@ -12,7 +14,7 @@ import {TranslatePipe} from '../../pipes/translate';
   Ionic pages and navigation.
 */
 @Component({
-  templateUrl: 'build/pages/restaurant/restaurant.html',
+  templateUrl: 'build/pages/uni-page/uni-page.html',
   directives: [LoadingModal],
    providers: [GeolocationService],
    queries: {
@@ -20,21 +22,21 @@ import {TranslatePipe} from '../../pipes/translate';
    },
    pipes: [TranslatePipe]
 })
-export class RestaurantPage {
+export class UniPage {
 
   static get parameters() {
     return [[NavController],[NavParams],[GeolocationService]];
   }
 
   constructor(nav,navParams,geolocationService) {
-    this.RestaurantPage = RestaurantPage;
-    this.RestaurantDetailsPage = RestaurantDetailsPage;
+    // this.RestaurantPage = RestaurantPage;
+    // this.RestaurantDetailsPage = RestaurantDetailsPage;
     this.nav = nav;
     this.navParams = navParams;
     this.geolocationService = geolocationService;
 
     this.details = navParams.get('geoloc');
-    console.log('page'+navParams.get('page'));
+    this.page = navParams.get('page');
 
     this.params = {};
 
@@ -48,25 +50,57 @@ export class RestaurantPage {
 
     this.disable = null;
 
-    this.pl_type_items = [
-      { value: "restaurant", text: 'Restaurant', checked: true},
-      { value: "cafe", text: 'Cafe', checked: false},
-    ];
+    if(this.page =='resto'){
+      this.title_header = "Restaurants";
+      this.pl_type_items = [
+        { value: "restaurant", text: 'Restaurant', checked: true},
+        { value: "cafe", text: 'Cafe', checked: false},
+      ];
 
-    this.cui_items = [
-      { value: "food", text: 'Any Cuisine', checked: true},
-      { value: "American", text: 'American', checked: false},
-      { value: "Chinese", text: 'Chinese', checked: false},
-      { value: "Filipino", text: 'Filipino', checked: false},
-      { value: "Indian", text: 'Indian', checked: false},
-      { value: "Italian", text: 'Italian', checked: false},
-      { value: "Japanese", text: 'Japanese', checked: false},
-      { value: "Lebanese", text: 'Lebanese', checked: false},
-      { value: "Mexican", text: 'Mexican', checked: false},
-      { value: "Spanish", text: 'Spanish', checked: false},
-      { value: "Thai", text: 'Thai', checked: false},
-      { value: "Vietnamese", text: 'Vietnamese', checked: false},
-    ];
+      this.cui_items = [
+        { value: "food", text: 'Any Cuisine', checked: true},
+        { value: "American", text: 'American', checked: false},
+        { value: "Chinese", text: 'Chinese', checked: false},
+        { value: "Filipino", text: 'Filipino', checked: false},
+        { value: "Indian", text: 'Indian', checked: false},
+        { value: "Italian", text: 'Italian', checked: false},
+        { value: "Japanese", text: 'Japanese', checked: false},
+        { value: "Lebanese", text: 'Lebanese', checked: false},
+        { value: "Mexican", text: 'Mexican', checked: false},
+        { value: "Spanish", text: 'Spanish', checked: false},
+        { value: "Thai", text: 'Thai', checked: false},
+        { value: "Vietnamese", text: 'Vietnamese', checked: false},
+      ];
+    }
+    else if(this.page =='hotels'){
+      this.title_header = "Hotels";
+      this.pl_type_items = [{ value: "lodging", text: 'Hotel', checked: true}];
+    }
+    else if(this.page =='malls'){
+      this.title_header = "Malls";
+      this.pl_type_items = [
+        { value: "shopping_mall", text: 'Mall', checked: true},
+        { value: "department_store", text: 'Department Store', checked: false},
+        { value: "clothing_store", text: 'Clothing Store', checked: false},
+        { value: "shoe_store", text: 'Shoe Store', checked: false},
+      ];
+    }
+    else if(this.page =='supermarkets'){
+      this.title_header = "Supermarkets";
+      this.pl_type_items = [{ value: "grocery_or_supermarket", text: 'Supermarket', checked: true}];
+    }
+    else if(this.page =='salons'){
+      this.title_header = "Beauty Salons";
+      this.pl_type_items = [{ value: "beauty_salon", text: 'Beauty Salon', checked: true}];
+    }
+    else if(this.page =='police'){
+      this.title_header = "Police Staions";
+      this.pl_type_items = [{ value: "police", text: 'Police Station', checked: true}];
+    }
+    else if(this.page =='hospitals'){
+      this.title_header = "Hospitals";
+      this.pl_type_items = [{ value: "hospital", text: 'Hospital', checked: true}];
+    }
 
     this.sort_items = [
       { value: "Distance", text: 'Distance', checked: true},
@@ -83,8 +117,40 @@ export class RestaurantPage {
     var me = this;
     me.params.geoloc = this.details;
     this.sort = me.sort;
-    me.params.placeType = 'restaurant';
-    me.params.cuisine = 'food';
+
+
+    if(me.page =='resto'){
+      me.params.placeType = 'restaurant';
+      me.params.cuisine = 'food';
+    }
+    else if(me.page =='hotels'){
+      me.params.placeType = 'lodging';
+      me.params.cuisine = '';
+    }
+    else if(me.page =='malls'){
+      me.params.placeType = 'shopping_mall';
+      me.params.cuisine = '';
+    }
+    else if(me.page =='supermarkets'){
+      me.params.placeType = 'grocery_or_supermarket';
+      me.params.cuisine = '';
+    }
+    else if(me.page =='salons'){
+      me.params.placeType = 'beauty_salon';
+      me.params.cuisine = '';
+    }
+    else if(me.page =='police'){
+      me.params.placeType = 'police';
+      me.params.cuisine = '';
+    }
+    else if(me.page =='hospitals'){
+      me.params.placeType = 'hospital';
+      me.params.cuisine = '';
+    }
+
+
+
+
     if (me.enterCTR === 1){
       me.geolocationService.setPlaces(me.params).then(function (res) {
 
@@ -124,7 +190,7 @@ export class RestaurantPage {
 
 
       console.log(me.results);
-      me.nav.push(RestaurantDetailsPage, {item_select:me.results});
+      me.nav.push(UniDetailPage, {item_select:me.results,page:me.page});
     });
 
   }

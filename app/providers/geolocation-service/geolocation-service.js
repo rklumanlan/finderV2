@@ -14,7 +14,7 @@ export class GeolocationService {
     this.connectivity = connectivityService;
     this.mapInitialised = false;
     this.apiKey = 'AIzaSyD4zGo9cejtd83MbUFQL8YU71b8_A5XZpc';
-    this.loadGeolocation();
+    // this.loadGeolocation();
 
     this.latlng = {};
     this.nav = nav;
@@ -104,7 +104,9 @@ export class GeolocationService {
     var me = this;
     var items = [];
     var a = 1;
-    var p1 = new google.maps.LatLng(pageDetails.geoloc.lat, pageDetails.geoloc.lng)
+    var p1 = new google.maps.LatLng(pageDetails.geoloc.lat, pageDetails.geoloc.lng);
+
+    var str1,str2;
 
     me.getPlaces(pageDetails, function(result,status, pagination){
       console.log(pageDetails.geoloc.lat);
@@ -122,6 +124,13 @@ export class GeolocationService {
               if (result[m].rating===undefined) {
                 result[m].rating = 0;
               }
+
+              for (var i = 0; i < result[m].types.length; i++) {
+                str1 = result[m].types[i];
+                str2 = str1.replace(/_/g, ' ');
+                result[m].types[i] = str2;
+              }
+
             }
           // }
         // }
@@ -190,7 +199,7 @@ export class GeolocationService {
         // }else {
           resolve(geo); // After 3 seconds, resolve the promise with value 42
         // }
-      }, 500);
+      }, 800);
     });
 
 
@@ -347,42 +356,42 @@ export class GeolocationService {
     // console.log(document.getElementById('police_map'));
     console.log(detail);
 
-    if (page === 'hospital') {
+    if (page === 'hospitals') {
       console.log('entered if');
       // mapcoords = {lat: parseFloat(detail.lat), lng: parseFloat(detail.lng)};
       // img = 'img/pins/hospital.png';
       // mapElem = document.getElementById('hospital_map');
       console.log('Entered hospital map');
       img = 'img/pins/hospital.png';
-      me.map = new google.maps.Map(document.getElementById('hospital_map'), mapOptions );
+      // me.map = new google.maps.Map(document.getElementById('hospital_map'), mapOptions );
     }
     else if (page === 'resto') {
       console.log('Entered Resto map');
       img = 'img/pins/restaurant.png';
-      me.map = new google.maps.Map(document.getElementById('resto_map'), mapOptions );
+      // me.map = new google.maps.Map(document.getElementById('resto_map'), mapOptions );
 
     }
-    else if (page === 'hotel') {
+    else if (page === 'hotels') {
       console.log('Entered Hotel map');
       img = 'img/pins/hotel.png';
-      me.map = new google.maps.Map(document.getElementById('hotel_map'), mapOptions );
+      // me.map = new google.maps.Map(document.getElementById('hotel_map'), mapOptions );
 
     }
-    else if (page === 'mall') {
+    else if (page === 'malls') {
       console.log('Entered Mall map');
       img = 'img/pins/mall.png';
-      me.map = new google.maps.Map(document.getElementById('mall_map'), mapOptions );
+      // me.map = new google.maps.Map(document.getElementById('mall_map'), mapOptions );
 
     }
-    else if (page === 'supermarket') {
+    else if (page === 'supermarkets') {
       console.log('Entered Supermarket map');
       img = 'img/pins/supermarket.png';
-      me.map = new google.maps.Map(document.getElementById('supmarket_map'), mapOptions );
+      // me.map = new google.maps.Map(document.getElementById('supmarket_map'), mapOptions );
     }
-    else if (page === 'salon') {
+    else if (page === 'salons') {
       console.log('Entered salon map');
       img = 'img/pins/salon.png';
-      me.map = new google.maps.Map(document.getElementById('salon_map'), mapOptions );
+      // me.map = new google.maps.Map(document.getElementById('salon_map'), mapOptions );
 
     }
     else {
@@ -391,8 +400,10 @@ export class GeolocationService {
       // mapElem = document.getElementById('police_map');
       console.log('Entered police map');
       img = 'img/pins/police.png';
-      me.map = new google.maps.Map(document.getElementById('police_map'), mapOptions );
+      // me.map = new google.maps.Map(document.getElementById('police_map'), mapOptions );
     }
+
+    me.map = new google.maps.Map(document.getElementById('uni_map'), mapOptions );
 
 
     var image = {
