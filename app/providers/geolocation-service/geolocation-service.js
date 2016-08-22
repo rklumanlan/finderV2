@@ -80,14 +80,11 @@ export class GeolocationService {
     var me = this;
     var items = [];
     var a = 1;
-<<<<<<< HEAD
-    var p1 = new google.maps.LatLng(pageDetails.geoloc.lat, pageDetails.geoloc.lng)
-=======
+
     var p1 = new google.maps.LatLng(pageDetails.geoloc.lat, pageDetails.geoloc.lng);
 
     var str1,str2;
 
->>>>>>> f27d491529b038c76171bc471546ab2dc4113f71
     me.getPlaces(pageDetails, function(result,status, pagination){
       console.log(pageDetails.geoloc.lat);
       console.log(pageDetails.geoloc.lng);
