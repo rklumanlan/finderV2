@@ -14,7 +14,7 @@ export class GeolocationService {
     this.connectivity = connectivityService;
     this.mapInitialised = false;
     this.apiKey = 'AIzaSyD4zGo9cejtd83MbUFQL8YU71b8_A5XZpc';
-    this.loadGeolocation();
+    // this.loadGeolocation();
 
     this.latlng = {};
     this.nav = nav;
@@ -104,7 +104,9 @@ export class GeolocationService {
     var me = this;
     var items = [];
     var a = 1;
-    var p1 = new google.maps.LatLng(pageDetails.geoloc.lat, pageDetails.geoloc.lng)
+    var p1 = new google.maps.LatLng(pageDetails.geoloc.lat, pageDetails.geoloc.lng);
+
+    var str1,str2;
 
     me.getPlaces(pageDetails, function(result,status, pagination){
       console.log(pageDetails.geoloc.lat);
@@ -122,6 +124,13 @@ export class GeolocationService {
               if (result[m].rating===undefined) {
                 result[m].rating = 0;
               }
+
+              for (var i = 0; i < result[m].types.length; i++) {
+                str1 = result[m].types[i];
+                str2 = str1.replace(/_/g, ' ');
+                result[m].types[i] = str2;
+              }
+
             }
           // }
         // }
@@ -190,7 +199,7 @@ export class GeolocationService {
         // }else {
           resolve(geo); // After 3 seconds, resolve the promise with value 42
         // }
-      }, 500);
+      }, 800);
     });
 
 
