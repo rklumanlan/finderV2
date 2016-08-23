@@ -39,37 +39,45 @@
 
 .icoMoon-health:before {
     content: "\e900";
-    font-size: 5em;
+    // font-size: 5em;
+    font-size: 16vw;
 }
 .icoMoon-hotel:before {
     content: "\e901";
-    font-size: 5em;
+    // font-size: 5em;
+    font-size: 16vw;
 }
 .icoMoon-jeep:before {
     content: "\e902";
-    font-size: 5em;
+    // font-size: 5em;
+    font-size: 16vw;
 }
 .icoMoon-jeep2:before {
     content: "\1f320";
 }
 .icoMoon-mall:before {
     content: "\e903";
-    font-size: 5em;
+    // font-size: 5em;
+    font-size: 16vw;
 }
 .icoMoon-marker:before {
     content: "\e904";
-    font-size: 5em;
+    // font-size: 5em;
+    font-size: 16vw;
 }
 .icoMoon-more:before {
-    content: "\e90b";
+    // content: "\e90b";
+    font-size: 16vw;
 }
 .icoMoon-police:before {
     content: "\e905";
-    font-size: 5em;
+    // font-size: 5em;
+    font-size: 16vw;
 }
 .icoMoon-resto:before {
     content: "\e906";
-    font-size: 5em;
+    // font-size: 5em;
+    font-size: 16vw;
 }
 .icoMoon-review:before {
     content: "\e90a";
@@ -77,11 +85,13 @@
 }
 .icoMoon-salon:before {
     content: "\e907";
-    font-size: 5em;
+    // font-size: 5em;
+    font-size: 16vw;
 }
 .icoMoon-supermarket:before {
     content: "\e908";
-    font-size: 5em;
+    // font-size: 5em;
+    font-size: 16vw;
 }
 .icoMoon-website:before {
     content: "\e909";
@@ -119,14 +129,14 @@ ul.ul-menu {
     padding: 0% !important;
 }
 
-li.icn {
+li.icn, li.icn2 {
     margin-bottom: 20%;
 }
 
 span.btn-menu-label {
-  font-size: 10pt;
+  font-size: 12pt;
   color: #636363;
-  white-space: pre-wrap;
+  // white-space: pre-wrap;
   font-weight: normal;
   text-transform: capitalize;
 }
@@ -138,7 +148,7 @@ ion-row.enter {
 }
 
 button.btn-menu {
-    height: 20%;
+    height: 16vh;
 }
 
 p {
