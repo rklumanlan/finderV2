@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavParams, NavController, Alert} from 'ionic-angular';
+import {NavParams, NavController, AlertController} from 'ionic-angular';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 import {MainPage} from '../main/main';
 
@@ -18,14 +18,15 @@ import {TranslatePipe} from '../../pipes/translate';
 })
 export class LandingPage {
   static get parameters() {
-    return [[GeolocationService],[NavParams],[NavController]];
+    return [[GeolocationService],[NavParams],[NavController],[AlertController]];
   }
 
-  constructor(geolocationService,navParams,nav) {
+  constructor(geolocationService,navParams,nav,alert) {
     this.MainPage = MainPage;
     this.geolocationService = geolocationService;
     this.navParams = navParams;
     this.nav = nav;
+    this.alert = alert;
 
     this.geolocation = '';
   }
@@ -100,7 +101,8 @@ export class LandingPage {
   }
 
   locErrMsg(){
-    let alert = Alert.create({
+    var me = this;
+    let alert = me.alert.create({
       title: 'No location found',
       subTitle: 'Either GPS signals are weak or GPS is switched off',
       buttons: [{
