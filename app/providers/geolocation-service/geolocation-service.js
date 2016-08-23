@@ -81,7 +81,6 @@ export class GeolocationService {
     var me = this;
     var items = [];
     var a = 1;
-
     var p1 = new google.maps.LatLng(pageDetails.geoloc.lat, pageDetails.geoloc.lng);
 
     var str1,str2;
