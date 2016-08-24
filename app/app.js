@@ -64,6 +64,6 @@ export class MyApp {
 ionicBootstrap(MyApp, [DataService,ConnectivityService], {
   iconMode: 'md',
   backButtonIcon: 'ios-arrow-back',
-  backButtonText: '',
-  tabsHideOnSubPages: true,
+  backButtonText: ''
+  // tabsHideOnSubPages: false,
 });

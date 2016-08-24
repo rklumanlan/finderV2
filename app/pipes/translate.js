@@ -163,8 +163,9 @@ export class TranslatePipe {
 
 
     }];
-
-    if (navigator.language.split('-')[0]=='jp') {
+    console.log('language is'+navigator.language.split('-')[0]);
+    if (navigator.language.split('-')[0]=='ja') {
+      console.log('japanese');
       console.log(jp);
       newValue = jp[0][value];
       console.log(newValue);
@@ -172,6 +173,7 @@ export class TranslatePipe {
       return newValue;
     }
     else {
+      console.log('english');
       return value;
     }
 
