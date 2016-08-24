@@ -164,7 +164,7 @@ export class TranslatePipe {
 
     }];
 
-    if (navigator.language.split('-')[0]=='jp') {
+    if (navigator.language.split('-')[0]=='ja') {
       console.log(jp);
       newValue = jp[0][value];
       console.log(newValue);
