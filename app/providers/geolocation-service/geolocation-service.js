@@ -359,7 +359,7 @@ export class GeolocationService {
         // console.log(place.icon);
         if (place.reviews !== undefined){
           for (var i = 0; i < place.reviews.length; i++) {
-            if (navigator.language=='ja-JP') {
+            if (navigator.language.split('-')[0]=='ja') {
               place.reviews[i].newTime = new Date(place.reviews[i].time*1000).toLocaleDateString('ja-JP');
             }
             else {

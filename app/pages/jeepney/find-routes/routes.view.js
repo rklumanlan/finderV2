@@ -75,7 +75,7 @@ export class FindRoutesPage {
       console.log(data!=undefined);
       if (data!=undefined) {
         if (ctr=='from') {
-          if (navigator.language.split('-')[0]=='en') {
+          if (navigator.language.split('-')[0]=='ja') {
             this.from = trans[0][data.point];
           }
           else {
@@ -84,7 +84,7 @@ export class FindRoutesPage {
 
         }
         else if (ctr=='to') {
-          if (navigator.language.split('-')[0]=='en') {
+          if (navigator.language.split('-')[0]=='ja') {
             this.to = trans[0][data.point];
           }
           else {
