@@ -118,6 +118,14 @@ export class TranslatePipe {
       "Jeepneys":"ジープニー",
       "Jeepney Routes":"ジープニー経路",
 
+      "Legend":"画讃",
+      "Church":"教会",
+      "City Hall":"シティーホール",
+      "Mall":"モール",
+      "School":"学校",
+      "Subdivision":"サブディビジョン",
+      "Terminal":"ターミナル",
+
       "Place Type":"場所の種類",
       "Cuisine":"料理",
       "Sort":"並べ替え",
@@ -157,7 +165,6 @@ export class TranslatePipe {
       "Sunset-Nepo is from Teresa Avenue to Fil-Am Friendship.":"スンセト-ネポはテレサ・アベニューからのFil-アムの友情にあります。",
       "Villa-Pampang is from Essel Park to Holy Angel University.":"ビラ-パンパングはエッセルパークからホーリーエンジェル大学までです。",
       "Plaridel-Capaya is from Plaridel Street to Capaya.":"Plaridel-カパヤ川はカパヤ川にPlaridelストリートからです。"
-
 
 
 
