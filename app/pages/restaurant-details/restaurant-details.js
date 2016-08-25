@@ -64,7 +64,6 @@ export class RestaurantDetailsPage {
   ionViewLoaded() {
 
     var me = this;
-<<<<<<< HEAD
     console.log('detail');
     console.log(document.getElementById('resto_map_dtl'));
 
@@ -76,8 +75,6 @@ export class RestaurantDetailsPage {
       if (res[0].reviews!==undefined) {
         me.reviews = res[0].reviews;
         me.setReviewRating();
-=======
-
     var x = document.getElementById("resto_rating");
     var y = document.getElementById("operating_hours");
     var rating,half,remaining;
@@ -103,7 +100,6 @@ export class RestaurantDetailsPage {
           }
           ctr=ctr+1;
         }
->>>>>>> 8a90c61f8b97420594ed46189f56b0f66d951071
       }
       //float
       else if (me.item_select.rating % 1 !== 0) {
