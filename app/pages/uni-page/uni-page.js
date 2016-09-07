@@ -6,6 +6,9 @@ import {LoadingModal} from '../../components/loading-modal/loading-modal';
 // Import menu pages
 import {UniDetailPage} from '../uni-detail-page/uni-detail-page';
 
+
+import {ConnectivityService} from '../../providers/connectivity-service/connectivity-service';
+
 import {TranslatePipe} from '../../pipes/translate';
 /*
   Generated class for the RestaurantPage page.
@@ -25,12 +28,12 @@ import {TranslatePipe} from '../../pipes/translate';
 export class UniPage {
 
   static get parameters() {
-    return [[NavController],[NavParams],[GeolocationService]];
+    return [[NavController],[NavParams],[GeolocationService],[ConnectivityService]];
   }
 
-  constructor(nav,navParams,geolocationService) {
-    // this.RestaurantPage = RestaurantPage;
-    // this.RestaurantDetailsPage = RestaurantDetailsPage;
+  constructor(nav,navParams,geolocationService,connectivityService) {
+
+    this.connectivity = connectivityService;
     this.nav = nav;
     this.navParams = navParams;
     this.geolocationService = geolocationService;
@@ -182,16 +185,21 @@ export class UniPage {
 
     console.log(item);
     var me = this;
+    if(me.connectivity.isOnline()){
+      me.geolocationService.setPlaceDetails('map',item.place_id).then(function (res) {
+        console.log('inner');
+        me.results = res[0];
+        me.results.rating = item.rating;
 
-    me.geolocationService.setPlaceDetails('map',item.place_id).then(function (res) {
-      console.log('inner');
-      me.results = res[0];
-      me.results.rating = item.rating;
 
+        console.log(me.results);
+        me.nav.push(UniDetailPage, {item_select:me.results,page:me.page});
 
-      console.log(me.results);
-      me.nav.push(UniDetailPage, {item_select:me.results,page:me.page});
-    });
+      });
+    }
+    else {
+      me.geolocationService.netErrMsg();
+    }
 
   }
 

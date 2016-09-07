@@ -854,7 +854,7 @@ loadGoogleMaps(opt){
     };
 
     var onOffline = () =>{
-        me.disableMap();
+        // me.disableMap();
     };
 
     document.addEventListener('online', onOnline, false);

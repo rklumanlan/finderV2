@@ -11,6 +11,8 @@ import {DataService} from '../../services/data';
 // import {GoogleMapsService} from '../../providers/google-maps-service/google-maps-service';
 import {GeolocationService} from '../../providers/geolocation-service/geolocation-service';
 
+import {ConnectivityService} from '../../providers/connectivity-service/connectivity-service';
+
 
 import {TranslatePipe} from '../../pipes/translate';
 
@@ -23,9 +25,10 @@ import {TranslatePipe} from '../../pipes/translate';
 
 export class MainPage{
   static get parameters(){
-    return [[DataService],[GeolocationService],[NavParams],[NavController],[AlertController]];
+    return [[DataService],[GeolocationService],[NavParams],[NavController],[AlertController],[ConnectivityService]];
   }
-  constructor(dataService,geolocationService,navParams,nav,alert) {
+  constructor(dataService,geolocationService,navParams,nav,alert,connectivityService) {
+    this.connectivity = connectivityService;
     //database service
     this.dataService = dataService;
     this.geolocationService = geolocationService;
@@ -96,22 +99,13 @@ export class MainPage{
 
   locErrMsg(){
     var me = this;
-    let alert = me.alert.create({
-      title: 'No location found',
-      subTitle: 'Please enable your GPS location.',
-      buttons: [{
-        text: 'OK',
-        handler: data => {
-          this.nav.pop();
-        }
-      }]
-    });
-    alert.present();
+    me.geolocationService.locErrMsg();
     document.getElementById('mainBtnLoc').style.display = "inline";
     document.getElementById('mainLoaderLoc').style.display = "none";
   }
 
   nextPage(ctr){
+    console.log('nextPage(ctr)');
     var ctr;
     var me = this;
     var latlng = me.geolocationService.getLatlng();
@@ -133,7 +127,14 @@ export class MainPage{
       console.log(geoloc);
     }
 
-    this.nav.push( UniPage, {geoloc: geoloc, page:ctr} );
+    if(me.connectivity.isOnline()){
+      this.nav.push( UniPage, {geoloc: geoloc, page:ctr} );
+    }
+    else {
+        me.geolocationService.netErrMsg();
+    }
+
+
 
     // if(ctr == 'resto'){
     //   this.nav.push( UniPage, {geoloc: geoloc, page:ctr} );
