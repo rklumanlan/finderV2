@@ -1,4 +1,4 @@
-import {Storage, SqlStorage, NavController, AlertController} from 'ionic-angular';
+import {Storage, SqlStorage, NavController, AlertController, ToastController} from 'ionic-angular';
 import {Injectable} from '@angular/core';
 import {Http, URLSearchParams} from '@angular/http';
 import 'rxjs/Rx';
@@ -16,12 +16,13 @@ import {ConnectivityService} from '../../providers/connectivity-service/connecti
 export class GoogleMapsService {
 
   static get parameters(){
-    return [[DataService],[ConnectivityService],[NavController],[Http],[AlertController]];
+    return [[DataService],[ConnectivityService],[NavController],[Http],[AlertController],[ToastController]];
   }
 
-  constructor(dataService,connectivityService,nav,http,alert){
+  constructor(dataService,connectivityService,nav,http,alert,toastCtrl){
     this.nav = nav;
     this.alert = alert;
+    this.toastCtrl = toastCtrl;
 
     this.http = http;
 
@@ -854,7 +855,13 @@ loadGoogleMaps(opt){
     };
 
     var onOffline = () =>{
-        me.disableMap();
+        // me.disableMap();
+        let toast = me.toastCtrl.create({
+          message:'Looks like there is a problem with your network connection. Try again later.',
+          duration: 5000,
+          position: 'bottom'
+        });
+        toast.present();
     };
 
     document.addEventListener('online', onOnline, false);

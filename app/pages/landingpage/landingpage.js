@@ -100,17 +100,7 @@ export class LandingPage {
 
   locErrMsg(){
     var me = this;
-    let alert = me.alert.create({
-      title: 'No location found',
-      subTitle: 'Either GPS signals are weak or GPS is switched off',
-      buttons: [{
-        text: 'OK',
-        handler: data => {
-          this.nav.pop();
-        }
-      }]
-    });
-    this.nav.present(alert);
+    me.geolocationService.locErrMsg();
     document.getElementById('lndBtnLoc').style.display = "inline";
     document.getElementById('lndLoaderLoc').style.display = "none";
   }
