@@ -1,4 +1,4 @@
-import {NavController,AlertController} from 'ionic-angular';
+import {NavController,AlertController, ToastController} from 'ionic-angular';
 import {Injectable, Inject} from '@angular/core';
 import {Http} from '@angular/http';
 import {ConnectivityService} from '../../providers/connectivity-service/connectivity-service';
@@ -7,14 +7,14 @@ import {MainPage} from '../../pages/main/main';
 @Injectable()
 export class GeolocationService {
   static get parameters(){
-    return [[ConnectivityService],[NavController],[AlertController]];
+    return [[ConnectivityService],[NavController],[AlertController],[ToastController]];
   }
-  constructor(connectivityService,nav,alert) {
+  constructor(connectivityService,nav,alert,toastCtrl) {
     this.connectivity = connectivityService;
     this.mapInitialised = false;
     this.apiKey = 'AIzaSyD4zGo9cejtd83MbUFQL8YU71b8_A5XZpc';
     // this.loadGeolocation();
-
+    this.toastCtrl = toastCtrl;
     this.latlng = {};
     this.nav = nav;
     this.alert = alert;
@@ -68,6 +68,8 @@ export class GeolocationService {
             console.log("disabling map");
             // me.netErrMsg();
             console.log('a2');
+
+
 
             // add error handler if offline -- alert box
         }
@@ -249,6 +251,12 @@ export class GeolocationService {
       //   me.netErrMsg();
       // }
       // }, 2000);
+      let toast = me.toastCtrl.create({
+        message: 'Looks like there is a problem with your network connection. Try again later.',
+        duration: 5000,
+        position: 'middle'
+      });
+      toast.present();
 
     };
 
