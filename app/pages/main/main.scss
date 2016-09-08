@@ -230,18 +230,26 @@ button.main_btn.disable-hover.button.button-clear.button-fab.button-clear-fab-to
     position: inherit;
     overflow: hidden;
     min-width: 0;
-    width: 45%;
+    width: 100%;
     height: auto;
     // border-radius: 50%;
     font-size: 3vw;
     // line-height: 56px;
     vertical-align: middle;
     background-clip: padding-box;
-    margin: 7% 20%;
+    margin: 5% 0%;
     box-shadow: none;
 }
-button.main_btn.button-clear ion-button-effect{
-  display: none;
+// ion-icon.more{
+//   font-size: 4em;
+// }
+button.main_btn.disable-hover.button.button-clear.button-fab.button-clear-fab-top.button-icon-only ion-button-effect{
+  display: none !important;
+  background: rgba(255, 255, 255, 0) !important;
+}
+ion-button-effect{
+  display:none !important;
+  background: rgba(255, 255, 255, 0) !important;
 }
 
 // custom icon css end

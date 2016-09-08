@@ -41,6 +41,7 @@ export class LandingPage {
   showlatlong(event) {
     var me = this;
     var geoCoords = {};
+    console.log("entered shwo latlong");
 
     document.getElementById('lndBtnLoc').style.display = "none";
     document.getElementById('lndLoaderLoc').style.display = "inline";

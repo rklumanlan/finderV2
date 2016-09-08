@@ -12,10 +12,11 @@
   <allow-intent href="mailto:*"/>
   <allow-intent href="geo:*"/>
   <preference name="orientation" value="portrait"/>
-  <preference name="SplashScreenDelay" value="3000"/>
+  <preference name="SplashScreenDelay" value="1000"/>
   <preference name="FadeSplashScreenDuration" value="1000"/>
   <preference name="SplashScreen" value="screen"/>
-  <preference name="ShowSplashScreenSpinner" value="false"/>
+  <preference name="ShowSplashScreenSpinner" value="true"/>
+  <preference name="AutoHideSplashScren" value="false"/>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
